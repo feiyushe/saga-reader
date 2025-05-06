@@ -1,0 +1,41 @@
+{
+	"$schema": "../gen/schemas/desktop-schema.json",
+	"identifier": "default",
+	"description": "Capability for the In-App window",
+	"windows": [
+		"main",
+		"settings",
+		"about",
+		"window_feed_create",
+		"window_feed_edit",
+		"window_feeds_package_create",
+		"window_feeds_package_edit"
+	],
+	"permissions": [
+		"core:app:default",
+		"core:window:default",
+		"core:window:allow-close",
+		"core:window:allow-is-visible",
+		"core:window:allow-get-all-windows",
+		"core:window:allow-create",
+		"core:window:allow-show",
+		"core:window:allow-set-focus",
+		"core:window:allow-center",
+		"core:webview:allow-create-webview",
+		"core:webview:allow-set-webview-focus",
+		"core:event:default",
+		"core:event:allow-listen",
+		"shell:default",
+		"shell:allow-open",
+		"shell:allow-spawn",
+		"clipboard-manager:default",
+		"clipboard-manager:allow-write-text",
+		"feed-api:default",
+		"autostart:allow-enable",
+		"autostart:allow-disable",
+		"autostart:allow-is-enabled",
+		"os:default",
+		"dialog:default",
+		"dialog:allow-ask"
+	]
+}

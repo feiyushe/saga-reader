@@ -1,0 +1,21 @@
+[package]
+name = "recorder"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+# 本crate的特定的依赖
+sea-orm = { version = "^1.1.4", features = ["sqlx-sqlite", "runtime-tokio-native-tls", "macros"] }
+dirs = "6.0.0"
+
+# 对workspace中其他crate的依赖
+types = { path = "../types" }
+
+# 与workspace共享配置的依赖
+anyhow = { workspace = true }
+chrono = { workspace = true }
+log = { workspace = true }
+serde = { workspace = true }

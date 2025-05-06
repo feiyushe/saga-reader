@@ -1,0 +1,21 @@
+[package]
+name = "llm"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+# 本crate的特定的依赖
+# langchain-rust = "4.4.2" # 简单场景下太重了，且不支持mistral，后续调研改造。
+# rig
+
+# 对workspace中其他crate的依赖
+types = { path = "../types" }
+
+# 与workspace共享配置的依赖
+tokio = { workspace = true, features = ["full"] }
+reqwest = { workspace = true, features = ["gzip", "deflate", "json"] }
+anyhow = { workspace = true }
+serde = { workspace = true, features = ["derive"] }

@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-scrap-text-by-url"
+description = "Enables the scrap_text_by_url command without any pre-configured scope."
+commands.allow = ["scrap_text_by_url"]
+
+[[permission]]
+identifier = "deny-scrap-text-by-url"
+description = "Denies the scrap_text_by_url command without any pre-configured scope."
+commands.deny = ["scrap_text_by_url"]

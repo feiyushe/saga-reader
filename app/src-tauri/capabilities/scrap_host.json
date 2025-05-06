@@ -1,0 +1,10 @@
+{
+	"$schema": "../gen/schemas/desktop-schema.json",
+	"identifier": "scrap-host-capability",
+	"description": "Capability for the Scrap WebHost",
+	"windows": ["WINDOW_SCRAP_HOST"],
+	"remote": {
+		"urls": ["https://*"]
+	},
+	"permissions": ["core:app:default", "core:window:default", "core:event:default"]
+}

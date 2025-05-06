@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-download-ollama"
+description = "Enables the download_ollama command without any pre-configured scope."
+commands.allow = ["download_ollama"]
+
+[[permission]]
+identifier = "deny-download-ollama"
+description = "Denies the download_ollama command without any pre-configured scope."
+commands.deny = ["download_ollama"]

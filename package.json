@@ -1,0 +1,16 @@
+{
+	"name": "saga-reader",
+	"type": "module",
+	"scripts": {
+		"dev": "bun run --bun --filter 'qino-feed-client' dev:desktop",
+		"dev:webonly": "bun run --bun --filter 'qino-feed-client' dev",
+		"build": "bun run --bun --filter 'qino-feed-client' build:desktop",
+		"build:macos": "bun run --bun --filter 'qino-feed-client' build:desktop-macos-universal",
+		"build:windows": "bun run --bun --filter 'qino-feed-client' build:desktop-win64"
+	},
+	"workspaces": [
+		"app",
+		"packages/*",
+		"crates/tauri-plugin-*"
+	]
+}

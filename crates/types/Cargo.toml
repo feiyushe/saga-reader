@@ -1,0 +1,17 @@
+[package]
+name = "types"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+# 本crate的特定的依赖
+
+# 对workspace中其他crate的依赖
+
+# 与workspace共享配置的依赖
+serde = { workspace = true, features = ["derive"] }
+strum = { workspace = true }
+chrono = { workspace = true }

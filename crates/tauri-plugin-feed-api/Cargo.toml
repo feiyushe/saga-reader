@@ -1,0 +1,20 @@
+[package]
+name = "tauri-plugin-feed-api"
+version = "0.1.0"
+edition = "2021"
+exclude = ["/guest-js", "/dist-js", "/node_modules"]
+links = "tauri-plugin-feed-api"
+
+[dependencies]
+spdlog-rs = { workspace = true }
+tauri = { workspace = true }
+serde = { workspace = true }
+tokio = { workspace = true, features = ["full"] }
+anyhow = { workspace = true }
+feed_api_rs = { path = "../feed_api_rs" }
+types = { path = "../types" }
+recorder = { path = "../recorder" }
+ollama = { path = "../ollama" }
+
+[build-dependencies]
+tauri-plugin = { version = "2.1.0", features = ["build"] }

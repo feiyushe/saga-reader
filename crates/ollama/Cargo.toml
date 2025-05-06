@@ -1,0 +1,21 @@
+[package]
+name = "ollama"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+# 本crate的特定的依赖
+open = "5.3.2"
+
+# 对workspace中其他crate的依赖
+llm = { path = "../llm" }
+types = { path = "../types" }
+
+# 与workspace共享配置的依赖
+tokio = { workspace = true, features = ["full"] }
+reqwest = { workspace = true, features = ["gzip", "deflate", "json"] }
+anyhow = { workspace = true }
+serde = { workspace = true, features = ["derive"] }

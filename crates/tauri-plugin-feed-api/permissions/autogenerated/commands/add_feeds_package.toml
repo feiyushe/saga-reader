@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-add-feeds-package"
+description = "Enables the add_feeds_package command without any pre-configured scope."
+commands.allow = ["add_feeds_package"]
+
+[[permission]]
+identifier = "deny-add-feeds-package"
+description = "Denies the add_feeds_package command without any pre-configured scope."
+commands.deny = ["add_feeds_package"]

@@ -1,0 +1,24 @@
+[package]
+name = "scrap"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+# 本crate的特定的依赖
+scraper = "0.22.0"
+urlencoding = "2.1.3"
+
+# 对workspace中其他crate的依赖
+types = { path = "../types" }
+llm = { path = "../llm" }
+
+# 与workspace共享配置的依赖
+reqwest = { workspace = true, features = ["gzip", "deflate", "cookies"] }
+anyhow = { workspace = true }
+thiserror = { workspace = true }
+chrono = { workspace = true }
+tokio = { workspace = true, features = ["full"] }
+spdlog-rs = { workspace = true }

@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-chat-with-article-assistant"
+description = "Enables the chat_with_article_assistant command without any pre-configured scope."
+commands.allow = ["chat_with_article_assistant"]
+
+[[permission]]
+identifier = "deny-chat-with-article-assistant"
+description = "Denies the chat_with_article_assistant command without any pre-configured scope."
+commands.deny = ["chat_with_article_assistant"]

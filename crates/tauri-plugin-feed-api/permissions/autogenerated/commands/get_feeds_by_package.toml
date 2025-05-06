@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-get-feeds-by-package"
+description = "Enables the get_feeds_by_package command without any pre-configured scope."
+commands.allow = ["get_feeds_by_package"]
+
+[[permission]]
+identifier = "deny-get-feeds-by-package"
+description = "Denies the get_feeds_by_package command without any pre-configured scope."
+commands.deny = ["get_feeds_by_package"]

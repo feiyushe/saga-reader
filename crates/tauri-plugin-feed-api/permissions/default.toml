@@ -1,0 +1,28 @@
+[default]
+description = ""
+permissions = [
+    "allow-mark-as-read",
+    "allow-set-favorite",
+    "allow-add-feeds-package",
+    "allow-remove-feeds-package",
+    "allow-rename-feeds-package",
+    "allow-add-feed",
+    "allow-remove-feed",
+    "allow-rename-feed",
+    "allow-change-feed-data",
+    "allow-get-feeds-packages",
+    "allow-get-feeds-by-package",
+    "allow-update-feed-contents",
+    "allow-read-feed-contents",
+    "allow-query-by-id",
+    "allow-get-app-config",
+    "allow-set-app-config",
+    "allow-open-article-external",
+    "allow-get-ollama-status",
+    "allow-download-ollama",
+    "allow-launch-ollama",
+    "allow-scrap-text-by-url",
+    "allow-update-article-by-source",
+    "allow-chat-with-article-assistant",
+    "allow-search-contents-by-keyword"
+]

@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-update-feed-contents"
+description = "Enables the update_feed_contents command without any pre-configured scope."
+commands.allow = ["update_feed_contents"]
+
+[[permission]]
+identifier = "deny-update-feed-contents"
+description = "Denies the update_feed_contents command without any pre-configured scope."
+commands.deny = ["update_feed_contents"]

@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-change-feed-data"
+description = "Enables the change_feed_data command without any pre-configured scope."
+commands.allow = ["change_feed_data"]
+
+[[permission]]
+identifier = "deny-change-feed-data"
+description = "Denies the change_feed_data command without any pre-configured scope."
+commands.deny = ["change_feed_data"]
