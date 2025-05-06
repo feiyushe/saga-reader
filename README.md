@@ -152,7 +152,7 @@ Similarly, there are some features in wunderlist that need to be improved.
 
 - You can help implement additional [Internet Search Providers](https://github.com/sopaco/saga-reader/tree/master/crates/scrap/src/search) beyond Bing, such as Google.
 - You can assist in integrating more [Online LLM Providers](https://github.com/sopaco/saga-reader/tree/master/crates/llm/src/providers) besides GLM Flash, like OpenAI.
-- You can also contribute to the internationalization of the app by providing [translations into additional languages](https://github.com/sopaco/saga-reader/tree/master/app/src/lib/i18n). Refer to the [svelte-i18n](https://github.com/kaisermann/svelte-i18n/blob/main/docs/Getting%20Started.md#5-localizing-your-app) repository to get started with internationalization.
+- You can also contribute to the internationalization of the app by providing [translations into additional languages](https://github.com/sopaco/saga-reader/tree/master/app/src/lib/i18n/locales). Refer to the [svelte-i18n](https://github.com/kaisermann/svelte-i18n/blob/main/docs/Getting%20Started.md#5-localizing-your-app) repository to get started with internationalization.
 
 If you enjoy using this app, consider supporting its development by donating through [GitHub Sponsors](https://github.com/sponsors/sopaco), [Paypal](https://paypal.me/skyronj), or [Alipay](https://aiqino.netlify.app/uprise-assets/alipay.jpg).
 

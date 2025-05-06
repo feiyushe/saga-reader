@@ -148,7 +148,7 @@ Saga Reader 完全免费和开源，这意味着所有数据都安全地存储�
 **例如**
 - 你可以帮助实现除 Bing 之外的其他[互联网搜索引擎适配器](https://github.com/sopaco/saga-reader/tree/master/crates/scrap/src/search)，例如 Google。
 - 你可以协助整合更多的[在线 LLM 提供商](https://github.com/sopaco/saga-reader/tree/master/crates/llm/src/providers)，除了 智普清言的GLM Flash，还有 OpenAI。
-- 您还可以通过提供[其他语言的翻译](https://github.com/sopaco/saga-reader/tree/master/app/src/lib/i18n)来帮助国际化应用程序。参考[svelte-i18n](https://github.com/kaisermann/svelte-i18n/blob/main/docs/Getting%20Started.md#5-localizing-your-app)国际化使用指南。
+- 您还可以通过提供[其他语言的翻译](https://github.com/sopaco/saga-reader/tree/master/app/src/lib/i18n/locales)来帮助国际化应用程序。参考[svelte-i18n](https://github.com/kaisermann/svelte-i18n/blob/main/docs/Getting%20Started.md#5-localizing-your-app)国际化使用指南。
 
 如果您喜欢使用这个应用程序，请考虑通过[GitHub赞助商](https://github.com/sponsors/sopaco)、[Paypal](https://paypal.me/skyronj)或[支付宝](https://aiqino.netlify.app/uprise-assets/alipay.jpg)捐款支持其开发。
 
