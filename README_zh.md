@@ -162,7 +162,7 @@ Saga Reader 完全免费和开源，这意味着所有数据都安全地存储�
 - [sea-orm](https://github.com/SeaQL/sea-orm)
 
 ### 许可证
-MIT，协议的副本说明保留在[LICENSE](./LICENSE.md)文件中。
+MIT，协议的副本说明保留在[LICENSE](./LICENSE)文件中。
 
 ### 关于我
 

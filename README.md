@@ -166,7 +166,7 @@ If you enjoy using this app, consider supporting its development by donating thr
 - [sea-orm](https://github.com/SeaQL/sea-orm)
 
 ### License
-MIT, A copy of the license is provided in the [LICENSE](./LICENSE.md) file.
+MIT, A copy of the license is provided in the [LICENSE](./LICENSE) file.
 
 ### About Me
 
