@@ -2,11 +2,10 @@
   <img width="120" height="120" src="https://aiqino.netlify.app/favicon.png">
 </p>
 <h3 align="center">麒睿智库(Saga Reader)</h3>
-<p align="center">您的AI智能助手</p>
+<p align="center">你的AI智能助手</p>
 <p align="center">
   <img src="https://img.shields.io/github/v/release/sopaco/saga-reader?label=version" />
   <img src="https://img.shields.io/github/downloads/sopaco/saga-reader/total" />
-  <img src="https://github.com/sopaco/saga-reader/workflows/CI%2FCD%20Release/badge.svg" />
 </p>
 <hr />
 
@@ -40,13 +39,13 @@
 ## 功能
 
 ### 内容订阅
-- 根据您的兴趣灵活设置您的内容订阅。只需定义一些关键词即可自动从全球互联网收集信息。
+- 根据你的兴趣灵活设置内容订阅。只需定义一些关键词即可自动从全球互联网收集信息。
 
 ### 翻译
 - 自动翻译外语信息。您可以将其他语言的文章自动翻译成您喜欢的语言。
 
 ### 安全和隐私
-- 提供最佳的安全和隐私功能。您的数据完全存储在您的个人计算机上，不受第三方服务提供商的跟踪或影响。
+- 提供最佳的安全和隐私功能。数据完全存储在你的个人计算机上，不受第三方服务提供商的跟踪或影响。
 
 ### 模型支持
 - 支持连接到云端大型模型或本地大型模型进行推理。
@@ -121,7 +120,7 @@
     ```
 <br>
 
-### 单仓库应用架构
+### 核心模块说明
 
 项目使用了Rust、Svelte（SvelteKit）、Tauri、SeaORM、SqlLite、TailwindCSS等技术。
 
@@ -138,6 +137,27 @@
 - `feed_api_rs`: 基于经典门面模式的核心能力API和实现。
 - `tauri-plugin-feed-api`: 通过tauri命令调用前端的核心能力API。
 - `types`: 共享基本类型模块。
+
+#### 示意图
+```plaintext
+Apply
++---------------------+     +---------------------+
+|      Frontend       |     |     Backend         |
+|  (Svelte/SvelteKit) |<--->|  (Rust Modules)     |
++---------------------+     +---------------------+
+       ^   ^   ^                      |   |   |
+       |   |   |                      |   |   |
++------+---+---+-------+       +------+---+---+-------+
+|  UI/UX Components    |       |  tauri-plugin-feed-api|
+|  State Management    |       |  feed_api_rs          |
+|  Internationalization|       |  llm                  |
+|  Styling (Tailwind)  |       |  ollama               |
+|  Build Tools (Vite)  |       |  recorder             |
+|                      |       |  scrap                |
+|                      |       |  types                |
+|                      |       |  intelligent          |
++----------------------+       +-----------------------+
+```
 
 ### 贡献
 
