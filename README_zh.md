@@ -1,7 +1,7 @@
 <p align="center">
   <img width="120" height="120" src="https://aiqino.netlify.app/favicon.png">
 </p>
-<h3 align="center">Saga Reader</h3>
+<h3 align="center">麒睿智库(Saga Reader)</h3>
 <p align="center">您的AI智能助手</p>
 <p align="center">
   <img src="https://img.shields.io/github/v/release/sopaco/saga-reader?label=version" />
@@ -18,10 +18,10 @@
 
 > 🚀 通过 [在 GitHub 上赞助](https://github.com/sponsors/sopaco)让这个软件更好的发展。
 
-## Saga Reader是什么
-Saga Reader 是一个AI驱动的智库式阅读器，根据用户指定的主题和偏好关键词自动从互联网上检索信息。它使用云端或本地大型模型进行总结和提供指导，并包括一个AI驱动的互动阅读伴读功能，允许您与AI讨论和交换阅读内容的想法。
+## 麒睿智库是什么
+麒睿智库(Saga Reader) 是一个AI驱动的智库式阅读器，根据用户指定的主题和偏好关键词自动从互联网上检索信息。它使用云端或本地大型模型进行总结和提供指导，并包括一个AI驱动的互动阅读伴读功能，允许您与AI讨论和交换阅读内容的想法。
 
-Saga Reader 完全免费和开源，这意味着所有数据都安全地存储在您自己的计算机上，不受第三方服务提供商的控制。此外，您可以根据自己的兴趣和偏好管理订阅关键词，而不会受到广告和商业化内容的打扰。
+麒睿智库 完全免费和开源，这意味着所有数据都安全地存储在您自己的计算机上，不受第三方服务提供商的控制。此外，您可以根据自己的兴趣和偏好管理订阅关键词，而不会受到广告和商业化内容的打扰。
 
 从[官方网站](https://aiqino.netlify.app)下载！
 
@@ -141,7 +141,7 @@ Saga Reader 完全免费和开源，这意味着所有数据都安全地存储�
 
 ### 贡献
 
-通过[GitHub Issues](https://github.com/sopaco/saga-reader/issues)报告错误或提出功能请求，帮助使Saga Reader变得更好。
+通过[GitHub Issues](https://github.com/sopaco/saga-reader/issues)报告错误或提出功能请求，帮助使麒睿智库变得更好。
 
 同样，Wunderlist 也有一些需要改进的功能。
 
