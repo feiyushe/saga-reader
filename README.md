@@ -7,7 +7,6 @@
 <p align="center">
   <img src="https://img.shields.io/github/v/release/sopaco/saga-reader?label=version" />
   <img src="https://img.shields.io/github/downloads/sopaco/saga-reader/total" />
-  <img src="https://github.com/sopaco/saga-reader/workflows/CI%2FCD%20Release/badge.svg" />
 </p>
 <hr />
 
@@ -141,6 +140,27 @@ We use a combination of Rust, Svelte (SvelteKit), Tauri, SeaORM, SqlLite, Tailwi
 - `feed_api_rs`: The core capability API and implementation, based on the classic facade pattern.
 - `tauri-plugin-feed-api`: Core capability API for frontend calls via tauri commands.
 - `types`: Shared basic types module.
+
+#### Schematic Diagram
+```plaintext
+Apply
++---------------------+     +---------------------+
+|      Frontend       |     |     Backend         |
+|  (Svelte/SvelteKit) |<--->|  (Rust Modules)     |
++---------------------+     +---------------------+
+       ^   ^   ^                      |   |   |
+       |   |   |                      |   |   |
++------+---+---+-------+       +------+---+---+-------+
+|  UI/UX Components    |       |  tauri-plugin-feed-api|
+|  State Management    |       |  feed_api_rs          |
+|  Internationalization|       |  llm                  |
+|  Styling (Tailwind)  |       |  ollama               |
+|  Build Tools (Vite)  |       |  recorder             |
+|                      |       |  scrap                |
+|                      |       |  types                |
+|                      |       |  intelligent          |
++----------------------+       +-----------------------+
+```
 
 ### Contribute
 
