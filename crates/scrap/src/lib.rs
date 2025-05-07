@@ -1,3 +1,4 @@
-pub mod search;
-mod connector;
 mod article_reader;
+mod connector;
+pub mod search;
+pub mod simulator;

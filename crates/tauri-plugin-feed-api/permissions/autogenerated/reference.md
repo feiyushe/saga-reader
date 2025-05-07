@@ -2,6 +2,8 @@
 
 
 
+#### This default permission set includes the following:
+
 - `allow-mark-as-read`
 - `allow-set-favorite`
 - `allow-add-feeds-package`

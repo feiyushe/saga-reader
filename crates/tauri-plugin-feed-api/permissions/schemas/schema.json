@@ -297,247 +297,296 @@
         {
           "description": "Enables the add_feed command without any pre-configured scope.",
           "type": "string",
-          "const": "allow-add-feed"
+          "const": "allow-add-feed",
+          "markdownDescription": "Enables the add_feed command without any pre-configured scope."
         },
         {
           "description": "Denies the add_feed command without any pre-configured scope.",
           "type": "string",
-          "const": "deny-add-feed"
+          "const": "deny-add-feed",
+          "markdownDescription": "Denies the add_feed command without any pre-configured scope."
         },
         {
           "description": "Enables the add_feeds_package command without any pre-configured scope.",
           "type": "string",
-          "const": "allow-add-feeds-package"
+          "const": "allow-add-feeds-package",
+          "markdownDescription": "Enables the add_feeds_package command without any pre-configured scope."
         },
         {
           "description": "Denies the add_feeds_package command without any pre-configured scope.",
           "type": "string",
-          "const": "deny-add-feeds-package"
+          "const": "deny-add-feeds-package",
+          "markdownDescription": "Denies the add_feeds_package command without any pre-configured scope."
         },
         {
           "description": "Enables the change_feed_data command without any pre-configured scope.",
           "type": "string",
-          "const": "allow-change-feed-data"
+          "const": "allow-change-feed-data",
+          "markdownDescription": "Enables the change_feed_data command without any pre-configured scope."
         },
         {
           "description": "Denies the change_feed_data command without any pre-configured scope.",
           "type": "string",
-          "const": "deny-change-feed-data"
+          "const": "deny-change-feed-data",
+          "markdownDescription": "Denies the change_feed_data command without any pre-configured scope."
         },
         {
           "description": "Enables the chat_with_article_assistant command without any pre-configured scope.",
           "type": "string",
-          "const": "allow-chat-with-article-assistant"
+          "const": "allow-chat-with-article-assistant",
+          "markdownDescription": "Enables the chat_with_article_assistant command without any pre-configured scope."
         },
         {
           "description": "Denies the chat_with_article_assistant command without any pre-configured scope.",
           "type": "string",
-          "const": "deny-chat-with-article-assistant"
+          "const": "deny-chat-with-article-assistant",
+          "markdownDescription": "Denies the chat_with_article_assistant command without any pre-configured scope."
         },
         {
           "description": "Enables the download_ollama command without any pre-configured scope.",
           "type": "string",
-          "const": "allow-download-ollama"
+          "const": "allow-download-ollama",
+          "markdownDescription": "Enables the download_ollama command without any pre-configured scope."
         },
         {
           "description": "Denies the download_ollama command without any pre-configured scope.",
           "type": "string",
-          "const": "deny-download-ollama"
+          "const": "deny-download-ollama",
+          "markdownDescription": "Denies the download_ollama command without any pre-configured scope."
         },
         {
           "description": "Enables the get_app_config command without any pre-configured scope.",
           "type": "string",
-          "const": "allow-get-app-config"
+          "const": "allow-get-app-config",
+          "markdownDescription": "Enables the get_app_config command without any pre-configured scope."
         },
         {
           "description": "Denies the get_app_config command without any pre-configured scope.",
           "type": "string",
-          "const": "deny-get-app-config"
+          "const": "deny-get-app-config",
+          "markdownDescription": "Denies the get_app_config command without any pre-configured scope."
         },
         {
           "description": "Enables the get_feeds_by_package command without any pre-configured scope.",
           "type": "string",
-          "const": "allow-get-feeds-by-package"
+          "const": "allow-get-feeds-by-package",
+          "markdownDescription": "Enables the get_feeds_by_package command without any pre-configured scope."
         },
         {
           "description": "Denies the get_feeds_by_package command without any pre-configured scope.",
           "type": "string",
-          "const": "deny-get-feeds-by-package"
+          "const": "deny-get-feeds-by-package",
+          "markdownDescription": "Denies the get_feeds_by_package command without any pre-configured scope."
         },
         {
           "description": "Enables the get_feeds_packages command without any pre-configured scope.",
           "type": "string",
-          "const": "allow-get-feeds-packages"
+          "const": "allow-get-feeds-packages",
+          "markdownDescription": "Enables the get_feeds_packages command without any pre-configured scope."
         },
         {
           "description": "Denies the get_feeds_packages command without any pre-configured scope.",
           "type": "string",
-          "const": "deny-get-feeds-packages"
+          "const": "deny-get-feeds-packages",
+          "markdownDescription": "Denies the get_feeds_packages command without any pre-configured scope."
         },
         {
           "description": "Enables the get_ollama_status command without any pre-configured scope.",
           "type": "string",
-          "const": "allow-get-ollama-status"
+          "const": "allow-get-ollama-status",
+          "markdownDescription": "Enables the get_ollama_status command without any pre-configured scope."
         },
         {
           "description": "Denies the get_ollama_status command without any pre-configured scope.",
           "type": "string",
-          "const": "deny-get-ollama-status"
+          "const": "deny-get-ollama-status",
+          "markdownDescription": "Denies the get_ollama_status command without any pre-configured scope."
         },
         {
           "description": "Enables the launch_ollama command without any pre-configured scope.",
           "type": "string",
-          "const": "allow-launch-ollama"
+          "const": "allow-launch-ollama",
+          "markdownDescription": "Enables the launch_ollama command without any pre-configured scope."
         },
         {
           "description": "Denies the launch_ollama command without any pre-configured scope.",
           "type": "string",
-          "const": "deny-launch-ollama"
+          "const": "deny-launch-ollama",
+          "markdownDescription": "Denies the launch_ollama command without any pre-configured scope."
         },
         {
           "description": "Enables the mark_as_read command without any pre-configured scope.",
           "type": "string",
-          "const": "allow-mark-as-read"
+          "const": "allow-mark-as-read",
+          "markdownDescription": "Enables the mark_as_read command without any pre-configured scope."
         },
         {
           "description": "Denies the mark_as_read command without any pre-configured scope.",
           "type": "string",
-          "const": "deny-mark-as-read"
+          "const": "deny-mark-as-read",
+          "markdownDescription": "Denies the mark_as_read command without any pre-configured scope."
         },
         {
           "description": "Enables the open_article_external command without any pre-configured scope.",
           "type": "string",
-          "const": "allow-open-article-external"
+          "const": "allow-open-article-external",
+          "markdownDescription": "Enables the open_article_external command without any pre-configured scope."
         },
         {
           "description": "Denies the open_article_external command without any pre-configured scope.",
           "type": "string",
-          "const": "deny-open-article-external"
+          "const": "deny-open-article-external",
+          "markdownDescription": "Denies the open_article_external command without any pre-configured scope."
         },
         {
           "description": "Enables the query_by_id command without any pre-configured scope.",
           "type": "string",
-          "const": "allow-query-by-id"
+          "const": "allow-query-by-id",
+          "markdownDescription": "Enables the query_by_id command without any pre-configured scope."
         },
         {
           "description": "Denies the query_by_id command without any pre-configured scope.",
           "type": "string",
-          "const": "deny-query-by-id"
+          "const": "deny-query-by-id",
+          "markdownDescription": "Denies the query_by_id command without any pre-configured scope."
         },
         {
           "description": "Enables the read_feed_contents command without any pre-configured scope.",
           "type": "string",
-          "const": "allow-read-feed-contents"
+          "const": "allow-read-feed-contents",
+          "markdownDescription": "Enables the read_feed_contents command without any pre-configured scope."
         },
         {
           "description": "Denies the read_feed_contents command without any pre-configured scope.",
           "type": "string",
-          "const": "deny-read-feed-contents"
+          "const": "deny-read-feed-contents",
+          "markdownDescription": "Denies the read_feed_contents command without any pre-configured scope."
         },
         {
           "description": "Enables the remove_feed command without any pre-configured scope.",
           "type": "string",
-          "const": "allow-remove-feed"
+          "const": "allow-remove-feed",
+          "markdownDescription": "Enables the remove_feed command without any pre-configured scope."
         },
         {
           "description": "Denies the remove_feed command without any pre-configured scope.",
           "type": "string",
-          "const": "deny-remove-feed"
+          "const": "deny-remove-feed",
+          "markdownDescription": "Denies the remove_feed command without any pre-configured scope."
         },
         {
           "description": "Enables the remove_feeds_package command without any pre-configured scope.",
           "type": "string",
-          "const": "allow-remove-feeds-package"
+          "const": "allow-remove-feeds-package",
+          "markdownDescription": "Enables the remove_feeds_package command without any pre-configured scope."
         },
         {
           "description": "Denies the remove_feeds_package command without any pre-configured scope.",
           "type": "string",
-          "const": "deny-remove-feeds-package"
+          "const": "deny-remove-feeds-package",
+          "markdownDescription": "Denies the remove_feeds_package command without any pre-configured scope."
         },
         {
           "description": "Enables the rename_feed command without any pre-configured scope.",
           "type": "string",
-          "const": "allow-rename-feed"
+          "const": "allow-rename-feed",
+          "markdownDescription": "Enables the rename_feed command without any pre-configured scope."
         },
         {
           "description": "Denies the rename_feed command without any pre-configured scope.",
           "type": "string",
-          "const": "deny-rename-feed"
+          "const": "deny-rename-feed",
+          "markdownDescription": "Denies the rename_feed command without any pre-configured scope."
         },
         {
           "description": "Enables the rename_feeds_package command without any pre-configured scope.",
           "type": "string",
-          "const": "allow-rename-feeds-package"
+          "const": "allow-rename-feeds-package",
+          "markdownDescription": "Enables the rename_feeds_package command without any pre-configured scope."
         },
         {
           "description": "Denies the rename_feeds_package command without any pre-configured scope.",
           "type": "string",
-          "const": "deny-rename-feeds-package"
+          "const": "deny-rename-feeds-package",
+          "markdownDescription": "Denies the rename_feeds_package command without any pre-configured scope."
         },
         {
           "description": "Enables the scrap_text_by_url command without any pre-configured scope.",
           "type": "string",
-          "const": "allow-scrap-text-by-url"
+          "const": "allow-scrap-text-by-url",
+          "markdownDescription": "Enables the scrap_text_by_url command without any pre-configured scope."
         },
         {
           "description": "Denies the scrap_text_by_url command without any pre-configured scope.",
           "type": "string",
-          "const": "deny-scrap-text-by-url"
+          "const": "deny-scrap-text-by-url",
+          "markdownDescription": "Denies the scrap_text_by_url command without any pre-configured scope."
         },
         {
           "description": "Enables the search_contents_by_keyword command without any pre-configured scope.",
           "type": "string",
-          "const": "allow-search-contents-by-keyword"
+          "const": "allow-search-contents-by-keyword",
+          "markdownDescription": "Enables the search_contents_by_keyword command without any pre-configured scope."
         },
         {
           "description": "Denies the search_contents_by_keyword command without any pre-configured scope.",
           "type": "string",
-          "const": "deny-search-contents-by-keyword"
+          "const": "deny-search-contents-by-keyword",
+          "markdownDescription": "Denies the search_contents_by_keyword command without any pre-configured scope."
         },
         {
           "description": "Enables the set_app_config command without any pre-configured scope.",
           "type": "string",
-          "const": "allow-set-app-config"
+          "const": "allow-set-app-config",
+          "markdownDescription": "Enables the set_app_config command without any pre-configured scope."
         },
         {
           "description": "Denies the set_app_config command without any pre-configured scope.",
           "type": "string",
-          "const": "deny-set-app-config"
+          "const": "deny-set-app-config",
+          "markdownDescription": "Denies the set_app_config command without any pre-configured scope."
         },
         {
           "description": "Enables the set_favorite command without any pre-configured scope.",
           "type": "string",
-          "const": "allow-set-favorite"
+          "const": "allow-set-favorite",
+          "markdownDescription": "Enables the set_favorite command without any pre-configured scope."
         },
         {
           "description": "Denies the set_favorite command without any pre-configured scope.",
           "type": "string",
-          "const": "deny-set-favorite"
+          "const": "deny-set-favorite",
+          "markdownDescription": "Denies the set_favorite command without any pre-configured scope."
         },
         {
           "description": "Enables the update_article_by_source command without any pre-configured scope.",
           "type": "string",
-          "const": "allow-update-article-by-source"
+          "const": "allow-update-article-by-source",
+          "markdownDescription": "Enables the update_article_by_source command without any pre-configured scope."
         },
         {
           "description": "Denies the update_article_by_source command without any pre-configured scope.",
           "type": "string",
-          "const": "deny-update-article-by-source"
+          "const": "deny-update-article-by-source",
+          "markdownDescription": "Denies the update_article_by_source command without any pre-configured scope."
         },
         {
           "description": "Enables the update_feed_contents command without any pre-configured scope.",
           "type": "string",
-          "const": "allow-update-feed-contents"
+          "const": "allow-update-feed-contents",
+          "markdownDescription": "Enables the update_feed_contents command without any pre-configured scope."
         },
         {
           "description": "Denies the update_feed_contents command without any pre-configured scope.",
           "type": "string",
-          "const": "deny-update-feed-contents"
+          "const": "deny-update-feed-contents",
+          "markdownDescription": "Denies the update_feed_contents command without any pre-configured scope."
         },
         {
-          "description": "",
+          "description": "\n#### This default permission set includes:\n\n- `allow-mark-as-read`\n- `allow-set-favorite`\n- `allow-add-feeds-package`\n- `allow-remove-feeds-package`\n- `allow-rename-feeds-package`\n- `allow-add-feed`\n- `allow-remove-feed`\n- `allow-rename-feed`\n- `allow-change-feed-data`\n- `allow-get-feeds-packages`\n- `allow-get-feeds-by-package`\n- `allow-update-feed-contents`\n- `allow-read-feed-contents`\n- `allow-query-by-id`\n- `allow-get-app-config`\n- `allow-set-app-config`\n- `allow-open-article-external`\n- `allow-get-ollama-status`\n- `allow-download-ollama`\n- `allow-launch-ollama`\n- `allow-scrap-text-by-url`\n- `allow-update-article-by-source`\n- `allow-chat-with-article-assistant`\n- `allow-search-contents-by-keyword`",
           "type": "string",
-          "const": "default"
+          "const": "default",
+          "markdownDescription": "\n#### This default permission set includes:\n\n- `allow-mark-as-read`\n- `allow-set-favorite`\n- `allow-add-feeds-package`\n- `allow-remove-feeds-package`\n- `allow-rename-feeds-package`\n- `allow-add-feed`\n- `allow-remove-feed`\n- `allow-rename-feed`\n- `allow-change-feed-data`\n- `allow-get-feeds-packages`\n- `allow-get-feeds-by-package`\n- `allow-update-feed-contents`\n- `allow-read-feed-contents`\n- `allow-query-by-id`\n- `allow-get-app-config`\n- `allow-set-app-config`\n- `allow-open-article-external`\n- `allow-get-ollama-status`\n- `allow-download-ollama`\n- `allow-launch-ollama`\n- `allow-scrap-text-by-url`\n- `allow-update-article-by-source`\n- `allow-chat-with-article-assistant`\n- `allow-search-contents-by-keyword`"
         }
       ]
     }

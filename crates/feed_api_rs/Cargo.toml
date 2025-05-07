@@ -25,3 +25,4 @@ serde = { workspace = true, features = ["derive"] }
 toml = { workspace = true }
 spdlog-rs = { workspace = true }                    # 开启异步需要添加 features = ["multi-thread"]
 chrono = { workspace = true }
+tauri = { workspace = true }

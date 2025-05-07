@@ -1,13 +1,15 @@
 use chrono::{Datelike, Duration, Local, Utc};
 use reqwest::Client;
 use scraper::{Html, Selector};
-use spdlog::error;
+use spdlog::{error, info};
 
+use tauri::{AppHandle, Runtime};
 use types::{Article, LLMSection};
 
 use crate::connector::ClientOption;
 use crate::search::types::IProvider;
 use crate::search::utils::{trim_head_read_days_ago, trim_html_with_script_and_style};
+use crate::simulator::scrap_text_by_url;
 use crate::{article_reader as article, connector};
 
 const SEARCH_HOST: &str = "www.baidu.com";
@@ -143,13 +145,21 @@ impl Provider {
 }
 
 impl IProvider for Provider {
-    async fn search_by_words(&self, words: Vec<&str>) -> anyhow::Result<Vec<Article>> {
+    async fn search_by_words<R: Runtime>(
+        &self,
+        words: Vec<&str>,
+        app_handle: Option<AppHandle<R>>,
+    ) -> anyhow::Result<Vec<Article>> {
+        info!("内容清单搜索中...{:?}", words);
         let search_word = words.join("%20").to_string();
         let date_range_end = Utc::now().timestamp();
         let date_range_begin = Utc::now().timestamp() - 60 * 60 * 24 * 7;
         let url = format!("https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=baidu&wd={}&rn=20&gpc=stf%3D{}%2C{}%7Cstftype%3D1", search_word, date_range_begin, date_range_end);
-        let response = self.client.get(url).send().await?;
-        let html_text = response.text().await?;
+        let html_text = match app_handle {
+            Some(ap) => scrap_text_by_url(ap, url.as_str()).await?,
+            None => self.client.get(url).send().await?.text().await?,
+        };
+        info!("已获得搜索数据，清单解析中");
         self.convert(html_text).await
     }
 }

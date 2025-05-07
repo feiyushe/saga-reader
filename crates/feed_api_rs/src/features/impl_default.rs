@@ -2,24 +2,30 @@ use std::sync::Arc;
 
 use chrono::{Datelike, NaiveDate, Utc, Weekday};
 use spdlog::{error, info};
+use tauri::{AppHandle, Runtime};
 use tokio::sync::RwLock;
 
 use intelligent::article_processor::assistant::Assistant;
-use intelligent::article_processor::llm_processor::{ArticleLLMProcessor, IPresetArticleLLMProcessor};
+use intelligent::article_processor::llm_processor::{
+    ArticleLLMProcessor, IPresetArticleLLMProcessor,
+};
 use intelligent::article_processor::melt::Melt;
 use intelligent::article_processor::optimizer::Optimizer;
 use intelligent::article_processor::purge::Purge;
 use intelligent::article_processor::types::IArticleProcessor;
-use ollama::{ProgramStatus, query_platform};
+use ollama::{query_platform, ProgramStatus};
 use recorder::article_recorder_service::ArticleRecorderService;
 use recorder::entity::article_record::{Model as ArticleRecord, Model};
-use scrap::search::{baidu, bing, ScrapProviderEnums};
 use scrap::search::types::IProvider;
 use scrap::search::utils::trim_html_with_script_and_style;
-use types::{AppConfig, Article, ConversationMessage, FeedsPackage, FeedTargetDescription, ScrapProviderType, UserConfig};
+use scrap::search::{baidu, bing, ScrapProviderEnums};
+use types::{
+    AppConfig, Article, ConversationMessage, FeedTargetDescription, FeedsPackage,
+    ScrapProviderType, UserConfig,
+};
 
-use crate::{application_context::ApplicationContext, startup::init_user_profile};
 use crate::startup::init_app_config::sync_to;
+use crate::{application_context::ApplicationContext, startup::init_user_profile};
 
 use super::api::FeaturesAPI;
 
@@ -49,8 +55,10 @@ impl FeaturesAPIImpl {
         // 初始化爬虫实例
         let scrap_provider = &app_config.scrap.provider;
         let scrap_provider = match scrap_provider {
-            ScrapProviderType::Baidu => ScrapProviderEnums::Baidu(baidu::Provider::new(llm_section)?),
-            ScrapProviderType::Bing => ScrapProviderEnums::Bing(bing::Provider::new(llm_section)?)
+            ScrapProviderType::Baidu => {
+                ScrapProviderEnums::Baidu(baidu::Provider::new(llm_section)?)
+            }
+            ScrapProviderType::Bing => ScrapProviderEnums::Bing(bing::Provider::new(llm_section)?),
         };
         let context = Arc::new(RwLock::new(ctx));
 
@@ -65,33 +73,41 @@ impl FeaturesAPIImpl {
         init_user_profile::sync_to(user_config).await
     }
 
-    async fn process_article_pipelines(&self, article: &mut Article, purge: &ArticleLLMProcessor, optimizer: &ArticleLLMProcessor, melt: &ArticleLLMProcessor) -> anyhow::Result<(Article, Article, Article)> {
+    async fn process_article_pipelines(
+        &self,
+        article: &mut Article,
+        purge: &ArticleLLMProcessor,
+        optimizer: &ArticleLLMProcessor,
+        melt: &ArticleLLMProcessor,
+    ) -> anyhow::Result<(Article, Article, Article)> {
         let out_purged_article = purge.process(article).await?;
         info!(
-                    "article purged, title = {}, source_link = {}, optimizing",
-                    article.title, article.source_link
-                );
+            "article purged, title = {}, source_link = {}, optimizing",
+            article.title, article.source_link
+        );
 
         let out_optimized_article = optimizer.process(&out_purged_article).await?;
         info!(
-                    "purged article optimized, title = {}, melting",
-                    out_purged_article.title
-                );
+            "purged article optimized, title = {}, melting",
+            out_purged_article.title
+        );
         if let Some(optimized_content) = out_optimized_article.content.clone() {
             if optimized_content.contains("QINO-AGENTIC-EXECUTION-FAILURE") {
-                return Err(anyhow::Error::msg(
-                    "QINO-AGENTIC-EXECUTION-FAILURE"
-                ));
+                return Err(anyhow::Error::msg("QINO-AGENTIC-EXECUTION-FAILURE"));
             }
         }
 
         let out_melted_article = melt.process(&out_optimized_article).await?;
         info!(
-                    "optimized article melted, title = {}, recording",
-                    out_melted_article.title
-                );
+            "optimized article melted, title = {}, recording",
+            out_melted_article.title
+        );
 
-        Ok((out_purged_article, out_optimized_article, out_melted_article))
+        Ok((
+            out_purged_article,
+            out_optimized_article,
+            out_melted_article,
+        ))
     }
 }
 
@@ -123,17 +139,10 @@ impl FeaturesAPI for FeaturesAPIImpl {
         ))
     }
 
-    async fn rename_feeds_package(
-        &self,
-        package_id: &str,
-        new_name: &str,
-    ) -> anyhow::Result<()> {
+    async fn rename_feeds_package(&self, package_id: &str, new_name: &str) -> anyhow::Result<()> {
         let context_guarded = &mut self.context.write().await;
-        let user_config = &mut context_guarded
-            .user_config;
-        if user_config
-            .rename_feeds_package(package_id, new_name)
-        {
+        let user_config = &mut context_guarded.user_config;
+        if user_config.rename_feeds_package(package_id, new_name) {
             self.sync_user_profile(user_config).await?;
             Ok(())
         } else {
@@ -144,11 +153,7 @@ impl FeaturesAPI for FeaturesAPIImpl {
         }
     }
 
-    async fn add_feed(
-        &self,
-        package_id: &str,
-        ftd: FeedTargetDescription,
-    ) -> anyhow::Result<()> {
+    async fn add_feed(&self, package_id: &str, ftd: FeedTargetDescription) -> anyhow::Result<()> {
         let context_guarded = &mut self.context.write().await;
         let user_config = &mut context_guarded.user_config;
         match user_config.find_feeds_package_mut(package_id) {
@@ -232,14 +237,22 @@ impl FeaturesAPI for FeaturesAPIImpl {
         context_guarded.user_config.find_feeds_package(package_id)
     }
 
-    async fn update_feed_contents(&self, package_id: &str, feed_id: &str) -> anyhow::Result<()> {
+    async fn update_feed_contents<R: Runtime>(
+        &self,
+        package_id: &str,
+        feed_id: &str,
+        app_handle: Option<AppHandle<R>>,
+    ) -> anyhow::Result<()> {
         let context_guarded = &self.context.read().await;
         let user_config = &context_guarded.user_config;
         let llm_section = &context_guarded.app_config.llm;
         if let Some(ftd) = user_config.find_feed(package_id, feed_id) {
             let words: Vec<&str> = ftd.data.iter().map(|x| x.as_str()).collect();
             info!("scraping, via the words...{:?}", words);
-            let mut articles = self.scrap_provider.search_by_words(words).await?;
+            let mut articles = self
+                .scrap_provider
+                .search_by_words(words, app_handle)
+                .await?;
             info!(
                 "found {} articles for the feed_id = {}, feed_name = {}",
                 articles.len(),
@@ -251,8 +264,14 @@ impl FeaturesAPI for FeaturesAPIImpl {
             let optimizer = Optimizer::new_processor(llm_section.clone())?;
             let melt = Melt::new_processor(llm_section.clone())?;
             for article in articles.iter_mut() {
-                if article_recorder_service.exists_by_source(&article.source_link).await? {
-                    info!("article existed, title = {}, source_link = {}", article.title, article.source_link);
+                if article_recorder_service
+                    .exists_by_source(&article.source_link)
+                    .await?
+                {
+                    info!(
+                        "article existed, title = {}, source_link = {}",
+                        article.title, article.source_link
+                    );
                     continue;
                 }
                 match self.process_article_pipelines(article, &purge, &optimizer, &melt).await {
@@ -306,25 +325,31 @@ impl FeaturesAPI for FeaturesAPIImpl {
     ) -> anyhow::Result<Vec<Model>> {
         if feed_id == SPECIFY_FEED_IDSET_TODAY_FILTER {
             let now: NaiveDate = Utc::now().date_naive();
-            return self.article_recorder_service
+            return self
+                .article_recorder_service
                 .query_backward_in_duration(offset, count, now, now)
                 .await;
         }
         if feed_id == SPECIFY_FEED_IDSET_WEEKEND_FILTER {
             let end: NaiveDate = Utc::now().date_naive();
             let monday_days_from_now = ((end.weekday() as i64 - Weekday::Mon as i64) % 7) as u64;
-            let start = end.checked_sub_days(chrono::Days::new(monday_days_from_now)).expect("SPECIFY_FEED_IDSET_WEEKEND_FILTER：日期转换错误，找不到本周周一的日期。");
-            return self.article_recorder_service
+            let start = end
+                .checked_sub_days(chrono::Days::new(monday_days_from_now))
+                .expect("SPECIFY_FEED_IDSET_WEEKEND_FILTER：日期转换错误，找不到本周周一的日期。");
+            return self
+                .article_recorder_service
                 .query_backward_in_duration(offset, count, start, end)
                 .await;
         }
         if feed_id == SPECIFY_FEED_IDSET_FAVORITE_FILTER {
-            return self.article_recorder_service
+            return self
+                .article_recorder_service
                 .query_favorite(offset, count)
                 .await;
         }
         if feed_id == SPECIFY_FEED_IDSET_UNREAD_FILTER {
-            return self.article_recorder_service
+            return self
+                .article_recorder_service
                 .query_unread(offset, count)
                 .await;
         }
@@ -343,7 +368,9 @@ impl FeaturesAPI for FeaturesAPIImpl {
     }
 
     async fn set_favorite(&self, id: i32, is_favorite: bool) -> anyhow::Result<()> {
-        self.article_recorder_service.set_favorite(id, is_favorite).await?;
+        self.article_recorder_service
+            .set_favorite(id, is_favorite)
+            .await?;
         Ok(())
     }
 
@@ -383,7 +410,11 @@ impl FeaturesAPI for FeaturesAPIImpl {
         Ok(())
     }
 
-    async fn update_article_by_source(&self, article_id: i32, source_text: String) -> anyhow::Result<bool> {
+    async fn update_article_by_source(
+        &self,
+        article_id: i32,
+        source_text: String,
+    ) -> anyhow::Result<bool> {
         let sharked_html = trim_html_with_script_and_style(source_text.as_str());
         let context_guarded = &self.context.read().await;
         let llm_section = &context_guarded.app_config.llm;
@@ -406,13 +437,21 @@ impl FeaturesAPI for FeaturesAPIImpl {
                     date_created: "".to_string(),
                     date_read: None,
                 };
-                match self.process_article_pipelines(&mut article, &purge, &optimizer, &melt).await {
+                match self
+                    .process_article_pipelines(&mut article, &purge, &optimizer, &melt)
+                    .await
+                {
                     Ok((out_purged_article, out_optimized_article, out_melted_article)) => {
                         let purged_content = out_purged_article.content.unwrap_or_default();
                         let optimized_content = out_optimized_article.content.unwrap_or_default();
                         let melted_content = out_melted_article.content.unwrap_or_default();
                         article_recorder_service
-                            .update_content(article_model, purged_content, optimized_content, melted_content)
+                            .update_content(
+                                article_model,
+                                purged_content,
+                                optimized_content,
+                                melted_content,
+                            )
                             .await?;
                         info!("article updated, article_id = {}", article_id);
                         Ok(true)
@@ -429,19 +468,37 @@ impl FeaturesAPI for FeaturesAPIImpl {
         }
     }
 
-    async fn chat_with_article_assistant(&self, article_id: i32, user_prompt: &str, history: Vec<ConversationMessage>) -> anyhow::Result<String> {
+    async fn chat_with_article_assistant(
+        &self,
+        article_id: i32,
+        user_prompt: &str,
+        history: Vec<ConversationMessage>,
+    ) -> anyhow::Result<String> {
         let context_guarded = &self.context.read().await;
         let llm_section = &context_guarded.app_config.llm;
         let assistant = Assistant::new(llm_section.clone());
 
-        let article_opt = self.article_recorder_service.query_by_id(article_id).await?;
+        let article_opt = self
+            .article_recorder_service
+            .query_by_id(article_id)
+            .await?;
         if let Some(article) = article_opt {
-            return assistant.chat(article.optimized_content, user_prompt, history).await;
+            return assistant
+                .chat(article.optimized_content, user_prompt, history)
+                .await;
         }
-        Ok(format!("文章不存在, article_id = {}, user_prompt = {}", article_id, user_prompt))
+        Ok(format!(
+            "文章不存在, article_id = {}, user_prompt = {}",
+            article_id, user_prompt
+        ))
     }
 
-    async fn search_contents_by_keyword(&self, keyword: &str, offset: u64, count: u64) -> anyhow::Result<Vec<Model>> {
+    async fn search_contents_by_keyword(
+        &self,
+        keyword: &str,
+        offset: u64,
+        count: u64,
+    ) -> anyhow::Result<Vec<Model>> {
         self.article_recorder_service
             .search_contents_by_keyword(keyword, offset, count)
             .await

@@ -1,6 +1,7 @@
 use reqwest::Client;
 use scraper::{Html, Selector};
 use spdlog::{debug, error, info};
+use tauri::{AppHandle, Runtime};
 use urlencoding::encode;
 
 use types::{Article, LLMSection};
@@ -9,6 +10,7 @@ use crate::connector::ClientOption;
 use crate::search::selector_extensions::ElementSelector;
 use crate::search::types::IProvider;
 use crate::search::utils::{trim_head_read_days_ago, trim_html_with_script_and_style};
+use crate::simulator::scrap_text_by_url;
 use crate::{article_reader as article, connector};
 
 const SEARCH_HOST: &str = "www.bing.com";
@@ -39,7 +41,9 @@ impl Provider {
     }
 
     fn prepare_target_sources(&self, html_text: &str) -> anyhow::Result<Vec<Article>> {
-        let sharked_html = trim_html_with_script_and_style(html_text);
+        let sharked_html =
+            trim_html_with_script_and_style(html_text);
+        let _watcher = sharked_html.as_str();
         let document = Html::parse_document(sharked_html.as_str());
 
         let mut pending_result: Vec<Article> = Vec::new();
@@ -104,7 +108,11 @@ impl Provider {
 }
 
 impl IProvider for Provider {
-    async fn search_by_words(&self, words: Vec<&str>) -> anyhow::Result<Vec<Article>> {
+    async fn search_by_words<R: Runtime>(
+        &self,
+        words: Vec<&str>,
+        app_handle: Option<AppHandle<R>>,
+    ) -> anyhow::Result<Vec<Article>> {
         info!("内容清单搜索中...{:?}", words);
         let search_word = words
             .iter()
@@ -112,16 +120,15 @@ impl IProvider for Provider {
             .collect::<Vec<String>>()
             .join("+")
             .to_string();
-        let url = reqwest::Url::parse(
-            format!(
-                r#"https://www.bing.com/search?ensearch=1&q={}&filters=ex1:%22ez2%22&rdr=1"#,
-                search_word
-            )
-            .as_str(),
-        )?;
-        let response = self.client.get(url).send().await?;
-        let html_text = response.text().await?;
-        info!("获得内容清单，深取内容中");
+        let url = format!(
+            r#"https://www.bing.com/search?ensearch=1&q={}&filters=ex1:%22ez2%22&rdr=1"#,
+            search_word
+        );
+        let html_text = match app_handle {
+            Some(ap) => scrap_text_by_url(ap, url.as_str()).await?,
+            None => self.client.get(url).send().await?.text().await?,
+        };
+        info!("已获得搜索数据，清单解析中");
         self.convert(html_text).await
     }
 }

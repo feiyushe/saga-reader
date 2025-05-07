@@ -55,21 +55,21 @@ async fn schedule_loop() -> anyhow::Result<()> {
     // 定时任务
     loop {
         info!("scheduled feeds update begin");
-        let feeds_packages = features.get_feeds_packages().await;
-        for feed_package in feeds_packages {
-            for feed in feed_package.feeds {
-                match features
-                    .update_feed_contents(&feed_package.id, &feed.id)
-                    .await
-                {
-                    Ok(_) => (),
-                    Err(e) => error!(
-                        "update_feed_contents failure, package_id = {}, feed_id = {}, error = {}",
-                        &feed_package.id, &feed.id, e
-                    ),
-                }
-            }
-        }
+        // let feeds_packages = features.get_feeds_packages().await;
+        // for feed_package in feeds_packages {
+        //     for feed in feed_package.feeds {
+        //         match features
+        //             .update_feed_contents(&feed_package.id, &feed.id, None)
+        //             .await
+        //         {
+        //             Ok(_) => (),
+        //             Err(e) => error!(
+        //                 "update_feed_contents failure, package_id = {}, feed_id = {}, error = {}",
+        //                 &feed_package.id, &feed.id, e
+        //             ),
+        //         }
+        //     }
+        // }
         info!("scheduled feeds update end");
         interval.tick().await;
     }

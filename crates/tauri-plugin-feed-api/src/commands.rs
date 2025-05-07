@@ -1,12 +1,12 @@
 use std::sync::Arc;
 
 use spdlog::error;
-use tauri::{AppHandle, Runtime, State};
+use tauri::{AppHandle, Manager, Runtime, State};
 
 use feed_api_rs::features::api::FeaturesAPI;
 use ollama::ProgramStatus;
 use recorder::entity::article_record::Model;
-use types::{AppConfig, ConversationMessage, FeedsPackage, FeedTargetDescription};
+use types::{AppConfig, ConversationMessage, FeedTargetDescription, FeedsPackage};
 
 use crate::scrap_host;
 use crate::state::HybridRuntimeState;
@@ -117,14 +117,17 @@ pub(crate) async fn get_feeds_by_package(
 }
 
 #[tauri::command(rename_all = "snake_case")]
-pub(crate) async fn update_feed_contents(
+pub(crate) async fn update_feed_contents<R: Runtime>(
+    app_handle: AppHandle<R>,
     state: State<'_, Arc<HybridRuntimeState>>,
     package_id: &str,
     feed_id: &str,
 ) -> Result<(), ()> {
     let features_api = &state.features_api;
     convert_result(
-        features_api.update_feed_contents(package_id, feed_id).await
+        features_api
+            .update_feed_contents(package_id, feed_id, Some(app_handle))
+            .await,
     )
 }
 
@@ -144,49 +147,48 @@ pub(crate) async fn read_feed_contents(
 }
 
 #[tauri::command(rename_all = "snake_case")]
-pub(crate) async fn query_by_id(state: State<'_, Arc<HybridRuntimeState>>, id: i32) -> Result<Option<Model>, ()> {
+pub(crate) async fn query_by_id(
+    state: State<'_, Arc<HybridRuntimeState>>,
+    id: i32,
+) -> Result<Option<Model>, ()> {
     let features_api = &state.features_api;
-    convert_result(
-        features_api
-            .query_by_id(id)
-            .await,
-    )
+    convert_result(features_api.query_by_id(id).await)
 }
 
 #[tauri::command(rename_all = "snake_case")]
-pub(crate) async fn mark_as_read(state: State<'_, Arc<HybridRuntimeState>>, id: i32) -> Result<(), ()> {
+pub(crate) async fn mark_as_read(
+    state: State<'_, Arc<HybridRuntimeState>>,
+    id: i32,
+) -> Result<(), ()> {
     let features_api = &state.features_api;
-    convert_result(
-        features_api
-            .mark_as_read(id)
-            .await,
-    )
+    convert_result(features_api.mark_as_read(id).await)
 }
 
 #[tauri::command(rename_all = "snake_case")]
-pub(crate) async fn set_favorite(state: State<'_, Arc<HybridRuntimeState>>, id: i32, favorite: bool) -> Result<(), ()> {
+pub(crate) async fn set_favorite(
+    state: State<'_, Arc<HybridRuntimeState>>,
+    id: i32,
+    favorite: bool,
+) -> Result<(), ()> {
     let features_api = &state.features_api;
-    convert_result(
-        features_api
-            .set_favorite(id, favorite)
-            .await,
-    )
+    convert_result(features_api.set_favorite(id, favorite).await)
 }
 
 #[tauri::command(rename_all = "snake_case")]
-pub(crate) async fn get_app_config(state: State<'_, Arc<HybridRuntimeState>>) -> Result<AppConfig, ()> {
+pub(crate) async fn get_app_config(
+    state: State<'_, Arc<HybridRuntimeState>>,
+) -> Result<AppConfig, ()> {
     let features_api = &state.features_api;
-    convert_result(
-        features_api.get_app_config().await
-    )
+    convert_result(features_api.get_app_config().await)
 }
 
 #[tauri::command(rename_all = "snake_case")]
-pub(crate) async fn set_app_config(state: State<'_, Arc<HybridRuntimeState>>, app_config: AppConfig) -> Result<(), ()> {
+pub(crate) async fn set_app_config(
+    state: State<'_, Arc<HybridRuntimeState>>,
+    app_config: AppConfig,
+) -> Result<(), ()> {
     let features_api = &state.features_api;
-    convert_result(
-        features_api.set_app_config(app_config).await
-    )
+    convert_result(features_api.set_app_config(app_config).await)
 }
 
 #[tauri::command(rename_all = "snake_case")]
@@ -210,7 +212,10 @@ pub(crate) async fn launch_ollama(state: State<'_, Arc<HybridRuntimeState>>) -> 
 }
 
 #[tauri::command(rename_all = "snake_case")]
-pub(crate) async fn open_article_external(state: State<'_, Arc<HybridRuntimeState>>, url: &str) -> Result<(), ()> {
+pub(crate) async fn open_article_external(
+    state: State<'_, Arc<HybridRuntimeState>>,
+    url: &str,
+) -> Result<(), ()> {
     if !url.starts_with("https://") {
         error!("open_article_external error, the url bypassed from web exists risk");
         return Err(());
@@ -220,18 +225,30 @@ pub(crate) async fn open_article_external(state: State<'_, Arc<HybridRuntimeStat
 }
 
 #[tauri::command(rename_all = "snake_case")]
-pub(crate) async fn scrap_text_by_url<R: Runtime>(app_handle: AppHandle<R>, url: &str) -> Result<String, ()> {
+pub(crate) async fn scrap_text_by_url<R: Runtime>(
+    app_handle: AppHandle<R>,
+    url: &str,
+) -> Result<String, ()> {
     // 查询Article，获得url并抓取数据，将content塞进去并走llm workflow
     scrap_host::scrap_text_by_url(app_handle, url).await
 }
 
 #[tauri::command(rename_all = "snake_case")]
-pub(crate) async fn update_article_by_source<R: Runtime>(app_handle: AppHandle<R>, state: State<'_, Arc<HybridRuntimeState>>, article_id: i32, url: &str) -> Result<bool, ()> {
+pub(crate) async fn update_article_by_source<R: Runtime>(
+    app_handle: AppHandle<R>,
+    state: State<'_, Arc<HybridRuntimeState>>,
+    article_id: i32,
+    url: &str,
+) -> Result<bool, ()> {
     // 查询Article，获得url并抓取数据，将content塞进去并走llm workflow
     match scrap_host::scrap_text_by_url(app_handle, url).await {
         Ok(content) => {
             let features_api = &state.features_api;
-            convert_result(features_api.update_article_by_source(article_id, content).await)
+            convert_result(
+                features_api
+                    .update_article_by_source(article_id, content)
+                    .await,
+            )
         }
         Err(e) => {
             error!("command execution error...{:?}", e);
@@ -241,9 +258,19 @@ pub(crate) async fn update_article_by_source<R: Runtime>(app_handle: AppHandle<R
 }
 
 #[tauri::command(rename_all = "snake_case")]
-pub(crate) async fn chat_with_article_assistant<R: Runtime>(app_handle: AppHandle<R>, state: State<'_, Arc<HybridRuntimeState>>, article_id: i32, user_prompt: &str, history: Vec<ConversationMessage>) -> Result<String, ()> {
+pub(crate) async fn chat_with_article_assistant<R: Runtime>(
+    app_handle: AppHandle<R>,
+    state: State<'_, Arc<HybridRuntimeState>>,
+    article_id: i32,
+    user_prompt: &str,
+    history: Vec<ConversationMessage>,
+) -> Result<String, ()> {
     let features_api = &state.features_api;
-    convert_result(features_api.chat_with_article_assistant(article_id, user_prompt, history).await)
+    convert_result(
+        features_api
+            .chat_with_article_assistant(article_id, user_prompt, history)
+            .await,
+    )
 }
 
 fn convert_result<T>(result: anyhow::Result<T>) -> Result<T, ()> {
