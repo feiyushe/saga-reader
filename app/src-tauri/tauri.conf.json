@@ -1,6 +1,6 @@
 {
 	"productName": "麒睿智库",
-	"version": "0.9.5",
+	"version": "0.9.6",
 	"identifier": "com.sopaco.labs.qinofeed",
 	"build": {
 		"beforeDevCommand": "bun run dev",
