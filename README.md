@@ -175,4 +175,5 @@ MIT, A copy of the license is provided in the [LICENSE](./LICENSE) file.
 An experienced internet veteran, having navigated through the waves of PC internet, mobile internet, and AI applications. Starting from an individual mobile application developer to a professional in the corporate world, I possess rich experience in product design and research and development. Currently, I am employed at [Kuaishou](https://en.wikipedia.org/wiki/Kuaishou), focusing on the R&D of universal front-end systems and AI exploration.
 
 WeChat: dokhell
+
 Email: dokhell@hotmail.com
