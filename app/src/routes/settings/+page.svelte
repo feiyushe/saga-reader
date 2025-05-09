@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { _ } from 'svelte-i18n';
+	import { _ } from 'svelte-i18n';
 	import { browser } from '$app/environment';
 	import { getName, getVersion, getTauriVersion } from '@tauri-apps/api/app';
 	import { arch, locale, platform, version } from '@tauri-apps/plugin-os';
@@ -236,20 +236,21 @@
 						</div>
 
 						<p class="mt-2 ml-0.5 type-scale-1 text-surface-400">
-							<span
-								>{$_('settings.section_llm_provider.provider_ollama_tip')}</span
-							>
+							<span>{$_('settings.section_llm_provider.provider_ollama_tip')}</span>
 							<span
 								onkeypress={featuresApi.download_ollama}
 								onclick={featuresApi.download_ollama}
 								role="link"
 								tabindex="0"
-								class="cursor-pointer text-primary-500">{$_('settings.section_llm_provider.provider_ollama_sentence_1')}</span
+								class="cursor-pointer text-primary-500"
+								>{$_('settings.section_llm_provider.provider_ollama_sentence_1')}</span
 							>。
 						</p>
 						<hr class="hr mt-2 mb-2" />
 						<label class={`label ${llmFormErrorOllamaURI ? 'text-red-500' : ''}`}>
-							<span class="label-text">{$_('settings.section_llm_provider.provider_ollama_sentence_2')}</span>
+							<span class="label-text"
+								>{$_('settings.section_llm_provider.provider_ollama_sentence_2')}</span
+							>
 							<input
 								class="input p-2"
 								type="url"
@@ -258,7 +259,9 @@
 							/>
 						</label>
 						<label class={`label mt-2 ${llmFormErrorOllamaModelName ? 'text-red-500' : ''}`}>
-							<span class="label-text">{$_('settings.section_llm_provider.provider_ollama_sentence_3')}</span>
+							<span class="label-text"
+								>{$_('settings.section_llm_provider.provider_ollama_sentence_3')}</span
+							>
 							<input
 								class="input p-2"
 								type="url"
@@ -283,18 +286,17 @@
 							tabindex="0"
 						>
 							<p class="h5">{$_('settings.section_llm_provider.provider_glm')}</p>
-							<Switch name="llm_ollama" readOnly checked={activedProviderType === 'glm'} />
+							<Switch name="llm_glm" readOnly checked={activedProviderType === 'glm'} />
 						</div>
 						<p class="mt-2 ml-0.5 type-scale-1 text-surface-400">
-							<span
-								>{$_('settings.section_llm_provider.provider_glm_sentence_1')}</span
-							>
+							<span>{$_('settings.section_llm_provider.provider_glm_sentence_1')}</span>
 							<span
 								onkeypress={openGLMGuide}
 								onclick={openGLMGuide}
 								role="link"
 								tabindex="0"
-								class="cursor-pointer text-primary-500">{$_('settings.section_llm_provider.provider_glm_sentence_2')}</span
+								class="cursor-pointer text-primary-500"
+								>{$_('settings.section_llm_provider.provider_glm_sentence_2')}</span
 							>。
 						</p>
 						<hr class="hr mt-2 mb-2" />
@@ -312,7 +314,7 @@
 						{/if}
 					</div>
 
-					<div
+					<!-- <div
 						class={`p-4 rounded-md border-2 ${activedProviderType === 'platform' ? 'border-primary-500' : ''} w-full`}
 					>
 						<div
@@ -323,14 +325,16 @@
 							tabindex="0"
 						>
 							<p class="h5">{$_('settings.section_llm_provider.provider_barton')}</p>
-							<Switch name="llm_ollama" readOnly checked={activedProviderType === 'platform'} />
+							<Switch name="llm_platform" readOnly checked={activedProviderType === 'platform'} />
 						</div>
 						<p class="mt-2 ml-0.5 type-scale-1 text-surface-400">
-						    {$_('settings.section_llm_provider.provider_barton_sentence_1')}
+							{$_('settings.section_llm_provider.provider_barton_sentence_1')}
 						</p>
 						<hr class="hr mt-2 mb-2" />
 						<label class={`label ${llmFormErrorPlatformModelPath ? 'text-red-500' : ''}`}>
-							<span class="label-text">{$_('settings.section_llm_provider.provider_barton_sentence_2')}</span>
+							<span class="label-text"
+								>{$_('settings.section_llm_provider.provider_barton_sentence_2')}</span
+							>
 							<input
 								class="input p-2"
 								type="text"
@@ -341,7 +345,7 @@
 						{#if llmFormChangedPlatform}
 							{@render LLMGroupSavePanel(saveLLMFormPlatform, restoreLLMFormPlatform)}
 						{/if}
-					</div>
+					</div> -->
 				</div>
 
 				{@render SectionEnd()}
@@ -363,10 +367,22 @@
 				{@render SectionEnd()}
 				{@render SectionHeader($_('settings.section_users_support.label'))}
 				<div class="flex space-x-4">
-				    {@render LinkButton($_('settings.section_users_support.visit_home'), 'https://aiqino.netlify.app?cf=desktop')}
-					{@render LinkButton($_('settings.section_users_support.feedback'), 'https://txc.qq.com/products/670982')}
-					{@render LinkButton($_('settings.section_users_support.blogs'), 'https://support.qq.com/products/670982/blog-archive')}
-					{@render LinkButton($_('settings.section_users_support.changelogs'), 'https://support.qq.com/products/670982/change-log')}
+					{@render LinkButton(
+						$_('settings.section_users_support.visit_home'),
+						'https://aiqino.netlify.app?cf=desktop'
+					)}
+					{@render LinkButton(
+						$_('settings.section_users_support.feedback'),
+						'https://txc.qq.com/products/670982'
+					)}
+					{@render LinkButton(
+						$_('settings.section_users_support.blogs'),
+						'https://support.qq.com/products/670982/blog-archive'
+					)}
+					{@render LinkButton(
+						$_('settings.section_users_support.changelogs'),
+						'https://support.qq.com/products/670982/change-log'
+					)}
 				</div>
 
 				{@render SectionEnd()}
@@ -376,7 +392,9 @@
 					<div class="flex flex-col space-y-2">
 						<p class="mt-3 type-scale-3">{appName}</p>
 						<p class="type-scale-2">{`${$_('settings.section_version.ver_app')}：${appVersion}`}</p>
-						<p class="type-scale-2">{`${$_('settings.section_version.ver_engine')}：${engineVersion}`}</p>
+						<p class="type-scale-2">
+							{`${$_('settings.section_version.ver_engine')}：${engineVersion}`}
+						</p>
 						<p class="type-scale-2">
 							{`${$_('settings.section_version.ver_system')}：${sysPlatform} ${sysVersion}, ${sysArch}, ${sysLocale}`}
 						</p>
