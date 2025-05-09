@@ -2,18 +2,23 @@
   <img width="120" height="120" src="https://aiqino.netlify.app/favicon.png">
 </p>
 <h3 align="center">麒睿智库(Saga Reader)</h3>
-<p align="center">你的AI智能助手</p>
-<p align="center">
-  <img src="https://img.shields.io/github/v/release/sopaco/saga-reader?label=version" />
-  <img src="https://img.shields.io/github/downloads/sopaco/saga-reader/total" />
-</p>
-<hr />
 
 <p align="center">
     <a href="./README.md">English</a>
     |
     <a href="./README_zh.md">中文</a>
 </p>
+
+<p align="center">💪🏻 由人工智能驱动的 <strong>速度极快</strong> 且 <strong>极其轻量</strong> 的互联网阅读器客户端</p>
+<p align="center">🛠️ 基于<strong>Rust</strong>、<strong>Tauri</strong>和<strong>Svelte</strong>构建的现代跨平台应用程序</p>
+<p align="center">
+  <a style="text-decoration:none" href="https://aiqino.netlify.app?s=github_website_tag">
+    <img src="https://img.shields.io/badge/麒睿智库-Website-F9B81F" alt="Website" />
+  </a>
+  <img src="https://img.shields.io/github/v/release/sopaco/saga-reader?label=version" />
+  <img src="https://img.shields.io/github/downloads/sopaco/saga-reader/total" />
+</p>
+<hr />
 
 > 🚀 通过 [在 GitHub 上赞助](https://github.com/sponsors/sopaco)让这个软件更好的发展。
 
@@ -22,19 +27,21 @@
 
 麒睿智库 完全免费和开源，这意味着所有数据都安全地存储在您自己的计算机上，不受第三方服务提供商的控制。此外，您可以根据自己的兴趣和偏好管理订阅关键词，而不会受到广告和商业化内容的打扰。
 
-从[官方网站](https://aiqino.netlify.app)下载！
+从[官方网站](https://aiqino.netlify.app?s=github_download)下载！
 
 ## 快照
 
 ---
 
-![snapshot-glance](./uprise/snapshot-glance.webp)
+![snapshot-glance](docs/assets/snapshot-glance.webp)
 
 ## 工作原理
 
 ---
 
-![archi-diags-en.png](./uprise/archi-diags-en.png)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/sopaco/saga-reader)
+
+![archi-diags-en.png](docs/assets/archi-diags-en.png)
 
 ## 功能
 
@@ -140,7 +147,6 @@
 
 #### 示意图
 ```plaintext
-Apply
 +---------------------+     +---------------------+
 |      Frontend       |     |     Backend         |
 |  (Svelte/SvelteKit) |<--->|  (Rust Modules)     |

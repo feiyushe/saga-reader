@@ -3,18 +3,23 @@
   <img width="120" height="120" src="https://aiqino.netlify.app/favicon.png">
 </p>
 <h3 align="center">Saga Reader</h3>
-<p align="center">Your AI-Powered think tank assistant</p>
-<p align="center">
-  <img src="https://img.shields.io/github/v/release/sopaco/saga-reader?label=version" />
-  <img src="https://img.shields.io/github/downloads/sopaco/saga-reader/total" />
-</p>
-<hr />
 
 <p align="center">
     <a href="./README.md">English</a>
     |
     <a href="./README_zh.md">中文</a>
 </p>
+
+<p align="center">🛠️ A modern, cross-platform application built on top of <strong>Rust</strong>, <strong>Tauri</strong> & <strong>Svelte</strong>.</p>
+<p align="center">💪🏻 <strong>Blazing-Fast</strong> and <strong>Extremely-Lightweight</strong> Internet Reader Client driven by <strong>AI</strong>.</p>
+<p align="center">
+  <a style="text-decoration:none" href="https://aiqino.netlify.app?s=github_website_tag">
+    <img src="https://img.shields.io/badge/SagaReader-Website-F9B81F" alt="Website" />
+  </a>
+  <img src="https://img.shields.io/github/v/release/sopaco/saga-reader?label=version" />
+  <img src="https://img.shields.io/github/downloads/sopaco/saga-reader/total" />
+</p>
+<hr />
 
 > 🚀 Help me develop this software better by [sponsoring on GitHub](https://github.com/sponsors/sopaco)
 
@@ -24,19 +29,21 @@ Saga Reader is an AI-driven think tank-style reader that automatically retrieves
 
 Saga Reader is completely free and open-source, meaning all data is securely stored on your own computer and is not controlled by third-party service providers. Additionally, you can manage your subscription keywords based on your interests and preferences without being disturbed by advertisements and commercialized content.
 
-Download it from [website](https://aiqino.netlify.app)!
+Download it from [website](https://aiqino.netlify.app?s=github_download)!
 
 ## Snapshots
 
 ---
 
-![snapshot-glance](./uprise/snapshot-glance.webp)
+![snapshot-glance](docs/assets/snapshot-glance.webp)
 
 ## How it works
 
 ---
 
-![archi-diags-en.png](./uprise/archi-diags-en.png)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/sopaco/saga-reader)
+
+![archi-diags-en.png](docs/assets/archi-diags-en.png)
 
 ## Features
 
@@ -143,7 +150,6 @@ We use a combination of Rust, Svelte (SvelteKit), Tauri, SeaORM, SqlLite, Tailwi
 
 #### Schematic Diagram
 ```plaintext
-Apply
 +---------------------+     +---------------------+
 |      Frontend       |     |     Backend         |
 |  (Svelte/SvelteKit) |<--->|  (Rust Modules)     |

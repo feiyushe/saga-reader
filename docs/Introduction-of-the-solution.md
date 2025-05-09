@@ -36,9 +36,20 @@ The project adopts a modular and hierarchical system architecture. Each module i
 ```
 
 #### 2.1.2 Complexity of Module Interaction
+![](./assets/modules-diags-en.png)
 - Frontend module: Involves multi-component interaction, state management, and internationalization processing. Components share states through Svelte Store, and the internationalization module dynamically switches language resources according to user settings.
 - Backend module: tauri-plugin-feed-api serves as a Tauri plugin, interacting with the frontend and coordinating other business modules. feed_api_rs is responsible for the core business process, linking modules such as llm, recorder, and scrap, and handling complex business logic.
 - Cross-module collaboration: After an article is crawled, the scrap module passes the data to the intelligent module. The intelligent module invokes llm for content processing, and the final result is stored by the recorder. The whole process involves the collaborative work of multiple modules.
+
+##### Content Subscription and Update Flow
+![](./assets/flows-feeds-diags-en.png)
+
+##### Article Reading and AI Interaction Flow
+![](./assets/flows-read-diags-en.png)
+
+##### Multilingual Translation Flow
+![](./assets/flows-translation-diags-en.png)
+
 
 ### 2.2 Frontend Architecture (Svelte)
 #### 2.2.1 Compile-time Optimization
@@ -99,7 +110,6 @@ Use connection pools for database and network requests to reduce the overhead of
 
 ```rust
 // db_pool.rs
-Apply
 use sea_orm::DatabaseConnection;
 use std::sync::Arc;
 use tokio::sync::Mutex;

@@ -27,7 +27,7 @@ spdlog-rs = "0.4.1"
 chrono = "0.4.40"
 
 ### tauri runtime
-tauri = { version = "2.5.1", features = [] }
+tauri = { version = "2.5.1" }
 
 ### diagnostic
 #### samply外部执行的很好

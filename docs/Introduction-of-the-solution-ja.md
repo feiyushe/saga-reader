@@ -17,7 +17,6 @@ Saga Reader（麒睿智库）は、AI 駆動のインテリジェントな閲読
 
 #### 2.1.1 階層化アーキテクチャ
 ```plaintext
-Apply
 +---------------------+
 |      Presentation   |
 |    (Frontend UI)    |
@@ -40,9 +39,19 @@ Apply
 ```
 
 #### 2.1.2 モジュール間の相互作用の複雑性
+![](./assets/modules-diags-en.png)
 - フロントエンドモジュール：多くのコンポーネント間の相互作用、状態管理、国際化処理を含み、コンポーネント間は Svelte Store を使って状態を共有し、国際化モジュールはユーザーの設定に応じて言語リソースを動的に切り替えます。
 - バックエンドモジュール：tauri-plugin-feed-api は Tauri プラグインとして、フロントエンドとの相互作用を行い、他のビジネスモジュールを調整します。feed_api_rs は核心的なビジネスプロセスを担当し、llm、recorder、scrap などのモジュールをつなぎ、複雑なビジネスロジックを処理します。
 - クロスモジュールの協働：記事をスクレイピングした後、scrap モジュールはデータを intelligent モジュールに渡し、intelligent は llm を呼び出してコンテンツを処理し、最終結果は recorder で保存されます。このプロセス全体は、多数のモジュールの共同作業を必要とします。
+
+##### コンテンツの購読と更新の流れ
+![](./assets/flows-feeds-diags-en.png)
+
+##### 記事の読み取りと人工知能との相互作用の流れ
+![](./assets/flows-read-diags-en.png)
+
+##### 多言語翻訳の流れ
+![](./assets/flows-translation-diags-en.png)
 
 ### 2.2 フロントエンドアーキテクチャ（Svelte）
 #### 2.2.1 コンパイル時の最適化
@@ -103,7 +112,6 @@ Tokio の非同期タスクスケジューリングを使用して、ネット�
 
 ```rust
 // db_pool.rs
-Apply
 use sea_orm::DatabaseConnection;
 use std::sync::Arc;
 use tokio::sync::Mutex;
