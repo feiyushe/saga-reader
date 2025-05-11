@@ -1,6 +1,6 @@
 [package]
 name = "qino-feed-client"
-version = "0.9.6"
+version = "0.9.8"
 description = "Qino Feed"
 authors = ["Sopaco"]
 edition = "2021"

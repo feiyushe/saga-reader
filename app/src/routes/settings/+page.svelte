@@ -369,7 +369,7 @@
 				<div class="flex space-x-4">
 					{@render LinkButton(
 						$_('settings.section_users_support.visit_home'),
-						'https://aiqino.netlify.app?cf=desktop'
+						'https://aiqino.netlify.app?s=desktop'
 					)}
 					{@render LinkButton(
 						$_('settings.section_users_support.feedback'),
