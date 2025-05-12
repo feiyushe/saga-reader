@@ -52,11 +52,11 @@ pub enum OutputType {
 
 #[derive(Serialize, Deserialize, EnumString, Clone, Default)]
 pub enum ScrapProviderType {
-    #[default]
     #[strum(serialize = "baidu")]
     #[serde(rename = "baidu")]
     Baidu,
 
+    #[default]
     #[strum(serialize = "bing")]
     #[serde(rename = "bing")]
     Bing,
@@ -64,7 +64,6 @@ pub enum ScrapProviderType {
 
 #[derive(Serialize, Deserialize, EnumString, Clone, Default)]
 pub enum LLMProviderType {
-    #[default]
     #[strum(serialize = "ollama")]
     #[serde(rename = "ollama")]
     Ollama,
@@ -73,6 +72,7 @@ pub enum LLMProviderType {
     #[serde(rename = "platform")]
     Platform,
 
+    #[default]
     #[strum(serialize = "glm")]
     #[serde(rename = "glm")]
     GLM,

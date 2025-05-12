@@ -1,5 +1,5 @@
 <script>
-    import { _ } from 'svelte-i18n';
+	import { _ } from 'svelte-i18n';
 	import { getName, getVersion, getTauriVersion } from '@tauri-apps/api/app';
 	import { featuresApi } from '$lib/hybrid-apis/feed/impl';
 	import { browser } from '$app/environment';
@@ -9,7 +9,7 @@
 	let appVersion = $state('-.-.-');
 	let engineVersion = $state('-.-.-');
 	function onVisitHome() {
-		featuresApi.open_article_external('https://skyron.netlify.app/qino');
+		featuresApi.open_article_external('https://aiqino.netlify.app?s=desktop');
 	}
 	if (browser) {
 		getName().then((val) => (appName = val));

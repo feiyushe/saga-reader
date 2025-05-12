@@ -13,7 +13,7 @@ use intelligent::article_processor::melt::Melt;
 use intelligent::article_processor::optimizer::Optimizer;
 use intelligent::article_processor::purge::Purge;
 use intelligent::article_processor::types::IArticleProcessor;
-use ollama::{query_platform, ProgramStatus};
+use ollama::{query_platform, ProgramStatus, Information};
 use recorder::article_recorder_service::ArticleRecorderService;
 use recorder::entity::article_record::{Model as ArticleRecord, Model};
 use scrap::search::types::IProvider;
@@ -390,8 +390,10 @@ impl FeaturesAPI for FeaturesAPIImpl {
     async fn get_ollama_status(&self) -> anyhow::Result<ProgramStatus> {
         let context_guarded = &self.context.read().await;
         let llm_section = &context_guarded.app_config.llm.provider_ollama;
-        let information = query_platform(&llm_section.endpoint).await?;
-        Ok(information.status)
+        match query_platform(&llm_section.endpoint).await {
+            Ok(information) => Ok(information.status),
+            Err(_) => Ok(ProgramStatus::Uninstall)
+        }
     }
 
     /// 下载Ollama

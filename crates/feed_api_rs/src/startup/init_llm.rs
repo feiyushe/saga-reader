@@ -1,3 +1,4 @@
+use spdlog::error;
 use ollama::{ProgramStatus, query_platform};
 use types::{LLMProviderType, LLMSection};
 
@@ -8,15 +9,22 @@ pub async fn call(llm_section: &LLMSection) -> anyhow::Result<()> {
         LLMProviderType::Ollama => {
             let mut task = InitTask::default();
             task.start("llm_provider_ollama", || async {
-                let ollama_information = query_platform(&llm_section.provider_ollama.endpoint).await?;
-                match ollama_information.status {
-                    // 在启动环节如果未安装Ollama不自动引导安装，只记录状态。
-                    ProgramStatus::Uninstall => {}
-                    // 在启动环节如果已安装Ollama但未运行则唤起Ollama。
-                    ProgramStatus::InstallButNotRunning => ollama::launch().await?,
-                    ProgramStatus::Running => {}
-                };
-                Ok(ollama_information.status)
+                match query_platform(&llm_section.provider_ollama.endpoint).await {
+                    Ok(ollama_information) => {
+                        match ollama_information.status {
+                            // 在启动环节如果未安装Ollama不自动引导安装，只记录状态。
+                            ProgramStatus::Uninstall => {}
+                            // 在启动环节如果已安装Ollama但未运行则唤起Ollama。
+                            ProgramStatus::InstallButNotRunning => ollama::launch().await?,
+                            ProgramStatus::Running => {}
+                        };
+                        Ok(ollama_information.status)
+                    }
+                    Err(_) => {
+                        error!("The Ollama instance is unavailable.");
+                        Ok(ProgramStatus::Uninstall)
+                    }
+                }
             })
                 .await?;
             Ok(())

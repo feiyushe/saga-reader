@@ -14,9 +14,10 @@
 <p align="center">💪🏻 <strong>Blazing-Fast</strong> and <strong>Extremely-Lightweight</strong> Internet Reader Client driven by <strong>AI</strong>.</p>
 <p align="center">
   <a style="text-decoration:none" href="https://aiqino.netlify.app?s=github_website_tag">
-    <img src="https://img.shields.io/badge/SagaReader-Website-F9B81F" alt="Website" />
+    <img src="https://img.shields.io/badge/SagaReader-Website-1E90FF" alt="Website" />
   </a>
-  <img src="https://img.shields.io/github/v/release/sopaco/saga-reader?label=version" />
+  <img src="https://img.shields.io/github/v/release/sopaco/saga-reader?label=version&color=6A5ACD" />
+  <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/sopaco/saga-reader/rust.yml">
   <img src="https://img.shields.io/github/downloads/sopaco/saga-reader/total" />
 </p>
 <hr />
@@ -30,6 +31,12 @@ Saga Reader is an AI-driven think tank-style reader that automatically retrieves
 Saga Reader is completely free and open-source, meaning all data is securely stored on your own computer and is not controlled by third-party service providers. Additionally, you can manage your subscription keywords based on your interests and preferences without being disturbed by advertisements and commercialized content.
 
 Download it from [website](https://aiqino.netlify.app?s=github_download)!
+
+[![Stargazers repo roster for @sopaco/saga-reader](https://reporoster.com/stars/sopaco/saga-reader)](https://github.com/sopaco/saga-reader/stargazers)
+
+**Note: Installation and Usage Instructions**
+
+For the installation precautions and the configuration method of the large language model required for the first use, please refer to the [**Help Document**](./docs/how-to-use-en.md).
 
 ## Snapshots
 
