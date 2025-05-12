@@ -12,7 +12,7 @@
 如果你使用的是方法一安装，目前没有购买微软和苹果的开发者服务和签名，需要设置一下运行授权。
 
 以MacOS为例，直接运行会遇到下面提示。
-![](how-to-use-install-uncertificate-zh.webp)
+![](assets/how-to-use-install-uncertificate-zh.webp)
 只需要运行下面命令后再安装即可。
 ``` sh
 sudo xattr -rd com.apple.quarantine /Applications/麒睿智库.app
@@ -23,21 +23,21 @@ sudo xattr -rd com.apple.quarantine /Applications/麒睿智库.app
 
 **1、配置AI服务，程序会通过AI服务对文章做总结和解读**
 
-![](how-to-use-settings-zh.png)
+![](assets/how-to-use-settings-zh.png)
 
 ### 配置订阅组
 
 **2、新建订阅组**
 
-![](how-to-use-add-feeds-package-zh.png)
+![](assets/how-to-use-add-feeds-package-zh.png)
 
 **3、新增一个订阅配置**
 
-![](how-to-use-add-feed-zh.png)
+![](assets/how-to-use-add-feed-zh.png)
 
 **4、填写订阅配置**
 
-![](how-to-use-edit-feed-zh.png)
+![](assets/how-to-use-edit-feed-zh.png)
 
 ### Q & A
 Q：订阅内容是如何更新的？

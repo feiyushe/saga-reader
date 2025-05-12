@@ -13,9 +13,10 @@
 <p align="center">🛠️ 基于<strong>Rust</strong>、<strong>Tauri</strong>和<strong>Svelte</strong>构建的现代跨平台应用程序</p>
 <p align="center">
   <a style="text-decoration:none" href="https://aiqino.netlify.app?s=github_website_tag">
-    <img src="https://img.shields.io/badge/麒睿智库-Website-F9B81F" alt="Website" />
+    <img src="https://img.shields.io/badge/麒睿智库-Website-1E90FF" alt="Website" />
   </a>
-  <img src="https://img.shields.io/github/v/release/sopaco/saga-reader?label=version" />
+  <img src="https://img.shields.io/github/v/release/sopaco/saga-reader?label=version&color=6A5ACD" />
+  <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/sopaco/saga-reader/rust.yml">
   <img src="https://img.shields.io/github/downloads/sopaco/saga-reader/total" />
 </p>
 <hr />
@@ -28,6 +29,10 @@
 麒睿智库 完全免费和开源，这意味着所有数据都安全地存储在您自己的计算机上，不受第三方服务提供商的控制。此外，您可以根据自己的兴趣和偏好管理订阅关键词，而不会受到广告和商业化内容的打扰。
 
 从[官方网站](https://aiqino.netlify.app?s=github_download)下载！
+
+**注意：安装与使用说明**
+
+安装注意事项与初次使用需要的大模型配置方法，详见[**帮助文档**](./docs/how-to-use-zh.md)。
 
 ## 快照
 

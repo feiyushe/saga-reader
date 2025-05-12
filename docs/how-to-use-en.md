@@ -11,7 +11,7 @@ If you install using Method 2, you can directly run the program after compilatio
 If you install using Method 1, since you haven't purchased the developer services and signatures from Microsoft and Apple, you need to set the operation authorization.
 
 Taking MacOS as an example, when you directly run the program, you will encounter the following prompt.
-![](how-to-use-install-uncertificate-zh.webp)
+![](assets/how-to-use-install-uncertificate-zh.webp)
 
 You only need to run the following command and then install.
 ``` sh
@@ -20,17 +20,17 @@ sudo xattr -rd com.apple.quarantine /Applications/Qi Rui Think Tank.app
 
 ### Initial Configuration Steps
 **1. Configure the AI service. The program will summarize and interpret the articles through the AI service.**
-![](how-to-use-settings-zh.png)
+![](assets/how-to-use-settings-zh.png)
 
 ### Configure the Subscription Group
 **2. Create a New Subscription Group**
-![](how-to-use-add-feeds-package-zh.png)
+![](assets/how-to-use-add-feeds-package-zh.png)
 
 **3. Add a New Subscription Configuration**
-![](how-to-use-add-feed-zh.png)
+![](assets/how-to-use-add-feed-zh.png)
 
 **4. Fill in the Subscription Configuration**
-![](how-to-use-edit-feed-zh.png)
+![](assets/how-to-use-edit-feed-zh.png)
 
 ### Q & A
 Q: How is the subscribed content updated?
