@@ -23,7 +23,7 @@ struct APIVersionResponse {
 #[cfg(target_os = "windows")]
 static PATH_TO_OLLAMA: &str = "ollama";
 #[cfg(target_os = "macos")]
-static PATH_TO_OLLAMA: &str = "/usr/local/bin/ollama11";
+static PATH_TO_OLLAMA: &str = "/usr/local/bin/ollama";
 #[cfg(target_os = "linux")]
 static PATH_TO_OLLAMA: &str = "/usr/local/bin/ollama";
 
