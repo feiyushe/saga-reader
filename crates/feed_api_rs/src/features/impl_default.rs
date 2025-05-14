@@ -13,7 +13,7 @@ use intelligent::article_processor::melt::Melt;
 use intelligent::article_processor::optimizer::Optimizer;
 use intelligent::article_processor::purge::Purge;
 use intelligent::article_processor::types::IArticleProcessor;
-use ollama::{query_platform, ProgramStatus, Information};
+use ollama::{query_platform, Information, ProgramStatus};
 use recorder::article_recorder_service::ArticleRecorderService;
 use recorder::entity::article_record::{Model as ArticleRecord, Model};
 use scrap::search::types::IProvider;
@@ -243,9 +243,13 @@ impl FeaturesAPI for FeaturesAPIImpl {
         feed_id: &str,
         app_handle: Option<AppHandle<R>>,
     ) -> anyhow::Result<()> {
-        let context_guarded = &self.context.read().await;
-        let user_config = &context_guarded.user_config;
-        let llm_section = &context_guarded.app_config.llm;
+        let user_config;
+        let llm_section;
+        {
+            let context_guarded = self.context.read().await;
+            user_config = context_guarded.user_config.clone();
+            llm_section = context_guarded.app_config.llm.clone();
+        }
         if let Some(ftd) = user_config.find_feed(package_id, feed_id) {
             let words: Vec<&str> = ftd.data.iter().map(|x| x.as_str()).collect();
             info!("scraping, via the words...{:?}", words);
@@ -392,7 +396,7 @@ impl FeaturesAPI for FeaturesAPIImpl {
         let llm_section = &context_guarded.app_config.llm.provider_ollama;
         match query_platform(&llm_section.endpoint).await {
             Ok(information) => Ok(information.status),
-            Err(_) => Ok(ProgramStatus::Uninstall)
+            Err(_) => Ok(ProgramStatus::Uninstall),
         }
     }
 

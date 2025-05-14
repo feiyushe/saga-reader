@@ -101,6 +101,13 @@
 	"settings": {
 		"label": "Settings",
 		"loading": "Loading...",
+		"section_llm_apperience": {
+			"label": "Apperience",
+			"theme": {
+				"label": "Dark Mode",
+				"description": "Turn on to use the Dark Night, turn off to use the White Moonlight."
+			}
+		},
 		"section_llm_provider": {
 			"label": "AI Configuration",
 			"tip": "Select the AI Provider",

@@ -8,8 +8,8 @@ function getTheme(): ThemePresets {
 }
 
 function setTheme(theme: ThemePresets) {
-	window.localStorage.setItem(LITE_STORAGE_KEY_THEME, theme);
 	setAppTheme(theme);
+	window.localStorage.setItem(LITE_STORAGE_KEY_THEME, theme);
 }
 
 function applyTheme() {
