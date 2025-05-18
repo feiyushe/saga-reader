@@ -12,10 +12,16 @@ function setTheme(theme: ThemePresets) {
 	window.localStorage.setItem(LITE_STORAGE_KEY_THEME, theme);
 }
 
-function applyTheme() {
+function applyTheme(): ThemePresets {
 	const theme = getTheme();
 	setAppTheme(theme);
+	setWebInnerOnly(theme);
+	return theme;
 }
 
-export { applyTheme, getTheme, setTheme };
+function setWebInnerOnly(theme: ThemePresets) {
+	document.documentElement.classList.toggle('dark', theme === 'dark');
+}
+
+export { applyTheme, getTheme, setTheme, setWebInnerOnly };
 export type { ThemePresets };

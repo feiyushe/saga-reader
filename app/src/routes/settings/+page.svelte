@@ -191,7 +191,6 @@
 	}
 
 	function switchTheme() {
-		console.log(1231312);
 		setTheme(theme === 'light' ? 'dark' : 'light');
 		theme = getTheme();
 	}
@@ -215,7 +214,7 @@
 	}
 </script>
 
-<div class="cursor-default w-full h-screen overflow-hidden flex flex-col">
+<div use:disableContextMenu class=" cursor-default w-full h-screen overflow-hidden flex flex-col">
 	<div class="flex-1 w-full h-full overflow-hidden flex flex-col">
 		<div class="pt-4 pb-4 pl-8 pr-8">
 			<h3 class="h3">{$_('settings.label')}</h3>
@@ -225,10 +224,10 @@
 			<p class="pl-8 mt-4">{$_('settings.loading')}</p>
 		{:else}
 			<div class="flex-1 h-full overflow-y-auto pl-8 pr-8">
-				{@render SectionHeader($_('settings.section_llm_apperience.label'))}
+				{@render SectionHeader($_('settings.section_llm_appearance.label'))}
 				{@render CheckOption(
-					$_('settings.section_llm_apperience.theme.label'),
-					$_('settings.section_llm_apperience.theme.description'),
+					$_('settings.section_llm_appearance.theme.label'),
+					$_('settings.section_llm_appearance.theme.description'),
 					isDarkModeEnabled,
 					switchTheme
 				)}

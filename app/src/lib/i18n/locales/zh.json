@@ -101,7 +101,7 @@
 	"settings": {
 		"label": "应用设置",
 		"loading": "加载中",
-		"section_llm_apperience": {
+		"section_llm_appearance": {
 			"label": "外观",
 			"theme": {
 				"label": "启用暗夜黑",

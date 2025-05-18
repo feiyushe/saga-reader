@@ -33,6 +33,7 @@ Saga Reader is completely free and open-source, meaning all data is securely sto
 Download it from [website](https://aiqino.netlify.app?s=github_download)!
 
 **Thanks to the kind people**
+
 [![Stargazers repo roster for @sopaco/saga-reader](https://reporoster.com/stars/sopaco/saga-reader)](https://github.com/sopaco/saga-reader/stargazers)
 
 **Note: Installation and Usage Instructions**

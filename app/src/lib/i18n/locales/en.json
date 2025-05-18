@@ -101,7 +101,7 @@
 	"settings": {
 		"label": "Settings",
 		"loading": "Loading...",
-		"section_llm_apperience": {
+		"section_llm_appearance": {
 			"label": "Apperience",
 			"theme": {
 				"label": "Dark Mode",

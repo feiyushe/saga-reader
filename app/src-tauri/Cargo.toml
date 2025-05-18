@@ -52,3 +52,4 @@ lto = 'thin'
 opt-level = 3
 panic = "abort"
 strip = "none"
+
