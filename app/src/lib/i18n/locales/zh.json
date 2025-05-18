@@ -1,157 +1,164 @@
 {
-  "common": {
-    "product_name": "麒睿智库",
-    "product_slogan": "智能阅读新体验",
-    "product_tip": "由AI驱动的知识软件，定制你的个人智库助理"
-  },
-  "main": {
-    "menu": {
-      "create_feeds_package": "添加订阅",
-      "settings": "设置"
-    },
-    "section_frequently_used": {
-      "label": "常用",
-      "menu": {
-        "today": "今日最新",
-        "this_week": "本周快递",
-        "favorites": "我的收藏",
-        "unread": "未读内容"
-      }
-    },
-    "section_subscriptions": {
-      "label": "所有订阅"
-    },
-    "feeds": {
-      "menu": {
-        "actions": {
-          "create": "新增",
-          "edit": "编辑",
-          "delete": "删除",
-          "delete_prompt": "要删除订阅包{name}吗？，该订阅包下的{length}个订阅栏目都将移除。",
-          "delete_dialog_title": "删除订阅包"
-        }
-      },
-      "create_or_edit": {
-        "field_feeds_package_name": "订阅组名称",
-        "field_feeds_package_placeholder": "请填写订阅组的名称，建议8个字以内",
-        "tip_modify_failured": "修改失败，请检查表单字段是否填写正确。{e}",
-        "tip_footer": "注意：订阅组名称建议不与其他已有的订阅组名称相同。"
-      }
-    },
-    "feed": {
-      "menu": {
-        "actions": {
-          "edit": "编辑",
-          "delete": "删除",
-          "delete_prompt": "要删除订阅{name}吗？",
-          "delete_dialog_title": "删除订阅"
-        }
-      },
-      "create_or_edit": {
-        "field_feed_name": "订阅名称",
-        "field_feed_placeholder": "请填写订阅的名称，建议8个字以内",
-        "field_fetcher_type_name": "信息来源",
-        "field_fetcher_type_selection_1": "巴顿引擎（全球情报侦测引擎）",
-        "field_fetcher_type_selection_2": "RSS订阅",
-        "field_keywords": "信息关键词",
-        "field_rss_url": "RSS地址",
-        "tip_unknown_fetcher": "未知Fetcher：{formFetcherId}",
-        "field_keywords_placeholder": "请填写信息关键词，多个关键词可以用空格隔开，就像使用搜索引擎一样。",
-        "field_rss_url_placeholder": "请填写RSS地址。",
-        "tip_modify_failured": "修改失败，请检查表单字段是否填写正确。{e}",
-        "tip_footer": "注意：订阅名称建议不与其他已有的订阅组名称相同。"
-      }
-    },
-    "search": {
-      "results_label": "搜索结果",
-      "placeholder_input": "智能搜索"
-    },
-    "articles": {
-      "tip_click_to_load_more": "点击继续加载",
-      "tip_loading": "加载中...",
-      "error_retry": "发生错误，点击重试",
-      "tip_empty_try_again": "无内容，点击尝试更新",
-      "tip_empty": "无内容"
-    },
-    "footer": {
-      "tasks": {
-        "label": "后台任务",
-        "idle": "当前无运行中任务"
-      }
-    }
-  },
-  "reader": {
-    "tab_optimized_content": "速读",
-    "tab_melted_content": "总结",
-    "tab_melted_original": "原文",
-    "tip_link_copyed": "链接已复制",
-    "blank_tip_0": "请选择订阅内容",
-    "blank_tip_1": "1、添加订阅主题",
-    "blank_tip_2": "2、刷新订阅内容清单",
-    "blank_tip_3": "3、点击订阅内容标题"
-  },
-  "aisprite": {
-    "label": "麒睿AI伴读",
-    "chat_me": "我",
-    "tip_wait_llm_response": "请等候Qino完成思考",
-    "tip_no_input": "请输入内容",
-    "tip_error_llm_error": "大模型服务调用异常",
-    "tip_placeholder_please_input": "向Qino了解..."
-  },
-  "settings": {
-    "label": "应用设置",
-    "loading": "加载中",
-    "section_llm_provider": {
-      "label": "大模型配置",
-      "tip": "选择大模型引擎",
-      "provider_ollama": "Ollama（本地大模型）",
-      "provider_ollama_tip": "Ollama可以本地部署在您的设备上，提供适合您硬件设备的私有模型与极佳的数据隐私安全性，需要先安装Ollama，",
-      "provider_ollama_sentence_1": "点击这里去下载",
-      "provider_ollama_sentence_2": "Ollama服务地址",
-      "provider_ollama_sentence_3": "模型名称",
-      "provider_ollama_sentence_4": "请填写模型名称，例如“qwen2.5:3b”",
-      "provider_ollama_sentence_5": "默认为“http://localhost:11434”",
-      "provider_glm": "智谱AI（云端大模型）",
-      "provider_glm_sentence_1": "您可以注册并使用智谱AI的云端大模型，智谱提供可免费使用的GLM Flash模型推理服务。",
-      "provider_glm_sentence_2": "点击这里申请",
-      "provider_glm_sentence_3": "输入API KEY",
-      "provider_barton": "巴顿引擎（本地大模型）",
-      "provider_barton_sentence_1": "（内侧中）自研的巴顿引擎推理速度快且占用内存极小，具备极佳的数据隐私安全性，也不需要额外安装其他程序。",
-      "provider_barton_sentence_2": "模型文件路径",
-      "provider_barton_sentence_3": "输入模型文件路径"
-    },
-    "section_app_behavior": {
-      "label": "应用行为",
-      "option_autostart": {
-        "label": "开机自启动",
-        "description": "启用该选项会在系统启动时自动执行订阅内容更新。如果关闭该选项，则您需要手动启动程序后才能自动更新订阅内容。"
-      },
-      "option_scheduled_fetch": {
-        "label": "更快的后台更新",
-        "description": "启用该选项有助于更快的更新您的订阅内容。"
-      }
-    },
-    "section_users_support": {
-      "label": "用户服务",
-      "visit_home": "访问官网",
-      "feedback": "用户反馈",
-      "blogs": "产品博客",
-      "changelogs": "更新日志"
-    },
-    "section_version": {
-      "label": "版本信息",
-      "ver_app": "应用版本",
-      "ver_engine": "引擎版本",
-      "ver_system": "系统信息"
-    }
-  },
-  "common_dialog": {
-    "save": "保存更改",
-    "cancel": "取消"
-  },
-  "about": {
-    "ver_app": "应用版本",
-    "ver_engine": "引擎版本",
-    "visit_home": "访问官网"
-  }
+	"common": {
+		"product_name": "麒睿智库",
+		"product_slogan": "智能阅读新体验",
+		"product_tip": "由AI驱动的知识软件，定制你的个人智库助理"
+	},
+	"main": {
+		"menu": {
+			"create_feeds_package": "添加订阅",
+			"settings": "设置"
+		},
+		"section_frequently_used": {
+			"label": "常用",
+			"menu": {
+				"today": "今日最新",
+				"this_week": "本周快递",
+				"favorites": "我的收藏",
+				"unread": "未读内容"
+			}
+		},
+		"section_subscriptions": {
+			"label": "所有订阅"
+		},
+		"feeds": {
+			"menu": {
+				"actions": {
+					"create": "新增",
+					"edit": "编辑",
+					"delete": "删除",
+					"delete_prompt": "要删除订阅包{name}吗？，该订阅包下的{length}个订阅栏目都将移除。",
+					"delete_dialog_title": "删除订阅包"
+				}
+			},
+			"create_or_edit": {
+				"field_feeds_package_name": "订阅组名称",
+				"field_feeds_package_placeholder": "请填写订阅组的名称，建议8个字以内",
+				"tip_modify_failured": "修改失败，请检查表单字段是否填写正确。{e}",
+				"tip_footer": "注意：订阅组名称建议不与其他已有的订阅组名称相同。"
+			}
+		},
+		"feed": {
+			"menu": {
+				"actions": {
+					"edit": "编辑",
+					"delete": "删除",
+					"delete_prompt": "要删除订阅{name}吗？",
+					"delete_dialog_title": "删除订阅"
+				}
+			},
+			"create_or_edit": {
+				"field_feed_name": "订阅名称",
+				"field_feed_placeholder": "请填写订阅的名称，建议8个字以内",
+				"field_fetcher_type_name": "信息来源",
+				"field_fetcher_type_selection_1": "巴顿引擎（全球情报侦测引擎）",
+				"field_fetcher_type_selection_2": "RSS订阅",
+				"field_keywords": "信息关键词",
+				"field_rss_url": "RSS地址",
+				"tip_unknown_fetcher": "未知Fetcher：{formFetcherId}",
+				"field_keywords_placeholder": "请填写信息关键词，多个关键词可以用空格隔开，就像使用搜索引擎一样。",
+				"field_rss_url_placeholder": "请填写RSS地址。",
+				"tip_modify_failured": "修改失败，请检查表单字段是否填写正确。{e}",
+				"tip_footer": "注意：订阅名称建议不与其他已有的订阅组名称相同。"
+			}
+		},
+		"search": {
+			"results_label": "搜索结果",
+			"placeholder_input": "智能搜索"
+		},
+		"articles": {
+			"tip_click_to_load_more": "点击继续加载",
+			"tip_loading": "加载中...",
+			"error_retry": "发生错误，点击重试",
+			"tip_empty_try_again": "无内容，点击尝试更新",
+			"tip_empty": "无内容"
+		},
+		"footer": {
+			"tasks": {
+				"label": "后台任务",
+				"idle": "当前无运行中任务"
+			}
+		}
+	},
+	"reader": {
+		"tab_optimized_content": "速读",
+		"tab_melted_content": "总结",
+		"tab_melted_original": "原文",
+		"tip_link_copyed": "链接已复制",
+		"blank_tip_0": "请选择订阅内容",
+		"blank_tip_1": "1、添加订阅主题",
+		"blank_tip_2": "2、刷新订阅内容清单",
+		"blank_tip_3": "3、点击订阅内容标题"
+	},
+	"aisprite": {
+		"label": "麒睿AI伴读",
+		"chat_me": "我",
+		"tip_wait_llm_response": "请等候Qino完成思考",
+		"tip_no_input": "请输入内容",
+		"tip_error_llm_error": "大模型服务调用异常",
+		"tip_placeholder_please_input": "向Qino了解..."
+	},
+	"settings": {
+		"label": "应用设置",
+		"loading": "加载中",
+		"section_llm_appearance": {
+			"label": "外观",
+			"theme": {
+				"label": "启用暗夜黑",
+				"description": "开启以使用暗夜黑主题，关闭则使用白月光主题"
+			}
+		},
+		"section_llm_provider": {
+			"label": "大模型配置",
+			"tip": "选择大模型引擎",
+			"provider_ollama": "Ollama（本地大模型）",
+			"provider_ollama_tip": "Ollama可以本地部署在您的设备上，提供适合您硬件设备的私有模型与极佳的数据隐私安全性，需要先安装Ollama，",
+			"provider_ollama_sentence_1": "点击这里去下载",
+			"provider_ollama_sentence_2": "Ollama服务地址",
+			"provider_ollama_sentence_3": "模型名称",
+			"provider_ollama_sentence_4": "请填写模型名称，例如“qwen2.5:3b”",
+			"provider_ollama_sentence_5": "默认为“http://localhost:11434”",
+			"provider_glm": "智谱AI（云端大模型）",
+			"provider_glm_sentence_1": "您可以注册并使用智谱AI的云端大模型，智谱提供可免费使用的GLM Flash模型推理服务。",
+			"provider_glm_sentence_2": "点击这里申请",
+			"provider_glm_sentence_3": "输入API KEY",
+			"provider_barton": "巴顿引擎（本地大模型）",
+			"provider_barton_sentence_1": "（内侧中）自研的巴顿引擎推理速度快且占用内存极小，具备极佳的数据隐私安全性，也不需要额外安装其他程序。",
+			"provider_barton_sentence_2": "模型文件路径",
+			"provider_barton_sentence_3": "输入模型文件路径"
+		},
+		"section_app_behavior": {
+			"label": "应用行为",
+			"option_autostart": {
+				"label": "开机自启动",
+				"description": "启用该选项会在系统启动时自动执行订阅内容更新。如果关闭该选项，则您需要手动启动程序后才能自动更新订阅内容。"
+			},
+			"option_scheduled_fetch": {
+				"label": "更快的后台更新",
+				"description": "启用该选项有助于更快的更新您的订阅内容。"
+			}
+		},
+		"section_users_support": {
+			"label": "用户服务",
+			"visit_home": "访问官网",
+			"feedback": "用户反馈",
+			"blogs": "产品博客",
+			"changelogs": "更新日志"
+		},
+		"section_version": {
+			"label": "版本信息",
+			"ver_app": "应用版本",
+			"ver_engine": "引擎版本",
+			"ver_system": "系统信息"
+		}
+	},
+	"common_dialog": {
+		"save": "保存更改",
+		"cancel": "取消"
+	},
+	"about": {
+		"ver_app": "应用版本",
+		"ver_engine": "引擎版本",
+		"visit_home": "访问官网"
+	}
 }

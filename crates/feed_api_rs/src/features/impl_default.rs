@@ -13,12 +13,13 @@ use intelligent::article_processor::melt::Melt;
 use intelligent::article_processor::optimizer::Optimizer;
 use intelligent::article_processor::purge::Purge;
 use intelligent::article_processor::types::IArticleProcessor;
-use ollama::{query_platform, ProgramStatus, Information};
+use ollama::{query_platform, ProgramStatus};
 use recorder::article_recorder_service::ArticleRecorderService;
 use recorder::entity::article_record::{Model as ArticleRecord, Model};
-use scrap::search::types::IProvider;
+use scrap::rss::RSSFetcher;
 use scrap::search::utils::trim_html_with_script_and_style;
 use scrap::search::{baidu, bing, ScrapProviderEnums};
+use scrap::types::IFetcher;
 use types::{
     AppConfig, Article, ConversationMessage, FeedTargetDescription, FeedsPackage,
     ScrapProviderType, UserConfig,
@@ -243,22 +244,20 @@ impl FeaturesAPI for FeaturesAPIImpl {
         feed_id: &str,
         app_handle: Option<AppHandle<R>>,
     ) -> anyhow::Result<()> {
-        let context_guarded = &self.context.read().await;
-        let user_config = &context_guarded.user_config;
-        let llm_section = &context_guarded.app_config.llm;
+        let user_config;
+        let llm_section;
+        {
+            let context_guarded = self.context.read().await;
+            user_config = context_guarded.user_config.clone();
+            llm_section = context_guarded.app_config.llm.clone();
+        }
         if let Some(ftd) = user_config.find_feed(package_id, feed_id) {
-            let words: Vec<&str> = ftd.data.iter().map(|x| x.as_str()).collect();
-            info!("scraping, via the words...{:?}", words);
-            let mut articles = self
-                .scrap_provider
-                .search_by_words(words, app_handle)
-                .await?;
-            info!(
-                "found {} articles for the feed_id = {}, feed_name = {}",
-                articles.len(),
-                feed_id,
-                ftd.name
-            );
+            // #region begin
+            let mut articles = match ftd.fetcher_id.as_str() {
+                "scrap" => self.scrap_provider.fetch(app_handle, &llm_section, ftd.clone()).await?,
+                "rss" => RSSFetcher::default().fetch(app_handle, &llm_section, ftd.clone()).await?,
+                _ => vec![],
+            };
             let article_recorder_service = &self.article_recorder_service;
             let purge = Purge::new_processor(llm_section.clone())?;
             let optimizer = Optimizer::new_processor(llm_section.clone())?;
@@ -392,7 +391,7 @@ impl FeaturesAPI for FeaturesAPIImpl {
         let llm_section = &context_guarded.app_config.llm.provider_ollama;
         match query_platform(&llm_section.endpoint).await {
             Ok(information) => Ok(information.status),
-            Err(_) => Ok(ProgramStatus::Uninstall)
+            Err(_) => Ok(ProgramStatus::Uninstall),
         }
     }
 

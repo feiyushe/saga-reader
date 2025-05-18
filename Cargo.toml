@@ -45,3 +45,6 @@ debug = true
 # use samply to generate the profiling flame-chart.
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[patch.crates-io]
+# tauri = { git = "https://github.com/Legend-Master/tauri.git", branch = "run-set-theme-on-main-thread" }

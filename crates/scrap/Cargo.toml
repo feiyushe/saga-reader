@@ -9,6 +9,7 @@ crate-type = ["cdylib", "rlib"]
 [dependencies]
 # 本crate的特定的依赖
 scraper = "0.22.0"
+rss = "2.0"
 urlencoding = "2.1.3"
 
 # 对workspace中其他crate的依赖

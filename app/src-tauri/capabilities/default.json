@@ -9,10 +9,12 @@
 		"window_feed_create",
 		"window_feed_edit",
 		"window_feeds_package_create",
-		"window_feeds_package_edit"
+		"window_feeds_package_edit",
+		"reserved"
 	],
 	"permissions": [
 		"core:app:default",
+		"core:app:allow-set-app-theme",
 		"core:window:default",
 		"core:window:allow-close",
 		"core:window:allow-is-visible",

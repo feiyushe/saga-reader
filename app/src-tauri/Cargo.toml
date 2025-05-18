@@ -1,6 +1,6 @@
 [package]
 name = "qino-feed-client"
-version = "0.9.8"
+version = "0.9.9"
 description = "Qino Feed"
 authors = ["Sopaco"]
 edition = "2021"
@@ -52,3 +52,4 @@ lto = 'thin'
 opt-level = 3
 panic = "abort"
 strip = "none"
+

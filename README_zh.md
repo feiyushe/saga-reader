@@ -34,15 +34,11 @@
 
 安装注意事项与初次使用需要的大模型配置方法，详见[**帮助文档**](./docs/how-to-use-zh.md)。
 
-## 快照
-
----
+## 截图
 
 ![snapshot-glance](docs/assets/snapshot-glance.webp)
 
 ## 工作原理
-
----
 
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/sopaco/saga-reader)
 
@@ -194,6 +190,9 @@
 
 ### 许可证
 MIT，协议的副本说明保留在[LICENSE](./LICENSE)文件中。
+
+**🙏感谢大家的支持，你们是国产开源的历史见证者**
+[![Stargazers repo roster for @sopaco/saga-reader](https://reporoster.com/stars/sopaco/saga-reader)](https://github.com/sopaco/saga-reader/stargazers)
 
 ### 关于我
 

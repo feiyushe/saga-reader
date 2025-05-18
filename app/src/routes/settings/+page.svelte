@@ -9,6 +9,7 @@
 	import { Switch } from '@skeletonlabs/skeleton-svelte';
 	import type { AppConfig, LLMProviderType } from '$lib/hybrid-apis/feed/types';
 	import { isTextEmpty } from '$lib/utils/text';
+	import { getTheme, setTheme, type ThemePresets } from '$lib/themes';
 
 	type PressedHandler = () => void;
 	type CheckSwitchedHandler = () => void;
@@ -23,6 +24,10 @@
 	let sysLocale = $state('');
 	let sysPlatform = $state('');
 	let sysVersion = $state('');
+
+	// 主题
+	let theme: ThemePresets = $state('light');
+	let isDarkModeEnabled = $derived(theme !== 'light');
 
 	// LLM配置信息
 	let activedProviderType: null | LLMProviderType = $state(null);
@@ -185,6 +190,11 @@
 		llmFormPlatformModelPath = appConfig.llm.provider_platform.model_path;
 	}
 
+	function switchTheme() {
+		setTheme(theme === 'light' ? 'dark' : 'light');
+		theme = getTheme();
+	}
+
 	if (browser) {
 		getName().then((val) => (appName = val));
 		getVersion().then((val) => (appVersion = val));
@@ -193,6 +203,7 @@
 		sysArch = arch();
 		sysPlatform = platform();
 		sysVersion = version();
+		theme = getTheme();
 
 		isEnabled().then((val) => (enableAutoStartUp = val));
 
@@ -203,7 +214,7 @@
 	}
 </script>
 
-<div use:disableContextMenu class="cursor-default w-full h-screen overflow-hidden flex flex-col">
+<div use:disableContextMenu class=" cursor-default w-full h-screen overflow-hidden flex flex-col">
 	<div class="flex-1 w-full h-full overflow-hidden flex flex-col">
 		<div class="pt-4 pb-4 pl-8 pr-8">
 			<h3 class="h3">{$_('settings.label')}</h3>
@@ -213,10 +224,18 @@
 			<p class="pl-8 mt-4">{$_('settings.loading')}</p>
 		{:else}
 			<div class="flex-1 h-full overflow-y-auto pl-8 pr-8">
-				<!-- {@render SectionHeader('主题外观')}
-		{@render SectionEnd()}
-		{@render SectionHeader('语言偏好')}
-		{@render SectionEnd()} -->
+				{@render SectionHeader($_('settings.section_llm_appearance.label'))}
+				{@render CheckOption(
+					$_('settings.section_llm_appearance.theme.label'),
+					$_('settings.section_llm_appearance.theme.description'),
+					isDarkModeEnabled,
+					switchTheme
+				)}
+
+				{@render SectionEnd()}
+
+				<!-- {@render SectionHeader('语言偏好')}
+				{@render SectionEnd()} -->
 
 				{@render SectionHeader($_('settings.section_llm_provider.label'))}
 				<div class="flex flex-col space-y-2">
