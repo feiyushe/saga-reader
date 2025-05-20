@@ -463,7 +463,11 @@
 
 {#snippet LLMGroupSavePanel(onSave: PressedHandler, onCancel: PressedHandler)}
 	<div class="pt-4 flex justify-end space-x-2">
-		<button type="button" class="btn preset-filled-primary-500" onclick={onSave}>保存更改</button>
-		<button type="button" class="btn preset-tonal-surface" onclick={onCancel}>取消</button>
+		<button type="button" class="btn preset-filled-primary-500" onclick={onSave}
+			>{$_('common_dialog.save')}</button
+		>
+		<button type="button" class="btn preset-tonal-surface" onclick={onCancel}
+			>{$_('common_dialog.cancel')}</button
+		>
 	</div>
 {/snippet}
