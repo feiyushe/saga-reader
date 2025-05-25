@@ -36,11 +36,19 @@
 	let llmFormGLMKey: string | null = $state(null);
 	let llmFormPlatformModelPath: string | null = $state(null);
 
+	let llmFormOpenAILikeBaseURI: string | null = $state(null);
+	let llmFormOpenAILikeModelName: string | null = $state(null);
+	let llmFormOpenAILikeKey: string | null = $state(null);
+
 	// LLM表单错误信息
 	let llmFormErrorOllamaURI = $derived(isTextEmpty(llmFormOllamaURI));
 	let llmFormErrorOllamaModelName = $derived(isTextEmpty(llmFormOllamaModelName));
 	let llmFormErrorGLMKey = $derived(isTextEmpty(llmFormGLMKey));
 	let llmFormErrorPlatformModelPath = $derived(isTextEmpty(llmFormPlatformModelPath));
+
+	let llmFormErrorOpenAILikeBaseURI = $derived(isTextEmpty(llmFormOpenAILikeBaseURI));
+	let llmFormErrorOpenAILikeModelName = $derived(isTextEmpty(llmFormOpenAILikeModelName));
+	let llmFormErrorOpenAILikeKey = $derived(isTextEmpty(llmFormOpenAILikeKey));
 
 	// LLM表单用户变更状态
 	let llmFormChangedOllama = $derived.by(() => {
@@ -57,6 +65,14 @@
 	let llmFormChangedPlatform = $derived.by(() => {
 		if (!appConfig) return false;
 		return llmFormPlatformModelPath !== appConfig.llm.provider_platform.model_path;
+	});
+	let llmFormChangedOpenAILike = $derived.by(() => {
+		if (!appConfig) return false;
+		return (
+			llmFormOpenAILikeBaseURI !== appConfig.llm.provider_openai.api_base_url ||
+			llmFormOpenAILikeKey !== appConfig.llm.provider_openai.api_key ||
+			llmFormOpenAILikeModelName !== appConfig.llm.provider_openai.model_name
+		);
 	});
 
 	// LLM表单变更保存与还原操作函数
@@ -80,7 +96,7 @@
 			if (!appConfig) return;
 
 			if (!formValidator()) {
-				console.error('createLLMSwitcherAction', `设置页LLM配置项校验不通过...${providerType}`);
+				console.warn('createLLMSwitcherAction', `设置页LLM配置项校验不通过...${providerType}`);
 				return;
 			}
 
@@ -104,6 +120,17 @@
 	const switchToLLMGLM = createLLMSwitcherAction(
 		'glm',
 		() => !llmFormErrorGLMKey,
+		() => {
+			if (!appConfig) return;
+			appConfig.llm.provider_glm.api_key = llmFormGLMKey || '';
+		}
+	);
+	const switchToLLMOpenAILike = createLLMSwitcherAction(
+		'openai',
+		() =>
+			!llmFormErrorOpenAILikeKey &&
+			!llmFormErrorOpenAILikeBaseURI &&
+			!llmFormErrorOpenAILikeModelName,
 		() => {
 			if (!appConfig) return;
 			appConfig.llm.provider_glm.api_key = llmFormGLMKey || '';
@@ -141,6 +168,27 @@
 	function restoreLLMFormGLM() {
 		if (!appConfig) return;
 		llmFormGLMKey = appConfig.llm.provider_glm.api_key;
+	}
+
+	const saveLLMFormOpenAILike = createSaveLLMFormAction(() => {
+		if (
+			!appConfig ||
+			llmFormErrorOpenAILikeKey ||
+			llmFormErrorOpenAILikeBaseURI ||
+			llmFormErrorOpenAILikeModelName
+		)
+			return false;
+		appConfig.llm.provider_openai.api_base_url = llmFormOpenAILikeBaseURI || '';
+		appConfig.llm.provider_openai.api_key = llmFormOpenAILikeKey || '';
+		appConfig.llm.provider_openai.model_name = llmFormOpenAILikeModelName || '';
+		return true;
+	});
+
+	function restoreLLMFormOpenAILike() {
+		if (!appConfig) return;
+		llmFormOpenAILikeBaseURI = appConfig.llm.provider_openai.api_base_url;
+		llmFormOpenAILikeKey = appConfig.llm.provider_openai.api_key;
+		llmFormOpenAILikeModelName = appConfig.llm.provider_openai.model_name;
 	}
 
 	const saveLLMFormPlatform = createSaveLLMFormAction(() => {
@@ -188,6 +236,9 @@
 		llmFormOllamaModelName = appConfig.llm.provider_ollama.endpoint.model;
 		llmFormGLMKey = appConfig.llm.provider_glm.api_key;
 		llmFormPlatformModelPath = appConfig.llm.provider_platform.model_path;
+		llmFormOpenAILikeKey = appConfig.llm.provider_openai.api_key;
+		llmFormOpenAILikeBaseURI = appConfig.llm.provider_openai.api_base_url;
+		llmFormOpenAILikeModelName = appConfig.llm.provider_openai.model_name;
 	}
 
 	function switchTheme() {
@@ -330,6 +381,55 @@
 						</label>
 						{#if llmFormChangedGLM}
 							{@render LLMGroupSavePanel(saveLLMFormGLM, restoreLLMFormGLM)}
+						{/if}
+					</div>
+
+					<div
+						class={`p-4 rounded-md border-2 ${activedProviderType === 'openai' ? 'border-primary-500' : ''} w-full`}
+					>
+						<div
+							class="cursor-pointer flex justify-between items-center gap-4"
+							onclick={switchToLLMOpenAILike}
+							onkeypress={switchToLLMOpenAILike}
+							role="button"
+							tabindex="0"
+						>
+							<p class="h5">{$_('settings.section_llm_provider.provider_openai')}</p>
+							<Switch name="llm_openai" readOnly checked={activedProviderType === 'openai'} />
+						</div>
+						<p class="mt-2 ml-0.5 type-scale-1 text-surface-400">
+							<span>{$_('settings.section_llm_provider.provider_openai_sentence_1')}</span>
+						</p>
+						<hr class="hr mt-2 mb-2" />
+						<label class={`label ${llmFormErrorOpenAILikeBaseURI ? 'text-red-500' : ''}`}>
+							<span class="label-text">API URL</span>
+							<input
+								class="input p-2"
+								type="url"
+								bind:value={llmFormOpenAILikeBaseURI}
+								placeholder={$_('settings.section_llm_provider.provider_openai_sentence_2')}
+							/>
+						</label>
+						<label class={`label ${llmFormErrorOpenAILikeKey ? 'text-red-500' : ''}`}>
+							<span class="label-text">API KEY</span>
+							<input
+								class="input p-2"
+								type="url"
+								bind:value={llmFormOpenAILikeKey}
+								placeholder={$_('settings.section_llm_provider.provider_openai_sentence_3')}
+							/>
+						</label>
+						<label class={`label ${llmFormErrorOpenAILikeModelName ? 'text-red-500' : ''}`}>
+							<span class="label-text">Model Name</span>
+							<input
+								class="input p-2"
+								type="url"
+								bind:value={llmFormOpenAILikeModelName}
+								placeholder={$_('settings.section_llm_provider.provider_openai_sentence_4')}
+							/>
+						</label>
+						{#if llmFormChangedOpenAILike}
+							{@render LLMGroupSavePanel(saveLLMFormOpenAILike, restoreLLMFormOpenAILike)}
 						{/if}
 					</div>
 
