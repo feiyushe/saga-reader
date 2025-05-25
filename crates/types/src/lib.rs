@@ -107,7 +107,11 @@ pub struct GLMLLMProvider {
 }
 
 #[derive(Serialize, Deserialize, Clone)]
-pub struct OpenAILLMProvider {}
+pub struct OpenAILLMProvider {
+    pub model_name: String,
+    pub api_base_url: String,
+    pub api_key: String,
+}
 
 #[derive(Serialize, Deserialize, Clone)]
 pub struct OllamaLLMProvider {

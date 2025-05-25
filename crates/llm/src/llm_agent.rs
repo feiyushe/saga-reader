@@ -3,6 +3,7 @@ use types::{LLMProviderType, LLMSection};
 use crate::providers::llm_glm::GLMCompletionService;
 use crate::providers::llm_mistral::MistralQinoAgentService;
 use crate::providers::llm_ollama::OllamaCompletionService;
+use crate::providers::llm_openaibase_like::OpenAILikeCompletionService;
 use crate::providers::llm_platform::PlatformAgentService;
 use crate::providers::types::{AITargetOption, CompletionService};
 
@@ -11,6 +12,7 @@ enum CompletionServiceEnums {
     Mistral(MistralQinoAgentService),
     Platform(PlatformAgentService),
     GLM(GLMCompletionService),
+    OpenAI(OpenAILikeCompletionService),
 }
 
 /// LLM Generate服务代理
@@ -56,7 +58,14 @@ impl CompletionAgent {
                     }
                 )
             }
-            _ => todo!()
+            LLMProviderType::OpenAI => {
+                let provider = OpenAILikeCompletionService::new(&llm_section.provider_openai, system_prompt, options)?;
+                Ok(
+                    CompletionAgent {
+                        provider: CompletionServiceEnums::OpenAI(provider),
+                    }
+                )
+            }
         }
     }
 
@@ -67,6 +76,7 @@ impl CompletionAgent {
             CompletionServiceEnums::Mistral(p) => p.completion(message).await,
             CompletionServiceEnums::Platform(p) => p.completion(message).await,
             CompletionServiceEnums::GLM(p) => p.completion(message).await,
+            CompletionServiceEnums::OpenAI(p) => p.completion(message).await
         }
     }
 }

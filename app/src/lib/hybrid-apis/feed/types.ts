@@ -1,4 +1,4 @@
-type LLMProviderType = 'ollama' | 'platform' | 'glm';
+type LLMProviderType = 'ollama' | 'platform' | 'glm' | 'openai';
 
 type LLMSection = {
 	provider_ollama: {
@@ -8,6 +8,11 @@ type LLMSection = {
 		};
 	};
 	provider_glm: {
+		api_key: string;
+	};
+	provider_openai: {
+		model_name: string;
+		api_base_url: string;
 		api_key: string;
 	};
 	provider_platform: {

@@ -49,7 +49,11 @@ fn default_app_config() -> AppConfig {
                 api_base_url: "https://open.bigmodel.cn/api/paas/v4/chat/completions".to_string(),
                 api_key: "".to_string(),
             },
-            provider_openai: OpenAILLMProvider {},
+            provider_openai: OpenAILLMProvider {
+                model_name: "".to_string(),
+                api_base_url: "".to_string(),
+                api_key: "".to_string(),
+            },
             active_provider_type: Default::default(),
         },
         scrap: ScrapSection { provider: Default::default() },
