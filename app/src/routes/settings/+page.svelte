@@ -334,7 +334,7 @@
 							>
 							<input
 								class="input p-2"
-								type="url"
+								type="text"
 								bind:value={llmFormOllamaModelName}
 								placeholder={$_('settings.section_llm_provider.provider_ollama_sentence_4')}
 							/>
@@ -374,7 +374,7 @@
 							<span class="label-text">API KEY</span>
 							<input
 								class="input p-2"
-								type="url"
+								type="text"
 								bind:value={llmFormGLMKey}
 								placeholder={$_('settings.section_llm_provider.provider_glm_sentence_3')}
 							/>
@@ -410,20 +410,20 @@
 								placeholder={$_('settings.section_llm_provider.provider_openai_sentence_2')}
 							/>
 						</label>
-						<label class={`label ${llmFormErrorOpenAILikeKey ? 'text-red-500' : ''}`}>
+						<label class={`mt-2 label ${llmFormErrorOpenAILikeKey ? 'text-red-500' : ''}`}>
 							<span class="label-text">API KEY</span>
 							<input
 								class="input p-2"
-								type="url"
+								type="text"
 								bind:value={llmFormOpenAILikeKey}
 								placeholder={$_('settings.section_llm_provider.provider_openai_sentence_3')}
 							/>
 						</label>
-						<label class={`label ${llmFormErrorOpenAILikeModelName ? 'text-red-500' : ''}`}>
+						<label class={`mt-2 label ${llmFormErrorOpenAILikeModelName ? 'text-red-500' : ''}`}>
 							<span class="label-text">Model Name</span>
 							<input
 								class="input p-2"
-								type="url"
+								type="text"
 								bind:value={llmFormOpenAILikeModelName}
 								placeholder={$_('settings.section_llm_provider.provider_openai_sentence_4')}
 							/>
