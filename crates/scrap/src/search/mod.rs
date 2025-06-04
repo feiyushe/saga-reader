@@ -33,7 +33,7 @@ impl IFetcher for ScrapProviderEnums {
     async fn fetch<R: Runtime>(
         &self,
         app_handle: Option<AppHandle<R>>,
-        llm_section: &LLMSection,
+        _llm_section: &LLMSection,
         ftd: FeedTargetDescription,
     ) -> anyhow::Result<Vec<Article>> {
         let words: Vec<&str> = ftd.data.iter().map(|x| x.as_str()).collect();

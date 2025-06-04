@@ -8,6 +8,7 @@ use tokio::{
     sync::{oneshot, Mutex},
     time::{sleep, Duration},
 };
+use tokio::sync::oneshot::error::RecvError;
 
 const WINDOW_SCRAP_HOST: &str = "WINDOW_SCRAP_HOST";
 static MUTEX: Lazy<Arc<Mutex<()>>> = Lazy::new(|| Arc::new(Mutex::new(())));
@@ -55,11 +56,22 @@ pub async fn scrap_text_by_url<R: Runtime>(
                     let _ = tx.send(scraped_str);
                 });
             });
-            let result = rx.await?;
-            window_ref_disposer
-                .close()
-                .expect("close scrap host panic!");
-            Ok(result)
+
+            let timeout_duration = Duration::from_secs(10);
+            match tokio::time::timeout(timeout_duration, rx).await? {
+                Ok(result) => {
+                    window_ref_disposer
+                        .close()
+                        .expect("close scrap host panic!");
+                    Ok(result)
+                }
+                Err(_) => {
+                    window_ref_disposer
+                        .close()
+                        .expect("close scrap host panic!");
+                    Err(anyhow::Error::msg("error occurs when execute simulator.scrap_text_by_url, nothing got when timeout."))
+                }
+            }
         }
     }
 }

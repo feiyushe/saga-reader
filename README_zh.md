@@ -192,6 +192,7 @@
 MIT，协议的副本说明保留在[LICENSE](./LICENSE)文件中。
 
 **🙏感谢大家的支持，你们是国产开源的历史见证者**
+
 [![Stargazers repo roster for @sopaco/saga-reader](https://reporoster.com/stars/sopaco/saga-reader)](https://github.com/sopaco/saga-reader/stargazers)
 
 ### 关于我
