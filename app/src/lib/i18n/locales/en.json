@@ -76,7 +76,11 @@
 		"footer": {
 			"tasks": {
 				"label": "Background Tasks",
-				"idle": "No tasks running currently."
+				"idle": "No tasks running currently.",
+				"status_summary_part1": "In Processing",
+				"status_summary_part2": "Items",
+				"status_ready": "Ready",
+				"status_error": "Error occurred, click to view details"
 			}
 		}
 	},

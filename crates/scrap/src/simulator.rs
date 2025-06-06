@@ -4,11 +4,11 @@ use std::sync::Arc;
 use tauri::{
     async_runtime, AppHandle, Listener, Manager, Runtime, Url, WebviewUrl, WebviewWindowBuilder,
 };
+use tokio::sync::oneshot::error::RecvError;
 use tokio::{
     sync::{oneshot, Mutex},
     time::{sleep, Duration},
 };
-use tokio::sync::oneshot::error::RecvError;
 
 const WINDOW_SCRAP_HOST: &str = "WINDOW_SCRAP_HOST";
 static MUTEX: Lazy<Arc<Mutex<()>>> = Lazy::new(|| Arc::new(Mutex::new(())));
