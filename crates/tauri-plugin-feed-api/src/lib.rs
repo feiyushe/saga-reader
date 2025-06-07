@@ -68,6 +68,7 @@ where
             Ok(())
         })
         .on_event(|app, event| match event {
+            #[cfg(target_os = "macos")]
             RunEvent::Reopen {
                 has_visible_windows,
                 ..
