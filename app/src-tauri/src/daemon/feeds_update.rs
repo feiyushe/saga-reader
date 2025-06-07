@@ -1,18 +1,15 @@
-use std::time::Duration;
+use std::{sync::Arc, time::Duration};
 
-use feed_api_rs::{
-    application_context::ContextHost,
-    features::{api::FeaturesAPI, impl_default::FeaturesAPIImpl},
-    startup::{init_logger, Startup},
-};
+use feed_api_rs::features::api::FeaturesAPI;
 use fslock::LockFile;
 use spdlog::{error, info, warn};
-use tauri::EventLoopMessage;
-use tokio::{runtime::Runtime, time};
+use tauri::{async_runtime, EventLoopMessage};
+use tauri_plugin_feed_api::state::HybridRuntimeState;
+use tokio::time;
 
 use crate::daemon::locks::{get_lock_path, LOCK_FEEDS_SCHEDULE_UPDATE};
 
-pub(crate) fn launch_feeds_schedule_update() -> anyhow::Result<()> {
+pub(crate) fn launch_feeds_schedule_update(state: Arc<HybridRuntimeState>) -> anyhow::Result<()> {
     // 防止重复运行更新实例
     let lock_path = get_lock_path(LOCK_FEEDS_SCHEDULE_UPDATE);
     let mut updater_lock = LockFile::open(&lock_path)?;
@@ -23,35 +20,23 @@ pub(crate) fn launch_feeds_schedule_update() -> anyhow::Result<()> {
         return Ok(());
     }
 
-    // 初始化异步运行时
-    info!("async runtime initializing");
-    let rt = Runtime::new().expect("Failed to create Tokio runtime");
-    rt.block_on(async {
-        info!("async runtime initialized");
-        schedule_loop().await.expect("schedule_loop occurs error");
+    async_runtime::spawn(async move {
+        schedule_loop(state)
+            .await
+            .expect("schedule_loop occurs error");
     });
     Ok(())
 }
 
-async fn schedule_loop() -> anyhow::Result<()> {
-    // 初始化业务模块
-    info!("features module initializing");
-    let context_host = Startup::launch().await?;
-    let mut context = context_host.copy_context();
-    context.app_config.log.log_name_tail = String::from("_feeds_schedule_update");
-
-    let app_config = &context.app_config;
-    init_logger::init_by(&app_config.log).expect("日志初始化失败");
-
+async fn schedule_loop(state: Arc<HybridRuntimeState>) -> anyhow::Result<()> {
+    let features = &state.features_api;
+    let app_config = &features.context.read().await.app_config;
     // 在所有权转移前读取需要的配置
     let update_interval = match &app_config.daemon.frequency_feeds_update {
-        true => 60 * 60 * 6,
-        false => 60 * 60 * 1,
+        true => 60 * 60 * 1,
+        false => 60 * 60 * 3,
     };
     let mut interval = time::interval(Duration::from_secs(update_interval));
-
-    let features = FeaturesAPIImpl::new(context).await?;
-    info!("features module initialized");
 
     // 定时任务
     loop {

@@ -62,28 +62,32 @@ function createStore() {
 	async function scheduleUpdate() {
 		if (globalSharedScheduleUpdatingFuture) return;
 		let resolve: (() => void) | null = null;
-		let reject: ((e: unknown) => void) | null = null;
+		let reject: (() => void) | null = null;
 		globalSharedScheduleUpdatingFuture = new Promise((r1, r2) => {
 			resolve = r1;
 			reject = r2;
 		});
+		let haveTaskCompleted = false;
+		const { list } = articles;
 		for (const feedPackage of feeds.feedPackages) {
 			for (const feed of feedPackage.feeds) {
 				const promise = featuresApi.update_feed_contents(feedPackage.id, feed.id);
-				const { list } = articles;
-				promise
-					.then(() => {
-						resolve!();
-						list.notifyDatasourceUpdated();
-					})
-					.catch((e) => {
-						reject!(e);
-						throw e;
-					});
+				promise.then(() => {
+					haveTaskCompleted = true;
+					list.notifyDatasourceUpdated(true);
+				});
 				tasks.addPending(`Schedule Updating For ${feedPackage.name} - ${feed.name}`, promise);
-				await promise;
+				try {
+					await promise;
+				} catch (e) {
+					console.error(`Major schedule update failured for ${feedPackage.name} - ${feed.name}`);
+				}
 			}
 		}
+		if (haveTaskCompleted) {
+			resolve!();
+			list.notifyDatasourceUpdated(false);
+		} else reject!();
 	}
 
 	function onSelectToday() {

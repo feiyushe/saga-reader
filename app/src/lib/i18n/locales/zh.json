@@ -76,7 +76,11 @@
 		"footer": {
 			"tasks": {
 				"label": "后台任务",
-				"idle": "当前无运行中任务"
+				"idle": "当前无运行中任务",
+				"status_summary_part1": "处理中",
+				"status_summary_part2": "项",
+				"status_ready": "就绪",
+				"status_error": "出现错误，点击查看详情"
 			}
 		}
 	},

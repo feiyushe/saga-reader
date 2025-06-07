@@ -16,7 +16,8 @@
 				"url": "/main",
 				"center": true,
 				"minWidth": 1440,
-				"minHeight": 750
+				"minHeight": 750,
+				"visible": false
 			},
 			{
 				"label": "reserved",

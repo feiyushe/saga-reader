@@ -37,7 +37,7 @@ const SPECIFY_FEED_IDSET_FAVORITE_FILTER: &str = "FAVORITE_FILTER";
 const SPECIFY_FEED_IDSET_UNREAD_FILTER: &str = "UNREAD_FILTER";
 
 pub struct FeaturesAPIImpl {
-    context: Arc<RwLock<ApplicationContext>>,
+    pub context: Arc<RwLock<ApplicationContext>>,
     scrap_provider: ScrapProviderEnums,
     article_recorder_service: ArticleRecorderService,
 }
@@ -254,8 +254,16 @@ impl FeaturesAPI for FeaturesAPIImpl {
         if let Some(ftd) = user_config.find_feed(package_id, feed_id) {
             // #region begin
             let mut articles = match ftd.fetcher_id.as_str() {
-                "scrap" => self.scrap_provider.fetch(app_handle, &llm_section, ftd.clone()).await?,
-                "rss" => RSSFetcher::default().fetch(app_handle, &llm_section, ftd.clone()).await?,
+                "scrap" => {
+                    self.scrap_provider
+                        .fetch(app_handle, &llm_section, ftd.clone())
+                        .await?
+                }
+                "rss" => {
+                    RSSFetcher::default()
+                        .fetch(app_handle, &llm_section, ftd.clone())
+                        .await?
+                }
                 _ => vec![],
             };
             let article_recorder_service = &self.article_recorder_service;

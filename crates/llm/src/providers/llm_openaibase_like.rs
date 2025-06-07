@@ -7,8 +7,8 @@ use crate::providers::types::{AITargetOption, CompletionService};
 
 #[derive(Serialize)]
 pub struct RequestParameters {
-    model: String,
-    messages: Vec<Message>,
+    pub(crate) model: String,
+    pub(crate) messages: Vec<Message>,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -19,30 +19,32 @@ pub struct Message {
 
 #[derive(Deserialize)]
 pub struct Response {
-    choices: Vec<ChoiceChunk>,
+    pub(crate) choices: Vec<ChoiceChunk>,
 }
 
 #[derive(Deserialize)]
 pub struct ChoiceChunk {
-    finish_reason: String,
-    message: Message,
+    finish_reason: Option<String>,
+    message: Option<Message>,
 }
 
 pub struct OpenAILikeCompletionService {
-    config: OpenAILLMProvider,
-    system_prompt: String,
-    client: Client,
+    pub(crate) config: OpenAILLMProvider,
+    pub(crate) system_prompt: String,
+    pub(crate) client: Client,
 }
 
 impl OpenAILikeCompletionService {
-    pub fn new(config: &OpenAILLMProvider, system_prompt: String, _options: AITargetOption) -> anyhow::Result<OpenAILikeCompletionService> {
-        Ok(
-            OpenAILikeCompletionService {
-                system_prompt,
-                config: config.clone(),
-                client: connector::new()?,
-            }
-        )
+    pub fn new(
+        config: &OpenAILLMProvider,
+        system_prompt: String,
+        _options: AITargetOption,
+    ) -> anyhow::Result<OpenAILikeCompletionService> {
+        Ok(OpenAILikeCompletionService {
+            system_prompt,
+            config: config.clone(),
+            client: connector::new()?,
+        })
     }
 }
 
@@ -61,13 +63,21 @@ impl CompletionService for OpenAILikeCompletionService {
             model: self.config.model_name.clone(),
             messages: vec![sys_prompt, message],
         };
-        let response =
-            self.client
-                .post(self.config.api_base_url.clone())
-                .header("Authorization", format!("Bearer {}", self.config.api_key.clone()))
-                .json(&parameter)
-                .send().await?;
+        let response = self
+            .client
+            .post(self.config.api_base_url.clone())
+            .header(
+                "Authorization",
+                format!("Bearer {}", self.config.api_key.clone()),
+            )
+            .json(&parameter)
+            .send()
+            .await?;
         let resp: Response = response.json().await?;
-        Ok(resp.choices[0].message.content.clone())
+        let content = match &resp.choices[0].message {
+            Some(m) => m.content.clone(),
+            None => String::new(),
+        };
+        Ok(content)
     }
 }

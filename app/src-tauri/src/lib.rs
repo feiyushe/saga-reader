@@ -1,13 +1,17 @@
 mod constrant;
 mod daemon;
+mod env;
 mod monitor;
 #[cfg(desktop)]
 mod tray;
 
+use std::sync::Arc;
+
 use constrant::WINDOW_MAIN_LABEL;
-use daemon::{args::DAEMON_FEEDS_SCHEDULE_UPDATE, launcher, locks::LOCK_FEEDS_SCHEDULE_UPDATE};
-use tauri::Manager;
+use daemon::{args::DAEMON_FEEDS_SCHEDULE_UPDATE, feeds_update::launch_feeds_schedule_update};
+use tauri::{Manager, RunEvent, State};
 use tauri_plugin_autostart::MacosLauncher;
+use tauri_plugin_feed_api::state::HybridRuntimeState;
 use tray::open_main_window;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -25,7 +29,7 @@ pub fn run() {
         .plugin(tauri_plugin_clipboard_manager::init())
         .plugin(tauri_plugin_autostart::init(
             MacosLauncher::LaunchAgent,
-            Some(vec!["--feeds-schedule-update"]),
+            Some(vec![DAEMON_FEEDS_SCHEDULE_UPDATE]),
         ))
         .invoke_handler(tauri::generate_handler![])
         .on_window_event(|window, event| match event {
@@ -47,9 +51,19 @@ pub fn run() {
                 let handle = app.handle();
                 tray::create_tray(handle)?;
             }
-            launcher::launch_ignore_error(DAEMON_FEEDS_SCHEDULE_UPDATE, LOCK_FEEDS_SCHEDULE_UPDATE);
+
+            let is_daemon = env::is_daemon();
+            if is_daemon {
+                let state: State<'_, Arc<HybridRuntimeState>> = app.state();
+                let state_clone = Arc::clone(&state);
+                launch_feeds_schedule_update(state_clone).unwrap();
+            } else {
+                if let Some(window) = app.get_window(WINDOW_MAIN_LABEL) {
+                    window.show().unwrap();
+                }
+            }
             Ok(())
         })
         .run(tauri::generate_context!())
-        .expect("error while running Qino Feed Desktop Application");
+        .expect("error while running Saga Reader Desktop Application");
 }

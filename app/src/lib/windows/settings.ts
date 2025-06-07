@@ -2,7 +2,7 @@ import { showWindowSingleton } from './utils';
 
 async function open() {
 	showWindowSingleton('settings', '/settings', {
-		title: '麒睿智库',
+		title: '应用设置',
 		width: 600,
 		height: 750,
 		center: true,

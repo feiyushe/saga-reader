@@ -1,12 +1,14 @@
 use reqwest::Client;
 use serde::Serialize;
+use types::OpenAILLMProvider;
 
 use crate::connector;
+use crate::providers::llm_openaibase_like::OpenAILikeCompletionService;
 use crate::providers::types::{AITargetOption, CompletionService};
 
-const API_AGENT_QINO_COMPLETIONS_FULL: &str = "https://api.mistral.ai/v1/agents/completions";
-const MISTRAL_AGENT_QINO_ID: &str = "ag:52270968:20250416:universal-chat:db393378";
-const MISTRAL_AGENT_QINO_KEY: &str = "Bearer vpWsC31ZMuTLmMWCBkQ3oJE095IrWkWe";
+const API_AGENT_QINO_COMPLETIONS_FULL: &str = "https://api.mistral.ai/v1/chat/completions";
+const MISTRAL_AGENT_QINO_ID: &str = "";
+const MISTRAL_AGENT_QINO_KEY: &str = "";
 
 #[derive(Serialize)]
 pub struct RequestParameters {
@@ -21,16 +23,22 @@ pub struct Message {
 }
 
 pub struct MistralQinoAgentService {
-    system_prompt: String,
-    client: Client,
+    inner: OpenAILikeCompletionService
 }
 
 impl MistralQinoAgentService {
     pub fn new(system_prompt: String, _options: AITargetOption) -> anyhow::Result<MistralQinoAgentService> {
         Ok(
             MistralQinoAgentService {
-                system_prompt,
-                client: connector::new()?,
+                inner: OpenAILikeCompletionService {
+                    config: OpenAILLMProvider {
+                        model_name: MISTRAL_AGENT_QINO_ID.to_string(),
+                        api_base_url: API_AGENT_QINO_COMPLETIONS_FULL.to_string(),
+                        api_key: MISTRAL_AGENT_QINO_KEY.to_string(),
+                    },
+                    system_prompt,
+                    client: connector::new()?,
+                }
             }
         )
     }
@@ -38,26 +46,6 @@ impl MistralQinoAgentService {
 
 impl CompletionService for MistralQinoAgentService {
     async fn completion(&self, content: String) -> anyhow::Result<String> {
-        let parameter = RequestParameters {
-            messages: vec![
-                Message {
-                    role: "system".to_string(),
-                    content: self.system_prompt.to_owned(),
-                },
-                Message {
-                    role: "user".to_string(),
-                    content,
-                },
-            ],
-            agent_id: MISTRAL_AGENT_QINO_ID.to_owned(),
-        };
-        let response =
-            self.client
-                .post(API_AGENT_QINO_COMPLETIONS_FULL)
-                .header("Authorization", MISTRAL_AGENT_QINO_KEY)
-                .json(&parameter)
-                .send().await?;
-        let text = response.text().await?;
-        Ok(text)
+        self.inner.completion(content).await
     }
 }
