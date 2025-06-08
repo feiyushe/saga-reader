@@ -26,11 +26,13 @@
 
 
 ## What's Saga Reader
-Saga Reader is an AI-driven think tank-style reader that automatically retrieves information from the internet based on user-specified topics and preferences. It uses cloud or local large models to summarize and provide guidance, and it includes an AI-driven interactive companion reading function, allowing you to discuss and exchange ideas with AI about the content you've read.
+**Saga Reader** is an AI-driven think tank-style reader that automatically retrieves information from the internet based on user-specified topics and preferences. It uses cloud or local large models to summarize and provide guidance, and it includes an AI-driven interactive companion reading function, allowing you to discuss and exchange ideas with AI about the content you've read.
 
-Saga Reader is completely free and open-source, meaning all data is securely stored on your own computer and is not controlled by third-party service providers. Additionally, you can manage your subscription keywords based on your interests and preferences without being disturbed by advertisements and commercialized content.
+**Saga Reader** is completely free and open-source, meaning all data is securely stored on your own computer and is not controlled by third-party service providers. Additionally, you can manage your subscription keywords based on your interests and preferences without being disturbed by advertisements and commercialized content.
 
-Download it from [website](https://aiqino.netlify.app?s=github_download)!
+❤️ Like **Saga Reader**? Star it 🌟 or [Sponsor the Developer](https://github.com/sponsors/sopaco)! ❤️
+
+⏬ Download it now from the [official website](https://aiqino.netlify.app?s=github_download)! Compatible with Windows, Mac, and Linux systems, it runs very smoothly on old computers.
 
 **Thanks to the kind people**
 
@@ -38,19 +40,19 @@ Download it from [website](https://aiqino.netlify.app?s=github_download)!
 
 **Note: Installation and Usage Instructions**
 
-For the installation precautions and the configuration method of the large language model required for the first use, please refer to the [**Help Document**](./docs/how-to-use-en.md).
+📖 For the installation precautions and the configuration method of the large language model required for the first use, please refer to the [**Help Document**](./docs/how-to-use-en.md).
 
-## Snapshots
+# 🌠 Snapshots
 
 ![snapshot-glance](docs/assets/snapshot-glance.webp)
 
-## How it works
+# 🧠 How it works
 
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/sopaco/saga-reader)
 
 ![archi-diags-en.png](docs/assets/archi-diags-en.png)
 
-## Key Features
+# 🌟 Key Features
 
 - **Intelligent Content Subscription**: An interest-based content generation engine that supports flexible content subscription settings according to user interests. Users only need to define keywords of interest to independently search for relevant information across the entire network without complex subscription operations.
 - **Efficient Information Retrieval**: A fully automated content engine implemented purely in Rust. It supports multiple retrieval modes such as search and RSS, enabling efficient collection of global internet information.
@@ -63,7 +65,7 @@ For the installation precautions and the configuration method of the large langu
 - **Flexible Reading Experience**: It offers flexible article reading methods. Users can choose to read the full content using the built - in article viewer or switch to their preferred browser for browsing.
 - **Efficient Search and Background Updates**: Supports article search and can silently update content in the background. Relying on Rust technology, it has extremely low memory usage (only 10MB) and excellent operating performance.
 
-## Development
+# 🖥 Development
 ### Prerequisites
 - [**Rust**](https://www.rust-lang.org)
 - [**Bun**](https://bun.sh) (recommended) or NodeJS
@@ -120,7 +122,7 @@ The installation is straight forward, just follow the steps below:
     ```
 <br>
 
-### Monorepo App Architecture
+# 📝 Monorepo App Architecture
 
 We use a combination of Rust, Svelte (SvelteKit), Tauri, SeaORM, SqlLite, TailwindCSS throughout this monorepo.
 
@@ -159,7 +161,7 @@ We use a combination of Rust, Svelte (SvelteKit), Tauri, SeaORM, SqlLite, Tailwi
 +----------------------+       +-----------------------+
 ```
 
-### Contribute
+# 🤝 Contribute
 
 Help improve Saga Reader by reporting bugs or submitting feature requests through [GitHub Issues](https://github.com/sopaco/saga-reader/issues).
 
@@ -173,7 +175,7 @@ Similarly, there are some features in wunderlist that need to be improved.
 
 If you enjoy using this app, consider supporting its development by donating through [GitHub Sponsors](https://github.com/sponsors/sopaco), [Paypal](https://paypal.me/skyronj), or [Alipay](https://aiqino.netlify.app/uprise-assets/alipay.jpg).
 
-### Developed with
+# ⚛️ Developed with
 
 - [Rust](https://github.com/rust-lang/rust)
 - [Tauri](https://github.com/tauri-apps/tauri)
@@ -182,10 +184,10 @@ If you enjoy using this app, consider supporting its development by donating thr
 - [Skeleton](https://github.com/skeletonlabs/skeleton)
 - [sea-orm](https://github.com/SeaQL/sea-orm)
 
-### License
-MIT, A copy of the license is provided in the [LICENSE](./LICENSE) file.
+# 🪪 License
+**MIT**. A copy of the license is provided in the [LICENSE](./LICENSE) file.
 
-### About Me
+# 👨 About Me
 
 > 🚀 Help me develop this software better by [sponsoring on GitHub](https://github.com/sponsors/sopaco)
 

@@ -23,28 +23,30 @@
 
 > 🚀 通过 [在 GitHub 上赞助](https://github.com/sponsors/sopaco)让这个软件更好的发展。
 
-## 麒睿智库是什么
-麒睿智库(Saga Reader) 是一个AI驱动的智库式阅读器，根据用户指定的主题和偏好关键词自动从互联网上检索信息。它使用云端或本地大型模型进行总结和提供指导，并包括一个AI驱动的互动阅读伴读功能，允许您与AI讨论和交换阅读内容的想法。
+# 麒睿智库是什么
+📖 **麒睿智库(Saga Reader)** 是一个AI驱动的智库式阅读器，根据用户指定的主题和偏好关键词自动从互联网上检索信息。它使用云端或本地大型模型进行总结和提供指导，并包括一个AI驱动的互动阅读伴读功能，允许您与AI讨论和交换阅读内容的想法。
 
-麒睿智库 完全免费和开源，这意味着所有数据都安全地存储在您自己的计算机上，不受第三方服务提供商的控制。此外，您可以根据自己的兴趣和偏好管理订阅关键词，而不会受到广告和商业化内容的打扰。
+🆓 **麒睿智库** 完全免费和开源，这意味着所有数据都安全地存储在您自己的计算机上，不受第三方服务提供商的控制。此外，您可以根据自己的兴趣和偏好管理订阅关键词，而不会受到广告和商业化内容的打扰。
 
-从[官方网站](https://aiqino.netlify.app?s=github_download)下载！
+❤️ 喜欢 **麒睿智库**? 点亮小星星 🌟 或 [赞助开发者](https://github.com/sponsors/sopaco)! ❤️
+
+⏬ 现在就从[官方网站](https://aiqino.netlify.app?s=github_download)下载！兼容 Windows、Mac 和 Linux 系统，在老电脑上也非常流畅。
 
 **注意：安装与使用说明**
 
-安装注意事项与初次使用需要的大模型配置方法，详见[**帮助文档**](./docs/how-to-use-zh.md)。
+📖 安装注意事项与初次使用需要的大模型配置方法，详见[**帮助文档**](./docs/how-to-use-zh.md)。
 
-## 截图
+# 🌠 界面
 
 ![snapshot-glance](docs/assets/snapshot-glance.webp)
 
-## 工作原理
+# 🧠 工作原理
 
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/sopaco/saga-reader)
 
 ![archi-diags-en.png](docs/assets/archi-diags-en.png)
 
-## 功能与特性
+# 🌟 功能与特性
 
 - **智能内容订阅**：基于兴趣的内容生成引擎，支持根据用户兴趣灵活设置内容订阅。用户只需定义感兴趣的关键词，即可全网自主搜索相关信息，无需复杂的订阅操作。
 - **高效信息抓取**：采用纯 Rust 实现的全自动内容引擎，支持搜索和 RSS 等多种抓取模式，可高效采集全球互联网信息。
@@ -57,7 +59,7 @@
 - **灵活阅读体验**：提供灵活的文章阅读方式，用户可选择使用内置文章查看器阅读完整内容，也能切换到偏好的浏览器进行浏览。
 - **高效搜索更新**：支持文章搜索功能，可在后台静默更新内容。依托 Rust 技术，内存占用极小（仅 10MB），运行性能卓越。
 
-## 开发
+# 🖥️ 开发
 ### 前提条件
 - [**Rust**](https://www.rust-lang.org)
 - [**Bun**](https://bun.sh) (推荐) or NodeJS
@@ -114,7 +116,7 @@
     ```
 <br>
 
-### 核心模块说明
+# 📝 核心模块说明
 
 项目使用了Rust、Svelte（SvelteKit）、Tauri、SeaORM、SqlLite、TailwindCSS等技术。
 
@@ -152,7 +154,7 @@
 +----------------------+       +-----------------------+
 ```
 
-### 贡献
+# 🤝 贡献
 
 通过[GitHub Issues](https://github.com/sopaco/saga-reader/issues)报告错误或提出功能请求，帮助使麒睿智库变得更好。
 
@@ -165,7 +167,7 @@
 
 如果您喜欢使用这个应用程序，请考虑通过[GitHub赞助商](https://github.com/sponsors/sopaco)、[Paypal](https://paypal.me/skyronj)或[支付宝](https://aiqino.netlify.app/uprise-assets/alipay.jpg)捐款支持其开发。
 
-### 使用以下技术开发
+# ⚛️ 使用以下技术开发
 
 - [Rust](https://github.com/rust-lang/rust)
 - [Tauri](https://github.com/tauri-apps/tauri)
@@ -174,14 +176,14 @@
 - [Skeleton](https://github.com/skeletonlabs/skeleton)
 - [sea-orm](https://github.com/SeaQL/sea-orm)
 
-### 许可证
-MIT，协议的副本说明保留在[LICENSE](./LICENSE)文件中。
+# 🪪 许可证
+**MIT**，协议的副本说明保留在[LICENSE](./LICENSE)文件中。
 
 **🙏感谢大家的支持，你们是国产开源的历史见证者**
 
 [![Stargazers repo roster for @sopaco/saga-reader](https://reporoster.com/stars/sopaco/saga-reader)](https://github.com/sopaco/saga-reader/stargazers)
 
-### 关于我
+# 👨 关于我
 
 > 🚀 通过 [在 GitHub 上赞助我](https://github.com/sponsors/sopaco)让这个软件更好的发展。
 
