@@ -50,32 +50,18 @@ For the installation precautions and the configuration method of the large langu
 
 ![archi-diags-en.png](docs/assets/archi-diags-en.png)
 
-## Features
+## Key Features
 
-### Content Subscriptions
-- Flexibly set your content subscriptions based on your interests. Simply define a few keywords to automatically gather information from the global internet.
-
-### Translation
-- Automatically translate foreign language information. You can have articles in other languages automatically translated into your preferred language.
-
-### Security and Privacy
-- Offers the best security and privacy features. Your data is stored entirely on your personal computer and is not tracked or influenced by third-party service providers.
-
-### Model Support
-- Supports connection to cloud-based large models or local large models on your personal computer for inference.
-
-### Performance
-- Extremely lightweight and high-performing, this application is developed using Rust and Svelte technologies, boasting the lowest memory and CPU consumption among its peers, with memory usage below 10MB. You can deploy it on any old device.
-
-### UI Design
-- Clean UI design, lightweight, practical, and easy to use. You won't be bothered by annoying ads or commercial elements.
-
-### Article Viewer
-- Use the built-in article viewer to read full content, or switch to your preferred browser for browsing.
-
-### Search and Background Updates
-- Supports article search.
-- Can silently update content in the background. Thanks to Rust technology, it boasts an extremely small memory footprint of just 10MB and excellent running performance.
+- **Intelligent Content Subscription**: An interest-based content generation engine that supports flexible content subscription settings according to user interests. Users only need to define keywords of interest to independently search for relevant information across the entire network without complex subscription operations.
+- **Efficient Information Retrieval**: A fully automated content engine implemented purely in Rust. It supports multiple retrieval modes such as search and RSS, enabling efficient collection of global internet information.
+- **AI Immersive Reading Companion**: An innovative AI reading companion feature that allows users to communicate with AI in real - time during the reading process, get answers to questions, gain in - depth insights, and bid farewell to the solitude of reading.
+- **Multilingual Intelligent Translation**: Equipped with intelligent translation capabilities, it breaks through language and regional barriers, automatically translating hundreds of foreign language information. Non - native language articles are automatically translated into the user's preferred language.
+- **Security and Privacy Assurance**: It provides the best security and privacy protection. All data is completely stored on the user's personal computer, free from tracking or influence by any third - party service providers.
+- **Multi - Model AI Support**: Supports connecting to cloud - based and local large - scale models for inference. Cloud - based large - scale models cover mainstream industry models to meet AI needs in different scenarios.
+- **Smooth Operation on Old Devices**: Developed based on Rust and Svelte technologies, it has the lowest memory and CPU consumption among similar products. With a memory usage of less than 10MB, it ensures smooth operation even on old devices.
+- **Clean and Refreshing UI**: Adopting a clean and refreshing UI design, the interface is simple, lightweight, practical, and easy to operate, free from annoying ads and commercial elements.
+- **Flexible Reading Experience**: It offers flexible article reading methods. Users can choose to read the full content using the built - in article viewer or switch to their preferred browser for browsing.
+- **Efficient Search and Background Updates**: Supports article search and can silently update content in the background. Relying on Rust technology, it has extremely low memory usage (only 10MB) and excellent operating performance.
 
 ## Development
 ### Prerequisites
