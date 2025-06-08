@@ -25,7 +25,7 @@
 > 🚀 Help me develop this software better by [sponsoring on GitHub](https://github.com/sponsors/sopaco)
 
 
-## What's Saga Reader
+# 👋 What's Saga Reader
 **Saga Reader** is an AI-driven think tank-style reader that automatically retrieves information from the internet based on user-specified topics and preferences. It uses cloud or local large models to summarize and provide guidance, and it includes an AI-driven interactive companion reading function, allowing you to discuss and exchange ideas with AI about the content you've read.
 
 **Saga Reader** is completely free and open-source, meaning all data is securely stored on your own computer and is not controlled by third-party service providers. Additionally, you can manage your subscription keywords based on your interests and preferences without being disturbed by advertisements and commercialized content.
