@@ -224,7 +224,7 @@
 
 	// 线上使用说明
 	function openGLMGuide() {
-		featuresApi.open_article_external('https://maas.aminer.cn/');
+		featuresApi.open_article_external('https://bigmodel.cn');
 	}
 
 	// 内存AppConfig更新后的衍生执行代码

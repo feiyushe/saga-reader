@@ -1,7 +1,3 @@
-import {
-	enable as enableAutoStart,
-	isEnabled as isEnableAutoStart
-} from '@tauri-apps/plugin-autostart';
 import type { Article } from '$lib/types/article';
 
 import {
@@ -153,13 +149,6 @@ function createStore() {
 					scheduleUpdate();
 				}
 			});
-		});
-
-		// 设置自启动
-		// TODO：根据用户设置自动设置自启动，默认自启动。
-		isEnableAutoStart().then((enable) => {
-			console.log(`isEnableAutoStart...${enable}`);
-			if (!enable) enableAutoStart().then(() => console.log('enableAutoStart completed'));
 		});
 	});
 
