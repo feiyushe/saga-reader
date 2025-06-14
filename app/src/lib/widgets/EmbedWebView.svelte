@@ -15,6 +15,11 @@
 		console.log('onLoadEventHandler...completed', src, loadingStatus);
 		onLoadEnd?.(src);
 	};
+
+	function onVisiblityChanged(v: boolean) {
+		hasRequestToUse = v;
+	}
+
 	$effect.pre(() => {
 		const snapshotSrc = src;
 		loadingStatus = LoadingStatus.Loading;
@@ -23,10 +28,6 @@
 		webview?.addEventListener('load', onLoadEventHandler);
 		return () => webview?.removeEventListener('load', onLoadEventHandler);
 	});
-
-	function onVisiblityChanged(v: boolean) {
-		hasRequestToUse = v;
-	}
 </script>
 
 <div

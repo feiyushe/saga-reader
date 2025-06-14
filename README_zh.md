@@ -28,7 +28,7 @@
 
 🆓 **麒睿智库** 完全免费和开源，这意味着所有数据都安全地存储在您自己的计算机上，不受第三方服务提供商的控制。此外，您可以根据自己的兴趣和偏好管理订阅关键词，而不会受到广告和商业化内容的打扰。
 
-❤️ 喜欢 **麒睿智库**? 点亮小星星 🌟 或 [赞助开发者](https://github.com/sponsors/sopaco)! ❤️
+❤️ 喜欢 **麒睿智库**? 点亮小星星 🌟 或 [赞助](https://github.com/sponsors/sopaco)! ❤️
 
 ⏬ 现在就从[官方网站](https://aiqino.netlify.app?s=github_download)下载！兼容 Windows、Mac 和 Linux 系统，在老电脑上也非常流畅。
 
