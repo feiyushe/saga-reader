@@ -15,7 +15,7 @@ Taking MacOS as an example, when you directly run the program, you will encounte
 
 You only need to run the following command and then install.
 ``` sh
-sudo xattr -rd com.apple.quarantine /Applications/Qi Rui Think Tank.app
+sudo xattr -rd com.apple.quarantine /Applications/麒睿智库.app
 ```
 
 ### Initial Configuration Steps
@@ -50,4 +50,4 @@ Q: How is the subscribed content updated?
 A: The program will update automatically. If you need to refresh manually, you can click the refresh button in the interface. The program will update the data automatically. If you want to manually trigger the update of a subscription, you can click this button.
 
 Q: What is Ollama and how to install it?
-A: Ollama is a very popular local running engine for large language models in the AIGC community. You can download open-source large language models on your own device and run inferences without having to access other commercial online services. You can download Ollama [here](https://ollama.com/download). 
+A: Ollama is a very popular local running engine for large language models in the AIGC community. You can download open-source large language models on your own device and run inferences without having to access other commercial online services. You can download Ollama [here](https://ollama.com/download).
