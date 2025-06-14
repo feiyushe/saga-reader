@@ -10,7 +10,7 @@
 		StarOff as IconStarOff,
 		Paperclip as IconOriginal
 	} from 'lucide-svelte';
-	import Markdown from '$lib/widgets/Markdown.svelte';
+	import ArticleRenderWidget from '$lib/widgets/ArticleRenderWidget.svelte';
 	import EmbedWebView from '$lib/widgets/EmbedWebView.svelte';
 	import type { ArticleReaderProps, ArticleReadMode } from './types';
 	import type { Article } from '$lib/types/article';
@@ -129,13 +129,13 @@
 			{#snippet content()}
 				{#if article}
 					<Tabs.Panel value="optimized">
-						{#key `${article.id}-${articleUpdatedSeq}`}
-							<Markdown value={article.optimized_content} />
+						{#key `optimized-${article.id}-${articleUpdatedSeq}`}
+							<ArticleRenderWidget value={article.optimized_content} />
 						{/key}
 					</Tabs.Panel>
 					<Tabs.Panel value="melted">
-						{#key `${article.id}-${articleUpdatedSeq}`}
-							<Markdown value={article.melted_content} />
+						{#key `melted-${article.id}-${articleUpdatedSeq}`}
+							<ArticleRenderWidget value={article.melted_content} />
 						{/key}
 					</Tabs.Panel>
 					<Tabs.Panel value="original" classes="h-full">

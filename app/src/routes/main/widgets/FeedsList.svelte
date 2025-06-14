@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { _ } from 'svelte-i18n';
+	import { _ } from 'svelte-i18n';
 	import { ask } from '@tauri-apps/plugin-dialog';
 	import ContextMenuProvider from '$lib/widgets/ContextMenuProvider.svelte';
 	import IconAdd from 'lucide-svelte/icons/plus';
@@ -24,7 +24,7 @@
 		openFeedPackageEditWindow
 	} from '$lib/windows/lite-edit';
 	import { disableContextMenu } from '$lib/utils/dom';
-    import { format } from '$lib/utils/text';
+	import { format } from '$lib/utils/text';
 
 	let {
 		store,
@@ -73,8 +73,8 @@
 				onClick: createRefreshFeedsAction(async () => {
 					const answer = await ask(
 						format($_('main.feeds.menu.actions.delete_prompt'), {
-						name,
-						length: `${feedPackage.feeds.length}`
+							name,
+							length: `${feedPackage.feeds.length}`
 						}),
 						{
 							title: $_('main.feeds.menu.actions.delete_dialog_title'),
@@ -103,12 +103,15 @@
 			{
 				name: 'del',
 				onClick: createRefreshFeedsAction(async () => {
-					const answer = await ask(format($_('main.feed.menu.actions.delete_prompt'), {
-					   name: feed.name
-					}), {
-						title: $_('main.feed.menu.actions.delete_dialog_title'),
-						kind: 'warning'
-					});
+					const answer = await ask(
+						format($_('main.feed.menu.actions.delete_prompt'), {
+							name: feed.name
+						}),
+						{
+							title: $_('main.feed.menu.actions.delete_dialog_title'),
+							kind: 'warning'
+						}
+					);
 					if (!answer) return;
 					await store.removeFeed(feedPackage.id, feed.id);
 				}),
@@ -172,9 +175,9 @@
 {/snippet}
 
 {#snippet listGroupItem(text, IconRender, onclick, stateSelected, menus)}
-    <!-- svelte-ignore a11y_invalid_attribute -->
-    <a href='#' {onclick}>
-        <ContextMenuProvider {menus}>
+	<!-- svelte-ignore a11y_invalid_attribute -->
+	<a href="#" {onclick}>
+		<ContextMenuProvider {menus}>
 			<div
 				class={`flex flex-row gap-2 items-center transition mr-2 rounded-md ${stateSelected ? 'preset-filled-primary-500' : 'preset-filled-surface-50-950 hover:preset-filled-primary-100-900'} p-2`}
 			>
@@ -190,14 +193,44 @@
 	class="preset-filled-surface-50 w-[15rem] flex h-full flex-col overflow-scroll-clip"
 >
 	{@render listSection($_('common.product_name'))}
-	{@render listItem($_('main.menu.create_feeds_package'), IconAddFeed, onAddFeedPressed, false, null)}
+	{@render listItem(
+		$_('main.menu.create_feeds_package'),
+		IconAddFeed,
+		onAddFeedPressed,
+		false,
+		null
+	)}
 	{@render listItem($_('main.menu.settings'), IconSettings, openSettings, false, null)}
 
 	{@render listSection($_('main.section_frequently_used.label'))}
-	{@render listItem($_('main.section_frequently_used.menu.today'), IconToday, onSelectToday, isTodaySelected, null)}
-	{@render listItem($_('main.section_frequently_used.menu.this_week'), IconWeekend, onSelectWeekend, isWeekendSelected, null)}
-	{@render listItem($_('main.section_frequently_used.menu.favorites'), IconFavorites, onSelectFavorite, isFavoriteSelected, null)}
-	{@render listItem($_('main.section_frequently_used.menu.unread'), IconUnread, onSelectUnread, isUnreadSelected, null)}
+	{@render listItem(
+		$_('main.section_frequently_used.menu.today'),
+		IconToday,
+		onSelectToday,
+		isTodaySelected,
+		null
+	)}
+	{@render listItem(
+		$_('main.section_frequently_used.menu.this_week'),
+		IconWeekend,
+		onSelectWeekend,
+		isWeekendSelected,
+		null
+	)}
+	{@render listItem(
+		$_('main.section_frequently_used.menu.favorites'),
+		IconFavorites,
+		onSelectFavorite,
+		isFavoriteSelected,
+		null
+	)}
+	{@render listItem(
+		$_('main.section_frequently_used.menu.unread'),
+		IconUnread,
+		onSelectUnread,
+		isUnreadSelected,
+		null
+	)}
 
 	{@render listSectionWithAction($_('main.section_subscriptions.label'), IconAdd, onAddFeedPressed)}
 

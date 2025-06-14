@@ -9,7 +9,7 @@ use std::sync::Arc;
 
 use constrant::WINDOW_MAIN_LABEL;
 use daemon::{args::DAEMON_FEEDS_SCHEDULE_UPDATE, feeds_update::launch_feeds_schedule_update};
-use tauri::{Manager, RunEvent, State};
+use tauri::{Manager, State};
 use tauri_plugin_autostart::MacosLauncher;
 use tauri_plugin_feed_api::state::HybridRuntimeState;
 use tray::open_main_window;
@@ -46,9 +46,9 @@ pub fn run() {
             _ => {}
         })
         .setup(|app| {
+            let handle = app.handle();
             #[cfg(all(desktop))]
             {
-                let handle = app.handle();
                 tray::create_tray(handle)?;
             }
 
@@ -56,7 +56,7 @@ pub fn run() {
             if is_daemon {
                 let state: State<'_, Arc<HybridRuntimeState>> = app.state();
                 let state_clone = Arc::clone(&state);
-                launch_feeds_schedule_update(state_clone).unwrap();
+                launch_feeds_schedule_update(handle, state_clone).unwrap();
             } else {
                 if let Some(window) = app.get_window(WINDOW_MAIN_LABEL) {
                     window.show().unwrap();

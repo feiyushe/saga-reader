@@ -30,7 +30,7 @@
 
 **Saga Reader** is completely free and open-source, meaning all data is securely stored on your own computer and is not controlled by third-party service providers. Additionally, you can manage your subscription keywords based on your interests and preferences without being disturbed by advertisements and commercialized content.
 
-❤️ Like **Saga Reader**? Star it 🌟 or [Sponsor the Developer](https://github.com/sponsors/sopaco)! ❤️
+❤️ Like **Saga Reader**? Star it 🌟 or [Sponsor Me](https://github.com/sponsors/sopaco)! ❤️
 
 ⏬ Download it now from the [official website](https://aiqino.netlify.app?s=github_download)! Compatible with Windows, Mac, and Linux systems, it runs very smoothly on old computers.
 
