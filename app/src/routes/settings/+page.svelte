@@ -265,7 +265,7 @@
 	}
 </script>
 
-<div use:disableContextMenu class=" cursor-default w-full h-screen overflow-hidden flex flex-col">
+<div use:disableContextMenu class="cursor-default w-full h-screen overflow-hidden flex flex-col">
 	<div class="flex-1 w-full h-full overflow-hidden flex flex-col">
 		<div class="pt-4 pb-4 pl-8 pr-8">
 			<h3 class="h3">{$_('settings.label')}</h3>
@@ -275,6 +275,7 @@
 			<p class="pl-8 mt-4">{$_('settings.loading')}</p>
 		{:else}
 			<div class="flex-1 h-full overflow-y-auto pl-8 pr-8">
+				<!-- section begin of theme config -->
 				{@render SectionHeader($_('settings.section_llm_appearance.label'))}
 				{@render CheckOption(
 					$_('settings.section_llm_appearance.theme.label'),
@@ -284,6 +285,7 @@
 				)}
 
 				{@render SectionEnd()}
+				<!-- section end of theme config -->
 
 				<!-- {@render SectionHeader('语言偏好')}
 				{@render SectionEnd()} -->
@@ -291,6 +293,8 @@
 				{@render SectionHeader($_('settings.section_llm_provider.label'))}
 				<div class="flex flex-col space-y-2">
 					<p class="type-scale-2 text-surface-400">{$_('settings.section_llm_provider.tip')}</p>
+
+					<!-- section begin of ollama config -->
 					<div
 						class={`p-4 rounded-md border-2 ${activedProviderType === 'ollama' ? 'border-primary-500' : ''} w-full`}
 					>
@@ -316,35 +320,39 @@
 								>{$_('settings.section_llm_provider.provider_ollama_sentence_1')}</span
 							>。
 						</p>
-						<hr class="hr mt-2 mb-2" />
-						<label class={`label ${llmFormErrorOllamaURI ? 'text-red-500' : ''}`}>
-							<span class="label-text"
-								>{$_('settings.section_llm_provider.provider_ollama_sentence_2')}</span
-							>
-							<input
-								class="input p-2"
-								type="url"
-								bind:value={llmFormOllamaURI}
-								placeholder={$_('settings.section_llm_provider.provider_ollama_sentence_5')}
-							/>
-						</label>
-						<label class={`label mt-2 ${llmFormErrorOllamaModelName ? 'text-red-500' : ''}`}>
-							<span class="label-text"
-								>{$_('settings.section_llm_provider.provider_ollama_sentence_3')}</span
-							>
-							<input
-								class="input p-2"
-								type="text"
-								bind:value={llmFormOllamaModelName}
-								placeholder={$_('settings.section_llm_provider.provider_ollama_sentence_4')}
-							/>
-						</label>
+						{#if activedProviderType === 'ollama'}
+							<hr class="hr mt-2 mb-2" />
+							<label class={`label ${llmFormErrorOllamaURI ? 'text-red-500' : ''}`}>
+								<span class="label-text"
+									>{$_('settings.section_llm_provider.provider_ollama_sentence_2')}</span
+								>
+								<input
+									class="input p-2"
+									type="url"
+									bind:value={llmFormOllamaURI}
+									placeholder={$_('settings.section_llm_provider.provider_ollama_sentence_5')}
+								/>
+							</label>
+							<label class={`label mt-2 ${llmFormErrorOllamaModelName ? 'text-red-500' : ''}`}>
+								<span class="label-text"
+									>{$_('settings.section_llm_provider.provider_ollama_sentence_3')}</span
+								>
+								<input
+									class="input p-2"
+									type="text"
+									bind:value={llmFormOllamaModelName}
+									placeholder={$_('settings.section_llm_provider.provider_ollama_sentence_4')}
+								/>
+							</label>
 
-						{#if llmFormChangedOllama}
-							{@render LLMGroupSavePanel(saveLLMFormOllama, restoreLLMFormOllama)}
+							{#if llmFormChangedOllama}
+								{@render LLMGroupSavePanel(saveLLMFormOllama, restoreLLMFormOllama)}
+							{/if}
 						{/if}
 					</div>
+					<!-- section end of theme ollama -->
 
+					<!-- section begin of glm config -->
 					<div
 						class={`p-4 rounded-md border-2 ${activedProviderType === 'glm' ? 'border-primary-500' : ''} w-full`}
 					>
@@ -369,21 +377,25 @@
 								>{$_('settings.section_llm_provider.provider_glm_sentence_2')}</span
 							>。
 						</p>
-						<hr class="hr mt-2 mb-2" />
-						<label class={`label ${llmFormErrorGLMKey ? 'text-red-500' : ''}`}>
-							<span class="label-text">API KEY</span>
-							<input
-								class="input p-2"
-								type="text"
-								bind:value={llmFormGLMKey}
-								placeholder={$_('settings.section_llm_provider.provider_glm_sentence_3')}
-							/>
-						</label>
-						{#if llmFormChangedGLM}
-							{@render LLMGroupSavePanel(saveLLMFormGLM, restoreLLMFormGLM)}
+						{#if activedProviderType === 'glm'}
+							<hr class="hr mt-2 mb-2" />
+							<label class={`label ${llmFormErrorGLMKey ? 'text-red-500' : ''}`}>
+								<span class="label-text">API KEY</span>
+								<input
+									class="input p-2"
+									type="text"
+									bind:value={llmFormGLMKey}
+									placeholder={$_('settings.section_llm_provider.provider_glm_sentence_3')}
+								/>
+							</label>
+							{#if llmFormChangedGLM}
+								{@render LLMGroupSavePanel(saveLLMFormGLM, restoreLLMFormGLM)}
+							{/if}
 						{/if}
 					</div>
+					<!-- section end of glm config -->
 
+					<!-- section begin of openai-like config -->
 					<div
 						class={`p-4 rounded-md border-2 ${activedProviderType === 'openai' ? 'border-primary-500' : ''} w-full`}
 					>
@@ -400,38 +412,41 @@
 						<p class="mt-2 ml-0.5 type-scale-1 text-surface-400">
 							<span>{$_('settings.section_llm_provider.provider_openai_sentence_1')}</span>
 						</p>
-						<hr class="hr mt-2 mb-2" />
-						<label class={`label ${llmFormErrorOpenAILikeBaseURI ? 'text-red-500' : ''}`}>
-							<span class="label-text">API URL</span>
-							<input
-								class="input p-2"
-								type="url"
-								bind:value={llmFormOpenAILikeBaseURI}
-								placeholder={$_('settings.section_llm_provider.provider_openai_sentence_2')}
-							/>
-						</label>
-						<label class={`mt-2 label ${llmFormErrorOpenAILikeKey ? 'text-red-500' : ''}`}>
-							<span class="label-text">API KEY</span>
-							<input
-								class="input p-2"
-								type="text"
-								bind:value={llmFormOpenAILikeKey}
-								placeholder={$_('settings.section_llm_provider.provider_openai_sentence_3')}
-							/>
-						</label>
-						<label class={`mt-2 label ${llmFormErrorOpenAILikeModelName ? 'text-red-500' : ''}`}>
-							<span class="label-text">Model Name</span>
-							<input
-								class="input p-2"
-								type="text"
-								bind:value={llmFormOpenAILikeModelName}
-								placeholder={$_('settings.section_llm_provider.provider_openai_sentence_4')}
-							/>
-						</label>
-						{#if llmFormChangedOpenAILike}
-							{@render LLMGroupSavePanel(saveLLMFormOpenAILike, restoreLLMFormOpenAILike)}
+						{#if activedProviderType === 'openai'}
+							<hr class="hr mt-2 mb-2" />
+							<label class={`label ${llmFormErrorOpenAILikeBaseURI ? 'text-red-500' : ''}`}>
+								<span class="label-text">API URL</span>
+								<input
+									class="input p-2"
+									type="url"
+									bind:value={llmFormOpenAILikeBaseURI}
+									placeholder={$_('settings.section_llm_provider.provider_openai_sentence_2')}
+								/>
+							</label>
+							<label class={`mt-2 label ${llmFormErrorOpenAILikeKey ? 'text-red-500' : ''}`}>
+								<span class="label-text">API KEY</span>
+								<input
+									class="input p-2"
+									type="text"
+									bind:value={llmFormOpenAILikeKey}
+									placeholder={$_('settings.section_llm_provider.provider_openai_sentence_3')}
+								/>
+							</label>
+							<label class={`mt-2 label ${llmFormErrorOpenAILikeModelName ? 'text-red-500' : ''}`}>
+								<span class="label-text">Model Name</span>
+								<input
+									class="input p-2"
+									type="text"
+									bind:value={llmFormOpenAILikeModelName}
+									placeholder={$_('settings.section_llm_provider.provider_openai_sentence_4')}
+								/>
+							</label>
+							{#if llmFormChangedOpenAILike}
+								{@render LLMGroupSavePanel(saveLLMFormOpenAILike, restoreLLMFormOpenAILike)}
+							{/if}
 						{/if}
 					</div>
+					<!-- section end of openai-like config -->
 
 					<!-- <div
 						class={`p-4 rounded-md border-2 ${activedProviderType === 'platform' ? 'border-primary-500' : ''} w-full`}
@@ -492,15 +507,15 @@
 					)}
 					{@render LinkButton(
 						$_('settings.section_users_support.feedback'),
-						'https://txc.qq.com/products/670982'
+						'https://github.com/sopaco/saga-reader/issues'
 					)}
 					{@render LinkButton(
 						$_('settings.section_users_support.blogs'),
-						'https://support.qq.com/products/670982/blog-archive'
+						'https://skyron.netlify.app/downloads/'
 					)}
 					{@render LinkButton(
 						$_('settings.section_users_support.changelogs'),
-						'https://support.qq.com/products/670982/change-log'
+						'https://github.com/sopaco/saga-reader/releases'
 					)}
 				</div>
 

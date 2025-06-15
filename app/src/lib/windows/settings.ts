@@ -4,7 +4,7 @@ async function open() {
 	showWindowSingleton('settings', '/settings', {
 		title: '应用设置',
 		width: 600,
-		height: 750,
+		height: screen.availHeight - 20,
 		center: true,
 		resizable: false,
 		maximizable: false
