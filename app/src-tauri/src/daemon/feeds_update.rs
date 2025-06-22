@@ -43,7 +43,7 @@ async fn schedule_loop<R: Runtime>(
         false => 60 * 60 * 3,
     };
     let mut interval = time::interval(Duration::from_secs(update_interval));
-    let mut cold_start_delay = time::interval(Duration::from_secs(120));
+    let mut cold_start_delay = time::interval(Duration::from_secs(360));
 
     // 定时任务
     loop {
