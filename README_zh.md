@@ -44,7 +44,7 @@
 
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/sopaco/saga-reader)
 
-![archi-diags-en.png](docs/assets/archi-diags-en.png)
+![archi-diags-en.png](docs/assets/archi-diags-zh.png)
 
 # 🌟 功能与特性
 

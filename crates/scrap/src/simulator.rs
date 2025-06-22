@@ -58,13 +58,18 @@ pub async fn scrap_text_by_url<R: Runtime>(
             });
 
             let timeout_duration = Duration::from_secs(10);
-            match tokio::time::timeout(timeout_duration, rx).await? {
-                Ok(result) => {
-                    window_ref_disposer
-                        .close()
-                        .expect("close scrap host panic!");
-                    Ok(result)
-                }
+            match tokio::time::timeout(timeout_duration, rx).await {
+                Ok(r) => match r {
+                    Ok(result) => {
+                        window_ref_disposer
+                            .close()
+                            .expect("close scrap host panic!");
+                        Ok(result)
+                    }
+                    Err(_) => {
+                        panic!("fatal error occurs, RecvError in simulator");
+                    }
+                },
                 Err(_) => {
                     window_ref_disposer
                         .close()
