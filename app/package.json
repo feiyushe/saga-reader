@@ -21,12 +21,12 @@
 	"license": "MIT",
 	"dependencies": {
 		"@sentry/sveltekit": "^9.28.1",
-		"@tauri-apps/api": "^2.5.0",
-		"@tauri-apps/plugin-autostart": "^2.3.0",
-		"@tauri-apps/plugin-clipboard-manager": "^2.2.2",
-		"@tauri-apps/plugin-dialog": "^2.2.1",
-		"@tauri-apps/plugin-os": "^2.2.1",
-		"@tauri-apps/plugin-shell": "^2.2.1",
+		"@tauri-apps/api": "^2.6.0",
+		"@tauri-apps/plugin-autostart": "^2.5.0",
+		"@tauri-apps/plugin-clipboard-manager": "^2.3.0",
+		"@tauri-apps/plugin-dialog": "^2.3.0",
+		"@tauri-apps/plugin-os": "^2.3.0",
+		"@tauri-apps/plugin-shell": "^2.3.0",
 		"@humanspeak/svelte-markdown": "^0.8.7",
 		"lucide-svelte": "^0.511.0",
 		"svelte-i18n": "^4.0.1"

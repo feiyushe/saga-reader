@@ -1,5 +1,4 @@
 import { setTheme as setAppTheme } from '@tauri-apps/api/app';
-// function setAppTheme() {}
 
 type ThemePresets = 'light' | 'dark';
 const LITE_STORAGE_KEY_THEME = 'ls_user_theme';
