@@ -180,7 +180,7 @@
 		class="btn w-60 preset-filled hover:preset-filled-primary-900-100"
 		onclick={store.toggle}
 	>
-		<span>Qino</span>
 		<Bot />
+		<span>Copilot</span>
 	</button>
 </div>
