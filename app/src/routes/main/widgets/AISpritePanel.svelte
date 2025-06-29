@@ -91,7 +91,7 @@
 							class="card pt-4 pl-4 pr-4 pb-2 preset-tonal rounded-tl-none rounded-bl-none space-y-2"
 						>
 							<header class="flex justify-between items-center">
-								<p class="font-bold">Qino</p>
+								<p class="font-bold">Copilot</p>
 								<small class="opacity-50">{toDateText(bubble.created_at).toLocaleString()}</small>
 							</header>
 							<Markdown value={bubble.payload} />
