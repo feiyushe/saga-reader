@@ -30,7 +30,7 @@ pub fn create_tray<R: Runtime>(app: &tauri::AppHandle<R>) -> tauri::Result<()> {
     let _ = TrayIconBuilder::with_id("tray")
         .icon(app.default_window_icon().unwrap().clone())
         .menu(&menu)
-        .menu_on_left_click(menu_click_by_left)
+        .show_menu_on_left_click(menu_click_by_left)
         .on_menu_event(move |app, event| match event.id.as_ref() {
             "main_show" => open_main_window(app),
             "endpoint_information" => {
