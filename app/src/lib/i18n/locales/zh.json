@@ -97,10 +97,10 @@
 	"aisprite": {
 		"label": "麒睿AI伴读",
 		"chat_me": "我",
-		"tip_wait_llm_response": "请等候Qino完成思考",
+		"tip_wait_llm_response": "请等候Copilot完成思考",
 		"tip_no_input": "请输入内容",
 		"tip_error_llm_error": "大模型服务调用异常",
-		"tip_placeholder_please_input": "向Qino了解..."
+		"tip_placeholder_please_input": "向Copilot了解..."
 	},
 	"settings": {
 		"label": "应用设置",

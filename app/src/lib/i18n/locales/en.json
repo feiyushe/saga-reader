@@ -97,10 +97,10 @@
 	"aisprite": {
 		"label": "AI Companion Reading",
 		"chat_me": "Me",
-		"tip_wait_llm_response": "Please wait for Qino to finish thinking.",
+		"tip_wait_llm_response": "Please wait for Copilot to finish thinking.",
 		"tip_no_input": "Please enter the content",
 		"tip_error_llm_error": "An exception occurred",
-		"tip_placeholder_please_input": "Learn about something from Qino"
+		"tip_placeholder_please_input": "Learn about something from Copilot"
 	},
 	"settings": {
 		"label": "Settings",

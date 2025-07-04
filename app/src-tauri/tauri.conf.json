@@ -53,6 +53,7 @@
 			}
 		}
 	},
+	"mainBinaryName": "SagaReader",
 	"plugins": {
 		"tauri-plugin-feed-api": {
 			"timeout": 30
