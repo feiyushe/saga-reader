@@ -84,7 +84,7 @@
 			{#each store.history as bubble (bubble.created_at)}
 				{#if bubble.role !== 'user'}
 					<div class="grid grid-cols-[auto_1fr] gap-2">
-						<Avatar name={bubble.role} size="size-12" classes="preset-filled-primary-900-100">
+						<Avatar name={bubble.role} size="size-12" classes="preset-filled-primary-500">
 							<Bot size="28" />
 						</Avatar>
 						<div
@@ -100,7 +100,7 @@
 				{:else}
 					<div class="grid grid-cols-[1fr_auto] gap-2">
 						<div
-							class="card pt-4 pl-4 pr-4 pb-2 preset-filled-primary-500 rounded-tr-none rounded-br-none space-y-2"
+							class="card pt-4 pl-4 pr-4 pb-2 preset-filled-primary-50-950 rounded-tr-none rounded-br-none space-y-2"
 						>
 							<header class="flex justify-between items-center">
 								<p class="font-bold">{$_('aisprite.chat_me')}</p>
