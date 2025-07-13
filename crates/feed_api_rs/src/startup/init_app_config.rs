@@ -45,7 +45,7 @@ fn default_app_config() -> AppConfig {
             provider_ollama: OllamaLLMProvider { endpoint: Default::default() },
             provider_platform: PlatformLLMProvider { template_path: "".to_string(), model_path: "".to_string() },
             provider_glm: GLMLLMProvider {
-                model_name: "GLM-4-Flash".to_string(),
+                model_name: "GLM-4-Flash-250414".to_string(),
                 api_base_url: "https://open.bigmodel.cn/api/paas/v4/chat/completions".to_string(),
                 api_key: "".to_string(),
             },
