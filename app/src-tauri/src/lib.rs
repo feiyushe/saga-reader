@@ -53,15 +53,14 @@ pub fn run() {
             }
 
             let is_daemon = env::is_daemon();
-            if is_daemon {
-                let state: State<'_, Arc<HybridRuntimeState>> = app.state();
-                let state_clone = Arc::clone(&state);
-                launch_feeds_schedule_update(handle, state_clone).unwrap();
-            } else {
+            if !is_daemon {
                 if let Some(window) = app.get_window(WINDOW_MAIN_LABEL) {
                     window.show().unwrap();
                 }
             }
+            let state: State<'_, Arc<HybridRuntimeState>> = app.state();
+            let state_clone = Arc::clone(&state);
+            launch_feeds_schedule_update(handle, state_clone).unwrap();
             Ok(())
         })
         .run(tauri::generate_context!())
