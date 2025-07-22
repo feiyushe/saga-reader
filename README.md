@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">🛠️ A modern, cross-platform application built on top of <strong>Rust</strong>, <strong>Tauri</strong> & <strong>Svelte</strong>.</p>
-<p align="center">💪🏻 <strong>Blazing-Fast</strong> and <strong>Extremely-Lightweight</strong> Internet Reader Client driven by <strong>AI</strong>.</p>
+<p align="center">💪🏻 <strong>Blazing-Fast</strong> and <strong>Extremely-Lightweight</strong> Internet Reader driven by <strong>AI</strong>.</p>
 <p align="center">
   <a style="text-decoration:none" href="https://aiqino.netlify.app?s=github_website_tag">
     <img src="https://img.shields.io/badge/SagaReader-Website-1E90FF" alt="Website" />
