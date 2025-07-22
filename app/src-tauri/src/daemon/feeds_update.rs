@@ -36,7 +36,7 @@ async fn schedule_loop<R: Runtime>(
     state: Arc<HybridRuntimeState>,
 ) -> anyhow::Result<()> {
     let features = &state.features_api;
-    let app_config = &features.context.read().await.app_config;
+    let app_config = { features.context.read().await.app_config.clone() };
     // 在所有权转移前读取需要的配置
     let update_interval = Duration::from_secs(match &app_config.daemon.frequency_feeds_update {
         true => 60 * 60 * 1,
