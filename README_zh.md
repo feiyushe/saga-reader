@@ -9,7 +9,7 @@
     <a href="./README_zh.md">中文</a>
 </p>
 
-<p align="center">💪🏻 由人工智能驱动的 <strong>速度极快</strong> 且 <strong>极其轻量</strong> 的互联网阅读器客户端</p>
+<p align="center">💪🏻 由人工智能驱动的 <strong>速度极快</strong> 且 <strong>极其轻量</strong> 的互联网阅读器</p>
 <p align="center">🛠️ 基于<strong>Rust</strong>、<strong>Tauri</strong>和<strong>Svelte</strong>构建的现代跨平台应用程序</p>
 <p align="center">
   <a style="text-decoration:none" href="https://aiqino.netlify.app?s=github_website_tag">
