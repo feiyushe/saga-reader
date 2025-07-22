@@ -1,11 +1,11 @@
-use std::{sync::Arc, time::Duration};
+use std::sync::Arc;
 
 use feed_api_rs::features::api::FeaturesAPI;
 use fslock::LockFile;
 use spdlog::{error, info, warn};
 use tauri::{async_runtime, AppHandle, EventLoopMessage, Runtime};
 use tauri_plugin_feed_api::state::HybridRuntimeState;
-use tokio::time;
+use tokio::time::{self, Duration, Instant};
 
 use crate::daemon::locks::{get_lock_path, LOCK_FEEDS_SCHEDULE_UPDATE};
 
@@ -38,11 +38,12 @@ async fn schedule_loop<R: Runtime>(
     let features = &state.features_api;
     let app_config = &features.context.read().await.app_config;
     // 在所有权转移前读取需要的配置
-    let update_interval = match &app_config.daemon.frequency_feeds_update {
+    let update_interval = Duration::from_secs(match &app_config.daemon.frequency_feeds_update {
         true => 60 * 60 * 1,
         false => 60 * 60 * 3,
-    };
-    let mut interval = time::interval(Duration::from_secs(update_interval));
+    });
+
+    let mut interval = time::interval_at(Instant::now() + update_interval, update_interval);
 
     // 定时任务
     loop {
