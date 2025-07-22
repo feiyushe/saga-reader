@@ -395,8 +395,15 @@ impl FeaturesAPI for FeaturesAPIImpl {
 
     /// 获得Ollama实例状态
     async fn get_ollama_status(&self) -> anyhow::Result<ProgramStatus> {
-        let context_guarded = &self.context.read().await;
-        let llm_section = &context_guarded.app_config.llm.provider_ollama;
+        let llm_section = {
+            self.context
+                .read()
+                .await
+                .app_config
+                .llm
+                .provider_ollama
+                .clone()
+        };
         match query_platform(&llm_section.endpoint).await {
             Ok(information) => Ok(information.status),
             Err(_) => Ok(ProgramStatus::Uninstall),
@@ -425,8 +432,7 @@ impl FeaturesAPI for FeaturesAPIImpl {
         source_text: String,
     ) -> anyhow::Result<bool> {
         let sharked_html = trim_html_with_script_and_style(source_text.as_str());
-        let context_guarded = &self.context.read().await;
-        let llm_section = &context_guarded.app_config.llm;
+        let llm_section = { self.context.read().await.app_config.llm.clone() };
 
         let article_recorder_service = &self.article_recorder_service;
         let purge = Purge::new_processor(llm_section.clone())?;
@@ -483,8 +489,7 @@ impl FeaturesAPI for FeaturesAPIImpl {
         user_prompt: &str,
         history: Vec<ConversationMessage>,
     ) -> anyhow::Result<String> {
-        let context_guarded = &self.context.read().await;
-        let llm_section = &context_guarded.app_config.llm;
+        let llm_section = { self.context.read().await.app_config.llm.clone() };
         let assistant = Assistant::new(llm_section.clone());
 
         let article_opt = self
