@@ -1,4 +1,4 @@
-use types::Article;
+use types::{Article, LLMInstructOption};
 
 /// 文章处理器trait，所有文章处理器都应该impl这个trait以形成责任链调度。
 pub trait IArticleProcessor {
@@ -7,5 +7,6 @@ pub trait IArticleProcessor {
     fn process(
         &self,
         input: &Article,
+        opt: LLMInstructOption,
     ) -> impl std::future::Future<Output = anyhow::Result<Article>>;
 }

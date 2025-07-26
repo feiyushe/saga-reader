@@ -4,7 +4,10 @@ use tokio::{
 };
 
 use recorder::path::get_appdata_file;
-use types::{AppConfig, GLMLLMProvider, LLMSection, OllamaLLMProvider, OpenAILLMProvider, PlatformLLMProvider, ScrapSection};
+use types::{
+    AppConfig, GLMLLMProvider, LLMInstructOption, LLMSection, OllamaLLMProvider, OpenAILLMProvider,
+    PlatformLLMProvider, ScrapSection,
+};
 
 use super::task::{InitTask, TaskInitializer};
 
@@ -27,7 +30,7 @@ pub async fn call() -> anyhow::Result<InitTask<AppConfig>> {
             }
         })
     })
-        .await?;
+    .await?;
     Ok(task)
 }
 
@@ -42,8 +45,13 @@ pub async fn sync_to(app_config: &AppConfig) -> anyhow::Result<()> {
 fn default_app_config() -> AppConfig {
     AppConfig {
         llm: LLMSection {
-            provider_ollama: OllamaLLMProvider { endpoint: Default::default() },
-            provider_platform: PlatformLLMProvider { template_path: "".to_string(), model_path: "".to_string() },
+            provider_ollama: OllamaLLMProvider {
+                endpoint: Default::default(),
+            },
+            provider_platform: PlatformLLMProvider {
+                template_path: "".to_string(),
+                model_path: "".to_string(),
+            },
             provider_glm: GLMLLMProvider {
                 model_name: "GLM-4-Flash-250414".to_string(),
                 api_base_url: "https://open.bigmodel.cn/api/paas/v4/chat/completions".to_string(),
@@ -55,8 +63,11 @@ fn default_app_config() -> AppConfig {
                 api_key: "".to_string(),
             },
             active_provider_type: Default::default(),
+            instruct: LLMInstructOption::default(),
         },
-        scrap: ScrapSection { provider: Default::default() },
+        scrap: ScrapSection {
+            provider: Default::default(),
+        },
         log: Default::default(),
         daemon: Default::default(),
         diagnostic: Default::default(),
