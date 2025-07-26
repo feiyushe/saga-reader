@@ -1,173 +1,183 @@
 {
-	"common": {
-		"product_name": "Saga Reader",
-		"product_slogan": "Your AI-Powered think tank assistant",
-		"product_tip": "Start your journey of intelligent reading"
-	},
-	"main": {
-		"menu": {
-			"create_feeds_package": "Add",
-			"settings": "Settings"
-		},
-		"section_frequently_used": {
-			"label": "Frequently Used",
-			"menu": {
-				"today": "Today",
-				"this_week": "This Week",
-				"favorites": "Favorites",
-				"unread": "Unread"
-			}
-		},
-		"feeds": {
-			"menu": {
-				"actions": {
-					"create": "New",
-					"edit": "Edit",
-					"delete": "Delete",
-					"delete_prompt": "Do you want to delete the subscription package {name}? All {length} subscription columns under this subscription package will be removed.",
-					"delete_dialog_title": "Delete the subscription package"
-				}
-			},
-			"create_or_edit": {
-				"field_feeds_package_name": "Subscription Group Name",
-				"field_feeds_package_placeholder": "Please fill in the name of the subscription group, preferably within 8 Chinese characters.",
-				"tip_modify_failured": "Modification failed. Please check if the form fields are filled in correctly. {e}",
-				"tip_footer": "Note: Subscription group names should be unique."
-			}
-		},
-		"section_subscriptions": {
-			"label": "Subscriptions"
-		},
-		"feed": {
-			"menu": {
-				"actions": {
-					"edit": "Edit",
-					"delete": "Delete",
-					"delete_prompt": "Do you want to delete the subscription {name}?",
-					"delete_dialog_title": "Delete the subscription"
-				}
-			},
-			"create_or_edit": {
-				"field_feed_name": "Subscription Name",
-				"field_feed_placeholder": "Please fill in the name of the subscription, preferably within 8 Chinese characters.",
-				"field_fetcher_type_name": "Information Source",
-				"field_fetcher_type_selection_1": "Barton Engine (Global Intelligence Detection Engine)",
-				"field_fetcher_type_selection_2": "RSS Subscription",
-				"field_keywords": "Keywords",
-				"field_rss_url": "RSS Address",
-				"tip_unknown_fetcher": "Unknown Fetcher: {formFetcherId}",
-				"field_keywords_placeholder": "Please fill in the information keywords. Multiple keywords can be separated by spaces, just like using a search engine.",
-				"field_rss_url_placeholder": "Please fill in the RSS address.",
-				"tip_modify_failured": "Modification failed. Please check if the form fields are filled in correctly. {e}",
-				"tip_footer": "Note: Subscription names should be distinct from existing ones."
-			}
-		},
-		"search": {
-			"results_label": "Search Results",
-			"placeholder_input": "Search"
-		},
-		"articles": {
-			"tip_click_to_load_more": "Click to load more",
-			"tip_loading": "Loading",
-			"error_retry": "Click to retry",
-			"tip_empty_try_again": "No articles. Click to update",
-			"tip_empty": "No articles"
-		},
-		"footer": {
-			"tasks": {
-				"label": "Background Tasks",
-				"idle": "No tasks running currently.",
-				"status_summary_part1": "In Processing",
-				"status_summary_part2": "Items",
-				"status_ready": "Ready",
-				"status_error": "Error occurred, click to view details"
-			}
-		}
-	},
-	"reader": {
-		"tab_optimized_content": "Glance",
-		"tab_melted_content": "Summarize",
-		"tab_melted_original": "Original",
-		"tip_link_copyed": "The link has been copied",
-		"blank_tip_0": "Please select the subscription content",
-		"blank_tip_1": "1.Add a subscription topic.",
-		"blank_tip_2": "2.Refresh the subscription content list.",
-		"blank_tip_3": "3.Click on the title of the subscription content."
-	},
-	"aisprite": {
-		"label": "AI Companion Reading",
-		"chat_me": "Me",
-		"tip_wait_llm_response": "Please wait for Copilot to finish thinking.",
-		"tip_no_input": "Please enter the content",
-		"tip_error_llm_error": "An exception occurred",
-		"tip_placeholder_please_input": "Learn about something from Copilot"
-	},
-	"settings": {
-		"label": "Settings",
-		"loading": "Loading...",
-		"section_llm_appearance": {
-			"label": "Apperience",
-			"theme": {
-				"label": "Dark Mode",
-				"description": "Turn on to use the Dark Night, turn off to use the White Moonlight."
-			}
-		},
-		"section_llm_provider": {
-			"label": "AI Configuration",
-			"tip": "Select the AI Provider",
-			"provider_ollama": "Ollama (Local Deploy)",
-			"provider_ollama_tip": "Ollama can be deployed locally on your device, providing a private model suitable for your hardware device and excellent data privacy and security. You need to install Ollama first.",
-			"provider_ollama_sentence_1": "Click here to download",
-			"provider_ollama_sentence_2": "Ollama Service URL",
-			"provider_ollama_sentence_3": "Model Name",
-			"provider_ollama_sentence_4": "Please fill in the model name, for example, \"qwen2.5:3b\"",
-			"provider_ollama_sentence_5": "The default is `http://localhost:11434`.",
-			"provider_glm": "GLM Flash (Cloud-based)",
-			"provider_glm_sentence_1": "You can register and use the cloud-based AI of GLM. It provides a free GLM Flash model inference service.",
-			"provider_glm_sentence_2": "Click here to apply",
-			"provider_glm_sentence_3": "Input API KEY",
-			"provider_openai": "Custom AI（Compatible with OpenAI）",
-			"provider_openai_sentence_1": "Most large model services are compatible with OpenAI; just enter the configuration.",
-			"provider_openai_sentence_2": "Enter the large model service URL",
-			"provider_openai_sentence_3": "Enter the API Key authorized by the large model provider",
-			"provider_openai_sentence_4": "Enter the model name",
-			"provider_barton": "Barton Engine (Local Integrated)",
-			"provider_barton_sentence_1": "(In beta) The self-developed Barton engine has a fast inference speed and extremely low memory usage, and it has excellent data privacy and security",
-			"provider_barton_sentence_2": "Model File Path",
-			"provider_barton_sentence_3": "Enter the model file path"
-		},
-		"section_app_behavior": {
-			"label": "Application Behavior",
-			"option_autostart": {
-				"label": "Launch deamon on System Boot",
-				"description": "Enabling this option will automatically execute the subscription content update when the system starts. If this option is disabled, you need to manually start the program before the subscription content can be updated automatically."
-			},
-			"option_scheduled_fetch": {
-				"label": "Faster Background Update",
-				"description": "Enabling this option helps to update your subscription content more quickly."
-			}
-		},
-		"section_users_support": {
-			"label": "Product Support",
-			"visit_home": "Website",
-			"feedback": "Feedback",
-			"blogs": "Blogs",
-			"changelogs": "Changelogs"
-		},
-		"section_version": {
-			"label": "Information",
-			"ver_app": "App Version",
-			"ver_engine": "Engine Version",
-			"ver_system": "System Information"
-		}
-	},
-	"common_dialog": {
-		"save": "Save",
-		"cancel": "Cancel"
-	},
-	"about": {
-		"ver_app": "App Version",
-		"ver_engine": "Engine Version",
-		"visit_home": "Visit Website"
-	}
+  "common": {
+    "product_name": "Saga Reader",
+    "product_slogan": "Your AI-Powered think tank assistant",
+    "product_tip": "Start your journey of intelligent reading"
+  },
+  "main": {
+    "menu": {
+      "create_feeds_package": "Add",
+      "settings": "Settings"
+    },
+    "section_frequently_used": {
+      "label": "Frequently Used",
+      "menu": {
+        "today": "Today",
+        "this_week": "This Week",
+        "favorites": "Favorites",
+        "unread": "Unread"
+      }
+    },
+    "feeds": {
+      "menu": {
+        "actions": {
+          "create": "New",
+          "edit": "Edit",
+          "delete": "Delete",
+          "delete_prompt": "Do you want to delete the subscription package {name}? All {length} subscription columns under this subscription package will be removed.",
+          "delete_dialog_title": "Delete the subscription package"
+        }
+      },
+      "create_or_edit": {
+        "field_feeds_package_name": "Subscription Group Name",
+        "field_feeds_package_placeholder": "Please fill in the name of the subscription group, preferably within 8 Chinese characters.",
+        "tip_modify_failured": "Modification failed. Please check if the form fields are filled in correctly. {e}",
+        "tip_footer": "Note: Subscription group names should be unique."
+      }
+    },
+    "section_subscriptions": {
+      "label": "Subscriptions"
+    },
+    "feed": {
+      "menu": {
+        "actions": {
+          "edit": "Edit",
+          "delete": "Delete",
+          "delete_prompt": "Do you want to delete the subscription {name}?",
+          "delete_dialog_title": "Delete the subscription"
+        }
+      },
+      "create_or_edit": {
+        "field_feed_name": "Subscription Name",
+        "field_feed_placeholder": "Please fill in the name of the subscription, preferably within 8 Chinese characters.",
+        "field_fetcher_type_name": "Information Source",
+        "field_fetcher_type_selection_1": "Barton Engine (Global Intelligence Detection Engine)",
+        "field_fetcher_type_selection_2": "RSS Subscription",
+        "field_keywords": "Keywords",
+        "field_rss_url": "RSS Address",
+        "tip_unknown_fetcher": "Unknown Fetcher: {formFetcherId}",
+        "field_keywords_placeholder": "Please fill in the information keywords. Multiple keywords can be separated by spaces, just like using a search engine.",
+        "field_rss_url_placeholder": "Please fill in the RSS address.",
+        "tip_modify_failured": "Modification failed. Please check if the form fields are filled in correctly. {e}",
+        "tip_footer": "Note: Subscription names should be distinct from existing ones."
+      }
+    },
+    "search": {
+      "results_label": "Search Results",
+      "placeholder_input": "Search"
+    },
+    "articles": {
+      "tip_click_to_load_more": "Click to load more",
+      "tip_loading": "Loading",
+      "error_retry": "Click to retry",
+      "tip_empty_try_again": "No articles. Click to update",
+      "tip_empty": "No articles"
+    },
+    "footer": {
+      "tasks": {
+        "label": "Background Tasks",
+        "idle": "No tasks running currently.",
+        "status_summary_part1": "In Processing",
+        "status_summary_part2": "Items",
+        "status_ready": "Ready",
+        "status_error": "Error occurred, click to view details"
+      }
+    }
+  },
+  "reader": {
+    "tab_optimized_content": "Glance",
+    "tab_melted_content": "Summarize",
+    "tab_melted_original": "Original",
+    "tip_link_copyed": "The link has been copied",
+    "blank_tip_0": "Please select the subscription content",
+    "blank_tip_1": "1.Add a subscription topic.",
+    "blank_tip_2": "2.Refresh the subscription content list.",
+    "blank_tip_3": "3.Click on the title of the subscription content."
+  },
+  "aisprite": {
+    "label": "AI Companion Reading",
+    "chat_me": "Me",
+    "tip_wait_llm_response": "Please wait for Copilot to finish thinking.",
+    "tip_no_input": "Please enter the content",
+    "tip_error_llm_error": "An exception occurred",
+    "tip_placeholder_please_input": "Learn about something from Copilot"
+  },
+  "settings": {
+    "label": "Settings",
+    "loading": "Loading...",
+    "section_llm_appearance": {
+      "label": "Apperience",
+      "theme": {
+        "label": "Dark Mode",
+        "description": "Turn on to use the Dark Night, turn off to use the White Moonlight."
+      }
+    },
+    "section_llm_provider": {
+      "label": "AI Configuration",
+      "tip": "Select the AI Provider",
+      "provider_ollama": "Ollama (Local Deploy)",
+      "provider_ollama_tip": "Ollama can be deployed locally on your device, providing a private model suitable for your hardware device and excellent data privacy and security. You need to install Ollama first.",
+      "provider_ollama_sentence_1": "Click here to download",
+      "provider_ollama_sentence_2": "Ollama Service URL",
+      "provider_ollama_sentence_3": "Model Name",
+      "provider_ollama_sentence_4": "Please fill in the model name, for example, \"qwen2.5:3b\"",
+      "provider_ollama_sentence_5": "The default is `http://localhost:11434`.",
+      "provider_glm": "GLM Flash (Cloud-based)",
+      "provider_glm_sentence_1": "You can register and use the cloud-based AI of GLM. It provides a free GLM Flash model inference service.",
+      "provider_glm_sentence_2": "Click here to apply",
+      "provider_glm_sentence_3": "Input API KEY",
+      "provider_openai": "Custom AI（Compatible with OpenAI）",
+      "provider_openai_sentence_1": "Most large model services are compatible with OpenAI; just enter the configuration.",
+      "provider_openai_sentence_2": "Enter the large model service URL",
+      "provider_openai_sentence_3": "Enter the API Key authorized by the large model provider",
+      "provider_openai_sentence_4": "Enter the model name",
+      "provider_barton": "Barton Engine (Local Integrated)",
+      "provider_barton_sentence_1": "(In beta) The self-developed Barton engine has a fast inference speed and extremely low memory usage, and it has excellent data privacy and security",
+      "provider_barton_sentence_2": "Model File Path",
+      "provider_barton_sentence_3": "Enter the model file path"
+    },
+    "section_llm_instruct": {
+      "label": "AI Behavior Preferences",
+      "lang": {
+        "label": "Auto-translate to",
+        "description": "When the content language is different, it will be automatically translated.",
+        "as_system": "Follow system",
+        "english": "English",
+        "chinese": "Chinese"
+      }
+    },
+    "section_app_behavior": {
+      "label": "Application Behavior",
+      "option_autostart": {
+        "label": "Launch deamon on System Boot",
+        "description": "Enabling this option will automatically execute the subscription content update when the system starts. If this option is disabled, you need to manually start the program before the subscription content can be updated automatically."
+      },
+      "option_scheduled_fetch": {
+        "label": "Faster Background Update",
+        "description": "Enabling this option helps to update your subscription content more quickly."
+      }
+    },
+    "section_users_support": {
+      "label": "Product Support",
+      "visit_home": "Website",
+      "feedback": "Feedback",
+      "blogs": "Blogs",
+      "changelogs": "Changelogs"
+    },
+    "section_version": {
+      "label": "Information",
+      "ver_app": "App Version",
+      "ver_engine": "Engine Version",
+      "ver_system": "System Information"
+    }
+  },
+  "common_dialog": {
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "about": {
+    "ver_app": "App Version",
+    "ver_engine": "Engine Version",
+    "visit_home": "Visit Website"
+  }
 }

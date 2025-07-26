@@ -22,7 +22,7 @@ use scrap::search::{baidu, bing, ScrapProviderEnums};
 use scrap::types::IFetcher;
 use types::{
     AppConfig, Article, ConversationMessage, FeedTargetDescription, FeedsPackage,
-    ScrapProviderType, UserConfig,
+    LLMInstructOption, ScrapProviderType, UserConfig,
 };
 
 use crate::startup::init_app_config::sync_to;
@@ -80,14 +80,15 @@ impl FeaturesAPIImpl {
         purge: &ArticleLLMProcessor,
         optimizer: &ArticleLLMProcessor,
         melt: &ArticleLLMProcessor,
+        opt: &LLMInstructOption,
     ) -> anyhow::Result<(Article, Article, Article)> {
-        let out_purged_article = purge.process(article).await?;
+        let out_purged_article = purge.process(article, opt.clone()).await?;
         info!(
             "article purged, title = {}, source_link = {}, optimizing",
             article.title, article.source_link
         );
 
-        let out_optimized_article = optimizer.process(&out_purged_article).await?;
+        let out_optimized_article = optimizer.process(&out_purged_article, opt.clone()).await?;
         info!(
             "purged article optimized, title = {}, melting",
             out_purged_article.title
@@ -98,7 +99,7 @@ impl FeaturesAPIImpl {
             }
         }
 
-        let out_melted_article = melt.process(&out_optimized_article).await?;
+        let out_melted_article = melt.process(&out_optimized_article, opt.clone()).await?;
         info!(
             "optimized article melted, title = {}, recording",
             out_melted_article.title
@@ -281,7 +282,7 @@ impl FeaturesAPI for FeaturesAPIImpl {
                     );
                     continue;
                 }
-                match self.process_article_pipelines(article, &purge, &optimizer, &melt).await {
+                match self.process_article_pipelines(article, &purge, &optimizer, &melt, &llm_section.instruct).await {
                     Ok((out_purged_article, out_optimized_article, out_melted_article)) => {
                         article_recorder_service
                             .insert(vec![ArticleRecord {
@@ -453,7 +454,13 @@ impl FeaturesAPI for FeaturesAPIImpl {
                     date_read: None,
                 };
                 match self
-                    .process_article_pipelines(&mut article, &purge, &optimizer, &melt)
+                    .process_article_pipelines(
+                        &mut article,
+                        &purge,
+                        &optimizer,
+                        &melt,
+                        &llm_section.instruct,
+                    )
                     .await
                 {
                     Ok((out_purged_article, out_optimized_article, out_melted_article)) => {

@@ -18,6 +18,21 @@ pub struct Article {
     pub date_read: Option<String>,
 }
 
+#[derive(Serialize, Deserialize, Clone)]
+pub struct LLMInstructOption {
+    pub lang: String,
+    pub emphasis: Option<String>,
+}
+
+impl Default for LLMInstructOption {
+    fn default() -> Self {
+        Self {
+            lang: "Chinese".to_string(),
+            emphasis: None,
+        }
+    }
+}
+
 /// 日志配置节点，用于指定日志的的开启、输出模式等行为。
 /// 该配置的应用详见[init_logger][feed_api_rs::startup::init_logger]
 #[derive(Serialize, Deserialize, Clone, Default)]
@@ -125,6 +140,8 @@ pub struct LLMSection {
     pub provider_glm: GLMLLMProvider,
     pub provider_openai: OpenAILLMProvider,
     pub active_provider_type: LLMProviderType,
+    #[serde(default)]
+    pub instruct: LLMInstructOption,
 }
 
 #[derive(Serialize, Deserialize, Clone, Default)]

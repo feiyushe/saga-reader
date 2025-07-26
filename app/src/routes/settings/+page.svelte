@@ -13,6 +13,7 @@
 
   type PressedHandler = () => void;
   type CheckSwitchedHandler = () => void;
+  type SelectionSelectedHandler = (value: string) => void;
 
   let appConfig: AppConfig | null = $state(null);
 
@@ -91,9 +92,7 @@
     return async () => {
       if (!syncToAppConfig()) return;
       if (!appConfig) return;
-      await featuresApi.set_app_config(appConfig);
-      appConfig = await featuresApi.get_app_config();
-      afterAppConfigUpdated();
+      await updateAppConfig(appConfig);
     };
   }
 
@@ -115,9 +114,7 @@
 
       appConfig.llm.active_provider_type = providerType;
       configUpdater();
-      await featuresApi.set_app_config(appConfig);
-      appConfig = await featuresApi.get_app_config();
-      afterAppConfigUpdated();
+      await updateAppConfig(appConfig);
     };
   }
 
@@ -235,14 +232,18 @@
     enableAutoStartUp = await isEnabled();
   }
 
+  async function updateAppConfig(ac: AppConfig) {
+    await featuresApi.set_app_config(ac);
+    appConfig = await featuresApi.get_app_config();
+    afterAppConfigUpdated();
+  }
+
   // 应用行为设置变更处理函数 - 后台更新频率
   async function onFrequencyUpdateSwitched() {
     if (!appConfig) return;
     appConfig.daemon.frequency_feeds_update =
       !appConfig.daemon.frequency_feeds_update;
-    await featuresApi.set_app_config(appConfig);
-    appConfig = await featuresApi.get_app_config();
-    afterAppConfigUpdated();
+    await updateAppConfig(appConfig);
   }
 
   // 线上使用说明
@@ -267,6 +268,12 @@
   function switchTheme() {
     setTheme(theme === "light" ? "dark" : "light");
     theme = getTheme();
+  }
+
+  async function selectLang(lang: string) {
+    if (!appConfig) return;
+    appConfig.llm.instruct.lang = lang;
+    await updateAppConfig(appConfig);
   }
 
   if (browser) {
@@ -313,8 +320,8 @@
         {@render SectionEnd()}
         <!-- section end of theme config -->
 
-        <!-- {@render SectionHeader('语言偏好')}
-				{@render SectionEnd()} -->
+        <!-- {@render SectionHeader("语言偏好")}
+        {@render SectionEnd()} -->
 
         {@render SectionHeader($_("settings.section_llm_provider.label"))}
         <div class="flex flex-col space-y-2">
@@ -577,6 +584,30 @@
         </div>
 
         {@render SectionEnd()}
+
+        {@render SectionHeader($_("settings.section_llm_instruct.label"))}
+        {@render SelectOption(
+          $_("settings.section_llm_instruct.lang.label"),
+          $_("settings.section_llm_instruct.lang.description"),
+          [
+            {
+              label: $_("settings.section_llm_instruct.lang.as_system"),
+              value: "system",
+            },
+            {
+              label: $_("settings.section_llm_instruct.lang.english"),
+              value: "English",
+            },
+            {
+              label: $_("settings.section_llm_instruct.lang.chinese"),
+              value: "Chinese",
+            },
+          ],
+          appConfig.llm.instruct.lang,
+          selectLang,
+        )}
+        {@render SectionEnd()}
+
         {@render SectionHeader($_("settings.section_app_behavior.label"))}
         {@render CheckOption(
           $_("settings.section_app_behavior.option_autostart.label"),
@@ -660,6 +691,27 @@
     <Switch name="label" readOnly {checked} />
   </div>
   <p class="mb-2 type-scale-2 text-surface-400">{description}</p>
+{/snippet}
+
+{#snippet SelectOption(
+  label: string,
+  description: string,
+  selections: { value: string; label: string }[],
+  selectedValue: string,
+  onSelected: SelectionSelectedHandler,
+)}
+  <div class="flex justify-between items-center gap-4 pt-2 pb-1">
+    <p>{label}</p>
+    <select
+      class="select w-32 cursor-pointer"
+      value={selectedValue}
+      onchange={(e) => onSelected((e.target as HTMLSelectElement).value)}
+    >
+      {#each selections as s (s.value)}
+        <option value={s.value}>{s.label}</option>
+      {/each}
+    </select>
+  </div>
 {/snippet}
 
 {#snippet SectionEnd()}
