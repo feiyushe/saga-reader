@@ -4,7 +4,6 @@ use std::sync::Arc;
 use tauri::{
     async_runtime, AppHandle, Listener, Manager, Runtime, Url, WebviewUrl, WebviewWindowBuilder,
 };
-use tokio::sync::oneshot::error::RecvError;
 use tokio::{
     sync::{oneshot, Mutex},
     time::{sleep, Duration},

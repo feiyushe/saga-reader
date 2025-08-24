@@ -24,6 +24,7 @@ pub struct Response {
 
 #[derive(Deserialize)]
 pub struct ChoiceChunk {
+    #[allow(dead_code)]
     finish_reason: Option<String>,
     message: Option<Message>,
 }
