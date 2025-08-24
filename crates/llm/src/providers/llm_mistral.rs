@@ -1,4 +1,3 @@
-use reqwest::Client;
 use serde::Serialize;
 use types::OpenAILLMProvider;
 

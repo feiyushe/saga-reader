@@ -20,13 +20,11 @@ use scrap::rss::RSSFetcher;
 use scrap::search::utils::trim_html_with_script_and_style;
 use scrap::search::{baidu, bing, ScrapProviderEnums};
 use scrap::types::IFetcher;
-use types::{
-    AppConfig, Article, ConversationMessage, FeedTargetDescription, FeedsPackage,
-    LLMInstructOption, ScrapProviderType, UserConfig,
-};
+use types::{AppConfig, Article, ConversationMessage, FeedTargetDescription, FeedsPackage, LLMInstructOption, ScrapProviderType, UserConfig, LLMSection};
 
 use crate::startup::init_app_config::sync_to;
 use crate::{application_context::ApplicationContext, startup::init_user_profile};
+use crate::utils::do_parallel_with_limit;
 
 use super::api::FeaturesAPI;
 
@@ -39,7 +37,7 @@ const SPECIFY_FEED_IDSET_UNREAD_FILTER: &str = "UNREAD_FILTER";
 pub struct FeaturesAPIImpl {
     pub context: Arc<RwLock<ApplicationContext>>,
     scrap_provider: ScrapProviderEnums,
-    article_recorder_service: ArticleRecorderService,
+    article_recorder_service: Arc<ArticleRecorderService>,
 }
 
 impl FeaturesAPIImpl {
@@ -50,8 +48,10 @@ impl FeaturesAPIImpl {
         let llm_section = app_config.llm.clone();
 
         // 初始化ArticleRecorderService实例
-        let mut article_recorder_service = ArticleRecorderService::default();
-        article_recorder_service.initialize().await?;
+        let mut ars = ArticleRecorderService::default();
+        ars.initialize().await?;
+        let article_recorder_service = Arc::new(ars);
+
 
         // 初始化爬虫实例
         let scrap_provider = &app_config.scrap.provider;
@@ -75,7 +75,6 @@ impl FeaturesAPIImpl {
     }
 
     async fn process_article_pipelines(
-        &self,
         article: &mut Article,
         purge: &ArticleLLMProcessor,
         optimizer: &ArticleLLMProcessor,
@@ -110,6 +109,40 @@ impl FeaturesAPIImpl {
             out_optimized_article,
             out_melted_article,
         ))
+    }
+
+    async fn create_futures_for_update_feeds(article_recorder_service: Arc<ArticleRecorderService>, mut article: Article, feed_id: String, purge: Arc<ArticleLLMProcessor>, optimizer: Arc<ArticleLLMProcessor>, melt: Arc<ArticleLLMProcessor>, package_id: String, llm_section: LLMSection) -> anyhow::Result<()> {
+        match Self::process_article_pipelines(&mut article, &purge, &optimizer, &melt, &llm_section.instruct).await {
+            Ok((out_purged_article, out_optimized_article, out_melted_article)) => {
+                article_recorder_service
+                    .insert(vec![ArticleRecord {
+                        id: 0,
+                        source_link: out_melted_article.source_link,
+                        title: out_melted_article.title,
+                        purged_content: out_purged_article.content.unwrap_or_default(),
+                        head_read: out_purged_article.head_read.unwrap_or_default(),
+                        optimized_content: out_optimized_article.content.unwrap_or_default(),
+                        melted_content: out_melted_article.content.unwrap_or_default(),
+                        published_at: Utc::now().date_naive(),
+                        created_at: Utc::now().date_naive(),
+                        has_read: false,
+                        is_favorite: false,
+                        group_id: feed_id.to_owned(),
+                    }])
+                    .await?;
+                info!(
+                    "article recorded to the feed_id = {}, title = {}",
+                    &feed_id, article.title
+                );
+            }
+            Err(e) => error!(
+                        "process_article_pipelines execution failure, the requirements of package_id = {}, feed_id = {}, source_link = {}, error = {}",
+                        package_id,
+                        &feed_id,
+                        article.source_link,
+                        e)
+        };
+        Ok(())
     }
 }
 
@@ -254,7 +287,7 @@ impl FeaturesAPI for FeaturesAPIImpl {
         }
         if let Some(ftd) = user_config.find_feed(package_id, feed_id) {
             // #region begin
-            let mut articles = match ftd.fetcher_id.as_str() {
+            let articles = match ftd.fetcher_id.as_str() {
                 "scrap" => {
                     self.scrap_provider
                         .fetch(app_handle, &llm_section, ftd.clone())
@@ -268,10 +301,12 @@ impl FeaturesAPI for FeaturesAPIImpl {
                 _ => vec![],
             };
             let article_recorder_service = &self.article_recorder_service;
-            let purge = Purge::new_processor(llm_section.clone())?;
-            let optimizer = Optimizer::new_processor(llm_section.clone())?;
-            let melt = Melt::new_processor(llm_section.clone())?;
-            for article in articles.iter_mut() {
+            let purge = Arc::new(Purge::new_processor(llm_section.clone())?);
+            let optimizer = Arc::new(Optimizer::new_processor(llm_section.clone())?);
+            let melt = Arc::new(Melt::new_processor(llm_section.clone())?);
+            let mut articles_process_futures = vec![];
+
+            for article in articles.iter() {
                 if article_recorder_service
                     .exists_by_source(&article.source_link)
                     .await?
@@ -282,37 +317,20 @@ impl FeaturesAPI for FeaturesAPIImpl {
                     );
                     continue;
                 }
-                match self.process_article_pipelines(article, &purge, &optimizer, &melt, &llm_section.instruct).await {
-                    Ok((out_purged_article, out_optimized_article, out_melted_article)) => {
-                        article_recorder_service
-                            .insert(vec![ArticleRecord {
-                                id: 0,
-                                source_link: out_melted_article.source_link,
-                                title: out_melted_article.title,
-                                purged_content: out_purged_article.content.unwrap_or_default(),
-                                head_read: out_purged_article.head_read.unwrap_or_default(),
-                                optimized_content: out_optimized_article.content.unwrap_or_default(),
-                                melted_content: out_melted_article.content.unwrap_or_default(),
-                                published_at: Utc::now().date_naive(),
-                                created_at: Utc::now().date_naive(),
-                                has_read: false,
-                                is_favorite: false,
-                                group_id: feed_id.into(),
-                            }])
-                            .await?;
-                        info!(
-                    "article recorded to the feed_name = {}, title = {}",
-                    ftd.name, article.title
+
+                let future = Self::create_futures_for_update_feeds(
+                    Arc::clone(&article_recorder_service),
+                    article.clone(),
+                    feed_id.to_owned(),
+                    Arc::clone(&purge),
+                    Arc::clone(&optimizer),
+                    Arc::clone(&melt),
+                    package_id.to_owned(),
+                    llm_section.clone()
                 );
-                    }
-                    Err(e) => error!(
-                        "process_article_pipelines execution failure, the requirements of package_id = {}, feed_id = {}, source_link = {}, error = {}",
-                        package_id,
-                        feed_id,
-                        article.source_link,
-                        e)
-                };
+                articles_process_futures.push(future);
             }
+            do_parallel_with_limit(articles_process_futures, llm_section.max_parallel.unwrap_or(5)).await;
             return Ok(());
         }
         let error_msg = format!(
@@ -453,8 +471,7 @@ impl FeaturesAPI for FeaturesAPIImpl {
                     date_created: "".to_string(),
                     date_read: None,
                 };
-                match self
-                    .process_article_pipelines(
+                match Self::process_article_pipelines(
                         &mut article,
                         &purge,
                         &optimizer,

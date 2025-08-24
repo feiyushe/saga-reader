@@ -142,6 +142,7 @@ pub struct LLMSection {
     pub active_provider_type: LLMProviderType,
     #[serde(default)]
     pub instruct: LLMInstructOption,
+    pub max_parallel: Option<usize>
 }
 
 #[derive(Serialize, Deserialize, Clone, Default)]

@@ -5,6 +5,7 @@ members = ["app/src-tauri", "crates/*"]
 [workspace.dependencies]
 ### asynchronous
 tokio = { version = "1.46.1", features = ["full"] }
+futures = "0.3"
 
 ### communication
 reqwest = { version = "0.12.20", features = ["gzip", "deflate", "json"] }

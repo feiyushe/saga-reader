@@ -53,7 +53,7 @@ fn default_app_config() -> AppConfig {
                 model_path: "".to_string(),
             },
             provider_glm: GLMLLMProvider {
-                model_name: "GLM-4-Flash-250414".to_string(),
+                model_name: "GLM-4.5-Flash".to_string(),
                 api_base_url: "https://open.bigmodel.cn/api/paas/v4/chat/completions".to_string(),
                 api_key: "".to_string(),
             },
@@ -64,6 +64,7 @@ fn default_app_config() -> AppConfig {
             },
             active_provider_type: Default::default(),
             instruct: LLMInstructOption::default(),
+            max_parallel: Some(5),
         },
         scrap: ScrapSection {
             provider: Default::default(),

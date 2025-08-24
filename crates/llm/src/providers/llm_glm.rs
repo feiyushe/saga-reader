@@ -1,7 +1,7 @@
 use types::{GLMLLMProvider, OpenAILLMProvider};
 
 use crate::connector;
-use crate::providers::llm_openaibase_like::{Message, OpenAILikeCompletionService};
+use crate::providers::llm_openaibase_like::OpenAILikeCompletionService;
 use crate::providers::types::{AITargetOption, CompletionService};
 
 pub struct GLMCompletionService {

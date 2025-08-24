@@ -12,6 +12,7 @@ pub struct RequestParameters {
 }
 
 pub struct PlatformAgentService {
+    #[allow(dead_code)]
     config: PlatformLLMProvider,
     client: Client,
 }
