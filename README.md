@@ -48,7 +48,7 @@
   <table style="width: 100%; margin: 0 auto;">
     <tr>
       <td style="width: 50%;"><img src="docs/assets/snapshot-main-light-en.png" alt="snapshot-main-light" style="width: 100%; height: auto; display: block;"></td>
-      <td style="width: 50%;"><img src="docs/assets/snapshot-main-dark-en" alt="snapshot-main-dark" style="width: 100%; height: auto; display: block;"></td>
+      <td style="width: 50%;"><img src="docs/assets/snapshot-main-dark-en.png" alt="snapshot-main-dark" style="width: 100%; height: auto; display: block;"></td>
     </tr>
   </table>
 </div>
