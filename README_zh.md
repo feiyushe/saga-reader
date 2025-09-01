@@ -38,7 +38,14 @@
 
 # 🌠 界面
 
-![snapshot-glance](docs/assets/snapshot-glance.webp)
+<div style="text-align: center;">
+  <table style="width: 100%; margin: 0 auto;">
+    <tr>
+      <td style="width: 50%;"><img src="docs/assets/snapshot-main-light-zh.png" alt="snapshot-main-light" style="width: 100%; height: auto; display: block;"></td>
+      <td style="width: 50%;"><img src="docs/assets/snapshot-main-dark-zh.png" alt="snapshot-main-dark" style="width: 100%; height: auto; display: block;"></td>
+    </tr>
+  </table>
+</div>
 
 # 🧠 工作原理
 
