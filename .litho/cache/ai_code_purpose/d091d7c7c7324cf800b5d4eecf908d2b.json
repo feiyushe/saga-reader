@@ -1,0 +1,15 @@
+{
+  "data": {
+    "code_purpose": "specificfeature",
+    "confidence": 0.95,
+    "reasoning": "该文件位于 `src/search/bing.rs`，文件名和路径表明其与搜索引擎 'bing' 相关。代码中定义了一个 `Provider` 结构体并实现了搜索功能相关的逻辑，导入了网络请求（reqwest）、HTML 解析（scraper）、日志等模块，并使用了项目内部的搜索相关工具和类型。整体实现的是针对 Bing 搜索结果的抓取和处理功能，属于实现特定业务逻辑的功能模块，因此归类为 'specificfeature'。"
+  },
+  "timestamp": 1758800784,
+  "prompt_hash": "d091d7c7c7324cf800b5d4eecf908d2b",
+  "token_usage": {
+    "input_tokens": 459,
+    "output_tokens": 217,
+    "total_tokens": 676
+  },
+  "model_name": null
+}

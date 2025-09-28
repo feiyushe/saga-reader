@@ -1,0 +1,159 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "article_record.rs",
+      "file_path": "crates/recorder/src/entity/article_record.rs",
+      "source_summary": "",
+      "code_purpose": "model",
+      "importance_score": 0.6,
+      "description": "定义文章记录的数据模型，用于存储源链接、标题、内容版本、阅读状态等信息。",
+      "functions": [],
+      "interfaces": [
+        "Model",
+        "Relation",
+        "ActiveModelBehavior"
+      ]
+    },
+    "detailed_description": "该组件是SeaORM实体模型，代表数据库中`t_article_record`表的结构。它包含文章的元数据（如标题、源链接）、多个版本的内容（原始提取、优化后、熔合后）、发布与创建日期、阅读状态和收藏状态。主要用于持久化文章抓取与处理结果，支持后续的内容展示与用户交互功能。",
+    "responsibilities": [
+      "定义文章记录的数据库表结构",
+      "提供序列化与反序列化能力以支持数据传输",
+      "维护文章内容的多种形态（原始、优化、导读等）",
+      "管理文章的阅读状态与分组归属"
+    ],
+    "interfaces": [
+      {
+        "name": "Model",
+        "interface_type": "struct",
+        "visibility": "pub",
+        "parameters": [
+          {
+            "name": "id",
+            "param_type": "i32",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "source_link",
+            "param_type": "String",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "title",
+            "param_type": "String",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "purged_content",
+            "param_type": "String",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "head_read",
+            "param_type": "String",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "optimized_content",
+            "param_type": "String",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "melted_content",
+            "param_type": "String",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "published_at",
+            "param_type": "chrono::NaiveDate",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "created_at",
+            "param_type": "chrono::NaiveDate",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "has_read",
+            "param_type": "bool",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "is_favorite",
+            "param_type": "bool",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "group_id",
+            "param_type": "String",
+            "is_optional": false,
+            "description": null
+          }
+        ],
+        "return_type": null,
+        "description": "文章记录的核心数据结构"
+      },
+      {
+        "name": "Relation",
+        "interface_type": "enum",
+        "visibility": "pub",
+        "parameters": [],
+        "return_type": null,
+        "description": "定义与其他实体的关系（当前为空）"
+      },
+      {
+        "name": "ActiveModelBehavior",
+        "interface_type": "trait_impl",
+        "visibility": "impl",
+        "parameters": [],
+        "return_type": null,
+        "description": "ActiveModel的行为实现（默认）"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "sea_orm",
+        "path": null,
+        "is_external": true,
+        "line_number": 1,
+        "dependency_type": "database_orm",
+        "version": null
+      },
+      {
+        "name": "serde",
+        "path": null,
+        "is_external": true,
+        "line_number": 2,
+        "dependency_type": "serialization",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 2.0,
+      "lines_of_code": 28,
+      "number_of_functions": 0,
+      "number_of_classes": 1,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 2.0,
+      "cohesion_score": 0.9
+    }
+  },
+  "timestamp": 1759024640,
+  "prompt_hash": "1445c7ab0cb786bdd8cdfbf520276166",
+  "token_usage": {
+    "input_tokens": 664,
+    "output_tokens": 887,
+    "total_tokens": 1551
+  },
+  "model_name": null
+}

@@ -1,0 +1,76 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "purge.rs",
+      "file_path": "crates/intelligent/src/article_processor/purge.rs",
+      "code_purpose": "specificfeature",
+      "importance_score": 0.6,
+      "description": "实现文章内容净化处理的LLM处理器，用于清除文章中的冗余或不适当内容。",
+      "functions": [],
+      "interfaces": [
+        "IPresetArticleLLMProcessor"
+      ]
+    },
+    "detailed_description": "该组件实现了IPresetArticleLLMProcessor trait，专门用于创建一个文章内容净化处理器。它通过加载预定义的系统提示和用户提示命令，配置LLM上下文参数（8192 token），并初始化ArticleLLMProcessor实例。其主要功能是为文章处理流程提供一个专门用于内容净化的AI处理通道，确保输出内容符合质量标准。",
+    "responsibilities": [
+      "实现文章内容净化的LLM处理逻辑",
+      "配置净化任务所需的系统提示和用户指令",
+      "设置适当的LLM上下文长度（8192 tokens）以处理长文本",
+      "作为预设处理器工厂创建ArticleLLMProcessor实例",
+      "遵循IPresetArticleLLMProcessor接口规范"
+    ],
+    "interfaces": [
+      {
+        "name": "IPresetArticleLLMProcessor",
+        "interface_type": "trait",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": "anyhow::Result<ArticleLLMProcessor>",
+        "description": "预设文章LLM处理器接口，定义了创建处理器实例的标准方法"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "llm::providers::types::AITargetOption",
+        "path": "llm::providers::types",
+        "is_external": false,
+        "line_number": 1,
+        "dependency_type": "struct",
+        "version": null
+      },
+      {
+        "name": "types::LLMSection",
+        "path": "types",
+        "is_external": false,
+        "line_number": 2,
+        "dependency_type": "type",
+        "version": null
+      },
+      {
+        "name": "crate::article_processor::llm_processor::{ArticleLLMProcessor, IPresetArticleLLMProcessor}",
+        "path": "crate::article_processor::llm_processor",
+        "is_external": false,
+        "line_number": 4,
+        "dependency_type": "module",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 2.0,
+      "lines_of_code": 19,
+      "number_of_functions": 1,
+      "number_of_classes": 1,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.6,
+      "cohesion_score": 0.85
+    }
+  },
+  "timestamp": 1758805881,
+  "prompt_hash": "83d05e12b628c2d7cd1d86f3007e94cb",
+  "token_usage": {
+    "input_tokens": 593,
+    "output_tokens": 661,
+    "total_tokens": 1254
+  },
+  "model_name": null
+}

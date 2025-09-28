@@ -1,0 +1,15 @@
+{
+  "data": {
+    "code_purpose": "util",
+    "confidence": 0.95,
+    "reasoning": "该文件位于startup目录下，文件名为init_logger.rs，主要功能是初始化日志系统。代码内容显示它配置了日志记录器的格式、级别和输出类型，属于工具类的功能。虽然在启动目录中，但其具体职责是提供日志配置的通用功能，因此归类为工具类(util)而非启动入口(entry)。"
+  },
+  "timestamp": 1758800710,
+  "prompt_hash": "fbd6308127aea68e1a7c15f2ef01ed7a",
+  "token_usage": {
+    "input_tokens": 464,
+    "output_tokens": 171,
+    "total_tokens": 635
+  },
+  "model_name": null
+}

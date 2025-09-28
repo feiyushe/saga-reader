@@ -1,0 +1,15 @@
+{
+  "data": {
+    "code_purpose": "specificfeature",
+    "confidence": 0.95,
+    "reasoning": "该文件位于 `crates/scrap/src/rss/` 目录下，文件名为 `mod.rs`，表明它是 RSS 模块的实现部分。代码中定义了一个 `RSSFetcher` 结构体并实现了 `IFetcher` trait，主要用于从 RSS 链接抓取内容并解析为 `Article` 对象列表。其核心功能是实现特定的数据抓取逻辑，属于具体业务功能的实现，因此归类为 'specificfeature'。"
+  },
+  "timestamp": 1758800781,
+  "prompt_hash": "5402b0393b2da56718bcb87175fd6b97",
+  "token_usage": {
+    "input_tokens": 457,
+    "output_tokens": 180,
+    "total_tokens": 637
+  },
+  "model_name": null
+}

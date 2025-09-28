@@ -1,0 +1,40 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "capabilities.json",
+      "file_path": "app/src-tauri/gen/schemas/capabilities.json",
+      "code_purpose": "config",
+      "importance_score": 0.6,
+      "description": "定义应用中不同能力（Capability）的配置，包括权限、窗口访问控制和平台限制。",
+      "functions": [],
+      "interfaces": []
+    },
+    "detailed_description": "该组件是一个JSON配置文件，用于定义Tauri桌面应用中的能力系统（Capabilities）。每个能力包含标识符、描述、本地/远程属性、关联窗口、支持的平台以及授予的权限列表。核心功能是通过声明式方式管理应用的功能权限，实现细粒度的安全控制。例如，'default'能力为默认主窗口提供基础UI和系统交互权限，而'scrap-host-capability'则专用于Scrap WebHost模块，限制其仅在特定窗口运行并赋予最小必要权限。",
+    "responsibilities": [
+      "定义和组织应用的能力与权限映射",
+      "实现基于能力的安全模型以隔离功能模块",
+      "控制各能力可访问的应用窗口范围",
+      "指定能力适用的平台限制（如仅桌面）",
+      "为远程内容（如Web视图）提供安全的权限配置"
+    ],
+    "interfaces": [],
+    "dependencies": [],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 3.0,
+      "lines_of_code": 1,
+      "number_of_functions": 0,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.0,
+      "cohesion_score": 0.95
+    }
+  },
+  "timestamp": 1758805947,
+  "prompt_hash": "952149d754cc18b71a69052679087887",
+  "token_usage": {
+    "input_tokens": 755,
+    "output_tokens": 514,
+    "total_tokens": 1269
+  },
+  "model_name": null
+}

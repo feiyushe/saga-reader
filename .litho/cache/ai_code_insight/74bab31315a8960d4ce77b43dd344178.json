@@ -1,0 +1,50 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "build.rs",
+      "file_path": "app/src-tauri/build.rs",
+      "source_summary": "",
+      "code_purpose": "config",
+      "importance_score": 0.6,
+      "description": "Tauri应用的构建脚本，用于在编译时生成必要的绑定和配置。",
+      "functions": [
+        "main"
+      ],
+      "interfaces": []
+    },
+    "detailed_description": "该组件是Rust项目中Tauri框架的构建脚本（build.rs），其主要作用是在编译期间执行tauri_build::build()函数，以生成前端与后端交互所需的绑定代码。它确保了Tauri命令、事件系统以及类型安全接口能够正确集成到最终的二进制文件中。尽管代码简洁，但它是连接Rust后端与前端的关键环节之一。",
+    "responsibilities": [
+      "在编译期触发Tauri绑定代码生成",
+      "确保前后端类型安全通信的基础设施准备",
+      "参与构建流程以支持Tauri特定功能（如命令注册、权限检查等）"
+    ],
+    "interfaces": [],
+    "dependencies": [
+      {
+        "name": "tauri_build",
+        "path": null,
+        "is_external": true,
+        "line_number": null,
+        "dependency_type": "build-dependency",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 3,
+      "number_of_functions": 1,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.5,
+      "cohesion_score": 0.95
+    }
+  },
+  "timestamp": 1759024658,
+  "prompt_hash": "74bab31315a8960d4ce77b43dd344178",
+  "token_usage": {
+    "input_tokens": 412,
+    "output_tokens": 436,
+    "total_tokens": 848
+  },
+  "model_name": null
+}

@@ -1,0 +1,235 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "baidu.rs",
+      "file_path": "crates/scrap/src/search/baidu.rs",
+      "code_purpose": "specificfeature",
+      "importance_score": 0.8,
+      "description": "百度搜索引擎结果抓取与解析组件，负责从百度搜索页面提取文章信息并进一步获取内容摘要",
+      "functions": [
+        "new",
+        "prepare_target_sources",
+        "convert",
+        "search_by_words",
+        "adjust_date_str"
+      ],
+      "interfaces": [
+        "IProvider"
+      ]
+    },
+    "detailed_description": "该组件实现了针对百度搜索结果页的爬虫功能。主要流程包括：构造带时间范围限制的百度搜索URL，获取HTML响应，使用CSS选择器解析搜索结果条目（标题、链接、发布时间等），处理相对日期格式，并通过异步方式调用文章阅读器获取目标网页正文内容。存在重定向问题导致内容抓取失败的风险。组件封装了HTML解析逻辑和网络请求细节，提供统一接口供上层调用。",
+    "responsibilities": [
+      "构建百度搜索请求URL并执行搜索",
+      "解析百度搜索结果页面的HTML结构提取文章元数据",
+      "转换相对日期字符串为标准格式",
+      "协调调用文章阅读器获取目标网页全文内容",
+      "实现搜索引擎提供商接口协议"
+    ],
+    "interfaces": [
+      {
+        "name": "new",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "llm_section",
+            "param_type": "LLMSection",
+            "is_optional": false,
+            "description": null
+          }
+        ],
+        "return_type": "anyhow::Result<Provider>",
+        "description": "创建Provider实例，初始化HTTP客户端和CSS选择器"
+      },
+      {
+        "name": "prepare_target_sources",
+        "interface_type": "function",
+        "visibility": "private",
+        "parameters": [
+          {
+            "name": "html_text",
+            "param_type": "&str",
+            "is_optional": false,
+            "description": null
+          }
+        ],
+        "return_type": "anyhow::Result<Vec<Article>>",
+        "description": "解析HTML文本，提取搜索结果中的文章元数据列表"
+      },
+      {
+        "name": "convert",
+        "interface_type": "function",
+        "visibility": "private",
+        "parameters": [
+          {
+            "name": "html_text",
+            "param_type": "String",
+            "is_optional": false,
+            "description": null
+          }
+        ],
+        "return_type": "anyhow::Result<Vec<Article>>",
+        "description": "将搜索结果元数据转换为包含完整内容的文章对象"
+      },
+      {
+        "name": "search_by_words",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "words",
+            "param_type": "Vec<&str>",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "app_handle",
+            "param_type": "Option<AppHandle<R>>",
+            "is_optional": true,
+            "description": null
+          }
+        ],
+        "return_type": "anyhow::Result<Vec<Article>>",
+        "description": "根据关键词搜索并返回文章列表，实现了IProvider trait"
+      },
+      {
+        "name": "adjust_date_str",
+        "interface_type": "function",
+        "visibility": "private",
+        "parameters": [
+          {
+            "name": "lossy_date_str",
+            "param_type": "String",
+            "is_optional": false,
+            "description": null
+          }
+        ],
+        "return_type": "String",
+        "description": "将'X天前'等相对时间表述转换为具体日期"
+      },
+      {
+        "name": "IProvider",
+        "interface_type": "trait",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "搜索引擎提供商接口，定义了search_by_words方法契约"
+      },
+      {
+        "name": "Provider",
+        "interface_type": "struct",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "百度搜索服务提供者，包含客户端、选择器和LLM配置"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "chrono",
+        "path": null,
+        "is_external": true,
+        "line_number": 1,
+        "dependency_type": "use",
+        "version": null
+      },
+      {
+        "name": "reqwest",
+        "path": null,
+        "is_external": true,
+        "line_number": 2,
+        "dependency_type": "use",
+        "version": null
+      },
+      {
+        "name": "scraper",
+        "path": null,
+        "is_external": true,
+        "line_number": 3,
+        "dependency_type": "use",
+        "version": null
+      },
+      {
+        "name": "spdlog",
+        "path": null,
+        "is_external": true,
+        "line_number": 4,
+        "dependency_type": "use",
+        "version": null
+      },
+      {
+        "name": "tauri",
+        "path": null,
+        "is_external": true,
+        "line_number": 6,
+        "dependency_type": "use",
+        "version": null
+      },
+      {
+        "name": "types",
+        "path": null,
+        "is_external": false,
+        "line_number": 7,
+        "dependency_type": "use",
+        "version": null
+      },
+      {
+        "name": "crate::connector",
+        "path": "crates/scrap/src/connector/mod.rs",
+        "is_external": false,
+        "line_number": 9,
+        "dependency_type": "use",
+        "version": null
+      },
+      {
+        "name": "crate::search::types",
+        "path": "crates/scrap/src/search/types.rs",
+        "is_external": false,
+        "line_number": 10,
+        "dependency_type": "use",
+        "version": null
+      },
+      {
+        "name": "crate::search::utils",
+        "path": "crates/scrap/src/search/utils.rs",
+        "is_external": false,
+        "line_number": 11,
+        "dependency_type": "use",
+        "version": null
+      },
+      {
+        "name": "crate::simulator",
+        "path": "crates/scrap/src/simulator/mod.rs",
+        "is_external": false,
+        "line_number": 12,
+        "dependency_type": "use",
+        "version": null
+      },
+      {
+        "name": "crate::article_reader",
+        "path": "crates/scrap/src/article_reader/mod.rs",
+        "is_external": false,
+        "line_number": 13,
+        "dependency_type": "use",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 12.0,
+      "lines_of_code": 181,
+      "number_of_functions": 5,
+      "number_of_classes": 1,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 11.0,
+      "cohesion_score": 0.75
+    }
+  },
+  "timestamp": 1758805537,
+  "prompt_hash": "4dcaa642b6730282a912b5099ee87e53",
+  "token_usage": {
+    "input_tokens": 2230,
+    "output_tokens": 1460,
+    "total_tokens": 3690
+  },
+  "model_name": null
+}

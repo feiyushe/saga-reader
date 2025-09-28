@@ -1,0 +1,51 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "settings.ts",
+      "file_path": "app/src/lib/windows/settings.ts",
+      "source_summary": "",
+      "code_purpose": "config",
+      "importance_score": 0.6,
+      "description": "负责管理设置窗口的打开行为，封装了窗口配置参数并调用单例模式展示窗口。",
+      "functions": [
+        "open"
+      ],
+      "interfaces": []
+    },
+    "detailed_description": "该组件定义了一个异步函数 open，用于打开名为 'settings' 的应用设置窗口。通过导入并调用 showWindowSingleton 工具函数，传入窗口标识、URL 路径及一系列窗口属性（如标题、尺寸、居中显示、不可调整大小和不可最大化），实现统一且受控的窗口展示逻辑。此模块作为配置与行为的桥梁，将窗口的视觉和交互特性集中声明。",
+    "responsibilities": [
+      "封装设置窗口的打开逻辑",
+      "定义设置窗口的UI配置参数（尺寸、标题、可调整性等）",
+      "利用单例模式确保设置窗口唯一实例",
+      "协调窗口系统与具体业务需求之间的交互"
+    ],
+    "interfaces": [],
+    "dependencies": [
+      {
+        "name": "showWindowSingleton",
+        "path": "./utils",
+        "is_external": false,
+        "line_number": 1,
+        "dependency_type": "function",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 14,
+      "number_of_functions": 1,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 1.0,
+      "cohesion_score": 0.95
+    }
+  },
+  "timestamp": 1759024698,
+  "prompt_hash": "940af1e923133707481c6b68a66b7748",
+  "token_usage": {
+    "input_tokens": 477,
+    "output_tokens": 488,
+    "total_tokens": 965
+  },
+  "model_name": null
+}

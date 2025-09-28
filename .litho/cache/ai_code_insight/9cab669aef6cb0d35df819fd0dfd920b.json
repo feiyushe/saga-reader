@@ -1,0 +1,51 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "settings.ts",
+      "file_path": "app/src/lib/i18n/settings.ts",
+      "code_purpose": "config",
+      "importance_score": 0.6,
+      "description": "国际化配置模块，负责管理应用的区域设置（locale），提供默认和备用语言配置，并根据运行环境获取当前浏览器的语言设置。",
+      "functions": [
+        "getLocale",
+        "setLocale"
+      ],
+      "interfaces": []
+    },
+    "detailed_description": "该组件是i18n系统的基础配置模块，定义了默认语言(zh)和备用语言(en)常量。其核心功能是通过`getLocale`函数检测执行环境（浏览器或服务端）并返回相应的语言标识：在浏览器中读取`window.navigator.language`，在服务端则返回默认中文。`setLocale`函数目前为空实现，预留用于动态切换语言的功能扩展。整体设计简洁，专注于语言环境的初始化逻辑。",
+    "responsibilities": [
+      "定义国际化系统的默认和备用语言",
+      "根据执行环境安全地获取当前用户语言偏好",
+      "提供语言设置的基础接口供上层模块调用",
+      "隔离浏览器API与服务端环境的差异"
+    ],
+    "interfaces": [],
+    "dependencies": [
+      {
+        "name": "$app/environment",
+        "path": "$app/environment",
+        "is_external": false,
+        "line_number": 1,
+        "dependency_type": "module-import",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 12,
+      "number_of_functions": 2,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.5,
+      "cohesion_score": 0.85
+    }
+  },
+  "timestamp": 1758806009,
+  "prompt_hash": "9cab669aef6cb0d35df819fd0dfd920b",
+  "token_usage": {
+    "input_tokens": 466,
+    "output_tokens": 527,
+    "total_tokens": 993
+  },
+  "model_name": null
+}

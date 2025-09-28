@@ -1,0 +1,15 @@
+{
+  "data": {
+    "code_purpose": "model",
+    "confidence": 0.9,
+    "reasoning": "该文件定义了类型和 trait，特别是 `IFetcher` trait 和相关的类型导入（如 Article, LLMSection, FeedTargetDescription），表明其主要作用是定义数据结构和接口契约。文件路径中的 `types.rs` 也强烈暗示这是类型定义文件，符合 'model' 类别的特征。"
+  },
+  "timestamp": 1758800903,
+  "prompt_hash": "b3d59ce958b066a149ec27eee1fda487",
+  "token_usage": {
+    "input_tokens": 294,
+    "output_tokens": 137,
+    "total_tokens": 431
+  },
+  "model_name": null
+}

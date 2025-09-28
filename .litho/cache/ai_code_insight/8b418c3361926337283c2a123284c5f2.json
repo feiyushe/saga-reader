@@ -1,0 +1,182 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "llm_processor.rs",
+      "file_path": "crates/intelligent/src/article_processor/llm_processor.rs",
+      "source_summary": "",
+      "code_purpose": "agent",
+      "importance_score": 0.8,
+      "description": "基于LLM的文章处理器，利用生成式AI模型对文章内容进行处理和转换。",
+      "functions": [
+        "new",
+        "process"
+      ],
+      "interfaces": [
+        "IArticleProcessor",
+        "IPresetArticleLLMProcessor"
+      ]
+    },
+    "detailed_description": "该组件是一个基于大型语言模型（LLM）的文章处理器，负责将输入的文章内容通过预设的系统提示和用户指令发送给LLM代理进行处理，并返回经过LLM生成或修改后的内容。它支持多语言处理，能够根据配置的语言选项自动适配输出语种。组件通过CompletionAgent与底层LLM服务交互，封装了prompt构造、语言处理逻辑以及结果注入等流程。",
+    "responsibilities": [
+      "作为LLM代理的前端接口，协调文章内容与AI模型之间的交互",
+      "构建符合要求的Prompt指令，包括原文、用户命令和语言规范",
+      "处理多语言需求，根据系统或指定语言设置输出语种",
+      "实现文章内容的异步生成式处理，保持输入结构不变仅替换内容",
+      "提供可扩展的构造接口以支持不同场景下的实例化"
+    ],
+    "interfaces": [
+      {
+        "name": "IArticleProcessor",
+        "interface_type": "trait",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": "anyhow::Result<Article>",
+        "description": "文章处理器统一接口，定义process方法用于处理文章。"
+      },
+      {
+        "name": "IPresetArticleLLMProcessor",
+        "interface_type": "trait",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "llm_section",
+            "param_type": "LLMSection",
+            "is_optional": false,
+            "description": null
+          }
+        ],
+        "return_type": "anyhow::Result<ArticleLLMProcessor>",
+        "description": "预设LLM处理器创建trait，用于框架层面统一创建ArticleLLMProcessor实例。"
+      },
+      {
+        "name": "new",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "llm_section",
+            "param_type": "LLMSection",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "system_prompt",
+            "param_type": "String",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "user_prompt_command",
+            "param_type": "String",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "options",
+            "param_type": "AITargetOption",
+            "is_optional": false,
+            "description": null
+          }
+        ],
+        "return_type": "anyhow::Result<Self>",
+        "description": "构造一个新的ArticleLLMProcessor实例，接受LLM配置、系统提示、用户命令和AI目标选项。"
+      },
+      {
+        "name": "process",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "input",
+            "param_type": "&Article",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "opt",
+            "param_type": "LLMInstructOption",
+            "is_optional": false,
+            "description": null
+          }
+        ],
+        "return_type": "anyhow::Result<Article>",
+        "description": "异步处理输入文章，调用LLM完成内容生成并返回新文章。"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "llm::llm_agent::CompletionAgent",
+        "path": "llm::llm_agent::CompletionAgent",
+        "is_external": false,
+        "line_number": 1,
+        "dependency_type": "struct",
+        "version": null
+      },
+      {
+        "name": "llm::providers::types::AITargetOption",
+        "path": "llm::providers::types::AITargetOption",
+        "is_external": false,
+        "line_number": 2,
+        "dependency_type": "type",
+        "version": null
+      },
+      {
+        "name": "types::Article",
+        "path": "types::Article",
+        "is_external": false,
+        "line_number": 3,
+        "dependency_type": "type",
+        "version": null
+      },
+      {
+        "name": "types::LLMInstructOption",
+        "path": "types::LLMInstructOption",
+        "is_external": false,
+        "line_number": 3,
+        "dependency_type": "type",
+        "version": null
+      },
+      {
+        "name": "types::LLMSection",
+        "path": "types::LLMSection",
+        "is_external": false,
+        "line_number": 3,
+        "dependency_type": "type",
+        "version": null
+      },
+      {
+        "name": "crate::article_processor::types::IArticleProcessor",
+        "path": "crate::article_processor::types::IArticleProcessor",
+        "is_external": false,
+        "line_number": 5,
+        "dependency_type": "trait",
+        "version": null
+      },
+      {
+        "name": "sys_locale::get_locale",
+        "path": "sys_locale::get_locale",
+        "is_external": true,
+        "line_number": 6,
+        "dependency_type": "function",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 3.0,
+      "lines_of_code": 61,
+      "number_of_functions": 2,
+      "number_of_classes": 1,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 7.0,
+      "cohesion_score": 0.85
+    }
+  },
+  "timestamp": 1759024333,
+  "prompt_hash": "8b418c3361926337283c2a123284c5f2",
+  "token_usage": {
+    "input_tokens": 1021,
+    "output_tokens": 1278,
+    "total_tokens": 2299
+  },
+  "model_name": null
+}

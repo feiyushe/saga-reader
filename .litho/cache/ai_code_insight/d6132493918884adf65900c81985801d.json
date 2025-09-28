@@ -1,0 +1,180 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "index.svelte.ts",
+      "file_path": "app/src/routes/main/stores/articles/list/index.svelte.ts",
+      "source_summary": "",
+      "code_purpose": "controller",
+      "importance_score": 1.0,
+      "description": "文章列表状态管理Store，负责聚合文章数据、处理分页加载、搜索过滤及与后端服务交互。基于Svelte的响应式系统实现。",
+      "functions": [
+        "create",
+        "generateTaskIdForUpdateFeed",
+        "refresh",
+        "updateFeeds",
+        "loadMore",
+        "notifyDatasourceUpdated",
+        "attachInitLoadingFuture"
+      ],
+      "interfaces": [
+        "StoreType",
+        "Associations"
+      ]
+    },
+    "detailed_description": "该组件是Svelte应用中的核心状态管理模块（Store），用于管理文章列表的展示逻辑。它封装了文章分组、分页加载、搜索过滤、数据刷新等关键功能。通过依赖注入方式关联tasks和search两个外部store，形成协作关系。使用$state和$derived实现响应式状态，利用$effect监听搜索条件变化并触发内容检索。支持初始化加载、连续加载更多、强制刷新、更新订阅源等操作，并通过loading store管理不同场景下的加载状态。整体采用工厂模式(create函数)生成具名store实例，符合Svelte stores规范。",
+    "responsibilities": [
+      "管理文章列表的分组显示状态（按发布时间聚合）",
+      "协调与后端API的交互（加载、刷新、更新feed内容）",
+      "处理分页逻辑（初始加载与滚动加载更多）",
+      "响应搜索输入变化并更新过滤结果",
+      "维护多个加载状态（初始化、连续加载、过滤加载）"
+    ],
+    "interfaces": [
+      {
+        "name": "StoreType",
+        "interface_type": "type",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "定义文章列表Store的完整接口结构，包含状态字段和行为方法"
+      },
+      {
+        "name": "Associations",
+        "interface_type": "type",
+        "visibility": "private",
+        "parameters": [],
+        "return_type": null,
+        "description": "内部类型，定义该Store所依赖的其他Store引用集合"
+      },
+      {
+        "name": "create",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "associations",
+            "param_type": "Associations",
+            "is_optional": false,
+            "description": "注入的依赖Store集合"
+          }
+        ],
+        "return_type": "StoreType",
+        "description": "工厂函数，创建并返回一个具备完整功能的文章列表Store实例"
+      },
+      {
+        "name": "generateTaskIdForUpdateFeed",
+        "interface_type": "function",
+        "visibility": "private",
+        "parameters": [
+          {
+            "name": "associatedFeedId",
+            "param_type": "string",
+            "is_optional": false,
+            "description": "目标Feed的ID"
+          }
+        ],
+        "return_type": "string",
+        "description": "生成用于任务追踪的唯一任务ID"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "featuresApi",
+        "path": "$lib/hybrid-apis/feed/impl",
+        "is_external": false,
+        "line_number": 1,
+        "dependency_type": "import",
+        "version": null
+      },
+      {
+        "name": "isSpecifyFeed",
+        "path": "$lib/hybrid-apis/feed/impl",
+        "is_external": false,
+        "line_number": 1,
+        "dependency_type": "import",
+        "version": null
+      },
+      {
+        "name": "tick",
+        "path": "svelte",
+        "is_external": true,
+        "line_number": 2,
+        "dependency_type": "import",
+        "version": null
+      },
+      {
+        "name": "Article",
+        "path": "$lib/types/article",
+        "is_external": false,
+        "line_number": 3,
+        "dependency_type": "import",
+        "version": null
+      },
+      {
+        "name": "ArticlesGroup",
+        "path": "../../../widgets/types",
+        "is_external": false,
+        "line_number": 4,
+        "dependency_type": "import",
+        "version": null
+      },
+      {
+        "name": "createLoading",
+        "path": "../../loading.svelte",
+        "is_external": false,
+        "line_number": 5,
+        "dependency_type": "import",
+        "version": null
+      },
+      {
+        "name": "Status",
+        "path": "../../loading.svelte",
+        "is_external": false,
+        "line_number": 5,
+        "dependency_type": "import",
+        "version": null
+      },
+      {
+        "name": "LoadingStore",
+        "path": "../../loading.svelte",
+        "is_external": false,
+        "line_number": 6,
+        "dependency_type": "import",
+        "version": null
+      },
+      {
+        "name": "SearchStore",
+        "path": "../search/index.svelte",
+        "is_external": false,
+        "line_number": 7,
+        "dependency_type": "import",
+        "version": null
+      },
+      {
+        "name": "TasksStoreType",
+        "path": "../../tasks.svelte",
+        "is_external": false,
+        "line_number": 8,
+        "dependency_type": "import",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 11.0,
+      "lines_of_code": 221,
+      "number_of_functions": 7,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.875,
+      "cohesion_score": 0.72
+    }
+  },
+  "timestamp": 1759024164,
+  "prompt_hash": "d6132493918884adf65900c81985801d",
+  "token_usage": {
+    "input_tokens": 2188,
+    "output_tokens": 1280,
+    "total_tokens": 3468
+  },
+  "model_name": null
+}

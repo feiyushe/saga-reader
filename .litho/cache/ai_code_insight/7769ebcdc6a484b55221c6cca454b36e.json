@@ -1,0 +1,58 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "state.rs",
+      "file_path": "crates/tauri-plugin-feed-api/src/state.rs",
+      "code_purpose": "model",
+      "importance_score": 0.6,
+      "description": null,
+      "functions": [],
+      "interfaces": [
+        "HybridRuntimeState"
+      ]
+    },
+    "detailed_description": "该组件定义了一个名为HybridRuntimeState的结构体，用于在Tauri插件中封装后端功能API的实现。其主要作用是作为运行时状态容器，持有FeaturesAPIImpl实例，以便在应用生命周期内共享和访问核心业务逻辑。该结构体设计简洁，遵循Rust的模块化架构原则，为插件系统提供类型安全的状态管理。",
+    "responsibilities": [
+      "封装后端功能API实现",
+      "作为Tauri插件的运行时状态容器",
+      "提供类型安全的状态共享机制"
+    ],
+    "interfaces": [
+      {
+        "name": "HybridRuntimeState",
+        "interface_type": "struct",
+        "visibility": "pub",
+        "parameters": [],
+        "return_type": null,
+        "description": "用于在Tauri插件中存储和共享FeaturesAPIImpl实例的公共结构体"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "feed_api_rs::features::impl_default::FeaturesAPIImpl",
+        "path": null,
+        "is_external": true,
+        "line_number": 1,
+        "dependency_type": "struct",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 5,
+      "number_of_functions": 0,
+      "number_of_classes": 1,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.2,
+      "cohesion_score": 0.9
+    }
+  },
+  "timestamp": 1758805930,
+  "prompt_hash": "7769ebcdc6a484b55221c6cca454b36e",
+  "token_usage": {
+    "input_tokens": 439,
+    "output_tokens": 443,
+    "total_tokens": 882
+  },
+  "model_name": null
+}

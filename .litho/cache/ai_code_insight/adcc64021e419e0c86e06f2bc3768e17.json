@@ -1,0 +1,129 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "assistant.rs",
+      "file_path": "crates/intelligent/src/article_processor/assistant.rs",
+      "source_summary": "",
+      "code_purpose": "agent",
+      "importance_score": 0.8,
+      "description": "智能助手组件，负责基于LLM的对话处理和文章内容分析。",
+      "functions": [
+        "new",
+        "chat"
+      ],
+      "interfaces": [
+        "Assistant"
+      ]
+    },
+    "detailed_description": "该组件实现了一个智能助手(Assistant)，封装了与大型语言模型(LLM)交互的能力。它通过CompletionAgent与底层LLM服务通信，接收文章内容、用户提问和会话历史，构造结构化提示(prompt)并获取模型回复。系统提示(SYSTEM_PROMPT)和用户指令后缀(USER_PROMPT_COMMAND_PURGE)从外部文件加载，增强了可配置性。chat方法负责将输入数据格式化为模型可理解的上下文，并返回生成的响应。",
+    "responsibilities": [
+      "管理LLM代理实例的生命周期",
+      "构造包含文章、会话历史和用户提问的完整对话上下文",
+      "调用LLM完成文本生成任务",
+      "封装与大型语言模型的交互逻辑"
+    ],
+    "interfaces": [
+      {
+        "name": "Assistant",
+        "interface_type": "struct",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "智能助手的主要数据结构，包含LLM代理和用户提示命令。"
+      },
+      {
+        "name": "new",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "llm_section",
+            "param_type": "LLMSection",
+            "is_optional": false,
+            "description": "指定使用的LLM配置区域"
+          }
+        ],
+        "return_type": "Assistant",
+        "description": "创建一个新的Assistant实例，初始化LLM代理和默认选项。"
+      },
+      {
+        "name": "chat",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "article",
+            "param_type": "String",
+            "is_optional": false,
+            "description": "待分析的文章正文"
+          },
+          {
+            "name": "user_prompt",
+            "param_type": "&str",
+            "is_optional": false,
+            "description": "用户当前的提问内容"
+          },
+          {
+            "name": "history",
+            "param_type": "Vec<ConversationMessage>",
+            "is_optional": false,
+            "description": "之前的会话消息历史"
+          }
+        ],
+        "return_type": "anyhow::Result<String>",
+        "description": "执行与LLM的对话交互，生成针对文章内容的回答。"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "llm::llm_agent::CompletionAgent",
+        "path": "llm::llm_agent::CompletionAgent",
+        "is_external": true,
+        "line_number": null,
+        "dependency_type": "struct",
+        "version": null
+      },
+      {
+        "name": "llm::providers::types::AITargetOption",
+        "path": "llm::providers::types::AITargetOption",
+        "is_external": true,
+        "line_number": null,
+        "dependency_type": "struct",
+        "version": null
+      },
+      {
+        "name": "types::ConversationMessage",
+        "path": "types::ConversationMessage",
+        "is_external": true,
+        "line_number": null,
+        "dependency_type": "struct",
+        "version": null
+      },
+      {
+        "name": "types::LLMSection",
+        "path": "types::LLMSection",
+        "is_external": true,
+        "line_number": null,
+        "dependency_type": "struct",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 43,
+      "number_of_functions": 2,
+      "number_of_classes": 1,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.4,
+      "cohesion_score": 0.9
+    }
+  },
+  "timestamp": 1759024321,
+  "prompt_hash": "adcc64021e419e0c86e06f2bc3768e17",
+  "token_usage": {
+    "input_tokens": 804,
+    "output_tokens": 945,
+    "total_tokens": 1749
+  },
+  "model_name": null
+}

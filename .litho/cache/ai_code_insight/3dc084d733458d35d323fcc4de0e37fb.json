@@ -1,0 +1,116 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "tasks.svelte.ts",
+      "file_path": "app/src/routes/main/stores/tasks.svelte.ts",
+      "code_purpose": "controller",
+      "importance_score": 1.0,
+      "description": "任务状态管理Store，用于跟踪异步操作的加载状态",
+      "functions": [
+        "createPending",
+        "create"
+      ],
+      "interfaces": [
+        "StoreType",
+        "PendingItem"
+      ]
+    },
+    "detailed_description": "该组件是一个Svelte状态管理Store，专门用于管理系统中所有异步任务的加载状态。它通过维护一个待处理任务列表(pendings)，每个任务包含描述、关联的loadingStore和Promise，实现对并发异步操作的统一状态追踪。组件提供添加、查询和移除待处理任务的功能，并基于所有子任务的状态派生出全局的pendingStatus和对应的显示文本pendingStatusText。当某个任务完成时，会自动从列表中清理已完成的任务。",
+    "responsibilities": [
+      "管理应用中所有异步任务的生命周期状态",
+      "聚合多个并发异步操作的整体状态（加载/错误/完成）",
+      "提供任务注册与查询接口供其他组件使用",
+      "生成用户友好的状态显示文本"
+    ],
+    "interfaces": [
+      {
+        "name": "StoreType",
+        "interface_type": "type",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "任务Store的主要接口类型，定义了状态属性和操作方法"
+      },
+      {
+        "name": "PendingItem",
+        "interface_type": "type",
+        "visibility": "private",
+        "parameters": [],
+        "return_type": null,
+        "description": "表示单个待处理任务的数据结构"
+      },
+      {
+        "name": "create",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": "StoreType",
+        "description": "工厂函数，创建并返回一个新的任务Store实例"
+      },
+      {
+        "name": "createPending",
+        "interface_type": "function",
+        "visibility": "private",
+        "parameters": [
+          {
+            "name": "description",
+            "param_type": "string",
+            "is_optional": false,
+            "description": "任务描述文本"
+          },
+          {
+            "name": "promise",
+            "param_type": "Promise<unknown>",
+            "is_optional": false,
+            "description": "要监控的异步Promise"
+          }
+        ],
+        "return_type": "PendingItem",
+        "description": "创建一个新的待处理任务项"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "LoadingStore",
+        "path": "./loading.svelte",
+        "is_external": false,
+        "line_number": 1,
+        "dependency_type": "type import",
+        "version": null
+      },
+      {
+        "name": "createLoadingStore",
+        "path": "./loading.svelte",
+        "is_external": false,
+        "line_number": 2,
+        "dependency_type": "function import",
+        "version": null
+      },
+      {
+        "name": "Status",
+        "path": "./loading.svelte",
+        "is_external": false,
+        "line_number": 2,
+        "dependency_type": "enum import",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 7.0,
+      "lines_of_code": 85,
+      "number_of_functions": 2,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.33,
+      "cohesion_score": 0.85
+    }
+  },
+  "timestamp": 1758801027,
+  "prompt_hash": "3dc084d733458d35d323fcc4de0e37fb",
+  "token_usage": {
+    "input_tokens": 996,
+    "output_tokens": 884,
+    "total_tokens": 1880
+  },
+  "model_name": null
+}

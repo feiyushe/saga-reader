@@ -1,0 +1,53 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "lib.rs",
+      "file_path": "crates/llm/src/lib.rs",
+      "source_summary": "",
+      "code_purpose": "agent",
+      "importance_score": 0.6,
+      "description": "LLM功能的核心模块聚合器，提供统一的接口访问入口。",
+      "functions": [
+        "pub mod llm_agent",
+        "mod connector",
+        "pub mod providers"
+      ],
+      "interfaces": []
+    },
+    "detailed_description": "该组件作为LLM（大语言模型）功能的顶层模块聚合器，主要职责是组织和导出子模块。它公开了`llm_agent`和`providers`模块供外部使用，同时私有引入`connector`模块用于内部HTTP客户端管理。整体结构遵循Rust的模块化设计原则，通过合理的可见性控制实现关注点分离。",
+    "responsibilities": [
+      "聚合LLM相关功能模块",
+      "定义公共API边界",
+      "管理内部模块依赖关系",
+      "提供统一的功能导出入口"
+    ],
+    "interfaces": [],
+    "dependencies": [
+      {
+        "name": "connector",
+        "path": "./crates/llm/src/connector.rs",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "module",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 3,
+      "number_of_functions": 0,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.5,
+      "cohesion_score": 0.8
+    }
+  },
+  "timestamp": 1759024566,
+  "prompt_hash": "6b397ec9a37a982794b1c3f095d54c0e",
+  "token_usage": {
+    "input_tokens": 485,
+    "output_tokens": 403,
+    "total_tokens": 888
+  },
+  "model_name": null
+}

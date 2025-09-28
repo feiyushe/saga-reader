@@ -1,0 +1,126 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "reader.svelte.ts",
+      "file_path": "app/src/routes/main/stores/reader.svelte.ts",
+      "code_purpose": "controller",
+      "importance_score": 1.0,
+      "description": "提供文章阅读状态管理和内容刷新功能的控制器组件，封装了与后端API和任务调度系统的交互逻辑。",
+      "functions": [
+        "create",
+        "markAsRead",
+        "refreshByEnhancedScraper"
+      ],
+      "interfaces": [
+        "StoreType",
+        "Associates"
+      ]
+    },
+    "detailed_description": "该组件是一个Svelte store，用于管理用户对文章的读取状态及内容更新操作。它通过`create`函数接收依赖项（主要是任务管理器），并返回包含`markAsRead`和`refreshByEnhancedScraper`两个方法的对象。其中`markAsRead`调用API标记文章为已读；`refreshByEnhancedScraper`则实现智能刷新机制：先检查是否存在正在进行的任务，若存在则复用或清理失败任务，否则发起新的更新请求，并将异步任务注册到全局任务队列中以支持并发控制和状态共享。",
+    "responsibilities": [
+      "管理文章的已读状态变更请求",
+      "协调文章内容的增强式抓取与刷新流程",
+      "集成任务调度系统以避免重复请求",
+      "封装底层API调用细节，提供简洁的接口供上层使用"
+    ],
+    "interfaces": [
+      {
+        "name": "StoreType",
+        "interface_type": "type",
+        "visibility": "export",
+        "parameters": [],
+        "return_type": null,
+        "description": "定义了本模块对外暴露的方法集合，包括markAsRead和refreshByEnhancedScraper"
+      },
+      {
+        "name": "Associates",
+        "interface_type": "type",
+        "visibility": "internal",
+        "parameters": [],
+        "return_type": null,
+        "description": "依赖注入结构，当前仅包含tasks任务管理器引用"
+      },
+      {
+        "name": "create",
+        "interface_type": "function",
+        "visibility": "export",
+        "parameters": [
+          {
+            "name": "associates",
+            "param_type": "Associates",
+            "is_optional": false,
+            "description": "注入的关联服务实例"
+          }
+        ],
+        "return_type": "StoreType",
+        "description": "工厂函数，用于创建并初始化store实例"
+      },
+      {
+        "name": "markAsRead",
+        "interface_type": "function",
+        "visibility": "internal",
+        "parameters": [
+          {
+            "name": "articleId",
+            "param_type": "number",
+            "is_optional": false,
+            "description": "目标文章ID"
+          }
+        ],
+        "return_type": "Promise<void>",
+        "description": "标记指定文章为已读状态"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "featuresApi",
+        "path": "$lib/hybrid-apis/feed/impl",
+        "is_external": false,
+        "line_number": 1,
+        "dependency_type": "api-client",
+        "version": null
+      },
+      {
+        "name": "Article",
+        "path": "$lib/types/article",
+        "is_external": false,
+        "line_number": 2,
+        "dependency_type": "model",
+        "version": null
+      },
+      {
+        "name": "Status",
+        "path": "./loading.svelte",
+        "is_external": false,
+        "line_number": 3,
+        "dependency_type": "constant",
+        "version": null
+      },
+      {
+        "name": "TasksStoreType",
+        "path": "./tasks.svelte",
+        "is_external": false,
+        "line_number": 4,
+        "dependency_type": "store-type",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 3.0,
+      "lines_of_code": 47,
+      "number_of_functions": 3,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.85,
+      "cohesion_score": 0.92
+    }
+  },
+  "timestamp": 1758800996,
+  "prompt_hash": "c0bf3f844db0e6208c3db258d3dd4ad8",
+  "token_usage": {
+    "input_tokens": 720,
+    "output_tokens": 962,
+    "total_tokens": 1682
+  },
+  "model_name": null
+}

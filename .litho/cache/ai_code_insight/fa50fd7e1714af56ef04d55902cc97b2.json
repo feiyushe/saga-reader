@@ -1,0 +1,51 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "index.ts",
+      "file_path": "app/src/lib/windows/index.ts",
+      "source_summary": "",
+      "code_purpose": "entry",
+      "importance_score": 0.8,
+      "description": "该文件是窗口模块的入口，负责导出窗口相关的功能，当前仅导出打开设置窗口的功能。",
+      "functions": [
+        "openSettings"
+      ],
+      "interfaces": []
+    },
+    "detailed_description": "该组件作为窗口模块的公共入口文件，通过重新导出从 './settings' 模块导入的 open 函数，提供统一的访问接口。它简化了外部模块对窗口操作函数的引用路径，符合模块化设计中的聚合模式。",
+    "responsibilities": [
+      "作为窗口模块的公共API入口",
+      "聚合并重新导出窗口相关功能",
+      "简化外部模块的导入路径",
+      "维护模块间依赖关系的清晰性"
+    ],
+    "interfaces": [],
+    "dependencies": [
+      {
+        "name": "./settings",
+        "path": "app/src/lib/windows/settings",
+        "is_external": false,
+        "line_number": 1,
+        "dependency_type": "import",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 3,
+      "number_of_functions": 1,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 1.0,
+      "cohesion_score": 0.9
+    }
+  },
+  "timestamp": 1759024457,
+  "prompt_hash": "fa50fd7e1714af56ef04d55902cc97b2",
+  "token_usage": {
+    "input_tokens": 429,
+    "output_tokens": 397,
+    "total_tokens": 826
+  },
+  "model_name": null
+}

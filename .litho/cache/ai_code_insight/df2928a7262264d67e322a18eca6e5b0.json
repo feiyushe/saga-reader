@@ -1,0 +1,48 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "lib.rs",
+      "file_path": "crates/feed_api_rs/src/lib.rs",
+      "code_purpose": "api",
+      "importance_score": 0.6,
+      "description": null,
+      "functions": [],
+      "interfaces": []
+    },
+    "detailed_description": "该组件作为feed_api_rs库的根模块，主要负责组织和导出子模块。它本身不包含具体实现逻辑，而是通过mod声明引入application_context、features、startup和utils四个子模块，并将前三个标记为公共（pub），使其对外暴露。其核心作用是模块化封装和API边界定义，形成清晰的内部结构层次。",
+    "responsibilities": [
+      "组织和管理子模块结构",
+      "控制模块的可见性与导出",
+      "提供统一的模块入口点",
+      "隔离内部实现细节（如utils）"
+    ],
+    "interfaces": [],
+    "dependencies": [
+      {
+        "name": "utils",
+        "path": "./crates/feed_api_rs/src/utils.rs",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "module",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 4,
+      "number_of_functions": 0,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.25,
+      "cohesion_score": 0.9
+    }
+  },
+  "timestamp": 1758805857,
+  "prompt_hash": "df2928a7262264d67e322a18eca6e5b0",
+  "token_usage": {
+    "input_tokens": 642,
+    "output_tokens": 364,
+    "total_tokens": 1006
+  },
+  "model_name": null
+}

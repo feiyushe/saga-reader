@@ -1,0 +1,86 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "types.rs",
+      "file_path": "crates/intelligent/src/article_processor/types.rs",
+      "code_purpose": "specificfeature",
+      "importance_score": 0.6,
+      "description": "定义文章处理器的核心trait IArticleProcessor，用于构建责任链模式下的异步文章处理流程。",
+      "functions": [],
+      "interfaces": [
+        "IArticleProcessor"
+      ]
+    },
+    "detailed_description": "该组件定义了 `IArticleProcessor` trait，作为所有文章处理器的统一接口。通过此trait可以实现责任链模式，使得多个处理器能够按顺序对文章进行异步处理。`process` 方法接收一个不可变引用的 Article 和 LLMInstructOption 参数，并返回一个 Future，表示异步处理结果。该设计保证了输入数据不被修改，符合函数式处理原则，便于组合和测试。",
+    "responsibilities": [
+      "定义文章处理的标准接口",
+      "支持异步处理流程",
+      "确保输入文章不可变性以保障数据安全",
+      "为责任链模式提供基础trait支撑"
+    ],
+    "interfaces": [
+      {
+        "name": "IArticleProcessor",
+        "interface_type": "trait",
+        "visibility": "pub",
+        "parameters": [],
+        "return_type": null,
+        "description": "文章处理器trait，所有文章处理器都应该impl这个trait以形成责任链调度。"
+      },
+      {
+        "name": "process",
+        "interface_type": "method",
+        "visibility": "pub",
+        "parameters": [
+          {
+            "name": "self",
+            "param_type": "&self",
+            "is_optional": false,
+            "description": "trait实例的不可变引用"
+          },
+          {
+            "name": "input",
+            "param_type": "&Article",
+            "is_optional": false,
+            "description": "待处理的文章内容，不可变引用"
+          },
+          {
+            "name": "opt",
+            "param_type": "LLMInstructOption",
+            "is_optional": false,
+            "description": "大模型指令选项配置"
+          }
+        ],
+        "return_type": "impl std::future::Future<Output = anyhow::Result<Article>>",
+        "description": "处理文章，输入为[Article][types::Article]，输出为`Article`的[future][std::future::Future]。函数本身不会修改输入的`Article`，且参数本身为不可变引用，在流水线中作为先前的副本。"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "types",
+        "path": "types",
+        "is_external": false,
+        "line_number": 1,
+        "dependency_type": "use",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 12,
+      "number_of_functions": 1,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 1.0,
+      "cohesion_score": 0.9
+    }
+  },
+  "timestamp": 1758805881,
+  "prompt_hash": "70c09ce4a2a65332561a35b3ab6409ab",
+  "token_usage": {
+    "input_tokens": 608,
+    "output_tokens": 771,
+    "total_tokens": 1379
+  },
+  "model_name": null
+}

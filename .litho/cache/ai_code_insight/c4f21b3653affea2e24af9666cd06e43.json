@@ -1,0 +1,96 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "utils.rs",
+      "file_path": "crates/feed_api_rs/src/utils.rs",
+      "code_purpose": "util",
+      "importance_score": 0.6,
+      "description": "提供异步任务并行执行的限流控制工具函数，用于管理高并发场景下的资源使用。",
+      "functions": [
+        "do_parallel_with_limit"
+      ],
+      "interfaces": []
+    },
+    "detailed_description": "该组件实现了一个名为 `do_parallel_with_limit` 的异步工具函数，用于在指定最大并发数的限制下并行执行一组 Future。通过使用 Tokio 的 Semaphore（信号量）机制，确保同时运行的任务数量不会超过设定阈值，从而防止资源耗尽。当 max_concurrent 为 0 时，默认设置为 1，避免非法状态。此函数广泛适用于需要控制异步任务并发度的场景，如批量网络请求、数据库操作等。",
+    "responsibilities": [
+      "提供异步任务的并发控制能力",
+      "防止系统资源因过多并发任务而耗尽",
+      "封装复杂的并发同步逻辑，提升上层代码可读性",
+      "支持动态配置最大并发数，并具备默认值容错处理"
+    ],
+    "interfaces": [
+      {
+        "name": "do_parallel_with_limit",
+        "interface_type": "function",
+        "visibility": "pub",
+        "parameters": [
+          {
+            "name": "futures",
+            "param_type": "Vec<F>",
+            "is_optional": false,
+            "description": "待执行的异步任务列表"
+          },
+          {
+            "name": "max_concurrent",
+            "param_type": "usize",
+            "is_optional": false,
+            "description": "最大允许的并发任务数，0 表示自动调整为 1"
+          }
+        ],
+        "return_type": "Vec<T>",
+        "description": "返回所有异步任务完成后的结果向量"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "std::future::Future",
+        "path": null,
+        "is_external": false,
+        "line_number": 1,
+        "dependency_type": "use",
+        "version": null
+      },
+      {
+        "name": "std::sync::Arc",
+        "path": null,
+        "is_external": false,
+        "line_number": 2,
+        "dependency_type": "use",
+        "version": null
+      },
+      {
+        "name": "futures::future::join_all",
+        "path": null,
+        "is_external": true,
+        "line_number": 3,
+        "dependency_type": "use",
+        "version": null
+      },
+      {
+        "name": "tokio::sync::Semaphore",
+        "path": null,
+        "is_external": true,
+        "line_number": 4,
+        "dependency_type": "use",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 2.0,
+      "lines_of_code": 29,
+      "number_of_functions": 1,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.138,
+      "cohesion_score": 0.95
+    }
+  },
+  "timestamp": 1758805876,
+  "prompt_hash": "c4f21b3653affea2e24af9666cd06e43",
+  "token_usage": {
+    "input_tokens": 619,
+    "output_tokens": 741,
+    "total_tokens": 1360
+  },
+  "model_name": null
+}

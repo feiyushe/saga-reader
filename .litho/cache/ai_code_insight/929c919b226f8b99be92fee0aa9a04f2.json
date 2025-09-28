@@ -1,0 +1,73 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "vite.config.ts",
+      "file_path": "app/vite.config.ts",
+      "code_purpose": "config",
+      "importance_score": 0.6,
+      "description": "Vite 构建工具的配置文件，用于 SvelteKit 应用的开发和构建设置",
+      "functions": [],
+      "interfaces": []
+    },
+    "detailed_description": "该组件是 Vite 的配置文件，主要用于配置 SvelteKit 项目的构建和开发服务器行为。它定义了插件加载顺序（Tailwind CSS、Sentry 错误追踪、SvelteKit 集成），并针对 Tauri 桌面应用开发环境进行了定制化设置，包括固定端口、HMR 配置以及对 src-tauri 目录的监听忽略。同时排除了 fsevents 的依赖优化以避免原生模块问题。",
+    "responsibilities": [
+      "配置 Vite 构建工具的核心行为",
+      "集成前端框架和第三方插件（Tailwind、Sentry、SvelteKit）",
+      "为 Tauri 桌面应用开发提供专用服务器设置",
+      "管理开发服务器的热更新和端口绑定策略",
+      "优化依赖处理以兼容原生环境"
+    ],
+    "interfaces": [],
+    "dependencies": [
+      {
+        "name": "vite",
+        "path": "vite",
+        "is_external": true,
+        "line_number": 1,
+        "dependency_type": "import",
+        "version": null
+      },
+      {
+        "name": "@tailwindcss/vite",
+        "path": "@tailwindcss/vite",
+        "is_external": true,
+        "line_number": 2,
+        "dependency_type": "import",
+        "version": null
+      },
+      {
+        "name": "@sentry/sveltekit",
+        "path": "@sentry/sveltekit",
+        "is_external": true,
+        "line_number": 3,
+        "dependency_type": "import",
+        "version": null
+      },
+      {
+        "name": "@sveltejs/kit/vite",
+        "path": "@sveltejs/kit/vite",
+        "is_external": true,
+        "line_number": 4,
+        "dependency_type": "import",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 3.0,
+      "lines_of_code": 47,
+      "number_of_functions": 0,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.085,
+      "cohesion_score": 0.92
+    }
+  },
+  "timestamp": 1758805840,
+  "prompt_hash": "929c919b226f8b99be92fee0aa9a04f2",
+  "token_usage": {
+    "input_tokens": 707,
+    "output_tokens": 563,
+    "total_tokens": 1270
+  },
+  "model_name": null
+}

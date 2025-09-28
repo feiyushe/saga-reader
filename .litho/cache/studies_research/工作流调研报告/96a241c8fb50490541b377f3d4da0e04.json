@@ -1,0 +1,34 @@
+{
+  "data": {
+    "main_workflow": {
+      "name": "文章智能处理与阅读流程",
+      "description": "用户选择一篇文章后，系统通过AI模型对内容进行净化、优化和融合处理，最终呈现高质量的可读内容。该流程是系统的核心价值所在，体现了信息聚合与智能增强的结合。",
+      "flowchart_mermaid": "graph TD\n    A[用户点击文章] --> B{文章内容已处理？}\n    B -- 否 --> C[启动LLM处理流水线]\n    C --> D[Purge: 净化内容]\n    D --> E[Optimize: 优化表达]\n    E --> F[Melt: 融合洞察]\n    F --> G[持久化处理结果]\n    G --> H[渲染优化后内容]\n    B -- 是 --> H\n    H --> I[用户阅读增强内容]\n    I --> J{用户提问？}\n    J -- 是 --> K[调用AI助手对话]\n    K --> L[显示AI回复]\n    J -- 否 --> M[结束]"
+    },
+    "other_important_workflows": [
+      {
+        "name": "应用启动初始化流程",
+        "description": "系统启动时按阶段加载配置、初始化日志、恢复用户状态并准备AI运行环境，确保应用稳定进入就绪状态。",
+        "flowchart_mermaid": "graph TD\n    A[启动应用] --> B[初始化核心配置]\n    B --> C[加载或创建默认app_config.toml]\n    C --> D[初始化日志系统]\n    D --> E[并行初始化用户配置与LLM服务]\n    E --> F[读取user_config.toml]\n    E --> G[检查Ollama服务状态]\n    F --> H[构建主状态Store]\n    G --> H\n    H --> I[渲染主界面]\n    I --> J[进入待命状态]"
+      },
+      {
+        "name": "订阅源内容更新流程",
+        "description": "系统定期或手动触发对所有RSS订阅源的内容抓取，并通过智能处理器生成结构化文章记录。",
+        "flowchart_mermaid": "graph TD\n    A[触发更新] --> B[遍历所有FeedsPackage]\n    B --> C{获取源类型}\n    C -->|RSS| D[RSS模块解析XML]\n    C -->|Search| E[搜索引擎爬虫抓取]\n    D --> F[提取标题/链接/摘要]\n    E --> F\n    F --> G[调用ArticleReader获取正文]\n    G --> H[启动Purge-Optimize-Melt处理链]\n    H --> I[存入数据库]\n    I --> J[更新UI文章列表]"
+      },
+      {
+        "name": "AI助手交互流程",
+        "description": "用户在阅读过程中向AI精灵提问，系统将问题连同上下文发送至LLM代理，返回结构化回答并展示。",
+        "flowchart_mermaid": "graph TD\n    A[打开AI精灵面板] --> B[输入问题]\n    B --> C[构造包含文章上下文的Prompt]\n    C --> D[调用LLM代理服务]\n    D --> E{选择提供商}\n    E -->|Ollama| F[本地模型响应]\n    E -->|OpenAI/GLM/Mistral| G[云端API响应]\n    F --> H[返回文本结果]\n    G --> H\n    H --> I[追加到对话历史]\n    I --> J[Markdown渲染显示]\n    J --> K[等待下一轮输入]"
+      }
+    ]
+  },
+  "timestamp": 1759024986,
+  "prompt_hash": "96a241c8fb50490541b377f3d4da0e04",
+  "token_usage": {
+    "input_tokens": 22372,
+    "output_tokens": 1011,
+    "total_tokens": 23383
+  },
+  "model_name": null
+}

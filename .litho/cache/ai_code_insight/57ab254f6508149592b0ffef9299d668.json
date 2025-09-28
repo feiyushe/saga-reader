@@ -1,0 +1,47 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "lib.rs",
+      "file_path": "crates/recorder/src/lib.rs",
+      "code_purpose": "specificfeature",
+      "importance_score": 0.6,
+      "description": "定义了文章记录器的核心模块结构，包括服务、实体、操作器和路径管理。",
+      "functions": [],
+      "interfaces": []
+    },
+    "detailed_description": "该组件作为recorder功能的模块入口，通过pub mod声明导出了article_recorder_service、entity、operator和path四个核心子模块。它本身不包含具体实现，而是组织和封装了与文章记录相关的数据访问、业务逻辑和服务接口。其中operator模块负责数据库操作，entity定义数据模型，path处理文件路径，article_recorder_service可能封装高层业务逻辑。整体构成一个完整的文章记录数据管理单元。",
+    "responsibilities": [
+      "组织和导出文章记录功能的相关模块",
+      "提供模块化结构以支持数据库操作和数据模型访问",
+      "作为其他组件访问recorder功能的统一入口"
+    ],
+    "interfaces": [],
+    "dependencies": [
+      {
+        "name": "operator",
+        "path": "./crates/recorder/src/operator.rs",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "internal",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 4,
+      "number_of_functions": 0,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.25,
+      "cohesion_score": 0.9
+    }
+  },
+  "timestamp": 1758805926,
+  "prompt_hash": "57ab254f6508149592b0ffef9299d668",
+  "token_usage": {
+    "input_tokens": 1705,
+    "output_tokens": 481,
+    "total_tokens": 2186
+  },
+  "model_name": null
+}

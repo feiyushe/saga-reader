@@ -1,0 +1,81 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "index.ts",
+      "file_path": "app/src/lib/i18n/index.ts",
+      "source_summary": "",
+      "code_purpose": "entry",
+      "importance_score": 0.8,
+      "description": "国际化模块的初始化入口，负责加载多语言资源并配置默认语言环境。",
+      "functions": [],
+      "interfaces": []
+    },
+    "detailed_description": "该组件是Svelte应用中i18n（国际化）系统的初始化入口。它通过导入svelte-i18n库的核心函数init和addMessages，注册英文(en)和中文(zh)的语言包，并基于getLocale()获取当前用户的首选语言，fallbackLocale作为备用语言进行初始化配置。整个逻辑在模块加载时自动执行，无需显式调用，确保应用启动时语言环境已正确设置。",
+    "responsibilities": [
+      "加载并注册多语言消息（en, zh）",
+      "初始化i18n系统的核心配置",
+      "设置回退语言和初始语言",
+      "作为i18n功能的统一接入点"
+    ],
+    "interfaces": [],
+    "dependencies": [
+      {
+        "name": "svelte-i18n",
+        "path": null,
+        "is_external": true,
+        "line_number": 1,
+        "dependency_type": "library",
+        "version": null
+      },
+      {
+        "name": "svelte-i18n",
+        "path": null,
+        "is_external": true,
+        "line_number": 2,
+        "dependency_type": "library",
+        "version": null
+      },
+      {
+        "name": "./settings",
+        "path": "app/src/lib/i18n/settings",
+        "is_external": false,
+        "line_number": 3,
+        "dependency_type": "module",
+        "version": null
+      },
+      {
+        "name": "./locales/en.json",
+        "path": "app/src/lib/i18n/locales/en.json",
+        "is_external": false,
+        "line_number": 4,
+        "dependency_type": "resource",
+        "version": null
+      },
+      {
+        "name": "./locales/zh.json",
+        "path": "app/src/lib/i18n/locales/zh.json",
+        "is_external": false,
+        "line_number": 5,
+        "dependency_type": "resource",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 13,
+      "number_of_functions": 0,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 5.0,
+      "cohesion_score": 0.9
+    }
+  },
+  "timestamp": 1759024467,
+  "prompt_hash": "34a006e9861ea50feae34bd3850e924a",
+  "token_usage": {
+    "input_tokens": 488,
+    "output_tokens": 568,
+    "total_tokens": 1056
+  },
+  "model_name": null
+}

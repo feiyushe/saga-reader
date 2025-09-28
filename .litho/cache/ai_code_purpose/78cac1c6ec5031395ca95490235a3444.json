@@ -1,0 +1,15 @@
+{
+  "data": {
+    "code_purpose": "config",
+    "confidence": 0.95,
+    "reasoning": "该文件包含多个常量定义，主要用于存储窗口标签、URL和标题等配置信息。文件名'constrant.rs'（尽管拼写可能有误，应为'constant'）以及其内容均为不可变的常量值，符合配置文件的特征。这些常量被用于应用程序的不同窗口设置，属于典型的配置用途。"
+  },
+  "timestamp": 1758800942,
+  "prompt_hash": "78cac1c6ec5031395ca95490235a3444",
+  "token_usage": {
+    "input_tokens": 349,
+    "output_tokens": 162,
+    "total_tokens": 511
+  },
+  "model_name": null
+}

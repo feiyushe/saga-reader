@@ -1,0 +1,15 @@
+{
+  "data": {
+    "code_purpose": "config",
+    "confidence": 0.98,
+    "reasoning": "该文件是一个Tauri应用的配置文件（tauri.conf.json），位于src-tauri目录下，属于Rust/Tauri项目的标准配置结构。文件以JSON格式定义了应用的元信息（如名称、版本、标识符）、构建指令（dev和build命令、前端资源路径）、窗口配置、安全策略和打包设置等，不包含任何可执行逻辑或业务代码，完全符合配置文件的特征。"
+  },
+  "timestamp": 1758800928,
+  "prompt_hash": "2b3a1a43f1a8ee478955d04ec6356bab",
+  "token_usage": {
+    "input_tokens": 470,
+    "output_tokens": 188,
+    "total_tokens": 658
+  },
+  "model_name": null
+}

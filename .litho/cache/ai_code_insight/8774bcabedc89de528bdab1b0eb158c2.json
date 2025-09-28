@@ -1,0 +1,109 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "feeds_update.rs",
+      "file_path": "app/src-tauri/src/daemon/feeds_update.rs",
+      "source_summary": "",
+      "code_purpose": "agent",
+      "importance_score": 0.8,
+      "description": "负责定时拉取并更新订阅源内容的后台守护任务，基于配置频率执行周期性更新。",
+      "functions": [
+        "launch_feeds_schedule_update",
+        "schedule_loop"
+      ],
+      "interfaces": []
+    },
+    "detailed_description": "该组件实现了一个后台定时任务代理（Agent），用于周期性地更新应用程序中的订阅源内容。通过读取应用配置中的更新频率（高频1小时或低频3小时），启动一个异步循环，每隔设定时间触发一次批量更新操作。每次执行时遍历所有已注册的feed package及其包含的feed项，并调用FeaturesAPI进行内容更新。使用文件锁机制防止多个实例同时运行，确保更新过程的唯一性和安全性。错误信息通过日志记录，成功与失败均有相应日志输出，便于监控和调试。",
+    "responsibilities": [
+      "管理订阅源内容的周期性自动更新任务",
+      "防止并发执行：通过文件锁确保同一时间仅有一个更新进程运行",
+      "根据应用配置动态调整更新频率（1小时或3小时）",
+      "协调调用FeaturesAPI完成各个feed的内容拉取与刷新",
+      "提供结构化日志输出以支持运行时监控和故障排查"
+    ],
+    "interfaces": [],
+    "dependencies": [
+      {
+        "name": "std::sync::Arc",
+        "path": "std::sync::Arc",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "std",
+        "version": null
+      },
+      {
+        "name": "feed_api_rs::features::api::FeaturesAPI",
+        "path": "feed_api_rs::features::api::FeaturesAPI",
+        "is_external": true,
+        "line_number": null,
+        "dependency_type": "crate",
+        "version": null
+      },
+      {
+        "name": "fslock::LockFile",
+        "path": "fslock::LockFile",
+        "is_external": true,
+        "line_number": null,
+        "dependency_type": "crate",
+        "version": null
+      },
+      {
+        "name": "spdlog",
+        "path": "spdlog",
+        "is_external": true,
+        "line_number": null,
+        "dependency_type": "crate",
+        "version": null
+      },
+      {
+        "name": "tauri",
+        "path": "tauri",
+        "is_external": true,
+        "line_number": null,
+        "dependency_type": "crate",
+        "version": null
+      },
+      {
+        "name": "tauri_plugin_feed_api::state::HybridRuntimeState",
+        "path": "tauri_plugin_feed_api::state::HybridRuntimeState",
+        "is_external": true,
+        "line_number": null,
+        "dependency_type": "crate",
+        "version": null
+      },
+      {
+        "name": "tokio::time",
+        "path": "tokio::time",
+        "is_external": true,
+        "line_number": null,
+        "dependency_type": "crate",
+        "version": null
+      },
+      {
+        "name": "crate::daemon::locks",
+        "path": "crate::daemon::locks",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "local",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 6.0,
+      "lines_of_code": 69,
+      "number_of_functions": 2,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.875,
+      "cohesion_score": 0.75
+    }
+  },
+  "timestamp": 1759024433,
+  "prompt_hash": "8774bcabedc89de528bdab1b0eb158c2",
+  "token_usage": {
+    "input_tokens": 1026,
+    "output_tokens": 894,
+    "total_tokens": 1920
+  },
+  "model_name": null
+}

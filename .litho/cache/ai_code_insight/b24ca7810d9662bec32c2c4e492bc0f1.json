@@ -1,0 +1,98 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "scrap_host.rs",
+      "file_path": "crates/tauri-plugin-feed-api/src/scrap_host.rs",
+      "source_summary": "",
+      "code_purpose": "api",
+      "importance_score": 0.8,
+      "description": "提供基于Tauri框架的网页内容抓取功能，通过创建隐藏Webview窗口加载指定URL并提取页面HTML内容。",
+      "functions": [
+        "scrap_text_by_url"
+      ],
+      "interfaces": []
+    },
+    "detailed_description": "该组件实现了异步网页内容抓取功能。其核心逻辑是：接收一个URL地址，在Tauri应用中创建一个不可见的Webview窗口加载该页面；等待3秒确保页面渲染完成；通过执行JavaScript脚本读取document.documentElement.innerHTML；使用Tauri事件系统将结果回传，并通过channel发送出去；最后关闭临时窗口并返回抓取结果。若已有抓取任务正在进行，则拒绝新请求以避免并发冲突。",
+    "responsibilities": [
+      "管理用于网页抓取的专用Webview窗口生命周期",
+      "防止并发抓取操作，保证单实例运行",
+      "执行JavaScript代码从远程页面提取HTML内容",
+      "通过异步通道返回抓取结果",
+      "处理Webview窗口的创建、通信与资源释放"
+    ],
+    "interfaces": [
+      {
+        "name": "scrap_text_by_url",
+        "interface_type": "function",
+        "visibility": "pub(crate)",
+        "parameters": [
+          {
+            "name": "app_handle",
+            "param_type": "AppHandle<R>",
+            "is_optional": false,
+            "description": "Tauri应用句柄，用于管理Webview窗口"
+          },
+          {
+            "name": "url",
+            "param_type": "&str",
+            "is_optional": false,
+            "description": "待抓取的网页URL字符串引用"
+          }
+        ],
+        "return_type": "Result<String, ()>",
+        "description": "异步抓取指定URL页面的完整HTML内容"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "std::sync::Arc",
+        "path": "std::sync::Arc",
+        "is_external": false,
+        "line_number": 1,
+        "dependency_type": "standard_library",
+        "version": null
+      },
+      {
+        "name": "spdlog::error",
+        "path": "spdlog::error",
+        "is_external": true,
+        "line_number": 3,
+        "dependency_type": "logging",
+        "version": null
+      },
+      {
+        "name": "tauri",
+        "path": "tauri",
+        "is_external": true,
+        "line_number": 5,
+        "dependency_type": "framework",
+        "version": null
+      },
+      {
+        "name": "tokio::sync::oneshot",
+        "path": "tokio::sync::oneshot",
+        "is_external": true,
+        "line_number": 7,
+        "dependency_type": "async_channel",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 2.0,
+      "lines_of_code": 55,
+      "number_of_functions": 1,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 4.0,
+      "cohesion_score": 0.9
+    }
+  },
+  "timestamp": 1759024402,
+  "prompt_hash": "b24ca7810d9662bec32c2c4e492bc0f1",
+  "token_usage": {
+    "input_tokens": 888,
+    "output_tokens": 768,
+    "total_tokens": 1656
+  },
+  "model_name": null
+}

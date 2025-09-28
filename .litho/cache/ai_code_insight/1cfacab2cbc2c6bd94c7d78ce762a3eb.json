@@ -1,0 +1,251 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "bing.rs",
+      "file_path": "crates/scrap/src/search/bing.rs",
+      "code_purpose": "specificfeature",
+      "importance_score": 0.8,
+      "description": "实现Bing搜索引擎的网页内容抓取与解析功能，支持通过关键词搜索并提取文章标题、链接及摘要信息。集成HTML清洗、文本抽取和LLM内容处理流程。",
+      "functions": [
+        "new",
+        "prepare_target_sources",
+        "convert",
+        "search_by_words"
+      ],
+      "interfaces": [
+        "IProvider"
+      ]
+    },
+    "detailed_description": "该组件实现了针对Bing搜索结果页的内容爬取与结构化提取逻辑。主要流程包括：1) 构造带编码关键词的Bing搜索URL；2) 使用reqwest客户端或Tauri运行时发起HTTP请求获取HTML；3) 利用scraper库解析DOM，通过CSS选择器提取每条搜索结果的标题、描述和链接；4) 对提取的链接进一步调用article_reader模块进行正文抓取与内容提炼；5) 将原始搜索片段与最终抓取内容整合为Article对象列表返回。整个过程支持可配置的LLM内容处理区域，并记录日志便于调试。",
+    "responsibilities": [
+      "构建Bing搜索URL并发送查询请求",
+      "解析Bing搜索结果页面的HTML结构",
+      "提取搜索结果中的标题、摘要和链接信息",
+      "协调调用文章内容抓取服务以获取完整正文",
+      "将非结构化搜索结果转换为标准化Article数据模型"
+    ],
+    "interfaces": [
+      {
+        "name": "new",
+        "interface_type": "constructor",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "llm_section",
+            "param_type": "LLMSection",
+            "is_optional": false,
+            "description": "指定用于内容处理的LLM区域配置"
+          }
+        ],
+        "return_type": "anyhow::Result<Provider>",
+        "description": "初始化Provider实例，配置HTTP客户端和HTML选择器"
+      },
+      {
+        "name": "prepare_target_sources",
+        "interface_type": "method",
+        "visibility": "private",
+        "parameters": [
+          {
+            "name": "html_text",
+            "param_type": "&str",
+            "is_optional": false,
+            "description": "原始Bing搜索结果HTML文本"
+          }
+        ],
+        "return_type": "anyhow::Result<Vec<Article>>",
+        "description": "从HTML中提取基础搜索结果项（仅含标题、链接、头部阅读提示）"
+      },
+      {
+        "name": "convert",
+        "interface_type": "method",
+        "visibility": "private",
+        "parameters": [
+          {
+            "name": "html_text",
+            "param_type": "String",
+            "is_optional": false,
+            "description": "待处理的搜索结果HTML"
+          }
+        ],
+        "return_type": "anyhow::Result<Vec<Article>>",
+        "description": "将基础搜索结果扩展为包含全文内容的Article对象"
+      },
+      {
+        "name": "search_by_words",
+        "interface_type": "trait_method",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "words",
+            "param_type": "Vec<&str>",
+            "is_optional": false,
+            "description": "要搜索的关键词列表"
+          },
+          {
+            "name": "app_handle",
+            "param_type": "Option<AppHandle<R>>",
+            "is_optional": true,
+            "description": "Tauri应用句柄，用于在GUI环境中执行网络请求"
+          }
+        ],
+        "return_type": "anyhow::Result<Vec<Article>>",
+        "description": "主入口方法：执行关键词搜索、获取结果并完成全流程解析"
+      },
+      {
+        "name": "Provider",
+        "interface_type": "struct",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "封装Bing搜索提供者的状态，包括HTTP客户端、选择器和LLM配置"
+      },
+      {
+        "name": "IProvider",
+        "interface_type": "trait",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "统一搜索提供者接口契约"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "reqwest::Client",
+        "path": null,
+        "is_external": true,
+        "line_number": 1,
+        "dependency_type": "http_client",
+        "version": null
+      },
+      {
+        "name": "scraper",
+        "path": null,
+        "is_external": true,
+        "line_number": 2,
+        "dependency_type": "html_parser",
+        "version": null
+      },
+      {
+        "name": "spdlog",
+        "path": null,
+        "is_external": true,
+        "line_number": 3,
+        "dependency_type": "logging",
+        "version": null
+      },
+      {
+        "name": "tauri",
+        "path": null,
+        "is_external": true,
+        "line_number": 4,
+        "dependency_type": "desktop_framework",
+        "version": null
+      },
+      {
+        "name": "urlencoding",
+        "path": null,
+        "is_external": true,
+        "line_number": 5,
+        "dependency_type": "utility",
+        "version": null
+      },
+      {
+        "name": "types::Article",
+        "path": "types",
+        "is_external": false,
+        "line_number": 7,
+        "dependency_type": "model",
+        "version": null
+      },
+      {
+        "name": "types::LLMSection",
+        "path": "types",
+        "is_external": false,
+        "line_number": 7,
+        "dependency_type": "model",
+        "version": null
+      },
+      {
+        "name": "crate::connector::ClientOption",
+        "path": "crate::connector",
+        "is_external": false,
+        "line_number": 9,
+        "dependency_type": "configuration",
+        "version": null
+      },
+      {
+        "name": "crate::search::selector_extensions::ElementSelector",
+        "path": "crate::search::selector_extensions",
+        "is_external": false,
+        "line_number": 10,
+        "dependency_type": "extension",
+        "version": null
+      },
+      {
+        "name": "crate::search::types::IProvider",
+        "path": "crate::search::types",
+        "is_external": false,
+        "line_number": 11,
+        "dependency_type": "interface",
+        "version": null
+      },
+      {
+        "name": "crate::search::utils::trim_head_read_days_ago",
+        "path": "crate::search::utils",
+        "is_external": false,
+        "line_number": 12,
+        "dependency_type": "utility",
+        "version": null
+      },
+      {
+        "name": "crate::search::utils::trim_html_with_script_and_style",
+        "path": "crate::search::utils",
+        "is_external": false,
+        "line_number": 12,
+        "dependency_type": "utility",
+        "version": null
+      },
+      {
+        "name": "crate::simulator::scrap_text_by_url",
+        "path": "crate::simulator",
+        "is_external": false,
+        "line_number": 13,
+        "dependency_type": "service",
+        "version": null
+      },
+      {
+        "name": "crate::article_reader",
+        "path": "crate::",
+        "is_external": false,
+        "line_number": 14,
+        "dependency_type": "service",
+        "version": null
+      },
+      {
+        "name": "crate::connector",
+        "path": "crate::connector",
+        "is_external": false,
+        "line_number": 15,
+        "dependency_type": "service",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 7.0,
+      "lines_of_code": 134,
+      "number_of_functions": 4,
+      "number_of_classes": 1,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.6875,
+      "cohesion_score": 0.85
+    }
+  },
+  "timestamp": 1758805479,
+  "prompt_hash": "1cfacab2cbc2c6bd94c7d78ce762a3eb",
+  "token_usage": {
+    "input_tokens": 1629,
+    "output_tokens": 1700,
+    "total_tokens": 3329
+  },
+  "model_name": null
+}

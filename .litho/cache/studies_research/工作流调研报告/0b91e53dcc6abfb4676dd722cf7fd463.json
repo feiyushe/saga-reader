@@ -1,0 +1,34 @@
+{
+  "data": {
+    "main_workflow": {
+      "name": "文章获取与智能处理流程",
+      "description": "系统启动后自动加载用户订阅源，通过RSS或搜索引擎抓取最新文章内容，利用大语言模型对原始内容进行净化、优化和熔炼等智能处理，并将结果持久化到本地数据库，最后在前端展示给用户。",
+      "flowchart_mermaid": "graph TD\n    A[系统启动] --> B[初始化配置与日志]\n    B --> C[加载用户订阅源]\n    C --> D[并发抓取RSS/搜索结果]\n    D --> E[提取网页正文内容]\n    E --> F[LLM三阶段处理: 净化-优化-熔炼]\n    F --> G[保存至本地SQLite数据库]\n    G --> H[前端状态管理器加载数据]\n    H --> I[渲染文章列表界面]"
+    },
+    "other_important_workflows": [
+      {
+        "name": "AI助手对话交互流程",
+        "description": "用户在AI精灵面板输入问题后，系统结合当前文章内容构造提示词，调用配置的LLM服务生成回复，并将流式响应实时显示在对话界面中。",
+        "flowchart_mermaid": "graph TD\n    A[用户输入问题] --> B[触发AI精灵Store]\n    B --> C[Tauri命令桥接至Rust后端]\n    C --> D[构造包含上下文的Prompt]\n    D --> E[LLM代理调用Ollama/Mistral/GLM等模型]\n    E --> F[返回生成的回复文本]\n    F --> G[Tauri事件回传前端]\n    G --> H[流式渲染AI回复消息]"
+      },
+      {
+        "name": "文章阅读与状态更新流程",
+        "description": "用户点击文章条目后，系统加载完整内容并支持多种阅读模式切换；当用户浏览时自动标记为已读，并同步更新数据库中的阅读状态。",
+        "flowchart_mermaid": "graph TD\n    A[用户点击文章] --> B[文章阅读器组件激活]\n    B --> C[调用Tauri API获取内容]\n    C --> D[展示优化/熔炼/原文三种视图]\n    D --> E[滚动过程中自动标记已读]\n    E --> F[调用markAsRead接口]\n    F --> G[更新数据库记录]\n    G --> H[状态Store同步变更]"
+      },
+      {
+        "name": "后台定时更新流程",
+        "description": "系统以守护进程方式运行定时任务，周期性检查所有订阅源的更新情况，自动抓取新内容并推送至用户界面。",
+        "flowchart_mermaid": "graph TD\n    A[守护进程启动] --> B[设置定时器]\n    B --> C[定期触发更新任务]\n    C --> D[遍历所有订阅源]\n    D --> E[抓取最新文章列表]\n    E --> F[去重并过滤已存在内容]\n    F --> G[执行智能内容处理流水线]\n    G --> H[存储新文章到数据库]\n    H --> I[通知前端刷新UI]"
+      }
+    ]
+  },
+  "timestamp": 1758807710,
+  "prompt_hash": "0b91e53dcc6abfb4676dd722cf7fd463",
+  "token_usage": {
+    "input_tokens": 19863,
+    "output_tokens": 1011,
+    "total_tokens": 20874
+  },
+  "model_name": null
+}

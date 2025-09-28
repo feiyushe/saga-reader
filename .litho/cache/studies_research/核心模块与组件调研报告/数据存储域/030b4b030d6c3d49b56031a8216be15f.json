@@ -1,0 +1,23 @@
+{
+  "data": {
+    "domain_name": "数据存储域",
+    "module_name": "数据库访问层",
+    "module_description": "封装对SQLite数据库的CRUD操作，提供类型安全的数据访问接口。",
+    "interaction": "定义了与文章记录服务之间的接口调用方式，通过依赖注入将Operator实例传递给ArticleRecorderService，支持异步方法调用如insert、update、delete和query。使用SeaORM的QueryFilter进行条件构建，实现按ID、链接、分组等多维度查询。",
+    "implementation": "基于SeaORM异步ORM框架实现，采用惰性初始化策略，在首次调用时建立数据库连接并自动创建表结构。使用连接池管理数据库连接，提升并发性能。支持分页查询和复杂条件过滤，所有操作均为异步fn，适配Rust异步运行时。核心类型包括DatabaseConnection、Entity、Model等。",
+    "associated_files": [
+      "crates/recorder/src/operator.rs",
+      "crates/recorder/src/entity/article_record.rs"
+    ],
+    "flowchart_mermaid": "graph TD\n    A[应用层] --> B[文章记录服务]\n    B --> C[数据库访问层]\n    C --> D[(SQLite数据库)]\n    C --> E[连接池管理]\n    C --> F[表结构自动创建]\n    B --> G[状态管理]\n    B --> H[全文检索]",
+    "sequence_diagram_mermaid": "sequenceDiagram\n    participant App as 应用层\n    participant Service as 文章记录服务\n    participant Operator as 数据库访问层\n    participant DB as SQLite数据库\n\n    App->>Service: insert_article(article)\n    Service->>Operator: insert(model)\n    Operator->>DB: INSERT INTO t_article_record\n    DB-->>Operator: 返回结果\n    Operator-->>Service: Result<Model>\n    Service-->>App: ArticleRecordId\n\n    App->>Service: search_by_keywords('rust')\n    Service->>Operator: find_with_filter()\n    Operator->>DB: SELECT ... WHERE title LIKE '%rust%'\n    DB-->>Operator: 查询结果集\n    Operator-->>Service: Vec<Model>\n    Service-->>App: Vec<ArticleRecord>"
+  },
+  "timestamp": 1758807734,
+  "prompt_hash": "030b4b030d6c3d49b56031a8216be15f",
+  "token_usage": {
+    "input_tokens": 1197,
+    "output_tokens": 662,
+    "total_tokens": 1859
+  },
+  "model_name": null
+}

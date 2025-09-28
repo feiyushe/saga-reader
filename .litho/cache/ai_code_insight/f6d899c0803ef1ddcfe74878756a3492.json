@@ -1,0 +1,328 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "types.ts",
+      "file_path": "app/src/routes/main/widgets/types.ts",
+      "code_purpose": "widget",
+      "importance_score": 1.0,
+      "description": "定义前端组件间通信的类型接口，主要用于Svelte组件的props类型声明",
+      "functions": [],
+      "interfaces": [
+        "FeedsListProps",
+        "SearchBarProps",
+        "ArticleReaderProps",
+        "ArticlesGroup",
+        "ArticlesListProps",
+        "FooterProps",
+        "AISpriteProps",
+        "ArticleReadMode"
+      ]
+    },
+    "detailed_description": "该文件是Svelte前端应用中的类型定义中心，专门用于定义UI组件之间的属性传递接口（Props）。它通过TypeScript的interface和type语法，为多个Svelte组件提供类型安全的props定义，包括Feeds列表、搜索栏、文章阅读器、文章分组列表、页脚和AI精灵等组件。同时定义了文章阅读模式的字面量联合类型。所有类型均通过export type导出，确保类型仅在编译时使用，不产生运行时开销。",
+    "responsibilities": [
+      "为Feeds列表组件提供类型定义",
+      "为文章阅读器组件提供类型定义",
+      "定义文章列表分组的数据结构",
+      "管理跨组件的状态store类型引用",
+      "定义UI交互事件的回调函数签名"
+    ],
+    "interfaces": [
+      {
+        "name": "FeedsListProps",
+        "interface_type": "interface",
+        "visibility": "exported",
+        "parameters": [
+          {
+            "name": "store",
+            "param_type": "FeedsStoreType",
+            "is_optional": false,
+            "description": "Feeds状态管理store"
+          },
+          {
+            "name": "selectedFeedId",
+            "param_type": "string | undefined",
+            "is_optional": true,
+            "description": "当前选中的feed ID"
+          },
+          {
+            "name": "onFeedPressed",
+            "param_type": "(feedId: string) => void",
+            "is_optional": false,
+            "description": "feed项点击回调"
+          },
+          {
+            "name": "onSelectToday",
+            "param_type": "() => void",
+            "is_optional": false,
+            "description": "选择今日内容回调"
+          },
+          {
+            "name": "onSelectWeekend",
+            "param_type": "() => void",
+            "is_optional": false,
+            "description": "选择周末内容回调"
+          },
+          {
+            "name": "isTodaySelected",
+            "param_type": "boolean",
+            "is_optional": false,
+            "description": "今日筛选是否激活"
+          },
+          {
+            "name": "isWeekendSelected",
+            "param_type": "boolean",
+            "is_optional": false,
+            "description": "周末筛选是否激活"
+          },
+          {
+            "name": "onSelectFavorite",
+            "param_type": "() => void",
+            "is_optional": false,
+            "description": "选择收藏内容回调"
+          },
+          {
+            "name": "isFavoriteSelected",
+            "param_type": "boolean",
+            "is_optional": false,
+            "description": "收藏筛选是否激活"
+          },
+          {
+            "name": "onSelectUnread",
+            "param_type": "() => void",
+            "is_optional": false,
+            "description": "选择未读内容回调"
+          },
+          {
+            "name": "isUnreadSelected",
+            "param_type": "boolean",
+            "is_optional": false,
+            "description": "未读筛选是否激活"
+          }
+        ],
+        "return_type": null,
+        "description": "Feeds列表组件的props类型，包含筛选状态和交互回调"
+      },
+      {
+        "name": "SearchBarProps",
+        "interface_type": "interface",
+        "visibility": "exported",
+        "parameters": [
+          {
+            "name": "store",
+            "param_type": "SearchStoreType",
+            "is_optional": false,
+            "description": "搜索功能的状态store"
+          },
+          {
+            "name": "articles_store",
+            "param_type": "ListStoreType",
+            "is_optional": false,
+            "description": "文章列表的状态store"
+          }
+        ],
+        "return_type": null,
+        "description": "搜索栏组件的props类型，需要访问搜索和文章列表两个store"
+      },
+      {
+        "name": "ArticleReaderProps",
+        "interface_type": "interface",
+        "visibility": "exported",
+        "parameters": [
+          {
+            "name": "articleId",
+            "param_type": "number",
+            "is_optional": false,
+            "description": "要阅读的文章ID"
+          },
+          {
+            "name": "store",
+            "param_type": "ReaderStoreType",
+            "is_optional": false,
+            "description": "阅读器状态管理store"
+          }
+        ],
+        "return_type": null,
+        "description": "文章阅读器组件的props类型"
+      },
+      {
+        "name": "ArticlesGroup",
+        "interface_type": "interface",
+        "visibility": "exported",
+        "parameters": [
+          {
+            "name": "name",
+            "param_type": "string",
+            "is_optional": false,
+            "description": "文章分组名称"
+          },
+          {
+            "name": "articles",
+            "param_type": "Article[]",
+            "is_optional": false,
+            "description": "该分组下的文章数组"
+          }
+        ],
+        "return_type": null,
+        "description": "文章分组的数据结构，用于组织文章列表"
+      },
+      {
+        "name": "ArticlesListProps",
+        "interface_type": "interface",
+        "visibility": "exported",
+        "parameters": [
+          {
+            "name": "store",
+            "param_type": "ListStoreType",
+            "is_optional": false,
+            "description": "文章列表状态管理store"
+          },
+          {
+            "name": "markAsRead",
+            "param_type": "(articleId: number) => Promise<void>",
+            "is_optional": false,
+            "description": "标记文章为已读的异步函数"
+          },
+          {
+            "name": "isFilterActived",
+            "param_type": "boolean",
+            "is_optional": false,
+            "description": "过滤器是否激活"
+          },
+          {
+            "name": "isFeedSpecified",
+            "param_type": "boolean",
+            "is_optional": false,
+            "description": "是否指定了特定feed"
+          },
+          {
+            "name": "selectedArticle",
+            "param_type": "Article | null",
+            "is_optional": true,
+            "description": "当前选中的文章"
+          },
+          {
+            "name": "onArticlePressed",
+            "param_type": "(article: Article) => void",
+            "is_optional": false,
+            "description": "文章项点击回调"
+          }
+        ],
+        "return_type": null,
+        "description": "文章列表组件的props类型，包含状态store和用户交互处理"
+      },
+      {
+        "name": "FooterProps",
+        "interface_type": "interface",
+        "visibility": "exported",
+        "parameters": [
+          {
+            "name": "tasksStore",
+            "param_type": "TasksStoreType",
+            "is_optional": false,
+            "description": "任务状态管理store"
+          }
+        ],
+        "return_type": null,
+        "description": "页脚组件的props类型"
+      },
+      {
+        "name": "AISpriteProps",
+        "interface_type": "interface",
+        "visibility": "exported",
+        "parameters": [
+          {
+            "name": "store",
+            "param_type": "AISpriteStore",
+            "is_optional": false,
+            "description": "AI精灵状态管理store"
+          }
+        ],
+        "return_type": null,
+        "description": "AI精灵组件的props类型"
+      },
+      {
+        "name": "ArticleReadMode",
+        "interface_type": "type",
+        "visibility": "exported",
+        "parameters": [],
+        "return_type": "'optimized' | 'melted' | 'original'",
+        "description": "文章阅读模式的三种可选值"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "Article",
+        "path": "$lib/types/article",
+        "is_external": false,
+        "line_number": 1,
+        "dependency_type": "type_import",
+        "version": null
+      },
+      {
+        "name": "SearchStoreType",
+        "path": "../stores/articles/search/index.svelte",
+        "is_external": false,
+        "line_number": 2,
+        "dependency_type": "type_import",
+        "version": null
+      },
+      {
+        "name": "ListStoreType",
+        "path": "../stores/articles/list/index.svelte",
+        "is_external": false,
+        "line_number": 3,
+        "dependency_type": "type_import",
+        "version": null
+      },
+      {
+        "name": "TasksStoreType",
+        "path": "../stores/tasks.svelte",
+        "is_external": false,
+        "line_number": 4,
+        "dependency_type": "type_import",
+        "version": null
+      },
+      {
+        "name": "FeedsStoreType",
+        "path": "../stores/feeds.svelte",
+        "is_external": false,
+        "line_number": 5,
+        "dependency_type": "type_import",
+        "version": null
+      },
+      {
+        "name": "ReaderStoreType",
+        "path": "../stores/reader.svelte",
+        "is_external": false,
+        "line_number": 6,
+        "dependency_type": "type_import",
+        "version": null
+      },
+      {
+        "name": "AISpriteStore",
+        "path": "../stores/sprite.svelte",
+        "is_external": false,
+        "line_number": 7,
+        "dependency_type": "type_import",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 66,
+      "number_of_functions": 0,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 7.0,
+      "cohesion_score": 0.85
+    }
+  },
+  "timestamp": 1758801086,
+  "prompt_hash": "f6d899c0803ef1ddcfe74878756a3492",
+  "token_usage": {
+    "input_tokens": 825,
+    "output_tokens": 2042,
+    "total_tokens": 2867
+  },
+  "model_name": null
+}

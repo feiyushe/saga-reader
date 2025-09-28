@@ -1,0 +1,77 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "main.rs",
+      "file_path": "app/src-tauri/src/main.rs",
+      "source_summary": "",
+      "code_purpose": "entry",
+      "importance_score": 0.8,
+      "description": "Tauri应用的主入口文件，负责初始化并启动核心运行时。",
+      "functions": [
+        "main"
+      ],
+      "interfaces": [
+        "run"
+      ]
+    },
+    "detailed_description": "该组件是Tauri桌面应用的程序入口点。通过cfg_attr属性在Windows发布版本中隐藏控制台窗口，确保用户体验整洁。它导入本地模块daemon和env，并在main函数中调用qino_feed_client_lib库的run函数来启动应用程序。整体逻辑简洁，专注于引导流程。",
+    "responsibilities": [
+      "作为应用程序的启动入口点",
+      "配置平台特定行为（如Windows下的控制台隐藏）",
+      "协调底层库的初始化与执行"
+    ],
+    "interfaces": [
+      {
+        "name": "run",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": "Result<(), anyhow::Error>",
+        "description": "来自qino_feed_client_lib的核心启动函数，初始化应用服务、窗口及事件循环"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "qino_feed_client_lib",
+        "path": "crate::qino_feed_client_lib",
+        "is_external": false,
+        "line_number": 7,
+        "dependency_type": "library",
+        "version": null
+      },
+      {
+        "name": "daemon",
+        "path": "./daemon",
+        "is_external": false,
+        "line_number": 3,
+        "dependency_type": "module",
+        "version": null
+      },
+      {
+        "name": "env",
+        "path": "./env",
+        "is_external": false,
+        "line_number": 4,
+        "dependency_type": "module",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 9,
+      "number_of_functions": 1,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.33,
+      "cohesion_score": 0.95
+    }
+  },
+  "timestamp": 1759024437,
+  "prompt_hash": "eba31b09180ad9babb41912ebe7c52de",
+  "token_usage": {
+    "input_tokens": 516,
+    "output_tokens": 514,
+    "total_tokens": 1030
+  },
+  "model_name": null
+}

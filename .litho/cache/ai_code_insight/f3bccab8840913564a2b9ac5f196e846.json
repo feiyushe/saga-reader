@@ -1,0 +1,108 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "lib.rs",
+      "file_path": "crates/tauri-plugin-feed-api/src/lib.rs",
+      "code_purpose": "api",
+      "importance_score": 0.8,
+      "description": "Tauri插件的核心模块，定义了与订阅源管理、内容抓取和AI助手交互的全部API接口。负责初始化应用上下文并注册所有命令处理器。",
+      "functions": [
+        "init"
+      ],
+      "interfaces": []
+    },
+    "detailed_description": "该组件是feed-api功能的核心Tauri插件入口，通过`init`函数创建并配置TauriPlugin实例。它集成了来自feed_api_rs后端服务的功能API，并通过调用`generate_handler!`宏将commands模块中定义的25个异步命令暴露给前端调用。插件在setup阶段异步启动应用上下文(Startup::launch)，并将FeaturesAPIImpl实例包装在Arc智能指针中进行全局状态管理。同时实现了macOS平台特定的窗口重开逻辑，确保应用从Dock点击时能正确显示主窗口。所有外部命令都通过State机制安全地访问共享的HybridRuntimeState状态对象。",
+    "responsibilities": [
+      "作为Tauri插件注册并暴露所有feed相关API命令",
+      "初始化并管理应用核心功能组件(FeaturesAPI)的生命周期",
+      "在运行时全局状态中安全地托管共享服务实例",
+      "处理跨平台特定事件(如macOS重新打开应用)",
+      "协调前端请求与后端业务逻辑之间的桥梁作用"
+    ],
+    "interfaces": [
+      {
+        "name": "init",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": "TauriPlugin<R>",
+        "description": "初始化并构建feed-api插件，注册所有命令处理器，设置全局状态和事件监听器"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "std::sync::Arc",
+        "path": "std::sync::Arc",
+        "is_external": false,
+        "line_number": 1,
+        "dependency_type": "import",
+        "version": null
+      },
+      {
+        "name": "tauri",
+        "path": "tauri",
+        "is_external": true,
+        "line_number": 3,
+        "dependency_type": "import",
+        "version": null
+      },
+      {
+        "name": "feed_api_rs::application_context::ContextHost",
+        "path": "feed_api_rs::application_context::ContextHost",
+        "is_external": true,
+        "line_number": 7,
+        "dependency_type": "import",
+        "version": null
+      },
+      {
+        "name": "feed_api_rs::features::impl_default::FeaturesAPIImpl",
+        "path": "feed_api_rs::features::impl_default::FeaturesAPIImpl",
+        "is_external": true,
+        "line_number": 8,
+        "dependency_type": "import",
+        "version": null
+      },
+      {
+        "name": "feed_api_rs::startup::Startup",
+        "path": "feed_api_rs::startup::Startup",
+        "is_external": true,
+        "line_number": 9,
+        "dependency_type": "import",
+        "version": null
+      },
+      {
+        "name": "crate::commands",
+        "path": "crates/tauri-plugin-feed-api/src/commands.rs",
+        "is_external": false,
+        "line_number": 11,
+        "dependency_type": "import",
+        "version": null
+      },
+      {
+        "name": "crate::state::HybridRuntimeState",
+        "path": "crates/tauri-plugin-feed-api/src/state/mod.rs",
+        "is_external": false,
+        "line_number": 13,
+        "dependency_type": "import",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 4.0,
+      "lines_of_code": 86,
+      "number_of_functions": 1,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 7.0,
+      "cohesion_score": 0.85
+    }
+  },
+  "timestamp": 1758805640,
+  "prompt_hash": "f3bccab8840913564a2b9ac5f196e846",
+  "token_usage": {
+    "input_tokens": 3400,
+    "output_tokens": 963,
+    "total_tokens": 4363
+  },
+  "model_name": null
+}

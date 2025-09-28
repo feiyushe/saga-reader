@@ -1,0 +1,165 @@
+{
+  "data": {
+    "core_dependencies": [
+      {
+        "from": "UI Layer",
+        "to": "Store & State Management",
+        "dependency_type": "Import",
+        "importance": 5,
+        "description": "UI组件通过导入Svelte stores进行状态管理"
+      },
+      {
+        "from": "UI Layer",
+        "to": "API & Service Layer",
+        "dependency_type": "FunctionCall",
+        "importance": 5,
+        "description": "UI通过hybrid-apis调用后端服务"
+      },
+      {
+        "from": "Store & State Management",
+        "to": "API & Service Layer",
+        "dependency_type": "FunctionCall",
+        "importance": 5,
+        "description": "Stores调用API实现数据获取和同步"
+      },
+      {
+        "from": "API & Service Layer",
+        "to": "Business Logic & Core Features",
+        "dependency_type": "FunctionCall",
+        "importance": 5,
+        "description": "API层调用核心业务逻辑处理请求"
+      },
+      {
+        "from": "Business Logic & Core Features",
+        "to": "Data Access & Utilities",
+        "dependency_type": "Composition",
+        "importance": 5,
+        "description": "核心功能组合使用数据访问和工具类"
+      },
+      {
+        "from": "Business Logic & Core Features",
+        "to": "External Integrations & Plugins",
+        "dependency_type": "Module",
+        "importance": 4,
+        "description": "核心逻辑依赖Tauri插件系统进行原生功能调用"
+      },
+      {
+        "from": "UI Layer",
+        "to": "External Integrations & Plugins",
+        "dependency_type": "Import",
+        "importance": 3,
+        "description": "部分UI组件直接调用Tauri API实现桌面功能"
+      },
+      {
+        "from": "Store & State Management",
+        "to": "Data Access & Utilities",
+        "dependency_type": "DataFlow",
+        "importance": 4,
+        "description": "状态存储与持久化数据之间的数据流"
+      }
+    ],
+    "architecture_layers": [
+      {
+        "name": "UI Layer",
+        "components": [
+          "+page.svelte",
+          "ArticlesList.svelte",
+          "AISpritePanel.svelte",
+          "FeedsList.svelte",
+          "ArticleReader.svelte",
+          "Footer.svelte",
+          "SearchBar.svelte",
+          "EmbedWebView.svelte",
+          "ContextMenuProvider.svelte",
+          "Markdown.svelte",
+          "ArticleRenderWidget.svelte",
+          "ReaderBlankIndicator.svelte",
+          "FeedsPanel.svelte",
+          "FeedEditPanel.svelte",
+          "FeedPackageEditPanel.svelte"
+        ],
+        "level": 1
+      },
+      {
+        "name": "Store & State Management",
+        "components": [
+          "index.svelte.ts",
+          "reader.svelte.ts",
+          "sprite.svelte.ts",
+          "feeds.svelte.ts",
+          "tasks.svelte.ts",
+          "loading.svelte.ts",
+          "toast.ts",
+          "context.ts"
+        ],
+        "level": 2
+      },
+      {
+        "name": "API & Service Layer",
+        "components": [
+          "impl.ts",
+          "api.ts",
+          "types.ts",
+          "index.ts",
+          "lite-edit.ts",
+          "tray.rs",
+          "commands.rs",
+          "feeds_update.rs"
+        ],
+        "level": 3
+      },
+      {
+        "name": "Business Logic & Core Features",
+        "components": [
+          "impl_default.rs",
+          "llm_agent.rs",
+          "article_reader.rs",
+          "init_app_config.rs",
+          "init_user_profile.rs",
+          "init_llm.rs"
+        ],
+        "level": 4
+      },
+      {
+        "name": "Data Access & Utilities",
+        "components": [
+          "operator.rs",
+          "article_recorder_service.rs",
+          "path.rs",
+          "connector.rs",
+          "utils.rs",
+          "selector_extensions.rs"
+        ],
+        "level": 5
+      },
+      {
+        "name": "External Integrations & Plugins",
+        "components": [
+          "lib.rs",
+          "scrap_host.rs",
+          "main.rs",
+          "launcher.rs"
+        ],
+        "level": 6
+      }
+    ],
+    "key_insights": [
+      "项目采用分层架构，从前端UI到后端核心逻辑有清晰的层次划分",
+      "Svelte stores作为状态管理核心，在UI和业务逻辑之间起到桥梁作用",
+      "存在明显的前后端分离设计，通过hybrid-apis进行通信",
+      "Tauri框架被广泛用于桌面应用集成，提供原生功能支持",
+      "智能Agent(LLM)相关组件集中在crates/llm目录，形成独立的功能模块",
+      "数据持久化通过SeaORM实现，与业务逻辑保持良好解耦",
+      "国际化(svelte-i18n)和UI库(@skeletonlabs/skeleton-svelte)被多处UI组件依赖",
+      "建议进一步规范化API层与业务逻辑层的接口定义，增强可维护性"
+    ]
+  },
+  "timestamp": 1759024752,
+  "prompt_hash": "0b584104c12da43080b2423eac392021",
+  "token_usage": {
+    "input_tokens": 14077,
+    "output_tokens": 1026,
+    "total_tokens": 15103
+  },
+  "model_name": null
+}

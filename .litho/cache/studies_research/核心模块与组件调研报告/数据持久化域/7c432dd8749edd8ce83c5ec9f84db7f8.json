@@ -1,0 +1,24 @@
+{
+  "data": {
+    "domain_name": "数据持久化域",
+    "module_name": "文章记录服务",
+    "module_description": "该模块是文章记录的核心服务层实现，封装了对文章记录的各类数据访问逻辑。它通过依赖 Operator 操作底层数据库，实现了初始化、插入、更新、查询（按分组、收藏、未读、时间范围等）、标记已读、设置收藏、关键词搜索等功能。其主要职责集中在文章记录的生命周期管理与状态变更控制，是连接上层业务逻辑与底层数据存储的关键中介。",
+    "interaction": "定义接口与交互方式：\n- 通过 `ArticleRecorderService` 结构体暴露公共方法\n- 所有操作均为异步函数，返回 `anyhow::Result<T>` 类型\n- 依赖 `Operator` 组件进行底层数据库操作\n- 使用 SeaORM 的 Model 和 ActiveModel 进行数据映射和操作\n- 支持多种查询条件（ID、分组、收藏状态、阅读状态、时间范围、关键词）\n- 提供资源清理接口 `dispose()`",
+    "implementation": "技术细节实现：\n- 使用 Rust 异步编程模型（async/await）\n- 基于 SeaORM 框架实现 ORM 操作\n- 数据库为 SQLite，通过 `sqlite://` 协议连接\n- 连接池配置：最大10连接，最小2连接，超时10秒\n- 表结构自动创建机制，在初始化时检查并创建 `t_article_record` 表\n- 路径管理使用 `dirs` crate 获取系统标准路径\n- 文件路径常量定义：`qino_feed.app_data` 目录和 `article_recorder.db` 文件\n- 实现了单例模式的数据库操作器\n- 所有文件操作基于 `std::path::PathBuf`\n- 自动创建缺失的目录结构",
+    "associated_files": [
+      "crates/recorder/src/article_recorder_service.rs",
+      "crates/recorder/src/operator.rs",
+      "crates/recorder/src/path.rs"
+    ],
+    "flowchart_mermaid": "graph TD\n    A[ArticleRecorderService] --> B[Operator]\n    B --> C[DatabaseConnection]\n    C --> D[(SQLite Database)]\n    A --> E[path.rs]\n    E --> F[System Paths]\n    \n    subgraph Data Flow\n        G[Business Logic] --> A\n        A -->|insert/update/query| B\n        B -->|SQL Operations| C\n        C -->|File I/O| D\n        E -->|Path Resolution| A\n    end",
+    "sequence_diagram_mermaid": "sequenceDiagram\n    participant Business as 业务逻辑层\n    participant Service as ArticleRecorderService\n    participant Operator as Operator\n    participant DB as DatabaseConnection\n    participant File as path.rs\n    \n    Business->>Service: initialize()\n    Service->>File: get_appdata_articles()\n    File-->>Service: 返回数据库路径\n    Service->>Operator: initialize()\n    Operator->>DB: 创建连接池\n    DB-->>Operator: 返回连接实例\n    Operator->>DB: create_table_if_not_existed()\n    DB-->>Operator: 表创建结果\n    Operator-->>Service: 初始化完成\n    Service-->>Business: 成功/错误\n    \n    Business->>Service: insert(records)\n    Service->>Operator: query() 检查重复\n    alt 存在未读记录\n        Operator-->>Service: 返回存在标志\n        Service->>Operator: delete() 删除旧记录\n    else\n        Service->>Operator: insert() 新记录\n    end\n    Operator-->>Service: 操作结果\n    Service-->>Business: 插入数量"
+  },
+  "timestamp": 1759025012,
+  "prompt_hash": "7c432dd8749edd8ce83c5ec9f84db7f8",
+  "token_usage": {
+    "input_tokens": 4738,
+    "output_tokens": 1107,
+    "total_tokens": 5845
+  },
+  "model_name": null
+}

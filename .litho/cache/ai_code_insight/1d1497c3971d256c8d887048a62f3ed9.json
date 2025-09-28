@@ -1,0 +1,66 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "index.svelte.ts",
+      "file_path": "app/src/routes/main/stores/articles/index.svelte.ts",
+      "code_purpose": "controller",
+      "importance_score": 0.8,
+      "description": "文章模块的状态管理控制器，协调搜索与列表子模块的创建和依赖注入",
+      "functions": [
+        "create"
+      ],
+      "interfaces": []
+    },
+    "detailed_description": "该组件是文章功能模块的核心状态管理协调器，负责初始化并组合两个关键子模块：搜索（search）和列表（list）。它通过`create`工厂函数接收上游任务状态（TasksStoreType），并将其实例化后的搜索模块传递给列表模块，形成依赖注入链。这种设计实现了关注点分离，使各子模块可独立维护，同时由父模块统一装配。",
+    "responsibilities": [
+      "作为文章模块的状态管理入口点",
+      "协调搜索和列表子store的创建与组装",
+      "实现跨store的依赖注入（将search实例注入list）",
+      "封装子模块的初始化逻辑，提供简洁的外部接口"
+    ],
+    "interfaces": [],
+    "dependencies": [
+      {
+        "name": "createSearch",
+        "path": "./search/index.svelte",
+        "is_external": false,
+        "line_number": 1,
+        "dependency_type": "function",
+        "version": null
+      },
+      {
+        "name": "createList",
+        "path": "./list/index.svelte",
+        "is_external": false,
+        "line_number": 2,
+        "dependency_type": "function",
+        "version": null
+      },
+      {
+        "name": "TasksStoreType",
+        "path": "../tasks.svelte",
+        "is_external": false,
+        "line_number": 3,
+        "dependency_type": "type",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 16,
+      "number_of_functions": 1,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.6,
+      "cohesion_score": 0.9
+    }
+  },
+  "timestamp": 1758805797,
+  "prompt_hash": "1d1497c3971d256c8d887048a62f3ed9",
+  "token_usage": {
+    "input_tokens": 495,
+    "output_tokens": 545,
+    "total_tokens": 1040
+  },
+  "model_name": null
+}

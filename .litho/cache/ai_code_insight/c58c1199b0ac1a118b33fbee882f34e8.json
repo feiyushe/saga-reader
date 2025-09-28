@@ -1,0 +1,191 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "article_reader.rs",
+      "file_path": "crates/scrap/src/article_reader.rs",
+      "source_summary": "",
+      "code_purpose": "specificfeature",
+      "importance_score": 0.8,
+      "description": "实现网页内容抓取与智能重定向处理的核心组件，支持基于LLM的页面跳转检测",
+      "functions": [
+        "read",
+        "read_inner",
+        "acquire_html",
+        "read_inner_from_response"
+      ],
+      "interfaces": [
+        "read",
+        "read_inner"
+      ]
+    },
+    "detailed_description": "该组件负责从指定URL抓取网页内容，并通过HTML解析提取正文文本。其核心流程包括：1) 发起HTTP请求获取原始HTML；2) 处理重定向响应（状态码3xx）；3) 利用scraper库选择body标签内容并去除脚本和样式；4) 在自动重定向模式下，使用LLM分析是否存在JavaScript跳转链接并递归抓取目标页面。特别地，当启用了auto_redirect且来源主机匹配时，会调用大模型服务判断是否存在window.location.href跳转，从而实现对前端重定向的智能化处理。",
+    "responsibilities": [
+      "发起HTTP请求并安全获取网页HTML内容",
+      "处理HTTP重定向及递归抓取最终页面",
+      "利用LLM智能识别前端JavaScript重定向链接",
+      "清洗HTML内容并提取纯文本正文",
+      "集成日志记录与错误处理机制"
+    ],
+    "interfaces": [
+      {
+        "name": "read",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "url_str",
+            "param_type": "&str",
+            "is_optional": false,
+            "description": "目标网页URL字符串引用"
+          },
+          {
+            "name": "source_search_host",
+            "param_type": "Option<String>",
+            "is_optional": true,
+            "description": "源搜索网站主机名，用于判定是否来自搜索引擎结果页"
+          },
+          {
+            "name": "llm_section",
+            "param_type": "LLMSection",
+            "is_optional": false,
+            "description": "大语言模型配置节，用于初始化CompletionAgent"
+          }
+        ],
+        "return_type": "anyhow::Result<(String, String)>",
+        "description": "公共入口函数，启动网页读取流程"
+      },
+      {
+        "name": "read_inner",
+        "interface_type": "function",
+        "visibility": "private",
+        "parameters": [
+          {
+            "name": "url_str",
+            "param_type": "&str",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "auto_redirect",
+            "param_type": "bool",
+            "is_optional": false,
+            "description": "是否启用智能重定向检测"
+          },
+          {
+            "name": "source_search_host",
+            "param_type": "Option<String>",
+            "is_optional": true,
+            "description": null
+          },
+          {
+            "name": "llm_section",
+            "param_type": "LLMSection",
+            "is_optional": false,
+            "description": null
+          }
+        ],
+        "return_type": "anyhow::Result<(String, String)>",
+        "description": "内部实现函数，包含完整的抓取与重定向逻辑"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "reqwest",
+        "path": null,
+        "is_external": true,
+        "line_number": 1,
+        "dependency_type": "http_client",
+        "version": null
+      },
+      {
+        "name": "scraper",
+        "path": null,
+        "is_external": true,
+        "line_number": 2,
+        "dependency_type": "html_parser",
+        "version": null
+      },
+      {
+        "name": "spdlog",
+        "path": null,
+        "is_external": true,
+        "line_number": 3,
+        "dependency_type": "logging",
+        "version": null
+      },
+      {
+        "name": "llm::llm_agent::CompletionAgent",
+        "path": "crates/llm/src/llm_agent.rs",
+        "is_external": false,
+        "line_number": 5,
+        "dependency_type": "ai_service",
+        "version": null
+      },
+      {
+        "name": "llm::providers::types::AITargetOption",
+        "path": "crates/llm/src/providers/types.rs",
+        "is_external": false,
+        "line_number": 6,
+        "dependency_type": "ai_config",
+        "version": null
+      },
+      {
+        "name": "types::LLMSection",
+        "path": "crates/types/src/lib.rs",
+        "is_external": false,
+        "line_number": 7,
+        "dependency_type": "config_struct",
+        "version": null
+      },
+      {
+        "name": "crate::connector",
+        "path": "crates/scrap/src/connector.rs",
+        "is_external": false,
+        "line_number": 9,
+        "dependency_type": "network_connector",
+        "version": null
+      },
+      {
+        "name": "crate::connector::ClientOption",
+        "path": "crates/scrap/src/connector.rs",
+        "is_external": false,
+        "line_number": 10,
+        "dependency_type": "config_struct",
+        "version": null
+      },
+      {
+        "name": "crate::search::selector_extensions::ElementSelector",
+        "path": "crates/scrap/src/search/selector_extensions.rs",
+        "is_external": false,
+        "line_number": 11,
+        "dependency_type": "extension_trait",
+        "version": null
+      },
+      {
+        "name": "crate::search::utils::trim_html_with_script_and_style",
+        "path": "crates/scrap/src/search/utils.rs",
+        "is_external": false,
+        "line_number": 12,
+        "dependency_type": "utility_function",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 11.0,
+      "lines_of_code": 97,
+      "number_of_functions": 4,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 10.0,
+      "cohesion_score": 0.75
+    }
+  },
+  "timestamp": 1759024333,
+  "prompt_hash": "c58c1199b0ac1a118b33fbee882f34e8",
+  "token_usage": {
+    "input_tokens": 1807,
+    "output_tokens": 1291,
+    "total_tokens": 3098
+  },
+  "model_name": null
+}

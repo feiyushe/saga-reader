@@ -1,0 +1,60 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "state.rs",
+      "file_path": "crates/tauri-plugin-feed-api/src/state.rs",
+      "source_summary": "",
+      "code_purpose": "model",
+      "importance_score": 0.6,
+      "description": "定义混合运行时状态结构，封装功能API实现。",
+      "functions": [],
+      "interfaces": [
+        "HybridRuntimeState"
+      ]
+    },
+    "detailed_description": "该组件定义了一个名为 HybridRuntimeState 的结构体，用于在 Tauri 插件中持有 feed_api_rs 功能模块的实现实例。其主要作用是作为共享状态在不同组件间传递，使得前端或后端逻辑可以安全地访问底层功能 API。目前仅包含一个字段 features_api，类型为 FeaturesAPIImpl，来自 feed_api_rs crate 的默认实现模块。",
+    "responsibilities": [
+      "封装底层功能API的实现实例",
+      "作为Tauri应用中的共享状态载体",
+      "提供类型安全的状态结构定义",
+      "解耦业务逻辑与具体API实现"
+    ],
+    "interfaces": [
+      {
+        "name": "HybridRuntimeState",
+        "interface_type": "struct",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "混合运行时状态结构，用于在Tauri插件中共享FeaturesAPIImpl实例。"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "feed_api_rs::features::impl_default::FeaturesAPIImpl",
+        "path": "feed_api_rs::features::impl_default",
+        "is_external": true,
+        "line_number": 1,
+        "dependency_type": "struct",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 5,
+      "number_of_functions": 0,
+      "number_of_classes": 1,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 1.0,
+      "cohesion_score": 1.0
+    }
+  },
+  "timestamp": 1759024648,
+  "prompt_hash": "cd39ba3772e0585b6b1349549060b61b",
+  "token_usage": {
+    "input_tokens": 447,
+    "output_tokens": 501,
+    "total_tokens": 948
+  },
+  "model_name": null
+}

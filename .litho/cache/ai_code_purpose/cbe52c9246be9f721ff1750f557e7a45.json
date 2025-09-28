@@ -1,0 +1,15 @@
+{
+  "data": {
+    "code_purpose": "api",
+    "confidence": 0.95,
+    "reasoning": "该文件位于 `crates/tauri-plugin-feed-api/src/lib.rs`，路径中包含 'api'，表明其与接口相关。文件内容中通过 `tauri::generate_handler!` 导出了大量命令函数（如 add_feed、get_app_config、update_feed_contents 等），这些是典型的 Tauri 插件 API 接口处理函数。同时，文件定义了插件初始化逻辑 `init` 并使用 `TauriPlugin`，说明它是为前端或其他后端模块提供功能调用的接口层。因此，该文件主要职责是暴露 API 接口，属于 'api' 类型。"
+  },
+  "timestamp": 1758800823,
+  "prompt_hash": "cbe52c9246be9f721ff1750f557e7a45",
+  "token_usage": {
+    "input_tokens": 460,
+    "output_tokens": 223,
+    "total_tokens": 683
+  },
+  "model_name": null
+}

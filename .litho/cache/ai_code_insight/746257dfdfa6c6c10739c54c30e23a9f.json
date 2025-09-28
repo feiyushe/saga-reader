@@ -1,0 +1,91 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "Markdown.svelte",
+      "file_path": "app/src/lib/widgets/Markdown.svelte",
+      "source_summary": "",
+      "code_purpose": "widget",
+      "importance_score": 0.8,
+      "description": "一个用于渲染 Markdown 内容的 Svelte 组件，支持自定义样式和图像渲染器。",
+      "functions": [],
+      "interfaces": [
+        "MarkdownProps"
+      ]
+    },
+    "detailed_description": "该组件封装了 '@humanspeak/svelte-markdown' 库，接收一个包含 Markdown 源文本的 `value` 属性，并通过自定义 `renderers` 配置（如使用 `MarkdownImg` 处理图片）来增强渲染能力。它还通过全局 CSS 样式统一了标题、段落、列表、表格和代码块等元素的视觉呈现，确保与应用整体设计语言一致。",
+    "responsibilities": [
+      "解析并渲染传入的 Markdown 字符串",
+      "提供可扩展的 HTML 元素渲染机制（通过 renderers）",
+      "统一 Markdown 内容的视觉样式以匹配产品设计规范",
+      "处理图片等内联元素的自定义渲染逻辑"
+    ],
+    "interfaces": [
+      {
+        "name": "MarkdownProps",
+        "interface_type": "type",
+        "visibility": "private",
+        "parameters": [
+          {
+            "name": "value",
+            "param_type": "string",
+            "is_optional": false,
+            "description": "要渲染的 Markdown 源文本"
+          }
+        ],
+        "return_type": null,
+        "description": "定义传递给 Markdown 组件的属性结构"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "@humanspeak/svelte-markdown",
+        "path": null,
+        "is_external": true,
+        "line_number": 1,
+        "dependency_type": "component",
+        "version": null
+      },
+      {
+        "name": "./types",
+        "path": "app/src/lib/widgets/types",
+        "is_external": false,
+        "line_number": 2,
+        "dependency_type": "type",
+        "version": null
+      },
+      {
+        "name": "svelte",
+        "path": null,
+        "is_external": true,
+        "line_number": 3,
+        "dependency_type": "framework",
+        "version": null
+      },
+      {
+        "name": "./MarkdownImg.svelte",
+        "path": "app/src/lib/widgets/MarkdownImg.svelte",
+        "is_external": false,
+        "line_number": 4,
+        "dependency_type": "component",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 136,
+      "number_of_functions": 0,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.029411764705882353,
+      "cohesion_score": 0.95
+    }
+  },
+  "timestamp": 1759024486,
+  "prompt_hash": "746257dfdfa6c6c10739c54c30e23a9f",
+  "token_usage": {
+    "input_tokens": 1314,
+    "output_tokens": 637,
+    "total_tokens": 1951
+  },
+  "model_name": null
+}

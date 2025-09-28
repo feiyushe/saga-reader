@@ -1,0 +1,50 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "id.ts",
+      "file_path": "app/src/lib/utils/id.ts",
+      "source_summary": "",
+      "code_purpose": "util",
+      "importance_score": 0.6,
+      "description": "生成基于时间戳的字符串ID",
+      "functions": [
+        "genStringId"
+      ],
+      "interfaces": []
+    },
+    "detailed_description": "该组件提供了一个简单的函数 genStringId，用于生成基于当前时间戳的字符串形式的唯一ID。通过调用 Date.now() 获取毫秒级时间戳，并将其转换为字符串返回。适用于需要轻量级、无依赖ID生成的场景。",
+    "responsibilities": [
+      "生成基于时间戳的唯一字符串ID",
+      "提供轻量级ID生成能力",
+      "避免外部依赖实现基本标识生成功能"
+    ],
+    "interfaces": [
+      {
+        "name": "genStringId",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": "string",
+        "description": "生成一个基于当前时间戳的字符串ID"
+      }
+    ],
+    "dependencies": [],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 5,
+      "number_of_functions": 1,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.0,
+      "cohesion_score": 1.0
+    }
+  },
+  "timestamp": 1759024694,
+  "prompt_hash": "45cb436521235e4d034a71e22730e6cf",
+  "token_usage": {
+    "input_tokens": 429,
+    "output_tokens": 364,
+    "total_tokens": 793
+  },
+  "model_name": null
+}

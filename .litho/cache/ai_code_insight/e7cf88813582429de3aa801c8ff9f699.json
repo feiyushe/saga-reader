@@ -1,0 +1,108 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "lib.rs",
+      "file_path": "crates/tauri-plugin-feed-api/src/lib.rs",
+      "source_summary": "",
+      "code_purpose": "api",
+      "importance_score": 0.8,
+      "description": "Tauri插件入口，定义并注册所有与feed功能相关的前端可调用命令。通过依赖注入管理应用状态，并初始化底层业务逻辑组件。",
+      "functions": [
+        "init"
+      ],
+      "interfaces": []
+    },
+    "detailed_description": "该组件是Tauri框架下的一个原生插件（`tauri-plugin-feed-api`）的核心入口文件。其主要职责是将位于`commands`模块中的异步Rust函数暴露给前端JavaScript环境，使其能够安全地调用本地系统能力。组件通过`tauri::plugin::Builder`构建插件实例，使用`generate_handler!`宏批量注册了24个由`#[tauri::command]`标记的函数。这些函数覆盖了从RSS源管理（增删改查）、文章内容获取、AI模型（Ollama）交互到全文搜索等完整的feed应用核心功能。在初始化阶段（`setup`），它异步启动了一个`Startup`流程来创建全局共享的`FeaturesAPIImpl`业务逻辑实例，并将其包裹在`Arc<Mutex<...>>`中通过`app_handle.manage()`进行状态管理，确保了跨命令调用的数据一致性和线程安全。此外，还包含了一个针对macOS的`on_event`监听器，用于处理应用重新打开事件时窗口的显示逻辑。",
+    "responsibilities": [
+      "作为Tauri插件的初始化入口，协调整个插件的生命周期",
+      "集中注册和暴露所有后端功能命令（Commands）供前端调用",
+      "管理插件级共享状态（HybridRuntimeState），实现依赖注入",
+      "处理特定于平台的应用程序事件（如macOS的Reopen事件）"
+    ],
+    "interfaces": [
+      {
+        "name": "init",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": "TauriPlugin<R>",
+        "description": "插件的初始化函数，返回一个构建好的Tauri插件实例。"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "std::sync::Arc",
+        "path": null,
+        "is_external": false,
+        "line_number": 1,
+        "dependency_type": "std_lib",
+        "version": null
+      },
+      {
+        "name": "tauri",
+        "path": null,
+        "is_external": true,
+        "line_number": 3,
+        "dependency_type": "external_crate",
+        "version": null
+      },
+      {
+        "name": "feed_api_rs::application_context::ContextHost",
+        "path": "crates/feed-api-rs",
+        "is_external": false,
+        "line_number": 7,
+        "dependency_type": "internal_crate",
+        "version": null
+      },
+      {
+        "name": "feed_api_rs::features::impl_default::FeaturesAPIImpl",
+        "path": "crates/feed-api-rs",
+        "is_external": false,
+        "line_number": 8,
+        "dependency_type": "internal_crate",
+        "version": null
+      },
+      {
+        "name": "feed_api_rs::startup::Startup",
+        "path": "crates/feed-api-rs",
+        "is_external": false,
+        "line_number": 9,
+        "dependency_type": "internal_crate",
+        "version": null
+      },
+      {
+        "name": "crate::commands",
+        "path": "./crates/tauri-plugin-feed-api/src/commands.rs",
+        "is_external": false,
+        "line_number": 11,
+        "dependency_type": "internal_module",
+        "version": null
+      },
+      {
+        "name": "crate::state::HybridRuntimeState",
+        "path": "./crates/tauri-plugin-feed-api/src/state.rs",
+        "is_external": false,
+        "line_number": 15,
+        "dependency_type": "internal_module",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 4.0,
+      "lines_of_code": 86,
+      "number_of_functions": 1,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.82,
+      "cohesion_score": 0.75
+    }
+  },
+  "timestamp": 1759024406,
+  "prompt_hash": "e7cf88813582429de3aa801c8ff9f699",
+  "token_usage": {
+    "input_tokens": 3408,
+    "output_tokens": 1051,
+    "total_tokens": 4459
+  },
+  "model_name": null
+}

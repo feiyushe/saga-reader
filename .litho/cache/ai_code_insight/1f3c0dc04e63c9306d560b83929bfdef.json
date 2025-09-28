@@ -1,0 +1,40 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "constrant.rs",
+      "file_path": "app/src-tauri/src/constrant.rs",
+      "code_purpose": "config",
+      "importance_score": 0.6,
+      "description": "定义了应用程序中多个窗口的标签、URL和标题常量，用于统一管理和配置Tauri应用的窗口元信息。",
+      "functions": [],
+      "interfaces": []
+    },
+    "detailed_description": "该组件是一个纯配置模块，通过Rust的const关键字定义了一系列字符串常量，主要用于Tauri桌面应用中不同窗口的标识(label)、路由地址(url)和显示标题(title)。这些常量集中管理了UI层的关键元数据，避免在代码各处硬编码字符串，提升可维护性。当前定义了主窗口、外部端点信息窗口和关于窗口三组配置项。",
+    "responsibilities": [
+      "集中管理应用窗口的唯一标识符（label）",
+      "统一维护窗口的导航路径（URL）配置",
+      "定义窗口的用户界面显示标题",
+      "提供编译时常量以确保类型安全和性能优化",
+      "避免魔法字符串，提高代码可读性和可维护性"
+    ],
+    "interfaces": [],
+    "dependencies": [],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 11,
+      "number_of_functions": 0,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.0,
+      "cohesion_score": 0.95
+    }
+  },
+  "timestamp": 1758805957,
+  "prompt_hash": "1f3c0dc04e63c9306d560b83929bfdef",
+  "token_usage": {
+    "input_tokens": 537,
+    "output_tokens": 476,
+    "total_tokens": 1013
+  },
+  "model_name": null
+}

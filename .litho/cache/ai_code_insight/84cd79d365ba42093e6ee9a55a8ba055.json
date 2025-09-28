@@ -1,0 +1,289 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "impl_default.rs",
+      "file_path": "crates/feed_api_rs/src/features/impl_default.rs",
+      "source_summary": "",
+      "code_purpose": "specificfeature",
+      "importance_score": 0.8,
+      "description": "实现Feeds功能的核心业务逻辑，包括订阅管理、内容抓取、文章处理管道和用户交互。",
+      "functions": [
+        "new",
+        "sync_user_profile",
+        "process_article_pipelines",
+        "create_futures_for_update_feeds",
+        "add_feeds_package",
+        "remove_feeds_package",
+        "rename_feeds_package",
+        "add_feed",
+        "remove_feed",
+        "rename_feed",
+        "change_feed_data",
+        "get_feeds_packages",
+        "get_feeds_by_package",
+        "update_feed_contents",
+        "read_feed_contents",
+        "query_by_id",
+        "mark_as_read",
+        "set_favorite",
+        "get_app_config",
+        "set_app_config",
+        "get_ollama_status",
+        "download_ollama",
+        "launch_ollama",
+        "open_article_external",
+        "update_article_by_source",
+        "chat_with_article_assistant",
+        "search_contents_by_keyword"
+      ],
+      "interfaces": [
+        "FeaturesAPI"
+      ]
+    },
+    "detailed_description": "该组件是Feed系统的核心业务实现。它通过`FeaturesAPIImpl`结构体实现了`FeaturesAPI`接口，提供了对订阅包（FeedsPackage）和单个订阅源（Feed）的全生命周期管理（增删改查）。其核心功能在于内容更新管道：当调用`update_feed_contents`时，会根据配置选择`scrap`或`rss`作为抓取器获取原始文章列表。对于每篇新文章，会启动一个异步处理流程，依次通过Purge、Optimizer、Melt三个LLM处理器进行内容净化、优化和融合，并将最终结果存入数据库。此外，该组件还提供读取已存档内容（支持多种过滤条件如今日、周末、收藏夹）、与文章助手对话、搜索等功能，并封装了对Ollama服务的启停控制。",
+    "responsibilities": [
+      "管理用户订阅包和订阅源的元数据配置",
+      "协调并执行从外部源抓取和处理文章内容的完整管道",
+      "提供对已存档文章的查询、标记和搜索等用户交互功能",
+      "作为应用配置和用户配置的中央访问点",
+      "集成和管理外部AI服务（Ollama）的生命周期"
+    ],
+    "interfaces": [
+      {
+        "name": "FeaturesAPI",
+        "interface_type": "trait",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "定义了所有前端或系统其他部分需要调用的Feed相关功能的接口。"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "std::sync::Arc",
+        "path": null,
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "std",
+        "version": null
+      },
+      {
+        "name": "chrono",
+        "path": null,
+        "is_external": true,
+        "line_number": null,
+        "dependency_type": "crate",
+        "version": null
+      },
+      {
+        "name": "spdlog",
+        "path": null,
+        "is_external": true,
+        "line_number": null,
+        "dependency_type": "crate",
+        "version": null
+      },
+      {
+        "name": "tauri",
+        "path": null,
+        "is_external": true,
+        "line_number": null,
+        "dependency_type": "crate",
+        "version": null
+      },
+      {
+        "name": "tokio::sync::RwLock",
+        "path": null,
+        "is_external": true,
+        "line_number": null,
+        "dependency_type": "crate",
+        "version": null
+      },
+      {
+        "name": "intelligent::article_processor::assistant::Assistant",
+        "path": "crates/intelligent/src/article_processor/assistant/mod.rs",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "local",
+        "version": null
+      },
+      {
+        "name": "intelligent::article_processor::llm_processor::ArticleLLMProcessor",
+        "path": "crates/intelligent/src/article_processor/llm_processor/mod.rs",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "local",
+        "version": null
+      },
+      {
+        "name": "intelligent::article_processor::llm_processor::IPresetArticleLLMProcessor",
+        "path": "crates/intelligent/src/article_processor/llm_processor/mod.rs",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "local",
+        "version": null
+      },
+      {
+        "name": "intelligent::article_processor::melt::Melt",
+        "path": "crates/intelligent/src/article_processor/melt/mod.rs",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "local",
+        "version": null
+      },
+      {
+        "name": "intelligent::article_processor::optimizer::Optimizer",
+        "path": "crates/intelligent/src/article_processor/optimizer/mod.rs",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "local",
+        "version": null
+      },
+      {
+        "name": "intelligent::article_processor::purge::Purge",
+        "path": "crates/intelligent/src/article_processor/purge/mod.rs",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "local",
+        "version": null
+      },
+      {
+        "name": "intelligent::article_processor::types::IArticleProcessor",
+        "path": "crates/intelligent/src/article_processor/types.rs",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "local",
+        "version": null
+      },
+      {
+        "name": "ollama",
+        "path": null,
+        "is_external": true,
+        "line_number": null,
+        "dependency_type": "crate",
+        "version": null
+      },
+      {
+        "name": "recorder::article_recorder_service::ArticleRecorderService",
+        "path": "crates/recorder/src/article_recorder_service/mod.rs",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "local",
+        "version": null
+      },
+      {
+        "name": "recorder::entity::article_record::Model",
+        "path": "crates/recorder/src/entity/article_record.rs",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "local",
+        "version": null
+      },
+      {
+        "name": "scrap::rss::RSSFetcher",
+        "path": "crates/scrap/src/rss/mod.rs",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "local",
+        "version": null
+      },
+      {
+        "name": "scrap::search::baidu",
+        "path": "crates/scrap/src/search/baidu.rs",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "local",
+        "version": null
+      },
+      {
+        "name": "scrap::search::bing",
+        "path": "crates/scrap/src/search/bing.rs",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "local",
+        "version": null
+      },
+      {
+        "name": "scrap::search::ScrapProviderEnums",
+        "path": "crates/scrap/src/search/mod.rs",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "local",
+        "version": null
+      },
+      {
+        "name": "scrap::types::IFetcher",
+        "path": "crates/scrap/src/types.rs",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "local",
+        "version": null
+      },
+      {
+        "name": "types",
+        "path": "crates/types/src/lib.rs",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "local",
+        "version": null
+      },
+      {
+        "name": "crate::startup::init_app_config::sync_to",
+        "path": "crates/feed_api_rs/src/startup/init_app_config.rs",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "local",
+        "version": null
+      },
+      {
+        "name": "crate::application_context::ApplicationContext",
+        "path": "crates/feed_api_rs/src/application_context.rs",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "local",
+        "version": null
+      },
+      {
+        "name": "crate::startup::init_user_profile",
+        "path": "crates/feed_api_rs/src/startup/init_user_profile.rs",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "local",
+        "version": null
+      },
+      {
+        "name": "crate::utils::do_parallel_with_limit",
+        "path": "crates/feed_api_rs/src/utils/mod.rs",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "local",
+        "version": null
+      },
+      {
+        "name": "super::api::FeaturesAPI",
+        "path": "crates/feed_api_rs/src/features/api.rs",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "local",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 25.0,
+      "lines_of_code": 544,
+      "number_of_functions": 22,
+      "number_of_classes": 1,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.73,
+      "cohesion_score": 0.65
+    }
+  },
+  "timestamp": 1759024300,
+  "prompt_hash": "84cd79d365ba42093e6ee9a55a8ba055",
+  "token_usage": {
+    "input_tokens": 7633,
+    "output_tokens": 1944,
+    "total_tokens": 9577
+  },
+  "model_name": null
+}

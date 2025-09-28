@@ -1,0 +1,26 @@
+{
+  "data": {
+    "domain_name": "内容处理域",
+    "module_name": "LLM内容处理器",
+    "module_description": "该模块利用大语言模型对抓取的文章内容进行智能化处理，包括内容净化、语义优化和信息融合三大核心功能。通过预设的提示模板与LLM交互，实现高质量内容输出。",
+    "interaction": "定义了IPresetArticleLLMProcessor接口作为统一契约，各处理器（purge/optimizer/melt）实现该接口。通过ArticleLLMProcessor与智能代理服务（CompletionAgent）交互，完成向底层LLM服务的请求转发。",
+    "implementation": "基于Rust异步生态构建，使用serde进行序列化，reqwest处理HTTP通信。采用策略模式设计，通过枚举类型动态绑定不同LLM提供商。各处理器使用固定提示模板与温度参数控制生成行为：净化(purge)注重完整性，优化(optimizer)强调稳定性(temperature=0.1)，熔炼(melt)允许一定创造性(temperature=0.7)。",
+    "associated_files": [
+      "crates/intelligent/src/article_processor/purge.rs",
+      "crates/intelligent/src/article_processor/optimizer.rs",
+      "crates/intelligent/src/article_processor/melt.rs",
+      "crates/llm/src/llm_agent.rs",
+      "crates/llm/src/providers/llm_openaibase_like.rs"
+    ],
+    "flowchart_mermaid": "graph TD\n    A[原始文章内容] --> B{选择处理器}\n    B --> C[净化处理器]\n    B --> D[优化处理器]\n    B --> E[熔炼处理器]\n    C --> F[调用CompletionAgent]\n    D --> F\n    E --> F\n    F --> G[LLM服务提供商]\n    G --> H[返回处理后内容]",
+    "sequence_diagram_mermaid": "sequenceDiagram\n    participant User\n    participant ArticleProcessor\n    participant CompletionAgent\n    participant LLMProvider\n    User->>ArticleProcessor: request processing\n    ArticleProcessor->>CompletionAgent: build prompt & send request\n    CompletionAgent->>LLMProvider: forward via OpenAI-like API\n    LLMProvider-->>CompletionAgent: return generated text\n    CompletionAgent-->>ArticleProcessor: parsed response\n    ArticleProcessor-->>User: return processed article"
+  },
+  "timestamp": 1758807722,
+  "prompt_hash": "0def7ce5bb74891b3843f02402fcf908",
+  "token_usage": {
+    "input_tokens": 2692,
+    "output_tokens": 684,
+    "total_tokens": 3376
+  },
+  "model_name": null
+}

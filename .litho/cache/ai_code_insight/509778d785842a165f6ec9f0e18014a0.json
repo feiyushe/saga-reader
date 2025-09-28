@@ -1,0 +1,40 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "zh.json",
+      "file_path": "app/src/lib/i18n/locales/zh.json",
+      "source_summary": "",
+      "code_purpose": "config",
+      "importance_score": 0.6,
+      "description": "中文语言包配置文件，包含应用所有界面的文本内容翻译与展示文案。",
+      "functions": [],
+      "interfaces": []
+    },
+    "detailed_description": "该组件是一个标准的JSON格式国际化（i18n）语言包，用于存储应用程序的中文界面文本。其结构按功能模块组织，如 common、main、reader、settings 等，每个模块下定义了对应的用户可见字符串，包括按钮标签、提示信息、菜单名称、对话框文本等。该文件不包含任何业务逻辑或可执行代码，纯粹作为资源配置使用，由前端框架在运行时根据当前语言环境动态加载并注入到UI组件中。",
+    "responsibilities": [
+      "提供完整的中文用户界面文本资源",
+      "支持多语言切换下的文案映射",
+      "按功能模块组织翻译内容以提高可维护性",
+      "为表单验证、错误提示、操作反馈等场景提供本地化消息"
+    ],
+    "interfaces": [],
+    "dependencies": [],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 183,
+      "number_of_functions": 0,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.0,
+      "cohesion_score": 0.95
+    }
+  },
+  "timestamp": 1759024700,
+  "prompt_hash": "509778d785842a165f6ec9f0e18014a0",
+  "token_usage": {
+    "input_tokens": 2858,
+    "output_tokens": 488,
+    "total_tokens": 3346
+  },
+  "model_name": null
+}

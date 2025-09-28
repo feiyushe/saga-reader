@@ -1,0 +1,103 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "impl.ts",
+      "file_path": "app/src/lib/hybrid-apis/feed/impl.ts",
+      "code_purpose": "api",
+      "importance_score": 0.8,
+      "description": "该文件定义了 Feeds 功能的 API 实现类 FeaturesAPIImpl，通过 Tauri 调用后端原生方法，提供对订阅源、文章内容、应用配置及 AI 助手交互等操作的支持。",
+      "functions": [
+        "add_feeds_package",
+        "remove_feeds_package",
+        "rename_feeds_package",
+        "add_feed",
+        "remove_feed",
+        "rename_feed",
+        "change_feed_data",
+        "get_feeds_packages",
+        "get_feeds_by_package",
+        "update_feed_contents",
+        "read_feed_contents",
+        "query_by_id",
+        "mark_as_read",
+        "get_app_config",
+        "set_app_config",
+        "get_ollama_status",
+        "download_ollama",
+        "launch_ollama",
+        "open_article_external",
+        "set_favorite",
+        "scrap_text_by_url",
+        "update_article_by_source",
+        "chat_with_article_assistant",
+        "search_contents_by_keyword",
+        "isSpecifyFeed",
+        "isRecentFamilyFeed"
+      ],
+      "interfaces": [
+        "FeaturesAPI"
+      ]
+    },
+    "detailed_description": "该组件是 Feed 系统的核心接口实现层，采用代理模式封装 Tauri 原生调用。它实现了 FeaturesAPI 接口，所有方法均通过 `call` 函数转发至 Rust 后端执行，实现了前后端逻辑解耦。组件还包含两个辅助函数 isSpecifyFeed 和 isRecentFamilyFeed，用于判断特殊虚拟 Feed 类型（如今日、周末、收藏等）。此外导出了预定义的 SPECIFY_FEED_IDSET 常量集合和单例实例 featuresApi，便于全局使用。",
+    "responsibilities": [
+      "提供对 RSS 订阅包和订阅项的增删改查操作",
+      "管理文章内容读取、搜索与状态更新（已读/收藏）",
+      "封装与 Ollama 本地大模型服务的交互接口",
+      "处理外部链接打开与网页内容抓取功能",
+      "提供特殊虚拟 Feed 的识别逻辑"
+    ],
+    "interfaces": [
+      {
+        "name": "FeaturesAPI",
+        "interface_type": "class",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "定义了 Feed 相关功能的接口契约"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "../tauri-regular",
+        "path": "app/src/lib/hybrid-apis/feed/../tauri-regular",
+        "is_external": false,
+        "line_number": 1,
+        "dependency_type": "module",
+        "version": null
+      },
+      {
+        "name": "./api",
+        "path": "app/src/lib/hybrid-apis/feed/api",
+        "is_external": false,
+        "line_number": 3,
+        "dependency_type": "module",
+        "version": null
+      },
+      {
+        "name": "./types",
+        "path": "app/src/lib/hybrid-apis/feed/types",
+        "is_external": false,
+        "line_number": 4,
+        "dependency_type": "module",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 3.0,
+      "lines_of_code": 164,
+      "number_of_functions": 25,
+      "number_of_classes": 1,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.15,
+      "cohesion_score": 0.88
+    }
+  },
+  "timestamp": 1758805699,
+  "prompt_hash": "ef3d38c3da8134420ef27e7b01559a4e",
+  "token_usage": {
+    "input_tokens": 1449,
+    "output_tokens": 811,
+    "total_tokens": 2260
+  },
+  "model_name": null
+}

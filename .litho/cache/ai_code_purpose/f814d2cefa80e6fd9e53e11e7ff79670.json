@@ -1,0 +1,15 @@
+{
+  "data": {
+    "code_purpose": "model",
+    "confidence": 0.95,
+    "reasoning": "该文件定义了一个名为Article的接口，包含文章的各种属性，如id、title、发布时间等，并通过export type导出。文件位于types目录下，且文件名article.ts表明其为类型定义文件。此类文件通常用于定义数据结构或模型，供其他模块引用，因此属于模型（model）类别。"
+  },
+  "timestamp": 1758800964,
+  "prompt_hash": "f814d2cefa80e6fd9e53e11e7ff79670",
+  "token_usage": {
+    "input_tokens": 284,
+    "output_tokens": 158,
+    "total_tokens": 442
+  },
+  "model_name": null
+}

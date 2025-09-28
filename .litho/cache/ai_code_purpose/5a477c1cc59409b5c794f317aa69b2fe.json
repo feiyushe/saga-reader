@@ -1,0 +1,15 @@
+{
+  "data": {
+    "code_purpose": "model",
+    "confidence": 0.95,
+    "reasoning": "该文件位于`crates/types/src/lib.rs`路径下，文件名是`lib.rs`，符合Rust中定义共享类型库的常见模式。文件内容主要包含多个使用`#[derive(Serialize, Deserialize, Clone)]`的结构体（如Article、LLMInstructOption、AppConfigLogSection），这些结构体用于数据建模和序列化，属于典型的数据模型定义。此外，该模块导出了`llm_endpoint`等子模块，也表明其作为类型集合的作用。无业务逻辑或控制流代码，因此最可能的用途是定义数据模型（model）。"
+  },
+  "timestamp": 1758800678,
+  "prompt_hash": "5a477c1cc59409b5c794f317aa69b2fe",
+  "token_usage": {
+    "input_tokens": 530,
+    "output_tokens": 236,
+    "total_tokens": 766
+  },
+  "model_name": null
+}

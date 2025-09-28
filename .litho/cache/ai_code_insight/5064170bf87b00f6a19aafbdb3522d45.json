@@ -1,0 +1,87 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "index.ts",
+      "file_path": "app/src/lib/themes/index.ts",
+      "code_purpose": "util",
+      "importance_score": 0.8,
+      "description": "主题管理工具模块，用于获取、设置和应用应用程序的UI主题（亮色/暗色模式）。",
+      "functions": [
+        "getTheme",
+        "setTheme",
+        "applyTheme",
+        "setWebInnerOnly"
+      ],
+      "interfaces": [
+        "ThemePresets"
+      ]
+    },
+    "detailed_description": "该组件是一个主题管理工具，负责处理应用程序的亮色和暗色主题切换。它通过localStorage持久化用户选择的主题，并调用Tauri API同步到原生应用层。同时，通过操作DOM类名来更新网页的视觉样式。`getTheme`从本地存储读取当前主题；`setTheme`保存主题并同步到应用层；`applyTheme`初始化或重新应用当前主题；`setWebInnerOnly`仅更新Web界面的CSS类。",
+    "responsibilities": [
+      "管理应用程序的主题状态（亮色/暗色模式）",
+      "在localStorage中持久化用户主题偏好",
+      "与Tauri原生API通信以设置应用级主题",
+      "通过DOM操作更新Web界面的视觉样式"
+    ],
+    "interfaces": [
+      {
+        "name": "ThemePresets",
+        "interface_type": "type",
+        "visibility": "exported",
+        "parameters": [],
+        "return_type": null,
+        "description": "定义支持的主题类型，仅限'light'和'dark'两种选项。"
+      },
+      {
+        "name": "getTheme",
+        "interface_type": "function",
+        "visibility": "exported",
+        "parameters": [],
+        "return_type": "ThemePresets",
+        "description": "从localStorage中读取用户保存的主题设置，若未设置则返回默认值'light'。"
+      },
+      {
+        "name": "setTheme",
+        "interface_type": "function",
+        "visibility": "exported",
+        "parameters": [
+          {
+            "name": "theme",
+            "param_type": "ThemePresets",
+            "is_optional": false,
+            "description": "要设置的主题值，必须为'light'或'dark'"
+          }
+        ],
+        "return_type": "void",
+        "description": "将指定主题保存到localStorage并通知Tauri应用层进行全局主题设置。"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "@tauri-apps/api/app",
+        "path": null,
+        "is_external": true,
+        "line_number": 1,
+        "dependency_type": "module_import",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 27,
+      "number_of_functions": 4,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.25,
+      "cohesion_score": 0.9
+    }
+  },
+  "timestamp": 1758805736,
+  "prompt_hash": "5064170bf87b00f6a19aafbdb3522d45",
+  "token_usage": {
+    "input_tokens": 588,
+    "output_tokens": 729,
+    "total_tokens": 1317
+  },
+  "model_name": null
+}

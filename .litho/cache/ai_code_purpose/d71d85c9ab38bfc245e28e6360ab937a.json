@@ -1,0 +1,15 @@
+{
+  "data": {
+    "code_purpose": "model",
+    "confidence": 0.95,
+    "reasoning": "该文件位于src/entity目录下，文件名为article_record.rs，且内容中定义了一个带有DeriveEntityModel属性的Model结构体，使用了sea_orm的数据库映射特性。这些特征表明这是一个数据模型定义文件，用于表示数据库中的文章记录实体，因此属于'model'类型。"
+  },
+  "timestamp": 1758800913,
+  "prompt_hash": "d71d85c9ab38bfc245e28e6360ab937a",
+  "token_usage": {
+    "input_tokens": 460,
+    "output_tokens": 151,
+    "total_tokens": 611
+  },
+  "model_name": null
+}

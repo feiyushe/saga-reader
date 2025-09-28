@@ -1,0 +1,92 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "melt.rs",
+      "file_path": "crates/intelligent/src/article_processor/melt.rs",
+      "code_purpose": "specificfeature",
+      "importance_score": 0.6,
+      "description": "实现文章处理中的LLM预设处理器，用于生成特定提示的AI内容。",
+      "functions": [
+        "new_processor"
+      ],
+      "interfaces": [
+        "IPresetArticleLLMProcessor"
+      ]
+    },
+    "detailed_description": "该组件实现了IPresetArticleLLMProcessor trait，负责创建一个基于预定义系统提示和用户提示的文章LLM处理器。其主要功能是通过封装固定的SYSTEM_PROMPT和USER_PROMPT_COMMAND_PURGE提示模板，结合传入的LLMSection配置，初始化并返回一个ArticleLLMProcessor实例。该处理器可能用于‘熔合’或‘提炼’文章内容，执行如摘要、重构或清理等语义转换任务。温度参数设置为0.7，表明输出具有一定创造性但保持可控。",
+    "responsibilities": [
+      "实现预设的LLM处理器创建逻辑",
+      "加载并管理固定的提示模板（system prompt 和 user prompt）",
+      "配置LLM调用参数（如temperature）",
+      "作为ArticleLLMProcessor的工厂构建器"
+    ],
+    "interfaces": [
+      {
+        "name": "IPresetArticleLLMProcessor",
+        "interface_type": "trait",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "定义了创建预设LLM处理器的标准接口"
+      },
+      {
+        "name": "new_processor",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "llm_section",
+            "param_type": "LLMSection",
+            "is_optional": false,
+            "description": "指定LLM服务的目标区域或配置"
+          }
+        ],
+        "return_type": "anyhow::Result<ArticleLLMProcessor>",
+        "description": "根据给定的LLMSection创建并返回一个配置好的ArticleLLMProcessor实例"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "llm::providers::types::AITargetOption",
+        "path": "llm::providers::types",
+        "is_external": false,
+        "line_number": 1,
+        "dependency_type": "struct",
+        "version": null
+      },
+      {
+        "name": "types::LLMSection",
+        "path": "types",
+        "is_external": false,
+        "line_number": 2,
+        "dependency_type": "struct",
+        "version": null
+      },
+      {
+        "name": "crate::article_processor::llm_processor::IPresetArticleLLMProcessor",
+        "path": "crate::article_processor::llm_processor",
+        "is_external": false,
+        "line_number": 5,
+        "dependency_type": "trait",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 2.0,
+      "lines_of_code": 19,
+      "number_of_functions": 1,
+      "number_of_classes": 1,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 3.0,
+      "cohesion_score": 0.85
+    }
+  },
+  "timestamp": 1758805895,
+  "prompt_hash": "409faa45e7903f096fdb6535f11b4a99",
+  "token_usage": {
+    "input_tokens": 592,
+    "output_tokens": 754,
+    "total_tokens": 1346
+  },
+  "model_name": null
+}

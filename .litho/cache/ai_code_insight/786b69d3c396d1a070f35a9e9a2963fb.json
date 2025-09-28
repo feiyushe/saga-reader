@@ -1,0 +1,38 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "FeedsPanel.svelte",
+      "file_path": "app/src/routes/main/widgets/FeedsPanel.svelte",
+      "code_purpose": "widget",
+      "importance_score": 0.8,
+      "description": null,
+      "functions": [],
+      "interfaces": []
+    },
+    "detailed_description": "该组件为空文件，未实现任何功能。作为前端UI组件，预期应展示信息流（feeds）内容，但当前无任何模板、脚本或样式定义。",
+    "responsibilities": [
+      "占位组件：目前仅作为未来功能的占位符",
+      "结构预留：为信息流面板保留路由和组件结构位置",
+      "待实现功能：预计用于渲染和管理动态信息流内容"
+    ],
+    "interfaces": [],
+    "dependencies": [],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 0,
+      "number_of_functions": 0,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.0,
+      "cohesion_score": 1.0
+    }
+  },
+  "timestamp": 1758805817,
+  "prompt_hash": "786b69d3c396d1a070f35a9e9a2963fb",
+  "token_usage": {
+    "input_tokens": 405,
+    "output_tokens": 280,
+    "total_tokens": 685
+  },
+  "model_name": null
+}

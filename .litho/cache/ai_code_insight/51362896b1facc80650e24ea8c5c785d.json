@@ -1,0 +1,41 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "date.ts",
+      "file_path": "app/src/lib/utils/date.ts",
+      "code_purpose": "util",
+      "importance_score": 0.6,
+      "description": "提供日期格式化工具函数，将当前日期转换为YYYY-MM-DD字符串格式",
+      "functions": [
+        "currentDateText"
+      ],
+      "interfaces": []
+    },
+    "detailed_description": "该组件包含一个工具函数currentDateText，用于获取当前日期并将其格式化为'YYYY-MM-DD'的字符串格式。函数通过JavaScript内置Date对象获取当前年、月、日，并对月份和日期进行补零处理，确保输出格式统一。主要服务于需要标准日期字符串表示的业务场景。",
+    "responsibilities": [
+      "获取当前系统日期",
+      "将日期格式化为标准的YYYY-MM-DD字符串格式",
+      "确保月份和日期的两位数显示（补零处理）",
+      "提供可复用的日期格式化功能"
+    ],
+    "interfaces": [],
+    "dependencies": [],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 13,
+      "number_of_functions": 1,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.0,
+      "cohesion_score": 1.0
+    }
+  },
+  "timestamp": 1758805994,
+  "prompt_hash": "51362896b1facc80650e24ea8c5c785d",
+  "token_usage": {
+    "input_tokens": 487,
+    "output_tokens": 383,
+    "total_tokens": 870
+  },
+  "model_name": null
+}

@@ -1,0 +1,201 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "Cargo.toml",
+      "file_path": "app/src-tauri/Cargo.toml",
+      "code_purpose": "config",
+      "importance_score": 0.6,
+      "description": "Tauri应用的Rust构建配置文件，定义项目元信息、依赖管理和编译配置。",
+      "functions": [],
+      "interfaces": []
+    },
+    "detailed_description": "该Cargo.toml文件是Tauri桌面应用的核心构建配置，负责管理整个后端Rust模块的依赖关系、编译选项和项目元数据。它定义了本地库的输出类型（动态/静态库），声明了多个Tauri官方插件以支持系统级功能如托盘图标、剪贴板操作、命令行执行等，并通过workspace机制统一管理共享依赖版本，确保依赖一致性。同时，配置了不同构建模式下的优化策略，提升发布版本性能。",
+    "responsibilities": [
+      "管理项目的元数据和版本信息",
+      "协调本地crates之间的依赖关系",
+      "集成Tauri生态插件以扩展桌面应用能力",
+      "统一workspace共享依赖的版本与特性",
+      "配置编译优化参数以提升运行时性能"
+    ],
+    "interfaces": [],
+    "dependencies": [
+      {
+        "name": "tauri-build",
+        "path": null,
+        "is_external": true,
+        "line_number": 11,
+        "dependency_type": "build-dependencies",
+        "version": "2.3.0"
+      },
+      {
+        "name": "sentry",
+        "path": null,
+        "is_external": true,
+        "line_number": 15,
+        "dependency_type": "dependencies",
+        "version": "0.41.0"
+      },
+      {
+        "name": "fslock",
+        "path": null,
+        "is_external": true,
+        "line_number": 16,
+        "dependency_type": "dependencies",
+        "version": "0.2.1"
+      },
+      {
+        "name": "tauri-plugin-shell",
+        "path": null,
+        "is_external": true,
+        "line_number": 17,
+        "dependency_type": "dependencies",
+        "version": "2.3.0"
+      },
+      {
+        "name": "tauri-plugin-clipboard-manager",
+        "path": null,
+        "is_external": true,
+        "line_number": 18,
+        "dependency_type": "dependencies",
+        "version": "2.3.0"
+      },
+      {
+        "name": "tauri-plugin-os",
+        "path": null,
+        "is_external": true,
+        "line_number": 19,
+        "dependency_type": "dependencies",
+        "version": "2.3.0"
+      },
+      {
+        "name": "tauri-plugin-dialog",
+        "path": null,
+        "is_external": true,
+        "line_number": 20,
+        "dependency_type": "dependencies",
+        "version": "2.3.1"
+      },
+      {
+        "name": "tauri-plugin-autostart",
+        "path": null,
+        "is_external": true,
+        "line_number": 23,
+        "dependency_type": "target.dependencies",
+        "version": "2.5.0"
+      },
+      {
+        "name": "tauri-plugin-single-instance",
+        "path": null,
+        "is_external": true,
+        "line_number": 24,
+        "dependency_type": "target.dependencies",
+        "version": "2.3.1"
+      },
+      {
+        "name": "feed_api_rs",
+        "path": "../../crates/feed_api_rs",
+        "is_external": false,
+        "line_number": 27,
+        "dependency_type": "dependencies",
+        "version": null
+      },
+      {
+        "name": "types",
+        "path": "../../crates/types",
+        "is_external": false,
+        "line_number": 28,
+        "dependency_type": "dependencies",
+        "version": null
+      },
+      {
+        "name": "recorder",
+        "path": "../../crates/recorder",
+        "is_external": false,
+        "line_number": 29,
+        "dependency_type": "dependencies",
+        "version": null
+      },
+      {
+        "name": "ollama",
+        "path": "../../crates/ollama",
+        "is_external": false,
+        "line_number": 30,
+        "dependency_type": "dependencies",
+        "version": null
+      },
+      {
+        "name": "tauri-plugin-feed-api",
+        "path": "../../crates/tauri-plugin-feed-api",
+        "is_external": false,
+        "line_number": 31,
+        "dependency_type": "dependencies",
+        "version": null
+      },
+      {
+        "name": "tauri",
+        "path": null,
+        "is_external": true,
+        "line_number": 34,
+        "dependency_type": "dependencies",
+        "version": null
+      },
+      {
+        "name": "serde",
+        "path": null,
+        "is_external": true,
+        "line_number": 35,
+        "dependency_type": "dependencies",
+        "version": null
+      },
+      {
+        "name": "serde_json",
+        "path": null,
+        "is_external": true,
+        "line_number": 36,
+        "dependency_type": "dependencies",
+        "version": null
+      },
+      {
+        "name": "anyhow",
+        "path": null,
+        "is_external": true,
+        "line_number": 37,
+        "dependency_type": "dependencies",
+        "version": null
+      },
+      {
+        "name": "tokio",
+        "path": null,
+        "is_external": true,
+        "line_number": 38,
+        "dependency_type": "dependencies",
+        "version": null
+      },
+      {
+        "name": "spdlog-rs",
+        "path": null,
+        "is_external": true,
+        "line_number": 39,
+        "dependency_type": "dependencies",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 53,
+      "number_of_functions": 0,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.75,
+      "cohesion_score": 0.85
+    }
+  },
+  "timestamp": 1758805961,
+  "prompt_hash": "037c011f098a1e80ee87c03e4ac4f69f",
+  "token_usage": {
+    "input_tokens": 775,
+    "output_tokens": 1118,
+    "total_tokens": 1893
+  },
+  "model_name": null
+}

@@ -1,0 +1,48 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "lib.rs",
+      "file_path": "crates/llm/src/lib.rs",
+      "code_purpose": "agent",
+      "importance_score": 0.6,
+      "description": "LLM功能的核心模块入口，组织和导出LLM智能Agent相关组件",
+      "functions": [],
+      "interfaces": []
+    },
+    "detailed_description": "该组件是LLM系统的核心模块定义文件，通过mod关键字声明并公开了三个子模块：llm_agent（智能Agent核心逻辑）、providers（LLM服务提供商集成）和connector（HTTP客户端连接器）。它作为整个LLM功能的门面（facade），负责模块化组织和API导出，但本身不包含具体业务逻辑实现。其主要作用是建立代码的模块结构和访问控制边界。",
+    "responsibilities": [
+      "作为LLM功能模块的根命名空间，提供统一的API导出入口",
+      "组织和管理LLM相关的子模块（agent、providers、connector）",
+      "控制模块间可见性与访问权限（通过pub关键字控制导出）",
+      "建立系统的模块化架构基础，支持功能解耦"
+    ],
+    "interfaces": [],
+    "dependencies": [
+      {
+        "name": "connector",
+        "path": "./crates/llm/src/connector.rs",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "module",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 3,
+      "number_of_functions": 0,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.25,
+      "cohesion_score": 0.9
+    }
+  },
+  "timestamp": 1758805851,
+  "prompt_hash": "5c768c8d6c8e6dd66ab215dce47b3f34",
+  "token_usage": {
+    "input_tokens": 477,
+    "output_tokens": 476,
+    "total_tokens": 953
+  },
+  "model_name": null
+}

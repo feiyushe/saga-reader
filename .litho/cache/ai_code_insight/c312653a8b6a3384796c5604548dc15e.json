@@ -1,0 +1,124 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "article.ts",
+      "file_path": "app/src/lib/types/article.ts",
+      "code_purpose": "model",
+      "importance_score": 0.6,
+      "description": "定义文章数据结构，用于表示系统中的文章实体及其属性。",
+      "functions": [],
+      "interfaces": [
+        "Article"
+      ]
+    },
+    "detailed_description": "该组件定义了一个名为 Article 的接口，用于描述系统中文章的数据结构。包含文章的基本信息如ID、标题、阅读状态、发布时间、内容版本（purged、optimized、melted）、创建时间、分组ID以及收藏状态等字段。主要用于类型约束和数据契约，在前后端交互或内部模块间传递文章数据时提供类型安全。",
+    "responsibilities": [
+      "定义文章实体的数据结构",
+      "提供类型安全保证",
+      "支持多版本内容展示",
+      "统一数据契约",
+      "支持前端展示与状态管理"
+    ],
+    "interfaces": [
+      {
+        "name": "Article",
+        "interface_type": "interface",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "id",
+            "param_type": "number",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "title",
+            "param_type": "string",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "head_read",
+            "param_type": "string",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "published_at",
+            "param_type": "string",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "has_read",
+            "param_type": "boolean",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "source_link",
+            "param_type": "string",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "purged_content",
+            "param_type": "string",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "optimized_content",
+            "param_type": "string",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "melted_content",
+            "param_type": "string",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "created_at",
+            "param_type": "string",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "group_id",
+            "param_type": "string",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "is_favorite",
+            "param_type": "boolean",
+            "is_optional": false,
+            "description": null
+          }
+        ],
+        "return_type": null,
+        "description": "表示系统中一篇文章的完整数据结构，包含元数据、内容版本和用户交互状态。"
+      }
+    ],
+    "dependencies": [],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 16,
+      "number_of_functions": 0,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.0,
+      "cohesion_score": 1.0
+    }
+  },
+  "timestamp": 1758805986,
+  "prompt_hash": "c312653a8b6a3384796c5604548dc15e",
+  "token_usage": {
+    "input_tokens": 479,
+    "output_tokens": 717,
+    "total_tokens": 1196
+  },
+  "model_name": null
+}
