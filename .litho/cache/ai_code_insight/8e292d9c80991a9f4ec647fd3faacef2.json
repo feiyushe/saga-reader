@@ -1,0 +1,178 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "llm_ollama.rs",
+      "file_path": "crates/llm/src/providers/llm_ollama.rs",
+      "source_summary": "",
+      "code_purpose": "specificfeature",
+      "importance_score": 0.8,
+      "description": "实现基于 Ollama LLM 的文本补全功能，封装请求参数并调用远程 API 完成生成任务",
+      "functions": [
+        "OllamaCompletionService::new",
+        "OllamaCompletionService::completion"
+      ],
+      "interfaces": [
+        "CompletionService"
+      ]
+    },
+    "detailed_description": "该组件实现了针对 Ollama 大语言模型的补全服务。通过封装请求体（RequestParameter）和解析响应（CompletionReply），利用 reqwest 发送 POST 请求至指定 endpoint 执行 completion 调用。系统提示词、模型配置和 AI 目标选项均在初始化时注入，确保可配置性与复用性。主要服务于需要与本地或私有部署的 Ollama 模型交互的功能模块。",
+    "responsibilities": [
+      "初始化 Ollama 补全服务所需的客户端与配置参数",
+      "构造符合 Ollama API 规范的请求数据结构",
+      "调用远程 /api/generate 接口完成文本生成任务",
+      "解析返回结果并提取生成文本",
+      "管理 HTTP 客户端生命周期及超时设置（间接依赖 connector）"
+    ],
+    "interfaces": [
+      {
+        "name": "OllamaCompletionService::new",
+        "interface_type": "constructor",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "config",
+            "param_type": "OllamaLLMProvider",
+            "is_optional": false,
+            "description": "包含 endpoint 等配置信息"
+          },
+          {
+            "name": "system_prompt",
+            "param_type": "String",
+            "is_optional": false,
+            "description": "系统级提示语"
+          },
+          {
+            "name": "options",
+            "param_type": "AITargetOption",
+            "is_optional": false,
+            "description": "AI 推理目标相关选项"
+          }
+        ],
+        "return_type": "anyhow::Result<OllamaCompletionService>",
+        "description": "创建一个新的 Ollama 补全服务实例"
+      },
+      {
+        "name": "OllamaCompletionService::completion",
+        "interface_type": "method",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "content",
+            "param_type": "String",
+            "is_optional": false,
+            "description": "用户输入内容"
+          }
+        ],
+        "return_type": "anyhow::Result<String>",
+        "description": "执行一次补全请求并返回生成结果"
+      },
+      {
+        "name": "CompletionService",
+        "interface_type": "trait",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "统一的补全服务接口契约"
+      },
+      {
+        "name": "RequestParameter",
+        "interface_type": "struct",
+        "visibility": "private",
+        "parameters": [],
+        "return_type": null,
+        "description": "用于序列化为 JSON 的请求体结构"
+      },
+      {
+        "name": "CompletionReply",
+        "interface_type": "struct",
+        "visibility": "private",
+        "parameters": [],
+        "return_type": null,
+        "description": "用于反序列化响应体的结果结构"
+      },
+      {
+        "name": "OllamaCompletionService",
+        "interface_type": "struct",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "Ollama 补全服务主结构体"
+      },
+      {
+        "name": "impl CompletionService for OllamaCompletionService",
+        "interface_type": "implementation",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "为 Ollama 实现通用补全接口"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "reqwest::Client",
+        "path": null,
+        "is_external": true,
+        "line_number": 1,
+        "dependency_type": "http_client",
+        "version": null
+      },
+      {
+        "name": "serde",
+        "path": null,
+        "is_external": true,
+        "line_number": 2,
+        "dependency_type": "serialization",
+        "version": null
+      },
+      {
+        "name": "types::llm_endpoint::LLMEndPoint",
+        "path": "types/llm_endpoint.rs",
+        "is_external": false,
+        "line_number": 4,
+        "dependency_type": "model",
+        "version": null
+      },
+      {
+        "name": "types::OllamaLLMProvider",
+        "path": "types/mod.rs",
+        "is_external": false,
+        "line_number": 5,
+        "dependency_type": "config",
+        "version": null
+      },
+      {
+        "name": "crate::connector",
+        "path": "./crates/llm/src/connector.rs",
+        "is_external": false,
+        "line_number": 7,
+        "dependency_type": "utility",
+        "version": null
+      },
+      {
+        "name": "crate::providers::types::AITargetOption",
+        "path": "./crates/llm/src/providers/types.rs",
+        "is_external": false,
+        "line_number": 8,
+        "dependency_type": "model",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 2.0,
+      "lines_of_code": 65,
+      "number_of_functions": 2,
+      "number_of_classes": 2,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.38,
+      "cohesion_score": 0.92
+    }
+  },
+  "timestamp": 1759024253,
+  "prompt_hash": "8e292d9c80991a9f4ec647fd3faacef2",
+  "token_usage": {
+    "input_tokens": 947,
+    "output_tokens": 1221,
+    "total_tokens": 2168
+  },
+  "model_name": null
+}

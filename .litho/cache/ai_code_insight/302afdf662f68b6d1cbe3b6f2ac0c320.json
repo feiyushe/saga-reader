@@ -1,0 +1,155 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "index.svelte.ts",
+      "file_path": "app/src/routes/main/stores/articles/list/index.svelte.ts",
+      "code_purpose": "controller",
+      "importance_score": 1.0,
+      "description": "文章列表状态管理器，负责数据加载、分页、搜索过滤和任务协调",
+      "functions": [
+        "create",
+        "generateTaskIdForUpdateFeed",
+        "notifyDatasourceUpdated",
+        "updateFeeds",
+        "attachInitLoadingFuture",
+        "refresh",
+        "loadMore"
+      ],
+      "interfaces": [
+        "StoreType",
+        "Associations"
+      ]
+    },
+    "detailed_description": "该组件是Svelte应用中的状态存储模块，专为管理文章列表的展示逻辑而设计。它封装了与文章数据获取、分页加载、搜索过滤及异步任务协调相关的所有状态和行为。通过依赖注入方式接收search和tasks两个关联store，实现跨模块状态联动。核心功能包括：初始化加载文章内容、下拉刷新、上滑加载更多、响应搜索关键词变化并实时更新过滤结果。采用$state和$effect构建响应式状态系统，并利用loading.svelte提供统一的加载状态管理。支持通过associatedFeedId动态切换数据源，并通过tasks store避免重复请求。",
+    "responsibilities": [
+      "管理文章列表的分组数据显示状态",
+      "处理文章数据的初始化加载与增量加载（分页）",
+      "响应搜索条件变化并执行全文检索更新视图",
+      "协调与其他功能模块（如任务队列、搜索）的状态同步",
+      "对外暴露标准化的数据访问与操作接口"
+    ],
+    "interfaces": [
+      {
+        "name": "StoreType",
+        "interface_type": "type",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "定义文章列表store的完整结构，包含状态字段和方法集合"
+      },
+      {
+        "name": "Associations",
+        "interface_type": "type",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "定义外部依赖的store类型集合，用于依赖注入"
+      },
+      {
+        "name": "create",
+        "interface_type": "function",
+        "visibility": "exported",
+        "parameters": [
+          {
+            "name": "associations",
+            "param_type": "Associations",
+            "is_optional": false,
+            "description": null
+          }
+        ],
+        "return_type": "StoreType",
+        "description": "工厂函数，创建并返回一个具备完整功能的文章列表store实例"
+      },
+      {
+        "name": "generateTaskIdForUpdateFeed",
+        "interface_type": "function",
+        "visibility": "private",
+        "parameters": [
+          {
+            "name": "associatedFeedId",
+            "param_type": "string",
+            "is_optional": false,
+            "description": null
+          }
+        ],
+        "return_type": "string",
+        "description": "根据feedId生成唯一的任务标识符，用于去重控制"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "$lib/hybrid-apis/feed/impl",
+        "path": "$lib/hybrid-apis/feed/impl",
+        "is_external": false,
+        "line_number": 1,
+        "dependency_type": "import",
+        "version": null
+      },
+      {
+        "name": "svelte",
+        "path": "svelte",
+        "is_external": true,
+        "line_number": 3,
+        "dependency_type": "import",
+        "version": null
+      },
+      {
+        "name": "$lib/types/article",
+        "path": "$lib/types/article",
+        "is_external": false,
+        "line_number": 2,
+        "dependency_type": "import",
+        "version": null
+      },
+      {
+        "name": "../../../widgets/types",
+        "path": "../../../widgets/types",
+        "is_external": false,
+        "line_number": 4,
+        "dependency_type": "import",
+        "version": null
+      },
+      {
+        "name": "../../loading.svelte",
+        "path": "../../loading.svelte",
+        "is_external": false,
+        "line_number": 5,
+        "dependency_type": "import",
+        "version": null
+      },
+      {
+        "name": "../search/index.svelte",
+        "path": "../search/index.svelte",
+        "is_external": false,
+        "line_number": 7,
+        "dependency_type": "import",
+        "version": null
+      },
+      {
+        "name": "../../tasks.svelte",
+        "path": "../../tasks.svelte",
+        "is_external": false,
+        "line_number": 8,
+        "dependency_type": "import",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 11.0,
+      "lines_of_code": 221,
+      "number_of_functions": 7,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 8.0,
+      "cohesion_score": 0.75
+    }
+  },
+  "timestamp": 1758800993,
+  "prompt_hash": "302afdf662f68b6d1cbe3b6f2ac0c320",
+  "token_usage": {
+    "input_tokens": 2179,
+    "output_tokens": 1173,
+    "total_tokens": 3352
+  },
+  "model_name": null
+}

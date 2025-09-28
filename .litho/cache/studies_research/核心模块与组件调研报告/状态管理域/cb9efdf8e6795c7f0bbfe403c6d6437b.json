@@ -1,0 +1,26 @@
+{
+  "data": {
+    "domain_name": "状态管理域",
+    "module_name": "集中式状态存储",
+    "module_description": "创建和整合多个子store，对外提供统一的状态访问接口，是整个应用的状态中枢。整合feeds、articles、tasks等多个子store，管理当前feed和文章选择状态，并调度定时内容更新任务。",
+    "interaction": "通过createStore函数创建集中式状态管理器，整合feeds、articles、tasks、reader和sprite等子store。提供setCurrentFeedId、setCurrentArticle等方法供外部调用，使用$state和$derived实现响应式状态管理，通过$effect监听状态变化并触发相应操作。",
+    "implementation": "采用Svelte的反应式特性($state, $derived, $effect)实现自动更新。通过全局共享的globalSharedScheduleUpdatingFuture确保更新任务不被重复触发。使用工厂模式(create函数)生成具名store实例，符合Svelte stores规范。主要功能包括：当前feed和文章的管理、特定筛选条件的选择逻辑、定时内容更新调度、以及初始化时的数据加载控制。",
+    "associated_files": [
+      "app/src/routes/main/stores/index.svelte.ts",
+      "app/src/routes/main/stores/articles/list/index.svelte.ts",
+      "app/src/routes/main/stores/tasks.svelte.ts",
+      "app/src/routes/main/stores/reader.svelte.ts",
+      "app/src/routes/main/stores/sprite.svelte.ts"
+    ],
+    "flowchart_mermaid": "graph TD\n    A[集中式状态存储] --> B[整合子Store]\n    B --> C[feeds store]\n    B --> D[articles store]\n    B --> E[tasks store]\n    B --> F[reader store]\n    B --> G[sprite store]\n    A --> H[提供统一接口]\n    H --> I[setCurrentFeedId]\n    H --> J[setCurrentArticle]\n    H --> K[scheduleUpdate]\n    A --> L[响应式管理]\n    L --> M[$state]\n    L --> N[$derived]\n    L --> O[$effect]",
+    "sequence_diagram_mermaid": "sequenceDiagram\n    participant UI\n    participant Store as 集中式状态存储\n    participant Articles as articles store\n    participant Tasks as tasks store\n    \n    UI->>Store: setCurrentFeedId(feedId)\n    Store->>Articles: list.associatedFeedId = feedId\n    Store->>Articles: list.refresh(true)\n    Articles->>API: read_feed_contents()\n    API-->>Articles: 返回数据\n    Articles->>Store: 更新groupedArticles\n    \n    UI->>Store: scheduleUpdate()\n    alt 没有正在进行的任务\n        Store->>Tasks: addPending(taskId, promise)\n        loop 每个feed\n            Tasks->>API: update_feed_contents()\n        end\n        Tasks-->>Store: 所有任务完成\n        Store->>Articles: notifyDatasourceUpdated()\n    else 有正在进行的任务\n        Store->>Tasks: queryPending(taskId)\n        Tasks-->>Store: 返回pending任务\n        Store->>UI: 复用现有任务\n    end"
+  },
+  "timestamp": 1759025001,
+  "prompt_hash": "cb9efdf8e6795c7f0bbfe403c6d6437b",
+  "token_usage": {
+    "input_tokens": 6906,
+    "output_tokens": 888,
+    "total_tokens": 7794
+  },
+  "model_name": null
+}

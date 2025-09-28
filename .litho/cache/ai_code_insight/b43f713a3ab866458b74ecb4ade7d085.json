@@ -1,0 +1,57 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "tauri.conf.json",
+      "file_path": "app/src-tauri/tauri.conf.json",
+      "code_purpose": "config",
+      "importance_score": 0.6,
+      "description": "Tauri 框架的主配置文件，定义应用元数据、构建流程、窗口设置、打包选项和插件配置。",
+      "functions": [],
+      "interfaces": []
+    },
+    "detailed_description": "该配置文件用于 Tauri 桌面应用框架，全面定义了应用的核心属性与行为。主要包括：应用基本信息（名称、版本、标识符）、开发与构建生命周期命令（如 dev 和 build 前执行的脚本）、主窗口及保留窗口的 UI 特性（尺寸、标题、初始可见性）、安全策略（CSP 设置为空，表示使用默认策略）、应用打包配置（图标、版权、描述、目标平台）以及第三方插件（tauri-plugin-feed-api）的特定参数。此文件是应用构建和分发的中枢配置。",
+    "responsibilities": [
+      "定义应用元数据（名称、版本、包标识）",
+      "配置开发与构建生命周期命令",
+      "管理应用窗口的初始化设置（尺寸、可见性等）",
+      "控制应用的打包与分发配置（图标、版权、语言等）",
+      "集成并配置 Tauri 插件的行为参数"
+    ],
+    "interfaces": [],
+    "dependencies": [
+      {
+        "name": "bun",
+        "path": null,
+        "is_external": true,
+        "line_number": 4,
+        "dependency_type": "tool",
+        "version": null
+      },
+      {
+        "name": "tauri-plugin-feed-api",
+        "path": null,
+        "is_external": true,
+        "line_number": 52,
+        "dependency_type": "plugin",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 62,
+      "number_of_functions": 0,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.2,
+      "cohesion_score": 0.9
+    }
+  },
+  "timestamp": 1758805938,
+  "prompt_hash": "b43f713a3ab866458b74ecb4ade7d085",
+  "token_usage": {
+    "input_tokens": 760,
+    "output_tokens": 576,
+    "total_tokens": 1336
+  },
+  "model_name": null
+}

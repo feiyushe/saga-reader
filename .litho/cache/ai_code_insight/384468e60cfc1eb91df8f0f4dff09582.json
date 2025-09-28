@@ -1,0 +1,61 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "env.rs",
+      "file_path": "app/src-tauri/src/env.rs",
+      "code_purpose": "util",
+      "importance_score": 0.6,
+      "description": "用于判断当前程序是否以守护进程模式启动的工具模块。",
+      "functions": [
+        "is_daemon"
+      ],
+      "interfaces": [
+        "is_daemon"
+      ]
+    },
+    "detailed_description": "该组件提供了一个简单的函数 `is_daemon`，用于检查当前程序的启动参数是否匹配预定义的守护进程启动标识（DAEMON_FEEDS_SCHEDULE_UPDATE）。它通过读取命令行第一个参数并与常量进行比较，返回布尔值表示是否处于守护进程模式。此逻辑被用于条件性地启动后台任务调度。",
+    "responsibilities": [
+      "解析命令行参数以确定启动模式",
+      "提供简洁的API来判断是否运行在守护进程模式",
+      "与系统环境交互获取启动参数",
+      "支持基于启动模式的条件执行逻辑"
+    ],
+    "interfaces": [
+      {
+        "name": "is_daemon",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": "bool",
+        "description": "检测当前进程是否以守护进程方式启动"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "DAEMON_FEEDS_SCHEDULE_UPDATE",
+        "path": "crate::daemon::args::DAEMON_FEEDS_SCHEDULE_UPDATE",
+        "is_external": false,
+        "line_number": 1,
+        "dependency_type": "constant",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 6,
+      "number_of_functions": 1,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.5,
+      "cohesion_score": 0.9
+    }
+  },
+  "timestamp": 1758805968,
+  "prompt_hash": "384468e60cfc1eb91df8f0f4dff09582",
+  "token_usage": {
+    "input_tokens": 451,
+    "output_tokens": 505,
+    "total_tokens": 956
+  },
+  "model_name": null
+}

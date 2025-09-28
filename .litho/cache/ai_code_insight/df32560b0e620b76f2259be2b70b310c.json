@@ -1,0 +1,132 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "path.rs",
+      "file_path": "crates/recorder/src/path.rs",
+      "source_summary": "",
+      "code_purpose": "util",
+      "importance_score": 0.8,
+      "description": "提供对应用数据目录和数据库文件路径的管理功能，确保所需目录存在并返回正确的路径。",
+      "functions": [
+        "get_appdata_articles",
+        "get_appdata_file",
+        "get_appdata_file_in_dir",
+        "ensure_app_data_prepared",
+        "ensure_dir_in_appdata_prepared",
+        "ensure_dir_prepared"
+      ],
+      "interfaces": []
+    },
+    "detailed_description": "该组件主要用于管理和生成应用程序的数据存储路径。它封装了对本地文件系统中特定目录（如用户本地数据目录下的 qino_feed.app_data）的操作，确保目标目录结构在访问前已正确创建。主要功能包括获取主数据库文件路径、构建子文件或子目录的完整路径，并自动创建缺失的目录结构。所有路径操作基于 `std::path::PathBuf` 并结合 `dirs` crate 获取标准系统路径，适用于跨平台场景。",
+    "responsibilities": [
+      "管理应用专属数据目录的路径生成",
+      "确保应用所需的数据目录结构存在（不存在则自动创建）",
+      "提供类型安全且可复用的路径构造接口",
+      "封装底层文件系统操作细节，降低调用方复杂度"
+    ],
+    "interfaces": [
+      {
+        "name": "get_appdata_articles",
+        "interface_type": "function",
+        "visibility": "pub",
+        "parameters": [],
+        "return_type": "PathBuf",
+        "description": "获取文章记录器数据库文件的完整路径"
+      },
+      {
+        "name": "get_appdata_file",
+        "interface_type": "function",
+        "visibility": "pub",
+        "parameters": [
+          {
+            "name": "file_name",
+            "param_type": "P: AsRef<Path>",
+            "is_optional": false,
+            "description": null
+          }
+        ],
+        "return_type": "PathBuf",
+        "description": "获取App Data下指定文件的完整路径"
+      },
+      {
+        "name": "get_appdata_file_in_dir",
+        "interface_type": "function",
+        "visibility": "pub",
+        "parameters": [
+          {
+            "name": "sub_dir_name",
+            "param_type": "&str",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "file_name",
+            "param_type": "P: AsRef<Path>",
+            "is_optional": false,
+            "description": null
+          }
+        ],
+        "return_type": "PathBuf",
+        "description": "获取App Data下指定子目录中某个文件的完整路径"
+      },
+      {
+        "name": "ensure_dir_prepared",
+        "interface_type": "function",
+        "visibility": "private",
+        "parameters": [
+          {
+            "name": "dir_path",
+            "param_type": "PathBuf",
+            "is_optional": false,
+            "description": null
+          }
+        ],
+        "return_type": "PathBuf",
+        "description": "确保给定路径的目录存在，若不存在则创建"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "std::fs",
+        "path": "std::fs",
+        "is_external": false,
+        "line_number": 1,
+        "dependency_type": "standard_library",
+        "version": null
+      },
+      {
+        "name": "std::path",
+        "path": "std::path",
+        "is_external": false,
+        "line_number": 2,
+        "dependency_type": "standard_library",
+        "version": null
+      },
+      {
+        "name": "dirs",
+        "path": "dirs",
+        "is_external": true,
+        "line_number": null,
+        "dependency_type": "external_crate",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 2.0,
+      "lines_of_code": 45,
+      "number_of_functions": 6,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.33,
+      "cohesion_score": 0.9
+    }
+  },
+  "timestamp": 1759024391,
+  "prompt_hash": "df32560b0e620b76f2259be2b70b310c",
+  "token_usage": {
+    "input_tokens": 923,
+    "output_tokens": 966,
+    "total_tokens": 1889
+  },
+  "model_name": null
+}

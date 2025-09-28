@@ -1,0 +1,40 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "app.d.ts",
+      "file_path": "app/src/app.d.ts",
+      "code_purpose": "entry",
+      "importance_score": 0.6,
+      "description": "SvelteKit应用类型声明文件，用于扩展全局App命名空间以定义框架所需接口",
+      "functions": [],
+      "interfaces": []
+    },
+    "detailed_description": "该文件是SvelteKit项目的全局类型声明文件，通过declare global语法扩展了App命名空间。它为SvelteKit框架提供类型定义入口，允许开发者自定义Error、Locals、PageData、PageState和Platform等接口。当前这些接口均被注释，表示尚未实现具体类型定义，但保留了未来扩展的可能性。此文件主要用于TypeScript类型系统集成，不影响运行时逻辑。",
+    "responsibilities": [
+      "为SvelteKit框架提供全局类型声明扩展点",
+      "定义应用程序级别的类型接口契约",
+      "支持服务器端locals对象的类型安全传递",
+      "维护页面数据和状态的类型一致性",
+      "集成平台特定环境的类型定义"
+    ],
+    "interfaces": [],
+    "dependencies": [],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 2.0,
+      "lines_of_code": 13,
+      "number_of_functions": 0,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.0,
+      "cohesion_score": 0.95
+    }
+  },
+  "timestamp": 1758805980,
+  "prompt_hash": "6654b7f0e0b6315d59bea218097bda8b",
+  "token_usage": {
+    "input_tokens": 466,
+    "output_tokens": 447,
+    "total_tokens": 913
+  },
+  "model_name": null
+}

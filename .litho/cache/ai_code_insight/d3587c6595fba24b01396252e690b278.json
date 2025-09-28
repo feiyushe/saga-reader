@@ -1,0 +1,158 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "task.rs",
+      "file_path": "crates/feed_api_rs/src/startup/task.rs",
+      "source_summary": "",
+      "code_purpose": "specificfeature",
+      "importance_score": 0.8,
+      "description": "定义了初始化任务的执行器和状态管理，用于异步启动并监控系统启动阶段的任务。",
+      "functions": [
+        "start",
+        "dump"
+      ],
+      "interfaces": [
+        "TaskInitializer",
+        "InitTask"
+      ]
+    },
+    "detailed_description": "该组件实现了系统启动过程中关键任务的异步执行与状态追踪功能。通过 `TaskInitializer` trait 提供统一接口，允许对任意返回 `anyhow::Result<TData>` 的异步函数进行封装执行，并记录执行耗时、状态（运行中、完成、错误）以及结果数据。`InitTask` 结构体作为具体实现，具备默认初始化能力，支持在执行失败时记录错误日志，在成功时输出耗时信息，增强了可观测性。",
+    "responsibilities": [
+      "封装异步任务的执行流程，确保统一的启动逻辑",
+      "监控任务执行时间并记录性能指标",
+      "维护任务的生命周期状态（未启动、运行中、完成、出错）",
+      "提供任务状态转储接口以供外部查询",
+      "处理任务执行中的异常并进行日志记录"
+    ],
+    "interfaces": [
+      {
+        "name": "TaskInitializer",
+        "interface_type": "trait",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "TResult",
+            "param_type": "generic",
+            "is_optional": false,
+            "description": "任务结果的包装类型"
+          },
+          {
+            "name": "TData",
+            "param_type": "generic",
+            "is_optional": false,
+            "description": "任务实际产出的数据类型"
+          }
+        ],
+        "return_type": null,
+        "description": "定义任务初始化器的核心行为，包括启动任务和导出状态快照"
+      },
+      {
+        "name": "start",
+        "interface_type": "method",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "task_name",
+            "param_type": "&str",
+            "is_optional": false,
+            "description": "任务名称，用于日志标记"
+          },
+          {
+            "name": "function",
+            "param_type": "F",
+            "is_optional": false,
+            "description": "返回 Future 的可调用对象"
+          }
+        ],
+        "return_type": "impl Future<Output = anyhow::Result<()>>",
+        "description": "异步执行传入的任务闭包，自动记录耗时和状态变化"
+      },
+      {
+        "name": "dump",
+        "interface_type": "method",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": "TaskDump",
+        "description": "导出当前任务的状态摘要"
+      },
+      {
+        "name": "InitTask",
+        "interface_type": "struct",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "result",
+            "param_type": "Option<TData>",
+            "is_optional": true,
+            "description": "任务执行结果"
+          },
+          {
+            "name": "task_cost",
+            "param_type": "u128",
+            "is_optional": false,
+            "description": "任务执行耗时（毫秒）"
+          },
+          {
+            "name": "task_status",
+            "param_type": "Status",
+            "is_optional": false,
+            "description": "当前任务状态"
+          }
+        ],
+        "return_type": null,
+        "description": "具体任务执行容器，持有执行结果、耗时和状态"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "std::future::Future",
+        "path": "std::future::Future",
+        "is_external": false,
+        "line_number": 1,
+        "dependency_type": "std",
+        "version": null
+      },
+      {
+        "name": "spdlog",
+        "path": "spdlog",
+        "is_external": true,
+        "line_number": 3,
+        "dependency_type": "crate",
+        "version": null
+      },
+      {
+        "name": "tokio::time::Instant",
+        "path": "tokio::time::Instant",
+        "is_external": true,
+        "line_number": 4,
+        "dependency_type": "crate",
+        "version": null
+      },
+      {
+        "name": "anyhow::Result",
+        "path": "anyhow",
+        "is_external": true,
+        "line_number": 6,
+        "dependency_type": "crate",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 4.0,
+      "lines_of_code": 64,
+      "number_of_functions": 2,
+      "number_of_classes": 1,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.57,
+      "cohesion_score": 0.88
+    }
+  },
+  "timestamp": 1759024313,
+  "prompt_hash": "d3587c6595fba24b01396252e690b278",
+  "token_usage": {
+    "input_tokens": 867,
+    "output_tokens": 1130,
+    "total_tokens": 1997
+  },
+  "model_name": null
+}

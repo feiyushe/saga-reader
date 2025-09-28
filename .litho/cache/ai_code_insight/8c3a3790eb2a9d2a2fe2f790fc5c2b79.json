@@ -1,0 +1,159 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "AISpritePanel.svelte",
+      "file_path": "app/src/routes/main/widgets/AISpritePanel.svelte",
+      "source_summary": "",
+      "code_purpose": "widget",
+      "importance_score": 1.0,
+      "description": "AI助手交互面板，提供聊天界面和用户输入功能",
+      "functions": [
+        "scrollChatBottom",
+        "addMessage",
+        "onPromptKeydown",
+        "toDateText"
+      ],
+      "interfaces": [
+        "store: AISpriteProps"
+      ]
+    },
+    "detailed_description": "该组件实现了一个悬浮式AI助手聊天面板，包含消息历史展示、实时输入、加载状态反馈等功能。通过绑定store属性管理对话状态，支持键盘快捷发送（回车键），并集成国际化文本显示。UI采用Svelte框架构建，使用Skeleton UI库的Avatar、ProgressRing等组件，并通过Markdown渲染器展示AI回复内容。面板可展开/收起，具备流畅滚动动画和响应式布局。",
+    "responsibilities": [
+      "管理AI助手面板的显示与隐藏状态",
+      "渲染对话历史记录，区分用户与AI消息",
+      "处理用户输入并触发消息发送逻辑",
+      "提供加载状态视觉反馈",
+      "实现聊天区域自动滚动到底部"
+    ],
+    "interfaces": [
+      {
+        "name": "store",
+        "interface_type": "prop",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "store",
+            "param_type": "AISpriteProps",
+            "is_optional": false,
+            "description": "包含对话历史、加载状态和操作方法的状态管理对象"
+          }
+        ],
+        "return_type": null,
+        "description": "接收外部传入的AI对话状态和控制方法"
+      },
+      {
+        "name": "scrollChatBottom",
+        "interface_type": "function",
+        "visibility": "private",
+        "parameters": [
+          {
+            "name": "behavior",
+            "param_type": "'auto' | 'instant' | 'smooth'",
+            "is_optional": true,
+            "description": "滚动动画行为"
+          }
+        ],
+        "return_type": "void",
+        "description": "将聊天容器滚动到底部"
+      },
+      {
+        "name": "addMessage",
+        "interface_type": "function",
+        "visibility": "private",
+        "parameters": [],
+        "return_type": "Promise<void>",
+        "description": "处理用户消息发送逻辑，包含防重复提交和错误提示"
+      },
+      {
+        "name": "onPromptKeydown",
+        "interface_type": "function",
+        "visibility": "private",
+        "parameters": [
+          {
+            "name": "event",
+            "param_type": "KeyboardEvent",
+            "is_optional": false,
+            "description": "键盘事件对象"
+          }
+        ],
+        "return_type": "void",
+        "description": "监听回车键触发消息发送"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "svelte-i18n",
+        "path": null,
+        "is_external": true,
+        "line_number": 1,
+        "dependency_type": "i18n",
+        "version": null
+      },
+      {
+        "name": "AISpriteProps",
+        "path": "../widgets/types",
+        "is_external": false,
+        "line_number": 2,
+        "dependency_type": "type",
+        "version": null
+      },
+      {
+        "name": "@skeletonlabs/skeleton-svelte",
+        "path": null,
+        "is_external": true,
+        "line_number": 3,
+        "dependency_type": "ui_library",
+        "version": null
+      },
+      {
+        "name": "lucide-svelte",
+        "path": null,
+        "is_external": true,
+        "line_number": 4,
+        "dependency_type": "icon_library",
+        "version": null
+      },
+      {
+        "name": "$lib/widgets/Markdown.svelte",
+        "path": "$lib/widgets/Markdown.svelte",
+        "is_external": false,
+        "line_number": 5,
+        "dependency_type": "component",
+        "version": null
+      },
+      {
+        "name": "toaster",
+        "path": "../stores/toast",
+        "is_external": false,
+        "line_number": 6,
+        "dependency_type": "store",
+        "version": null
+      },
+      {
+        "name": "svelte",
+        "path": null,
+        "is_external": true,
+        "line_number": 8,
+        "dependency_type": "framework",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 9.0,
+      "lines_of_code": 186,
+      "number_of_functions": 4,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 7.0,
+      "cohesion_score": 0.85
+    }
+  },
+  "timestamp": 1759024204,
+  "prompt_hash": "8c3a3790eb2a9d2a2fe2f790fc5c2b79",
+  "token_usage": {
+    "input_tokens": 1765,
+    "output_tokens": 1028,
+    "total_tokens": 2793
+  },
+  "model_name": null
+}

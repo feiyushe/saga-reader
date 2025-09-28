@@ -1,0 +1,59 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "monitor.rs",
+      "file_path": "app/src-tauri/src/monitor.rs",
+      "source_summary": "",
+      "code_purpose": "specificfeature",
+      "importance_score": 0.6,
+      "description": null,
+      "functions": [
+        "start"
+      ],
+      "interfaces": []
+    },
+    "detailed_description": "该组件负责初始化Sentry错误监控服务。在应用启动时调用`start`函数，通过提供的DSN配置连接到Sentry服务器，并自动绑定当前代码的发布版本（使用宏`release_name!()`）。该功能用于捕获运行时异常、错误和性能问题，支持远程监控和调试。",
+    "responsibilities": [
+      "初始化Sentry监控客户端",
+      "绑定应用发布版本信息以便追踪",
+      "为全局错误捕获提供运行时上下文"
+    ],
+    "interfaces": [
+      {
+        "name": "start",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": "nil",
+        "description": "启动Sentry监控服务，返回一个RAII守卫以维持会话生命周期"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "sentry",
+        "path": null,
+        "is_external": true,
+        "line_number": 1,
+        "dependency_type": "crate",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 9,
+      "number_of_functions": 1,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 1.0,
+      "cohesion_score": 0.95
+    }
+  },
+  "timestamp": 1759024666,
+  "prompt_hash": "68d760b0d05eb65fa4348484009855df",
+  "token_usage": {
+    "input_tokens": 488,
+    "output_tokens": 405,
+    "total_tokens": 893
+  },
+  "model_name": null
+}

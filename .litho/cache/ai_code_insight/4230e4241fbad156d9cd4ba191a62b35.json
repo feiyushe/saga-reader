@@ -1,0 +1,49 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "default.json",
+      "file_path": "app/src-tauri/capabilities/default.json",
+      "source_summary": "",
+      "code_purpose": "config",
+      "importance_score": 0.6,
+      "description": "Capability configuration for the In-App window in a Tauri desktop application, defining allowed windows and permissions.",
+      "functions": [],
+      "interfaces": []
+    },
+    "detailed_description": "This configuration file defines a capability set named 'default' for a Tauri-based desktop application. It specifies which windows are available in the app (such as main, settings, about, and various feed-related windows) and grants a comprehensive set of permissions required for core functionality including window management, webview creation, event handling, shell operations, clipboard access, feed API interaction, autostart control, OS integration, and user dialogs. The schema reference ensures structural validity against the desktop-schema.json specification.",
+    "responsibilities": [
+      "Defines the set of available windows within the application",
+      "Grants essential permissions for core desktop functionalities",
+      "Serves as a security boundary by explicitly listing allowed capabilities",
+      "Provides configuration for role-based access control in the Tauri framework"
+    ],
+    "interfaces": [],
+    "dependencies": [
+      {
+        "name": "../gen/schemas/desktop-schema.json",
+        "path": "app/src-tauri/gen/schemas/desktop-schema.json",
+        "is_external": false,
+        "line_number": 1,
+        "dependency_type": "$schema",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 2.0,
+      "lines_of_code": 43,
+      "number_of_functions": 0,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.02,
+      "cohesion_score": 0.95
+    }
+  },
+  "timestamp": 1759024655,
+  "prompt_hash": "4230e4241fbad156d9cd4ba191a62b35",
+  "token_usage": {
+    "input_tokens": 675,
+    "output_tokens": 406,
+    "total_tokens": 1081
+  },
+  "model_name": null
+}

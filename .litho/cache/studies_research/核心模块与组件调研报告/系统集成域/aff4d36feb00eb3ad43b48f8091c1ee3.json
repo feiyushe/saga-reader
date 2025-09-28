@@ -1,0 +1,23 @@
+{
+  "data": {
+    "domain_name": "系统集成域",
+    "module_name": "启动初始化",
+    "module_description": "协调应用启动时的各项初始化任务，包括配置加载和服务准备。",
+    "interaction": "通过InitTask封装初始化流程，实现Tiger0（同步）和Tiger1（并发）两阶段初始化策略；Tiger0完成核心配置与日志系统设置，Tiger1并行执行用户配置加载和LLM服务检测等任务。",
+    "implementation": "使用tokio::join!实现init_user_profile和init_llm的并发初始化以提升性能；通过ContextHost trait管理ApplicationContext生命周期；配置文件采用TOML格式进行序列化与反序列化，并在缺失时生成默认配置写入磁盘。",
+    "associated_files": [
+      "crates/feed_api_rs/src/startup/mod.rs",
+      "crates/feed_api_rs/src/startup/init_app_config.rs"
+    ],
+    "flowchart_mermaid": "graph TD\n    A[应用启动] --> B{配置文件存在?}\n    B -->|是| C[加载app_config.toml]\n    B -->|否| D[生成默认配置]\n    C & D --> E[反序列化为AppConfig]\n    E --> F[写入磁盘sync_to]\n    F --> G[Tiger0: 同步初始化核心配置与日志]\n    G --> H[Tiger1: 并发初始化用户配置与LLM服务]\n    H --> I[启动完成]",
+    "sequence_diagram_mermaid": "sequenceDiagram\n    participant Frontend\n    participant Startup\n    participant AppConfig\n    participant LLMService\n\n    Startup->>AppConfig: load_or_default()\n    alt 配置文件存在\n        AppConfig-->>Startup: 返回已加载的配置\n    else 默认配置\n        AppConfig->>AppConfig: generate_default()\n        AppConfig->>Disk: sync_to(app_config.toml)\n        AppConfig-->>Startup: 返回默认配置\n    end\n    Startup->>Startup: init_context_host()\n    Startup->>Startup: Tiger0.init_core_config()\n    Startup->>Startup: Tiger0.init_logging()\n    par 并发初始化\n        Startup->>Startup: init_user_profile()\n        Startup->>LLMService: init_llm()\n    end\n    Startup-->>Frontend: launch complete"
+  },
+  "timestamp": 1758807799,
+  "prompt_hash": "aff4d36feb00eb3ad43b48f8091c1ee3",
+  "token_usage": {
+    "input_tokens": 2297,
+    "output_tokens": 659,
+    "total_tokens": 2956
+  },
+  "model_name": null
+}

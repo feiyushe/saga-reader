@@ -1,0 +1,250 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "operator.rs",
+      "file_path": "crates/recorder/src/operator.rs",
+      "source_summary": "",
+      "code_purpose": "database",
+      "importance_score": 0.8,
+      "description": "负责管理与SQLite数据库的连接，并提供对文章记录(entity::article_record)的CRUD操作封装。支持条件查询、分页、计数、存在性检查等核心数据访问功能。",
+      "functions": [
+        "new",
+        "ensure_db_initialized",
+        "create_table_if_not_existed",
+        "initialize",
+        "count",
+        "dispose",
+        "insert",
+        "update",
+        "query",
+        "query_by_filters",
+        "exists",
+        "query_without_filter",
+        "query_by_id",
+        "delete"
+      ],
+      "interfaces": [
+        "Operator"
+      ]
+    },
+    "detailed_description": "该组件是Recorder模块中用于持久化文章记录的核心数据库操作器。它封装了SeaORM框架对`article_record`实体的访问逻辑，通过内部持有可选的DatabaseConnection实例实现连接管理。组件在初始化时建立到SQLite数据库的连接池，并确保`t_article_record`表的存在。其主要行为包括：插入新文章记录、更新已有记录、根据ID或复杂过滤条件查询记录（支持分页和排序）、判断记录是否存在、删除记录以及获取总数量。所有操作均以异步方式执行，符合Rust异步编程模型。组件设计为单例模式使用，需先调用initialize完成初始化后方可执行其他操作。",
+    "responsibilities": [
+      "管理数据库连接生命周期（初始化、关闭）",
+      "确保数据表结构存在",
+      "提供对文章记录的增删改查操作接口",
+      "支持基于条件和分页的数据查询",
+      "保证数据操作的安全性和事务一致性"
+    ],
+    "interfaces": [
+      {
+        "name": "Operator",
+        "interface_type": "struct",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "数据库操作器主结构体，封装数据库连接与操作方法"
+      },
+      {
+        "name": "new",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": "Operator",
+        "description": "创建一个新的Operator实例，初始状态无数据库连接"
+      },
+      {
+        "name": "initialize",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": "anyhow::Result<()>",
+        "description": "异步初始化数据库连接并创建必要数据表"
+      },
+      {
+        "name": "dispose",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": "anyhow::Result<()>",
+        "description": "异步释放数据库连接资源"
+      },
+      {
+        "name": "insert",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "entity",
+            "param_type": "article_record::ActiveModel",
+            "is_optional": false,
+            "description": null
+          }
+        ],
+        "return_type": "anyhow::Result<()>",
+        "description": "插入一条新的文章记录"
+      },
+      {
+        "name": "update",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "entity",
+            "param_type": "article_record::ActiveModel",
+            "is_optional": false,
+            "description": null
+          }
+        ],
+        "return_type": "anyhow::Result<article_record::Model>",
+        "description": "更新一条已有文章记录并返回更新后的模型"
+      },
+      {
+        "name": "query",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "offset",
+            "param_type": "Option<u64>",
+            "is_optional": true,
+            "description": null
+          },
+          {
+            "name": "limit",
+            "param_type": "Option<u64>",
+            "is_optional": true,
+            "description": null
+          },
+          {
+            "name": "filter",
+            "param_type": "F",
+            "is_optional": false,
+            "description": "实现了IntoCondition trait的过滤条件"
+          }
+        ],
+        "return_type": "anyhow::Result<Vec<article_record::Model>>",
+        "description": "根据过滤条件分页查询文章记录，按发布时间和ID降序排列"
+      },
+      {
+        "name": "count",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": "anyhow::Result<u64>",
+        "description": "获取文章记录总数"
+      },
+      {
+        "name": "exists",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "filter",
+            "param_type": "F",
+            "is_optional": false,
+            "description": "实现了IntoCondition trait的过滤条件"
+          }
+        ],
+        "return_type": "anyhow::Result<bool>",
+        "description": "检查满足特定条件的文章记录是否存在"
+      },
+      {
+        "name": "query_by_id",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "id",
+            "param_type": "i32",
+            "is_optional": false,
+            "description": null
+          }
+        ],
+        "return_type": "anyhow::Result<Option<article_record::Model>>",
+        "description": "根据ID精确查询单条文章记录"
+      },
+      {
+        "name": "delete",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "entity",
+            "param_type": "article_record::ActiveModel",
+            "is_optional": false,
+            "description": null
+          }
+        ],
+        "return_type": "anyhow::Result<DeleteResult>",
+        "description": "删除指定的文章记录"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "std::time::Duration",
+        "path": null,
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "std",
+        "version": null
+      },
+      {
+        "name": "sea_orm",
+        "path": null,
+        "is_external": true,
+        "line_number": null,
+        "dependency_type": "crate",
+        "version": null
+      },
+      {
+        "name": "anyhow",
+        "path": null,
+        "is_external": true,
+        "line_number": null,
+        "dependency_type": "crate",
+        "version": null
+      },
+      {
+        "name": "log",
+        "path": null,
+        "is_external": true,
+        "line_number": null,
+        "dependency_type": "crate",
+        "version": null
+      },
+      {
+        "name": "article_record",
+        "path": "crates/recorder/src/entity/article_record.rs",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "local",
+        "version": null
+      },
+      {
+        "name": "get_appdata_articles",
+        "path": "crates/recorder/src/path.rs",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "local",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 5.0,
+      "lines_of_code": 160,
+      "number_of_functions": 14,
+      "number_of_classes": 1,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.6,
+      "cohesion_score": 0.85
+    }
+  },
+  "timestamp": 1759024391,
+  "prompt_hash": "cf5c8c7340c35a40db8c879ac1f24695",
+  "token_usage": {
+    "input_tokens": 1938,
+    "output_tokens": 1705,
+    "total_tokens": 3643
+  },
+  "model_name": null
+}

@@ -1,0 +1,40 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "capabilities.json",
+      "file_path": "app/src-tauri/gen/schemas/capabilities.json",
+      "source_summary": "",
+      "code_purpose": "config",
+      "importance_score": 0.6,
+      "description": "定义应用程序不同运行环境下的能力集，包括权限、窗口访问和平台限制。",
+      "functions": [],
+      "interfaces": []
+    },
+    "detailed_description": "该组件是一个JSON配置文件，用于声明Tauri应用中的各种capability（能力），每个capability包含标识符、描述、本地/远程策略、允许的窗口列表、权限列表以及可选的平台限制。主要用于安全模型控制，决定特定上下文（如主窗口或Web视图）可以执行哪些系统级操作。",
+    "responsibilities": [
+      "定义应用的安全能力边界",
+      "管理不同功能模块的权限分配",
+      "控制capability对特定窗口的可见性与可用性",
+      "支持多平台的能力差异化配置"
+    ],
+    "interfaces": [],
+    "dependencies": [],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 3.0,
+      "lines_of_code": 1,
+      "number_of_functions": 0,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.0,
+      "cohesion_score": 0.85
+    }
+  },
+  "timestamp": 1759024661,
+  "prompt_hash": "184bb05e0d17bd85030e0cd1ab8da47d",
+  "token_usage": {
+    "input_tokens": 763,
+    "output_tokens": 400,
+    "total_tokens": 1163
+  },
+  "model_name": null
+}

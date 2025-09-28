@@ -1,0 +1,48 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "toast.ts",
+      "file_path": "app/src/routes/main/stores/toast.ts",
+      "code_purpose": "util",
+      "importance_score": 0.8,
+      "description": "定义了两个全局通知toaster实例，用于在应用不同位置显示提示消息",
+      "functions": [],
+      "interfaces": []
+    },
+    "detailed_description": "该组件使用@skeletonlabs/skeleton-svelte库的createToaster函数创建了两个预配置的toaster实例：globalToaster位于屏幕右下角，偏移30px；spriteToaster位于屏幕左下角，偏移128px。这两个实例可在应用各处导入使用，提供统一的通知展示样式和位置策略。",
+    "responsibilities": [
+      "创建并导出全局通知toaster实例",
+      "定义通知组件的显示位置策略",
+      "提供统一的UI反馈机制",
+      "封装第三方通知库的初始化配置"
+    ],
+    "interfaces": [],
+    "dependencies": [
+      {
+        "name": "@skeletonlabs/skeleton-svelte",
+        "path": null,
+        "is_external": true,
+        "line_number": 1,
+        "dependency_type": "import",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 10,
+      "number_of_functions": 2,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.1,
+      "cohesion_score": 0.95
+    }
+  },
+  "timestamp": 1758805787,
+  "prompt_hash": "53bacdb24378ff0ad9c4663c1b4e0fa7",
+  "token_usage": {
+    "input_tokens": 463,
+    "output_tokens": 387,
+    "total_tokens": 850
+  },
+  "model_name": null
+}

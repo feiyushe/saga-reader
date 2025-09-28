@@ -1,0 +1,49 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "FeedPackageEditPanel.svelte",
+      "file_path": "app/src/routes/main/widgets/FeedPackageEditPanel.svelte",
+      "code_purpose": "widget",
+      "importance_score": 0.8,
+      "description": null,
+      "functions": [],
+      "interfaces": [
+        "FeedPackageEditPanel"
+      ]
+    },
+    "detailed_description": "该组件是一个Svelte前端UI组件，用于编辑信息流包（Feed Package）。由于源代码为空，无法确定其具体实现逻辑和功能细节。理想情况下，此类组件应提供表单输入、数据绑定、验证和提交功能，以支持用户对feed package的创建或修改操作。",
+    "responsibilities": [
+      "作为信息流包编辑功能的UI容器",
+      "提供用户交互界面以编辑feed package数据",
+      "协调表单输入与数据提交逻辑"
+    ],
+    "interfaces": [
+      {
+        "name": "FeedPackageEditPanel",
+        "interface_type": "component",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": null
+      }
+    ],
+    "dependencies": [],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 0,
+      "number_of_functions": 0,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.0,
+      "cohesion_score": 1.0
+    }
+  },
+  "timestamp": 1758805830,
+  "prompt_hash": "514d4c0b04d3d780ce01311309910cd8",
+  "token_usage": {
+    "input_tokens": 410,
+    "output_tokens": 359,
+    "total_tokens": 769
+  },
+  "model_name": null
+}

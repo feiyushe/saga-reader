@@ -1,0 +1,15 @@
+{
+  "data": {
+    "code_purpose": "api",
+    "confidence": 0.95,
+    "reasoning": "该文件位于`hybrid-apis/feed/`目录下，文件名为`impl.ts`，表明是某种API的实现。内容中定义了一个类`FeaturesAPIImpl`，实现了`FeaturesAPI`接口，其中每个方法都通过`call`函数调用底层Tauri原生接口，属于典型的前后端或跨层接口定义与实现。此类文件主要用于封装与底层通信的API，符合'api'类型特征。"
+  },
+  "timestamp": 1758800847,
+  "prompt_hash": "a32ef042760431c435329ff28c4bcd28",
+  "token_usage": {
+    "input_tokens": 460,
+    "output_tokens": 176,
+    "total_tokens": 636
+  },
+  "model_name": null
+}

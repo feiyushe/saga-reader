@@ -1,0 +1,70 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "dom.ts",
+      "file_path": "app/src/lib/utils/dom.ts",
+      "source_summary": "",
+      "code_purpose": "util",
+      "importance_score": 0.6,
+      "description": "提供DOM操作相关的工具函数，用于禁用右键菜单和监听元素可见性变化。",
+      "functions": [
+        "disableContextMenu",
+        "observeVisiblity"
+      ],
+      "interfaces": [
+        "ObserveVisiblityOption"
+      ]
+    },
+    "detailed_description": "该组件包含两个核心工具函数：`disableContextMenu`用于在浏览器环境中禁用指定节点的上下文菜单（右键菜单），但允许输入框等表单元素保留默认行为；`observeVisiblity`利用IntersectionObserver API监听页面元素的可见状态变化，并通过回调通知。这两个函数均返回Svelte风格的销毁对象，便于在组件生命周期中清理事件监听或观察器。",
+    "responsibilities": [
+      "禁用非输入元素的右键上下文菜单",
+      "监听DOM元素的可视状态变化",
+      "提供可销毁的DOM行为绑定机制",
+      "适配Svelte运行时环境（通过$env判断）"
+    ],
+    "interfaces": [
+      {
+        "name": "ObserveVisiblityOption",
+        "interface_type": "type",
+        "visibility": "exported",
+        "parameters": [
+          {
+            "name": "callback",
+            "param_type": "(v: boolean) => void",
+            "is_optional": false,
+            "description": "当元素可见性发生变化时调用的回调函数，参数为boolean表示是否可见"
+          }
+        ],
+        "return_type": null,
+        "description": "定义observeVisiblity函数所需的配置选项结构"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "$app/environment",
+        "path": "$app/environment",
+        "is_external": true,
+        "line_number": 1,
+        "dependency_type": "import",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 4.0,
+      "lines_of_code": 46,
+      "number_of_functions": 2,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.5,
+      "cohesion_score": 0.85
+    }
+  },
+  "timestamp": 1759024690,
+  "prompt_hash": "9a0c0aea81cc72cc13d6b8d1b3f1cce5",
+  "token_usage": {
+    "input_tokens": 642,
+    "output_tokens": 597,
+    "total_tokens": 1239
+  },
+  "model_name": null
+}

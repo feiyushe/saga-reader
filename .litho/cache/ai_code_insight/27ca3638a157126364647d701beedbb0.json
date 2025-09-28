@@ -1,0 +1,114 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "EmbedWebView.svelte",
+      "file_path": "app/src/lib/widgets/EmbedWebView.svelte",
+      "code_purpose": "widget",
+      "importance_score": 0.8,
+      "description": "一个用于嵌入外部网页的Svelte组件，支持加载状态管理和可见性感知加载优化。",
+      "functions": [
+        "onLoadEventHandler",
+        "onVisiblityChanged"
+      ],
+      "interfaces": [
+        "EmbedWebViewProps"
+      ]
+    },
+    "detailed_description": "该组件封装了一个可嵌入的Web视图（iframe），主要用于在应用内部安全地展示外部网页内容。它通过`src`属性接收目标URL，并利用自定义的`observeVisiblity`指令监听页面元素的可见性变化，实现懒加载优化：仅当组件进入视口时才请求资源。组件提供了加载状态反馈机制，使用`LoadingStatus`枚举跟踪加载过程，并通过Progress组件显示加载动画。事件处理方面，监听iframe的`load`事件以更新状态并通知父级组件。此外，通过`$effect.pre`运行副作用，在每次`src`变更时重新绑定事件监听器，确保生命周期同步。",
+    "responsibilities": [
+      "管理嵌入式Web页面的加载生命周期",
+      "提供基于可见性的懒加载优化策略",
+      "展示加载进度与状态反馈给用户",
+      "安全地渲染第三方网页内容",
+      "向父组件暴露加载开始和结束的回调通知"
+    ],
+    "interfaces": [
+      {
+        "name": "EmbedWebViewProps",
+        "interface_type": "type",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "src",
+            "param_type": "string",
+            "is_optional": false,
+            "description": "要嵌入的网页URL"
+          },
+          {
+            "name": "onLoadStart",
+            "param_type": "() => void",
+            "is_optional": true,
+            "description": "加载开始时的回调函数"
+          },
+          {
+            "name": "onLoadEnd",
+            "param_type": "(src: string) => void",
+            "is_optional": true,
+            "description": "加载完成时的回调函数"
+          }
+        ],
+        "return_type": null,
+        "description": "定义EmbedWebView组件的输入属性类型"
+      },
+      {
+        "name": "onLoadEventHandler",
+        "interface_type": "function",
+        "visibility": "private",
+        "parameters": [],
+        "return_type": "void",
+        "description": "处理iframe加载完成事件，更新状态并触发回调"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "$lib/utils/dom",
+        "path": "app/src/lib/utils/dom",
+        "is_external": false,
+        "line_number": 1,
+        "dependency_type": "import",
+        "version": null
+      },
+      {
+        "name": "$lib/types/loading",
+        "path": "app/src/lib/types/loading",
+        "is_external": false,
+        "line_number": 2,
+        "dependency_type": "import",
+        "version": null
+      },
+      {
+        "name": "./types",
+        "path": "app/src/lib/widgets/types",
+        "is_external": false,
+        "line_number": 3,
+        "dependency_type": "import",
+        "version": null
+      },
+      {
+        "name": "@skeletonlabs/skeleton-svelte",
+        "path": null,
+        "is_external": true,
+        "line_number": 4,
+        "dependency_type": "import",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 3.0,
+      "lines_of_code": 79,
+      "number_of_functions": 2,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.5,
+      "cohesion_score": 0.85
+    }
+  },
+  "timestamp": 1758805755,
+  "prompt_hash": "27ca3638a157126364647d701beedbb0",
+  "token_usage": {
+    "input_tokens": 899,
+    "output_tokens": 930,
+    "total_tokens": 1829
+  },
+  "model_name": null
+}

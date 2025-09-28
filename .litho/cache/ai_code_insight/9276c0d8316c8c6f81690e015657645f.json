@@ -1,0 +1,184 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "mod.rs",
+      "file_path": "crates/feed_api_rs/src/startup/mod.rs",
+      "code_purpose": "other",
+      "importance_score": 0.8,
+      "description": "应用启动初始化模块，负责协调Tiger0和Tiger1阶段的组件初始化，包括配置、日志、用户档案和LLM服务。",
+      "functions": [
+        "tiger0_1",
+        "tiger2",
+        "launch"
+      ],
+      "interfaces": [
+        "Startup",
+        "ContextHost"
+      ]
+    },
+    "detailed_description": "该组件是应用的启动协调器，实现两阶段初始化策略：Tiger0为必须同步初始化的核心配置与日志，Tiger1为可并行初始化的用户配置与依赖服务（如LLM）。通过tokio::join!并发执行init_user_profile和init_llm以提升启动性能。实现了ContextHost trait以管理ApplicationContext生命周期，并提供了launch入口方法。Tiger2阶段被预留用于延迟初始化。",
+    "responsibilities": [
+      "协调应用启动时序，执行Tiger0/Tiger1阶段初始化",
+      "并发初始化用户配置与LLM依赖服务",
+      "管理ApplicationContext的创建与传递",
+      "提供统一的启动入口点(launch)",
+      "处理启动过程中的错误并记录日志"
+    ],
+    "interfaces": [
+      {
+        "name": "Startup",
+        "interface_type": "struct",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "应用启动上下文容器，持有ApplicationContext实例。"
+      },
+      {
+        "name": "ContextHost",
+        "interface_type": "trait",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "定义上下文宿主行为的标准接口，被Startup实现。"
+      },
+      {
+        "name": "launch",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": "anyhow::Result<Startup>",
+        "description": "异步启动方法，构建并返回初始化完成的Startup实例。"
+      },
+      {
+        "name": "tiger0_1",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": "anyhow::Result<ApplicationContext>",
+        "description": "执行Tiger0(同步)和Tiger1(并发)阶段的初始化逻辑，返回构建的ApplicationContext。"
+      },
+      {
+        "name": "tiger2",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "_context",
+            "param_type": "ApplicationContext",
+            "is_optional": false,
+            "description": "传入的上下文对象，当前未使用"
+          }
+        ],
+        "return_type": "anyhow::Result<ApplicationContext>",
+        "description": "预留的Tiger2延迟初始化函数，当前为todo状态。"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "spdlog",
+        "path": null,
+        "is_external": true,
+        "line_number": 1,
+        "dependency_type": "logging",
+        "version": null
+      },
+      {
+        "name": "anyhow",
+        "path": null,
+        "is_external": true,
+        "line_number": 3,
+        "dependency_type": "error_handling",
+        "version": null
+      },
+      {
+        "name": "tokio",
+        "path": null,
+        "is_external": true,
+        "line_number": 27,
+        "dependency_type": "runtime",
+        "version": null
+      },
+      {
+        "name": "types",
+        "path": "./crates/llm/src/providers/types.rs",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "internal_module",
+        "version": null
+      },
+      {
+        "name": "init_app_config",
+        "path": "crates/feed_api_rs/src/startup/init_app_config",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "internal_module",
+        "version": null
+      },
+      {
+        "name": "init_logger",
+        "path": "crates/feed_api_rs/src/startup/init_logger",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "internal_module",
+        "version": null
+      },
+      {
+        "name": "init_llm",
+        "path": "crates/feed_api_rs/src/startup/init_llm",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "internal_module",
+        "version": null
+      },
+      {
+        "name": "init_user_profile",
+        "path": "crates/feed_api_rs/src/startup/init_user_profile",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "internal_module",
+        "version": null
+      },
+      {
+        "name": "task",
+        "path": "crates/feed_api_rs/src/startup/task",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "internal_module",
+        "version": null
+      },
+      {
+        "name": "ApplicationContext",
+        "path": "crates/feed_api_rs/src/application_context/ApplicationContext",
+        "is_external": false,
+        "line_number": 3,
+        "dependency_type": "data_model",
+        "version": null
+      },
+      {
+        "name": "ContextHost",
+        "path": "crates/feed_api_rs/src/application_context/ContextHost",
+        "is_external": false,
+        "line_number": 3,
+        "dependency_type": "trait",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 3.0,
+      "lines_of_code": 72,
+      "number_of_functions": 3,
+      "number_of_classes": 1,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.65,
+      "cohesion_score": 0.85
+    }
+  },
+  "timestamp": 1758805357,
+  "prompt_hash": "9276c0d8316c8c6f81690e015657645f",
+  "token_usage": {
+    "input_tokens": 1263,
+    "output_tokens": 1242,
+    "total_tokens": 2505
+  },
+  "model_name": null
+}

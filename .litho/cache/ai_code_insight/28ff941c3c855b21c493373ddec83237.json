@@ -1,0 +1,82 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "types.rs",
+      "file_path": "crates/intelligent/src/article_processor/types.rs",
+      "source_summary": "",
+      "code_purpose": "specificfeature",
+      "importance_score": 0.6,
+      "description": "定义文章处理器的统一接口，支持异步处理和责任链模式。",
+      "functions": [],
+      "interfaces": [
+        "IArticleProcessor"
+      ]
+    },
+    "detailed_description": "该组件定义了 `IArticleProcessor` trait，作为文章处理流水线中各处理器的统一接口规范。所有实现该 trait 的结构体均可参与文章处理的责任链调度。`process` 方法接收不可变引用的 `Article` 和 `LLMInstructOption` 配置，返回一个异步 Future，输出为 `anyhow::Result<Article>`，确保非阻塞 I/O 与错误传播能力。此设计支持构建可扩展、松耦合的文章处理管道。",
+    "responsibilities": [
+      "定义文章处理器的标准接口",
+      "支持异步非阻塞处理流程",
+      "保证输入数据不可变性以维护状态一致性",
+      "支持通过 LLM 指令选项进行参数化处理",
+      "为责任链模式提供基础抽象"
+    ],
+    "interfaces": [
+      {
+        "name": "IArticleProcessor",
+        "interface_type": "trait",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "文章处理器的核心 trait，用于实现责任链模式中的处理器节点。"
+      },
+      {
+        "name": "process",
+        "interface_type": "method",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "input",
+            "param_type": "&Article",
+            "is_optional": false,
+            "description": "待处理的文章内容，为不可变引用"
+          },
+          {
+            "name": "opt",
+            "param_type": "LLMInstructOption",
+            "is_optional": false,
+            "description": "LLM 指令配置选项"
+          }
+        ],
+        "return_type": "impl std::future::Future<Output = anyhow::Result<Article>>",
+        "description": "处理文章的方法，接受不可变引用的 Article 和 LLMInstructOption，返回异步 Result。"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "types",
+        "path": "types",
+        "is_external": false,
+        "line_number": 1,
+        "dependency_type": "use",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 12,
+      "number_of_functions": 1,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.5,
+      "cohesion_score": 0.9
+    }
+  },
+  "timestamp": 1759024609,
+  "prompt_hash": "28ff941c3c855b21c493373ddec83237",
+  "token_usage": {
+    "input_tokens": 616,
+    "output_tokens": 708,
+    "total_tokens": 1324
+  },
+  "model_name": null
+}

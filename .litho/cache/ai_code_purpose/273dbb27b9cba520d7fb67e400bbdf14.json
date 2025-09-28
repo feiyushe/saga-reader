@@ -1,0 +1,15 @@
+{
+  "data": {
+    "code_purpose": "specificfeature",
+    "confidence": 0.9,
+    "reasoning": "该文件位于startup目录下，文件名为init_user_profile.rs，内容主要实现用户配置的初始化逻辑，包括读取或创建默认的用户配置文件（如TOML格式），并提供同步到存储的功能。其职责是处理特定的初始化业务逻辑，属于特定功能模块，而非通用工具或模型定义。因此归类为'specificfeature'。"
+  },
+  "timestamp": 1758800703,
+  "prompt_hash": "273dbb27b9cba520d7fb67e400bbdf14",
+  "token_usage": {
+    "input_tokens": 467,
+    "output_tokens": 179,
+    "total_tokens": 646
+  },
+  "model_name": null
+}

@@ -1,0 +1,77 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "index.ts",
+      "file_path": "app/src/lib/hybrid-apis/tauri-regular/index.ts",
+      "code_purpose": "entry",
+      "importance_score": 0.8,
+      "description": "Tauri 插件 API 调用的统一入口，封装 invoke 方法以支持插件通信。",
+      "functions": [
+        "call"
+      ],
+      "interfaces": [
+        "InvokeArgs",
+        "Option"
+      ]
+    },
+    "detailed_description": "该组件作为 Tauri 框架中与原生插件交互的桥接层，通过封装 `@tauri-apps/api/core` 的 `invoke` 方法，提供类型安全的 RPC 调用接口。其主要功能是将前端逻辑与底层 Rust 插件解耦，使用字符串拼接方式构造插件命令（如 `plugin:feed-api|${methodName}`），并传递参数执行异步调用。当前仅暴露一个泛型函数 `call`，支持返回值类型参数化，提升调用端的类型推导能力。",
+    "responsibilities": [
+      "提供统一的 Tauri 插件调用接口",
+      "封装底层 invoke 方法以简化上层使用",
+      "确保跨平台 API 调用的类型安全性",
+      "管理插件命名空间和方法路由"
+    ],
+    "interfaces": [
+      {
+        "name": "InvokeArgs",
+        "interface_type": "type",
+        "visibility": "export",
+        "parameters": [],
+        "return_type": null,
+        "description": "允许传递对象、数字数组或二进制数据作为调用参数的联合类型。"
+      },
+      {
+        "name": "Option",
+        "interface_type": "type",
+        "visibility": "export",
+        "parameters": [
+          {
+            "name": "T",
+            "param_type": "unknown",
+            "is_optional": false,
+            "description": "泛型占位符，表示任意可选值类型"
+          }
+        ],
+        "return_type": null,
+        "description": "表示某值可能存在、为空或未定义的可选类型别名。"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "@tauri-apps/api/core",
+        "path": null,
+        "is_external": true,
+        "line_number": 1,
+        "dependency_type": "import",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 13,
+      "number_of_functions": 1,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 1.0,
+      "cohesion_score": 0.9
+    }
+  },
+  "timestamp": 1758805714,
+  "prompt_hash": "0c2760672116db4e9f3ed65c8cea377c",
+  "token_usage": {
+    "input_tokens": 496,
+    "output_tokens": 638,
+    "total_tokens": 1134
+  },
+  "model_name": null
+}

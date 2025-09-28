@@ -1,0 +1,187 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "article_recorder_service.rs",
+      "file_path": "crates/recorder/src/article_recorder_service.rs",
+      "source_summary": "",
+      "code_purpose": "specificfeature",
+      "importance_score": 0.8,
+      "description": "文章记录服务，负责对文章记录进行增删改查、状态管理及搜索等业务操作。",
+      "functions": [
+        "initialize",
+        "update_content",
+        "insert",
+        "exists_by_source",
+        "query_backward",
+        "query_favorite",
+        "query_unread",
+        "query_backward_in_duration",
+        "count",
+        "mark_as_read",
+        "set_favorite",
+        "query_by_id",
+        "dispose",
+        "search_contents_by_keyword"
+      ],
+      "interfaces": [
+        "ArticleRecorderService"
+      ]
+    },
+    "detailed_description": "该组件是文章记录的核心服务层实现，封装了对文章记录（Model）的各类数据访问逻辑。它通过依赖 Operator 操作底层数据库，实现了初始化、插入、更新、查询（按分组、收藏、未读、时间范围等）、标记已读、设置收藏、关键词搜索等功能。其主要职责集中在文章记录的生命周期管理与状态变更控制，是连接上层业务逻辑与底层数据存储的关键中介。",
+    "responsibilities": [
+      "管理文章记录的持久化操作（增删改查）",
+      "维护文章记录的状态（已读/未读、收藏）",
+      "提供多维度的文章查询接口（按时间、收藏、未读、关键词等）",
+      "确保数据一致性（如插入时去重逻辑）"
+    ],
+    "interfaces": [
+      {
+        "name": "ArticleRecorderService",
+        "interface_type": "struct",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "文章记录服务的主要结构体，包含Operator用于执行数据库操作。"
+      },
+      {
+        "name": "initialize",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": "anyhow::Result<()>",
+        "description": "初始化服务及其依赖的Operator。"
+      },
+      {
+        "name": "update_content",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "record",
+            "param_type": "Model",
+            "is_optional": false,
+            "description": "需要更新的文章记录"
+          },
+          {
+            "name": "purged_content",
+            "param_type": "String",
+            "is_optional": false,
+            "description": "清洗后的内容"
+          },
+          {
+            "name": "optimized_content",
+            "param_type": "String",
+            "is_optional": false,
+            "description": "优化后的内容"
+          },
+          {
+            "name": "melted_content",
+            "param_type": "String",
+            "is_optional": false,
+            "description": "融合后的内容"
+          }
+        ],
+        "return_type": "anyhow::Result<Model>",
+        "description": "更新指定记录的三种内容字段。"
+      },
+      {
+        "name": "insert",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "records",
+            "param_type": "Vec<Model>",
+            "is_optional": false,
+            "description": "待插入的文章记录列表"
+          }
+        ],
+        "return_type": "anyhow::Result<i32>",
+        "description": "批量插入文章记录，自动处理重复链接：删除已读的重复项，跳过未读的重复项。"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "chrono::NaiveDate",
+        "path": null,
+        "is_external": true,
+        "line_number": 1,
+        "dependency_type": "use",
+        "version": null
+      },
+      {
+        "name": "sea_orm::ColumnTrait",
+        "path": null,
+        "is_external": true,
+        "line_number": 2,
+        "dependency_type": "use",
+        "version": null
+      },
+      {
+        "name": "sea_orm::Condition",
+        "path": null,
+        "is_external": true,
+        "line_number": 2,
+        "dependency_type": "use",
+        "version": null
+      },
+      {
+        "name": "sea_orm::IntoActiveModel",
+        "path": null,
+        "is_external": true,
+        "line_number": 2,
+        "dependency_type": "use",
+        "version": null
+      },
+      {
+        "name": "sea_orm::ActiveValue::Set",
+        "path": null,
+        "is_external": true,
+        "line_number": 3,
+        "dependency_type": "use",
+        "version": null
+      },
+      {
+        "name": "sea_orm::prelude::Expr",
+        "path": null,
+        "is_external": true,
+        "line_number": 4,
+        "dependency_type": "use",
+        "version": null
+      },
+      {
+        "name": "crate::entity::article_record",
+        "path": "./crates/recorder/src/entity/article_record.rs",
+        "is_external": false,
+        "line_number": 6,
+        "dependency_type": "use",
+        "version": null
+      },
+      {
+        "name": "crate::operator::Operator",
+        "path": null,
+        "is_external": false,
+        "line_number": 7,
+        "dependency_type": "use",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 9.0,
+      "lines_of_code": 157,
+      "number_of_functions": 18,
+      "number_of_classes": 1,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.4667,
+      "cohesion_score": 0.85
+    }
+  },
+  "timestamp": 1759024392,
+  "prompt_hash": "9a8a579a07ccbdfaca7eeda797409138",
+  "token_usage": {
+    "input_tokens": 2194,
+    "output_tokens": 1228,
+    "total_tokens": 3422
+  },
+  "model_name": null
+}

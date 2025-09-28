@@ -1,0 +1,15 @@
+{
+  "data": {
+    "code_purpose": "model",
+    "confidence": 0.85,
+    "reasoning": "该文件定义了一个名为IProvider的trait以及使用了Article类型，这表明它主要负责定义数据结构和接口契约。文件位于search目录下的types.rs，通常这样的命名约定意味着它是用来定义类型的地方。此外，没有实现具体的业务逻辑，而是提供了异步方法签名，说明其作为模型或接口定义的角色。因此，判断此文件的主要目的是作为模型(model)。"
+  },
+  "timestamp": 1758800910,
+  "prompt_hash": "b2fd859f2a8bec1ef5b463e1f7a9b48b",
+  "token_usage": {
+    "input_tokens": 276,
+    "output_tokens": 214,
+    "total_tokens": 490
+  },
+  "model_name": null
+}

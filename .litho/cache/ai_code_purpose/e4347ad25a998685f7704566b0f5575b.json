@@ -1,0 +1,15 @@
+{
+  "data": {
+    "code_purpose": "model",
+    "confidence": 0.95,
+    "reasoning": "该文件位于 `types.ts`，文件名表明其主要定义类型。内容中包含多个 type 定义，如 LLMSection、AppConfig、FeedTargetDescription 等，均为数据结构的类型声明，用于描述应用配置、文章模型、订阅源等数据形态。无函数实现或业务逻辑，符合 'model' 类型即数据模型或类型定义的特征。路径 `lib/hybrid-apis/feed/` 也暗示其为 API 层的数据结构定义。"
+  },
+  "timestamp": 1758800851,
+  "prompt_hash": "e4347ad25a998685f7704566b0f5575b",
+  "token_usage": {
+    "input_tokens": 460,
+    "output_tokens": 194,
+    "total_tokens": 654
+  },
+  "model_name": null
+}

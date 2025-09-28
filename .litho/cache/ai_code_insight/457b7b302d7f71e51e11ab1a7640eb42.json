@@ -1,0 +1,58 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "connector.rs",
+      "file_path": "crates/llm/src/connector.rs",
+      "code_purpose": "util",
+      "importance_score": 0.6,
+      "description": "构建并配置用于HTTP请求的reqwest客户端，设置超时、Gzip和Deflate压缩支持。",
+      "functions": [
+        "new"
+      ],
+      "interfaces": []
+    },
+    "detailed_description": "该组件负责创建一个预配置的reqwest::Client实例，用于后续的HTTP通信。它设置了60秒的全局请求超时，并启用了Gzip和Deflate内容编码压缩，以优化网络传输效率。此客户端通常被LLM相关服务用于调用远程API。",
+    "responsibilities": [
+      "初始化HTTP客户端实例",
+      "配置请求超时策略",
+      "启用响应内容的压缩支持",
+      "提供可靠的网络传输基础组件"
+    ],
+    "interfaces": [],
+    "dependencies": [
+      {
+        "name": "std::time::Duration",
+        "path": null,
+        "is_external": false,
+        "line_number": 1,
+        "dependency_type": "use",
+        "version": null
+      },
+      {
+        "name": "reqwest::Client",
+        "path": null,
+        "is_external": true,
+        "line_number": 3,
+        "dependency_type": "use",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 13,
+      "number_of_functions": 1,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 2.0,
+      "cohesion_score": 0.95
+    }
+  },
+  "timestamp": 1758805851,
+  "prompt_hash": "457b7b302d7f71e51e11ab1a7640eb42",
+  "token_usage": {
+    "input_tokens": 466,
+    "output_tokens": 390,
+    "total_tokens": 856
+  },
+  "model_name": null
+}

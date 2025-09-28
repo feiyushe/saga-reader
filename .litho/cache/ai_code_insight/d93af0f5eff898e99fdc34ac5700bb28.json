@@ -1,0 +1,49 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "default.json",
+      "file_path": "app/src-tauri/capabilities/default.json",
+      "code_purpose": "config",
+      "importance_score": 0.6,
+      "description": "Capability configuration for the In-App window in a Tauri application, defining allowed windows and permissions.",
+      "functions": [],
+      "interfaces": []
+    },
+    "detailed_description": "This configuration file defines a capability set named 'default' for a Tauri desktop application. It specifies which windows are available in the app (such as main, settings, about, and various feed-related windows) and grants a comprehensive set of permissions required for core functionality including window management, webview control, event handling, shell operations, clipboard access, feed API interaction, autostart features, OS integration, and dialog usage. The schema reference ensures structural validation against the desktop-schema.json specification.",
+    "responsibilities": [
+      "Define the set of available application windows",
+      "Declare essential runtime permissions for core application features",
+      "Enforce security by explicitly listing permitted capabilities",
+      "Provide configuration for role-based access control in the Tauri framework",
+      "Enable modular capability management through JSON-based schema"
+    ],
+    "interfaces": [],
+    "dependencies": [
+      {
+        "name": "../gen/schemas/desktop-schema.json",
+        "path": "../gen/schemas/desktop-schema.json",
+        "is_external": false,
+        "line_number": 2,
+        "dependency_type": "schema",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 2.0,
+      "lines_of_code": 43,
+      "number_of_functions": 0,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.023,
+      "cohesion_score": 0.95
+    }
+  },
+  "timestamp": 1758805938,
+  "prompt_hash": "d93af0f5eff898e99fdc34ac5700bb28",
+  "token_usage": {
+    "input_tokens": 667,
+    "output_tokens": 407,
+    "total_tokens": 1074
+  },
+  "model_name": null
+}

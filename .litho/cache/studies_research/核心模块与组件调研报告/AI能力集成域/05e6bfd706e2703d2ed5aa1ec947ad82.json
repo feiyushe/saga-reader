@@ -1,0 +1,26 @@
+{
+  "data": {
+    "domain_name": "AI能力集成域",
+    "module_name": "LLM代理服务",
+    "module_description": "实现面向多种LLM提供商的代理模式，屏蔽底层接口差异，提供统一的文本生成能力。通过枚举类型CompletionServiceEnums封装了Ollama、Mistral、Platform、GLM和OpenAI等不同提供商的具体服务实现，并在CompletionAgent结构体中根据配置动态选择实际的服务实例。",
+    "interaction": "定义了CompletionService trait作为统一接口，各具体实现（如OllamaCompletionService、OpenAILikeCompletionService）均实现此trait。CompletionAgent作为代理层，根据LLMSection中的active_provider_type字段决定使用哪个具体服务实例。系统通过new()方法初始化代理，通过异步completion()方法发送用户输入并获取响应。",
+    "implementation": "采用Rust语言实现，基于reqwest进行HTTP通信，serde用于序列化/反序列化。核心是CompletionAgent结构体，内部持有CompletionServiceEnums枚举类型的provider字段，该枚举包装了不同LLM提供商的服务实例。通过match表达式在运行时分发调用到具体实现。Ollama和OpenAI兼容服务直接处理API请求，而GLM和Mistral则作为适配层复用OpenAI兼容逻辑。",
+    "associated_files": [
+      "crates/llm/src/llm_agent.rs",
+      "crates/llm/src/providers/llm_ollama.rs",
+      "crates/llm/src/providers/llm_openaibase_like.rs",
+      "crates/llm/src/providers/llm_glm.rs",
+      "crates/llm/src/providers/llm_mistral.rs"
+    ],
+    "flowchart_mermaid": "graph TD\n    A[用户请求] --> B{CompletionAgent}\n    B --> C[根据active_provider_type选择]\n    C --> D[OllamaCompletionService]\n    C --> E[MistralQinoAgentService]\n    C --> F[GLMCompletionService]\n    C --> G[OpenAILikeCompletionService]\n    D --> H[发送POST请求到Ollama API]\n    E --> I[通过OpenAILike复用逻辑调用Mistral]\n    F --> J[转换为OpenAI格式调用]\n    G --> K[发送POST请求到OpenAI兼容API]\n    H --> L[返回响应]\n    I --> L\n    J --> L\n    K --> L",
+    "sequence_diagram_mermaid": "sequenceDiagram\n    participant User\n    participant CompletionAgent\n    participant Provider\n    participant API\n    User->>CompletionAgent: completion(message)\n    activate CompletionAgent\n    CompletionAgent->>CompletionAgent: 根据active_provider_type匹配服务\n    alt Ollama提供者\n        CompletionAgent->>Provider: OllamaCompletionService::new()\n        Provider->>API: POST /api/generate (Ollama)\n    else OpenAI/Mistral/GLM提供者\n        CompletionAgent->>Provider: OpenAILikeCompletionService::new()\n        Provider->>API: POST /v1/chat/completions\n    end\n    API-->>Provider: 返回JSON响应\n    Provider-->>CompletionAgent: 解析response.content\n    CompletionAgent-->>User: 返回文本结果\n    deactivate CompletionAgent"
+  },
+  "timestamp": 1759025012,
+  "prompt_hash": "05e6bfd706e2703d2ed5aa1ec947ad82",
+  "token_usage": {
+    "input_tokens": 4421,
+    "output_tokens": 926,
+    "total_tokens": 5347
+  },
+  "model_name": null
+}

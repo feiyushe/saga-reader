@@ -1,0 +1,15 @@
+{
+  "data": {
+    "code_purpose": "config",
+    "confidence": 0.95,
+    "reasoning": "该文件位于 `src-tauri/gen/schemas/` 路径下，文件名为 `capabilities.json`，内容是一个 JSON 格式的配置对象，定义了不同 capability 的权限和窗口访问控制。这种结构通常用于 Tauri 框架中声明应用的安全策略和权限配置，属于典型的配置文件。无任何函数、类或业务逻辑代码，符合 'config' 类型的特征。"
+  },
+  "timestamp": 1758800938,
+  "prompt_hash": "f19e6f3ff8a57e87758c2762c2584aeb",
+  "token_usage": {
+    "input_tokens": 464,
+    "output_tokens": 177,
+    "total_tokens": 641
+  },
+  "model_name": null
+}

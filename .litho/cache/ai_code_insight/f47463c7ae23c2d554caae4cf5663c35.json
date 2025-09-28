@@ -1,0 +1,105 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "sprite.svelte.ts",
+      "file_path": "app/src/routes/main/stores/sprite.svelte.ts",
+      "code_purpose": "controller",
+      "importance_score": 1.0,
+      "description": "管理对话状态和交互的Svelte store，用于处理用户与文章助手之间的聊天逻辑。",
+      "functions": [
+        "create",
+        "send",
+        "cleanUp",
+        "toggle"
+      ],
+      "interfaces": [
+        "StoreType",
+        "ConversationInput",
+        "ConversationMessage"
+      ]
+    },
+    "detailed_description": "该组件是一个Svelte状态管理store，负责管理一个对话窗口的打开/关闭状态、消息历史记录以及发送新消息的逻辑。它通过调用外部API（featuresApi.chat_with_article_assistant）实现与文章相关的智能助手对话功能，并集成loading状态以控制UI加载反馈。当对话框关闭时会清理历史记录和加载状态。组件使用$state进行响应式状态管理，符合Svelte 5的信号语法。",
+    "responsibilities": [
+      "管理对话界面的展开/收起状态",
+      "维护用户与系统之间的消息历史记录",
+      "封装向文章助手发送消息并接收回复的异步逻辑",
+      "协调loading状态以反映请求过程中的UI反馈",
+      "在对话关闭时清理本地状态数据"
+    ],
+    "interfaces": [
+      {
+        "name": "StoreType",
+        "interface_type": "type",
+        "visibility": "exported",
+        "parameters": [],
+        "return_type": null,
+        "description": "定义了对话store的公开接口结构，包括状态字段和方法"
+      },
+      {
+        "name": "create",
+        "interface_type": "function",
+        "visibility": "exported",
+        "parameters": [
+          {
+            "name": "context",
+            "param_type": "IContext",
+            "is_optional": false,
+            "description": "提供当前上下文信息，如当前文章ID"
+          }
+        ],
+        "return_type": "StoreType",
+        "description": "工厂函数，用于创建并初始化一个新的对话store实例"
+      },
+      {
+        "name": "send",
+        "interface_type": "function",
+        "visibility": "internal",
+        "parameters": [
+          {
+            "name": "input",
+            "param_type": "ConversationInput",
+            "is_optional": false,
+            "description": "用户输入的消息内容"
+          }
+        ],
+        "return_type": "Promise<boolean>",
+        "description": "发送用户消息并获取助手回复，返回操作是否成功"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "featuresApi",
+        "path": "$lib/hybrid-apis/feed/impl",
+        "is_external": true,
+        "line_number": 4,
+        "dependency_type": "api",
+        "version": null
+      },
+      {
+        "name": "LoadingStore",
+        "path": "./loading.svelte",
+        "is_external": false,
+        "line_number": 2,
+        "dependency_type": "store",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 3.0,
+      "lines_of_code": 90,
+      "number_of_functions": 4,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.67,
+      "cohesion_score": 0.85
+    }
+  },
+  "timestamp": 1758801010,
+  "prompt_hash": "f47463c7ae23c2d554caae4cf5663c35",
+  "token_usage": {
+    "input_tokens": 919,
+    "output_tokens": 840,
+    "total_tokens": 1759
+  },
+  "model_name": null
+}

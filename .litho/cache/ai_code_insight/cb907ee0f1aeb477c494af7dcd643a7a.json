@@ -1,0 +1,36 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "FeedEditPanel.svelte",
+      "file_path": "app/src/routes/main/widgets/FeedEditPanel.svelte",
+      "code_purpose": "widget",
+      "importance_score": 0.8,
+      "description": null,
+      "functions": [],
+      "interfaces": []
+    },
+    "detailed_description": "该组件为空，未包含任何代码实现。无法确定其具体功能和业务逻辑。",
+    "responsibilities": [
+      "未知：组件无内容，职责无法识别"
+    ],
+    "interfaces": [],
+    "dependencies": [],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 0,
+      "number_of_functions": 0,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.0,
+      "cohesion_score": 1.0
+    }
+  },
+  "timestamp": 1758805822,
+  "prompt_hash": "cb907ee0f1aeb477c494af7dcd643a7a",
+  "token_usage": {
+    "input_tokens": 407,
+    "output_tokens": 182,
+    "total_tokens": 589
+  },
+  "model_name": null
+}

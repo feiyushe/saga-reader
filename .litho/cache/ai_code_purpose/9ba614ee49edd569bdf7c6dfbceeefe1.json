@@ -1,0 +1,15 @@
+{
+  "data": {
+    "code_purpose": "specificfeature",
+    "confidence": 0.9,
+    "reasoning": "该文件位于`crates/ollama/src/lib.rs`，是一个Rust库模块，主要实现了与Ollama程序交互的功能，如安装、启动、获取版本信息等。文件中定义了枚举类型`ProgramStatus`和结构体`Information`用于状态管理，并通过`tokio::process::Command`调用外部命令与Ollama进行通信。其职责是封装对Ollama的特定功能操作，属于实现特定业务逻辑的功能模块，因此归类为'specificfeature'。"
+  },
+  "timestamp": 1758800830,
+  "prompt_hash": "9ba614ee49edd569bdf7c6dfbceeefe1",
+  "token_usage": {
+    "input_tokens": 457,
+    "output_tokens": 205,
+    "total_tokens": 662
+  },
+  "model_name": null
+}

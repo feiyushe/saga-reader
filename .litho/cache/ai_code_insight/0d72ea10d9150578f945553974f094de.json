@@ -1,0 +1,131 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "launcher.rs",
+      "file_path": "app/src-tauri/src/daemon/launcher.rs",
+      "source_summary": "",
+      "code_purpose": "specificfeature",
+      "importance_score": 0.8,
+      "description": "负责守护进程的启动逻辑，包含带错误忽略的启动接口和标准启动流程。",
+      "functions": [
+        "launch_ignore_error",
+        "launch"
+      ],
+      "interfaces": [
+        "launch_ignore_error",
+        "launch"
+      ]
+    },
+    "detailed_description": "该组件实现了守护进程（daemon）的启动功能。核心逻辑是通过文件锁机制防止重复启动：首先获取指定名称的锁路径，尝试获取文件锁，若已锁定则说明守护进程已在运行，直接返回；否则释放锁并使用当前可执行文件路径结合参数重新启动守护进程。`launch_ignore_error` 提供了对错误静默处理的启动方式，仅在出错时记录日志。",
+    "responsibilities": [
+      "管理守护进程的启动流程",
+      "通过文件锁防止守护进程重复启动",
+      "提供静默失败的安全启动接口",
+      "记录关键启动事件日志",
+      "调用自身二进制启动新进程实例"
+    ],
+    "interfaces": [
+      {
+        "name": "launch",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "host_arg",
+            "param_type": "&str",
+            "is_optional": false,
+            "description": "传递给守护进程的主机参数"
+          },
+          {
+            "name": "locker_monitor_name",
+            "param_type": "&str",
+            "is_optional": false,
+            "description": "用于生成锁文件路径的监控名称"
+          }
+        ],
+        "return_type": "anyhow::Result<()>",
+        "description": "安全地启动守护进程，若已被锁定则不重复启动"
+      },
+      {
+        "name": "launch_ignore_error",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "host_arg",
+            "param_type": "&str",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "locker_monitor_name",
+            "param_type": "&str",
+            "is_optional": false,
+            "description": null
+          }
+        ],
+        "return_type": "()",
+        "description": "启动守护进程并在出错时仅记录日志而不中断调用方"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "std::env",
+        "path": null,
+        "is_external": false,
+        "line_number": 1,
+        "dependency_type": "standard_library",
+        "version": null
+      },
+      {
+        "name": "std::process::Command",
+        "path": null,
+        "is_external": false,
+        "line_number": 2,
+        "dependency_type": "standard_library",
+        "version": null
+      },
+      {
+        "name": "fslock::LockFile",
+        "path": null,
+        "is_external": true,
+        "line_number": 4,
+        "dependency_type": "third_party",
+        "version": null
+      },
+      {
+        "name": "spdlog",
+        "path": null,
+        "is_external": true,
+        "line_number": 5,
+        "dependency_type": "third_party",
+        "version": null
+      },
+      {
+        "name": "crate::daemon::locks::get_lock_path",
+        "path": "app/src-tauri/src/daemon/locks.rs",
+        "is_external": false,
+        "line_number": 7,
+        "dependency_type": "internal",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 3.0,
+      "lines_of_code": 41,
+      "number_of_functions": 2,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.55,
+      "cohesion_score": 0.85
+    }
+  },
+  "timestamp": 1759024430,
+  "prompt_hash": "0d72ea10d9150578f945553974f094de",
+  "token_usage": {
+    "input_tokens": 803,
+    "output_tokens": 893,
+    "total_tokens": 1696
+  },
+  "model_name": null
+}

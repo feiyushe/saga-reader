@@ -1,0 +1,26 @@
+{
+  "data": {
+    "domain_name": "系统启动与配置域",
+    "module_name": "启动流程管理",
+    "module_description": "作为应用启动中枢，采用分阶段策略进行初始化：Tiger0_1同步初始化关键配置和日志系统，随后并行初始化用户配置与LLM服务依赖。通过`tokio::join!`实现并发加载以提升启动效率，并具备错误聚合处理机制。",
+    "interaction": "定义了`ContextHost` trait用于统一管理`ApplicationContext`的生命周期；各子模块通过返回`InitTask<T>`结构参与初始化流程；支持延迟初始化（Tiger2预留接口）体现阶段性启动设计思想。",
+    "implementation": "使用Rust异步运行时Tokio实现非阻塞I/O操作；采用分阶段初始化策略（Tiger0_1同步、Tiger1并行）优化启动性能；通过`anyhow::Result`进行错误传播与聚合处理；利用`spdlog`实现结构化日志输出。",
+    "associated_files": [
+      "crates/feed_api_rs/src/startup/mod.rs",
+      "crates/feed_api_rs/src/startup/init_app_config.rs",
+      "crates/feed_api_rs/src/startup/init_user_profile.rs",
+      "crates/feed_api_rs/src/startup/init_llm.rs",
+      "crates/feed_api_rs/src/startup/init_logger.rs"
+    ],
+    "flowchart_mermaid": "graph TD\n    A[启动流程开始] --> B{是否Debug模式}\n    B -->|是| C[启用默认日志]\n    B -->|否| D[读取app_config.toml]\n    D --> E{文件存在?}\n    E -->|否| F[生成默认配置]\n    E -->|是| G[解析TOML配置]\n    F --> H[持久化到磁盘]\n    G --> I[初始化日志系统]\n    H --> I\n    I --> J[并行初始化]\n    J --> K[加载用户配置]\n    J --> L[唤醒LLM服务]\n    K --> M{成功?}\n    L --> N{成功?}\n    M -->|否| O[聚合错误退出]\n    N -->|否| O\n    M -->|是| P[构建ApplicationContext]\n    N -->|是| P\n    P --> Q[启动完成]",
+    "sequence_diagram_mermaid": "sequenceDiagram\n    participant S as Startup\n    participant AC as AppConfig\n    participant UC as UserProfile\n    participant LL as LLMRuntime\n    participant LG as Logger\n    \n    S->>AC: init_app_config::call()\n    AC-->>S: 返回AppConfig\n    \n    S->>LG: init_logger::call(&app_config)\n    LG-->>S: 日志系统就绪\n    \n    par 并行初始化\n        S->>UC: init_user_profile::call()\n        S->>LL: init_llm::call(llm_section)\n        \n        UC-->>S: 返回UserConfig\n        LL-->>S: 返回LLM状态\n    end\n    \n    alt 任一失败\n        S->>S: 聚合错误并终止\n    else 全部成功\n        S->>S: 构建ApplicationContext\n    end"
+  },
+  "timestamp": 1759025041,
+  "prompt_hash": "f929784062a9f9600134fe6772bd6ee8",
+  "token_usage": {
+    "input_tokens": 4972,
+    "output_tokens": 853,
+    "total_tokens": 5825
+  },
+  "model_name": null
+}

@@ -1,0 +1,15 @@
+{
+  "data": {
+    "code_purpose": "util",
+    "confidence": 0.95,
+    "reasoning": "该文件位于src目录下，文件名为env.rs，主要功能是通过环境变量和命令行参数判断当前是否为守护进程模式。代码结构简单，只包含一个工具函数is_daemon，用于返回布尔值判断运行模式，不涉及UI、路由、模型定义或接口暴露，符合工具类代码特征。因此归类为'util'（工具类的代码）。"
+  },
+  "timestamp": 1758800948,
+  "prompt_hash": "f3cdaa7099cf2f26f4176196cad175eb",
+  "token_usage": {
+    "input_tokens": 257,
+    "output_tokens": 180,
+    "total_tokens": 437
+  },
+  "model_name": null
+}

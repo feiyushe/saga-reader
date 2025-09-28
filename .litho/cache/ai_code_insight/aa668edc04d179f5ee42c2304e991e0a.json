@@ -1,0 +1,58 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "types.rs",
+      "file_path": "crates/feed_api_rs/src/startup/types.rs",
+      "code_purpose": "model",
+      "importance_score": 0.6,
+      "description": "定义了任务状态枚举和任务转储数据结构，用于表示任务的运行状态和执行时长。",
+      "functions": [],
+      "interfaces": [
+        "Status",
+        "TaskDump"
+      ]
+    },
+    "detailed_description": "该组件定义了两个核心类型：Status 枚举用于表示任务的生命周期状态（未启动、运行中、已完成、已中止、错误），TaskDump 结构体用于封装任务的状态和持续时间。这些类型主要用于任务监控、状态追踪和结果序列化等场景。通过派生 Clone 和 Copy trait，确保了类型的高效复制语义，适用于高频访问的上下文。",
+    "responsibilities": [
+      "定义任务状态的枚举类型",
+      "封装任务运行时信息的数据结构",
+      "提供轻量级、可复制的任务状态表示"
+    ],
+    "interfaces": [
+      {
+        "name": "Status",
+        "interface_type": "enum",
+        "visibility": "pub",
+        "parameters": [],
+        "return_type": null,
+        "description": "表示任务的生命周期状态，包括未启动、运行中、完成、中止和错误五种状态。"
+      },
+      {
+        "name": "TaskDump",
+        "interface_type": "struct",
+        "visibility": "pub",
+        "parameters": [],
+        "return_type": null,
+        "description": "包含任务当前状态和执行持续时间的只读快照结构体。"
+      }
+    ],
+    "dependencies": [],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 14,
+      "number_of_functions": 0,
+      "number_of_classes": 2,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.0,
+      "cohesion_score": 0.95
+    }
+  },
+  "timestamp": 1758805868,
+  "prompt_hash": "aa668edc04d179f5ee42c2304e991e0a",
+  "token_usage": {
+    "input_tokens": 457,
+    "output_tokens": 548,
+    "total_tokens": 1005
+  },
+  "model_name": null
+}

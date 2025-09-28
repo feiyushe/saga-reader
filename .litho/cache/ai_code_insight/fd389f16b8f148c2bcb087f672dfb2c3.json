@@ -1,0 +1,362 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "FeedsList.svelte",
+      "file_path": "app/src/routes/main/widgets/FeedsList.svelte",
+      "code_purpose": "widget",
+      "importance_score": 1.0,
+      "description": "Svelte组件，用于渲染和管理订阅源列表，支持分组展开、上下文菜单、状态选择等功能。",
+      "functions": [
+        "createRefreshFeedsAction",
+        "createFeedPackageMenus",
+        "createFeedMenus",
+        "toggleExpand",
+        "expandGroup",
+        "onAddFeedPressed"
+      ],
+      "interfaces": [
+        "listSection",
+        "listSectionWithAction",
+        "listItem",
+        "listItemInner",
+        "listGroupItem"
+      ]
+    },
+    "detailed_description": "该组件实现了一个完整的订阅源管理界面，包含多个功能区域：应用标题区、常用功能快捷入口（今日、本周、收藏等）、订阅分组列表及其内部的订阅项。每个分组支持展开/折叠操作，并通过上下文菜单提供创建、编辑、删除等交互行为。所有UI文本均支持国际化。组件通过props接收状态和回调函数，保持了良好的解耦性。使用Svelte的状态绑定机制($state)管理展开状态，并集成Tauri插件实现原生对话框提示。",
+    "responsibilities": [
+      "渲染多层级的订阅源列表结构",
+      "处理用户与订阅分组及条目的交互逻辑",
+      "管理分组展开/折叠状态",
+      "集成上下文菜单以支持增删改操作",
+      "协调国际化文本显示"
+    ],
+    "interfaces": [
+      {
+        "name": "listSection",
+        "interface_type": "snippet",
+        "visibility": "private",
+        "parameters": [
+          {
+            "name": "text",
+            "param_type": "string",
+            "is_optional": false,
+            "description": "显示的标题文本"
+          }
+        ],
+        "return_type": null,
+        "description": "渲染一个无操作的标题区块"
+      },
+      {
+        "name": "listSectionWithAction",
+        "interface_type": "snippet",
+        "visibility": "private",
+        "parameters": [
+          {
+            "name": "text",
+            "param_type": "string",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "IconRender",
+            "param_type": "Component",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "onclick",
+            "param_type": "Function",
+            "is_optional": false,
+            "description": null
+          }
+        ],
+        "return_type": null,
+        "description": "渲染带右侧图标的可点击标题区块"
+      },
+      {
+        "name": "listItem",
+        "interface_type": "snippet",
+        "visibility": "private",
+        "parameters": [
+          {
+            "name": "text",
+            "param_type": "string",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "IconRender",
+            "param_type": "Component",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "onclick",
+            "param_type": "Function",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "stateSelected",
+            "param_type": "boolean",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "menus",
+            "param_type": "Array<Menu>",
+            "is_optional": true,
+            "description": null
+          }
+        ],
+        "return_type": null,
+        "description": "通用列表项渲染器，可选地包装上下文菜单"
+      },
+      {
+        "name": "listItemInner",
+        "interface_type": "snippet",
+        "visibility": "private",
+        "parameters": [
+          {
+            "name": "text",
+            "param_type": "string",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "IconRender",
+            "param_type": "Component",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "stateSelected",
+            "param_type": "boolean",
+            "is_optional": false,
+            "description": null
+          }
+        ],
+        "return_type": null,
+        "description": "实际的内容展示单元"
+      },
+      {
+        "name": "listGroupItem",
+        "interface_type": "snippet",
+        "visibility": "private",
+        "parameters": [
+          {
+            "name": "text",
+            "param_type": "string",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "IconRender",
+            "param_type": "Component",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "onclick",
+            "param_type": "Function",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "stateSelected",
+            "param_type": "boolean",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "menus",
+            "param_type": "Array<Menu>",
+            "is_optional": false,
+            "description": null
+          }
+        ],
+        "return_type": null,
+        "description": "专用于分组项的渲染模板，强制包含上下文菜单"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "svelte-i18n",
+        "path": "svelte-i18n",
+        "is_external": true,
+        "line_number": null,
+        "dependency_type": "i18n",
+        "version": null
+      },
+      {
+        "name": "@tauri-apps/plugin-dialog",
+        "path": "@tauri-apps/plugin-dialog",
+        "is_external": true,
+        "line_number": null,
+        "dependency_type": "plugin",
+        "version": null
+      },
+      {
+        "name": "$lib/widgets/ContextMenuProvider.svelte",
+        "path": "$lib/widgets/ContextMenuProvider.svelte",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "component",
+        "version": null
+      },
+      {
+        "name": "lucide-svelte/icons/plus",
+        "path": "lucide-svelte/icons/plus",
+        "is_external": true,
+        "line_number": null,
+        "dependency_type": "icon",
+        "version": null
+      },
+      {
+        "name": "lucide-svelte/icons/folder",
+        "path": "lucide-svelte/icons/folder",
+        "is_external": true,
+        "line_number": null,
+        "dependency_type": "icon",
+        "version": null
+      },
+      {
+        "name": "lucide-svelte/icons/folder-open",
+        "path": "lucide-svelte/icons/folder-open",
+        "is_external": true,
+        "line_number": null,
+        "dependency_type": "icon",
+        "version": null
+      },
+      {
+        "name": "lucide-svelte/icons/circle-plus",
+        "path": "lucide-svelte/icons/circle-plus",
+        "is_external": true,
+        "line_number": null,
+        "dependency_type": "icon",
+        "version": null
+      },
+      {
+        "name": "lucide-svelte/icons/package",
+        "path": "lucide-svelte/icons/package",
+        "is_external": true,
+        "line_number": null,
+        "dependency_type": "icon",
+        "version": null
+      },
+      {
+        "name": "lucide-svelte/icons/newspaper",
+        "path": "lucide-svelte/icons/newspaper",
+        "is_external": true,
+        "line_number": null,
+        "dependency_type": "icon",
+        "version": null
+      },
+      {
+        "name": "lucide-svelte/icons/settings",
+        "path": "lucide-svelte/icons/settings",
+        "is_external": true,
+        "line_number": null,
+        "dependency_type": "icon",
+        "version": null
+      },
+      {
+        "name": "lucide-svelte/icons/globe",
+        "path": "lucide-svelte/icons/globe",
+        "is_external": true,
+        "line_number": null,
+        "dependency_type": "icon",
+        "version": null
+      },
+      {
+        "name": "lucide-svelte/icons/file-heart",
+        "path": "lucide-svelte/icons/file-heart",
+        "is_external": true,
+        "line_number": null,
+        "dependency_type": "icon",
+        "version": null
+      },
+      {
+        "name": "lucide-svelte/icons/eye-off",
+        "path": "lucide-svelte/icons/eye-off",
+        "is_external": true,
+        "line_number": null,
+        "dependency_type": "icon",
+        "version": null
+      },
+      {
+        "name": "./types",
+        "path": "./types",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "type",
+        "version": null
+      },
+      {
+        "name": "../stores/loading.svelte",
+        "path": "../stores/loading.svelte",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "store",
+        "version": null
+      },
+      {
+        "name": "$lib/windows/index",
+        "path": "$lib/windows/index",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "module",
+        "version": null
+      },
+      {
+        "name": "$lib/hybrid-apis/feed/types",
+        "path": "$lib/hybrid-apis/feed/types",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "type",
+        "version": null
+      },
+      {
+        "name": "$lib/windows/lite-edit",
+        "path": "$lib/windows/lite-edit",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "module",
+        "version": null
+      },
+      {
+        "name": "$lib/utils/dom",
+        "path": "$lib/utils/dom",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "utility",
+        "version": null
+      },
+      {
+        "name": "$lib/utils/text",
+        "path": "$lib/utils/text",
+        "is_external": false,
+        "line_number": null,
+        "dependency_type": "utility",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 6.0,
+      "lines_of_code": 263,
+      "number_of_functions": 6,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 19.0,
+      "cohesion_score": 0.75
+    }
+  },
+  "timestamp": 1758801067,
+  "prompt_hash": "fd389f16b8f148c2bcb087f672dfb2c3",
+  "token_usage": {
+    "input_tokens": 2265,
+    "output_tokens": 1935,
+    "total_tokens": 4200
+  },
+  "model_name": null
+}

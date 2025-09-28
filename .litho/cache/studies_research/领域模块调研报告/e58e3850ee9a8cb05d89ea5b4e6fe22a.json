@@ -1,0 +1,616 @@
+{
+  "data": {
+    "domain_modules": [
+      {
+        "name": "用户界面域",
+        "description": "负责应用的整体视觉呈现、用户交互和前端状态管理，为用户提供直观、响应式的操作体验。",
+        "domain_type": "核心业务域",
+        "sub_modules": [
+          {
+            "name": "主页面布局",
+            "description": "实现应用主界面的三栏式布局结构，协调信息源列表、文章列表和内容阅读器等组件。",
+            "code_paths": [
+              "app/src/routes/main/+page.svelte"
+            ],
+            "key_functions": [
+              "初始化主状态存储",
+              "集成全局通知系统",
+              "协调多模块UI组件"
+            ],
+            "importance": 9.5
+          },
+          {
+            "name": "侧边栏导航",
+            "description": "提供结构化的订阅包和订阅项管理界面，支持聚合视图切换和上下文菜单操作。",
+            "code_paths": [
+              "app/src/routes/main/widgets/FeedsList.svelte"
+            ],
+            "key_functions": [
+              "渲染FeedsPackage和Feed列表",
+              "处理分组展开/折叠",
+              "提供右键上下文菜单"
+            ],
+            "importance": 8.0
+          },
+          {
+            "name": "文章列表展示",
+            "description": "负责文章条目的分组渲染、加载状态管理和自动标记已读等交互逻辑。",
+            "code_paths": [
+              "app/src/routes/main/widgets/ArticlesList.svelte"
+            ],
+            "key_functions": [
+              "按分组显示文章",
+              "实现滚动加载更多",
+              "自动标记阅读状态"
+            ],
+            "importance": 9.0
+          },
+          {
+            "name": "内容阅读器",
+            "description": "提供文章内容的多模式阅读体验，支持优化、熔炼和原始三种视图切换。",
+            "code_paths": [
+              "app/src/routes/main/widgets/ArticleReader.svelte"
+            ],
+            "key_functions": [
+              "渲染HTML或Markdown内容",
+              "实现标签页视图切换",
+              "提供外部链接打开功能"
+            ],
+            "importance": 9.5
+          },
+          {
+            "name": "AI助手面板",
+            "description": "实现悬浮式AI聊天界面，支持与文章内容相关的智能对话交互。",
+            "code_paths": [
+              "app/src/routes/main/widgets/AISpritePanel.svelte"
+            ],
+            "key_functions": [
+              "管理对话历史记录",
+              "发送消息至AI服务",
+              "渲染Markdown回复内容"
+            ],
+            "importance": 8.5
+          }
+        ],
+        "code_paths": [
+          "app/src/routes/main/+page.svelte",
+          "app/src/routes/main/widgets/*.svelte"
+        ],
+        "importance": 9.0,
+        "complexity": 7.5
+      },
+      {
+        "name": "状态管理域",
+        "description": "集中管理应用的全局和局部状态，确保数据一致性并驱动UI更新，是前后端交互的核心枢纽。",
+        "domain_type": "核心业务域",
+        "sub_modules": [
+          {
+            "name": "集中式状态存储",
+            "description": "创建和整合多个子store，对外提供统一的状态访问接口，是整个应用的状态中枢。",
+            "code_paths": [
+              "app/src/routes/main/stores/index.svelte.ts"
+            ],
+            "key_functions": [
+              "整合feeds、articles、tasks等多个子store",
+              "管理当前feed和文章选择状态",
+              "调度定时内容更新任务"
+            ],
+            "importance": 10.0
+          },
+          {
+            "name": "文章状态管理",
+            "description": "专门管理文章列表的展示逻辑，包括分组、分页、搜索过滤和刷新操作。",
+            "code_paths": [
+              "app/src/routes/main/stores/articles/list/index.svelte.ts"
+            ],
+            "key_functions": [
+              "实现文章分组与分页",
+              "响应搜索条件变化",
+              "管理不同场景下的加载状态"
+            ],
+            "importance": 9.0
+          },
+          {
+            "name": "异步任务管理",
+            "description": "集中跟踪所有后台异步任务的执行状态，为用户提供可视化的进度反馈。",
+            "code_paths": [
+              "app/src/routes/main/stores/tasks.svelte.ts"
+            ],
+            "key_functions": [
+              "维护待处理任务队列",
+              "统一管理加载状态文本",
+              "提供任务添加和查询接口"
+            ],
+            "importance": 8.5
+          },
+          {
+            "name": "阅读状态管理",
+            "description": "管理单篇文章的阅读状态和内容刷新逻辑，支持智能去重的任务调度。",
+            "code_paths": [
+              "app/src/routes/main/stores/reader.svelte.ts"
+            ],
+            "key_functions": [
+              "标记文章为已读",
+              "调度增强型抓取任务",
+              "实现任务复用机制避免重复请求"
+            ],
+            "importance": 8.0
+          },
+          {
+            "name": "AI对话状态",
+            "description": "管理AI精灵对话界面的状态，包括消息历史、加载状态和可见性控制。",
+            "code_paths": [
+              "app/src/routes/main/stores/sprite.svelte.ts"
+            ],
+            "key_functions": [
+              "维护对话历史记录",
+              "处理用户消息发送",
+              "管理异步请求状态"
+            ],
+            "importance": 8.0
+          }
+        ],
+        "code_paths": [
+          "app/src/routes/main/stores/*.svelte.ts"
+        ],
+        "importance": 9.5,
+        "complexity": 8.0
+      },
+      {
+        "name": "内容获取与处理域",
+        "description": "负责从多种来源抓取网页内容，并通过大语言模型进行净化、优化和融合等智能处理，形成高质量的可读内容。",
+        "domain_type": "核心业务域",
+        "sub_modules": [
+          {
+            "name": "RSS内容抓取",
+            "description": "实现标准RSS源的内容解析和正文提取，是传统信息源的主要获取方式。",
+            "code_paths": [
+              "crates/scrap/src/rss/mod.rs"
+            ],
+            "key_functions": [
+              "解析RSS XML数据",
+              "提取文章元信息",
+              "调用文章阅读器获取完整正文"
+            ],
+            "importance": 8.5
+          },
+          {
+            "name": "搜索引擎爬虫",
+            "description": "从Bing、百度等搜索引擎结果页抓取内容，扩展信息获取渠道。",
+            "code_paths": [
+              "crates/scrap/src/search/bing.rs",
+              "crates/scrap/src/search/baidu.rs"
+            ],
+            "key_functions": [
+              "发起关键词搜索请求",
+              "解析HTML搜索结果",
+              "抓取目标网页全文内容"
+            ],
+            "importance": 8.0
+          },
+          {
+            "name": "智能网页抓取",
+            "description": "通过Tauri Webview实现对JavaScript渲染页面的智能抓取，支持自动重定向检测。",
+            "code_paths": [
+              "crates/scrap/src/simulator.rs",
+              "crates/scrap/src/article_reader.rs"
+            ],
+            "key_functions": [
+              "创建隐藏Webview窗口",
+              "执行JavaScript提取DOM内容",
+              "利用LLM判断是否存在前端跳转"
+            ],
+            "importance": 9.0
+          },
+          {
+            "name": "文章内容处理管道",
+            "description": "构建基于LLM的文章处理流水线，依次执行净化、优化和融合操作。",
+            "code_paths": [
+              "crates/intelligent/src/article_processor/purge.rs",
+              "crates/intelligent/src/article_processor/optimizer.rs",
+              "crates/intelligent/src/article_processor/melt.rs"
+            ],
+            "key_functions": [
+              "构造LLM提示词",
+              "调用底层AI服务",
+              "串联多个处理阶段"
+            ],
+            "importance": 9.5
+          }
+        ],
+        "code_paths": [
+          "crates/scrap/src/*",
+          "crates/intelligent/src/article_processor/*"
+        ],
+        "importance": 9.5,
+        "complexity": 9.0
+      },
+      {
+        "name": "AI能力集成域",
+        "description": "封装与各种大语言模型提供商的交互逻辑，为上层应用提供统一的AI服务能力。",
+        "domain_type": "核心业务域",
+        "sub_modules": [
+          {
+            "name": "LLM代理服务",
+            "description": "实现面向多种LLM提供商的代理模式，屏蔽底层接口差异，提供统一的文本生成能力。",
+            "code_paths": [
+              "crates/llm/src/llm_agent.rs"
+            ],
+            "key_functions": [
+              "根据配置动态选择服务实例",
+              "转发用户输入至对应提供商",
+              "处理不同提供商的响应格式"
+            ],
+            "importance": 9.5
+          },
+          {
+            "name": "Ollama集成",
+            "description": "实现对本地Ollama模型的补全服务调用，支持私有化部署的AI能力。",
+            "code_paths": [
+              "crates/llm/src/providers/llm_ollama.rs"
+            ],
+            "key_functions": [
+              "构造Ollama API请求",
+              "解析completion响应",
+              "管理模型配置"
+            ],
+            "importance": 9.0
+          },
+          {
+            "name": "OpenAI兼容接口",
+            "description": "实现与OpenAI风格API兼容的服务调用，支持主流云端大模型接入。",
+            "code_paths": [
+              "crates/llm/src/providers/llm_openaibase_like.rs"
+            ],
+            "key_functions": [
+              "构造OpenAI格式请求",
+              "解析流式响应",
+              "支持系统提示词配置"
+            ],
+            "importance": 8.5
+          },
+          {
+            "name": "GLM/Mistral适配",
+            "description": "作为适配层使系统能够以统一方式调用智谱AI和Mistral等特定厂商的模型服务。",
+            "code_paths": [
+              "crates/llm/src/providers/llm_glm.rs",
+              "crates/llm/src/providers/llm_mistral.rs"
+            ],
+            "key_functions": [
+              "转换GLM配置为通用格式",
+              "复用OpenAI兼容逻辑",
+              "适配特定API端点"
+            ],
+            "importance": 8.0
+          }
+        ],
+        "code_paths": [
+          "crates/llm/src/*"
+        ],
+        "importance": 9.0,
+        "complexity": 8.5
+      },
+      {
+        "name": "数据持久化域",
+        "description": "负责应用程序的数据存储与管理，包括用户配置、文章记录和数据库操作。",
+        "domain_type": "基础设施域",
+        "sub_modules": [
+          {
+            "name": "文章记录服务",
+            "description": "封装对文章记录的各类数据访问逻辑，是连接业务逻辑与数据库的关键中介。",
+            "code_paths": [
+              "crates/recorder/src/article_recorder_service.rs"
+            ],
+            "key_functions": [
+              "插入和更新文章记录",
+              "按条件查询文章",
+              "标记已读和收藏状态"
+            ],
+            "importance": 8.5
+          },
+          {
+            "name": "数据库操作器",
+            "description": "使用SeaORM框架实现对SQLite数据库的访问，管理`t_article_record`表的CRUD操作。",
+            "code_paths": [
+              "crates/recorder/src/operator.rs"
+            ],
+            "key_functions": [
+              "建立数据库连接池",
+              "执行异步数据库操作",
+              "确保表结构存在"
+            ],
+            "importance": 8.0
+          },
+          {
+            "name": "数据路径管理",
+            "description": "封装应用程序数据存储路径的生成与管理，确保跨平台兼容性。",
+            "code_paths": [
+              "crates/recorder/src/path.rs"
+            ],
+            "key_functions": [
+              "获取标准系统路径",
+              "构建完整文件路径",
+              "自动创建缺失目录"
+            ],
+            "importance": 7.0
+          }
+        ],
+        "code_paths": [
+          "crates/recorder/src/*"
+        ],
+        "importance": 8.0,
+        "complexity": 7.0
+      },
+      {
+        "name": "系统启动与配置域",
+        "description": "负责应用程序的初始化流程、配置管理和生命周期控制，确保系统稳定运行。",
+        "domain_type": "基础设施域",
+        "sub_modules": [
+          {
+            "name": "启动流程管理",
+            "description": "作为应用启动中枢，采用分阶段策略进行初始化，提升启动效率。",
+            "code_paths": [
+              "crates/feed_api_rs/src/startup/mod.rs"
+            ],
+            "key_functions": [
+              "同步初始化关键配置",
+              "并行加载用户配置与LLM依赖",
+              "实现错误聚合处理"
+            ],
+            "importance": 9.0
+          },
+          {
+            "name": "应用配置管理",
+            "description": "加载或创建默认的应用配置，支持运行时动态保存配置实现持久化。",
+            "code_paths": [
+              "crates/feed_api_rs/src/startup/init_app_config.rs"
+            ],
+            "key_functions": [
+              "读取TOML格式配置文件",
+              "生成默认配置对象",
+              "同步配置到磁盘"
+            ],
+            "importance": 8.5
+          },
+          {
+            "name": "用户配置管理",
+            "description": "在应用启动时初始化用户个人资料，为新用户提供引导体验。",
+            "code_paths": [
+              "crates/feed_api_rs/src/startup/init_user_profile.rs"
+            ],
+            "key_functions": [
+              "读取user_config.toml文件",
+              "生成默认用户配置",
+              "持久化到磁盘"
+            ],
+            "importance": 8.0
+          },
+          {
+            "name": "日志系统",
+            "description": "初始化应用程序的日志系统，根据配置决定输出位置和格式。",
+            "code_paths": [
+              "crates/feed_api_rs/src/startup/init_logger.rs"
+            ],
+            "key_functions": [
+              "配置全局日志行为",
+              "实现按天轮转的日志写入",
+              "设置可读的日志格式"
+            ],
+            "importance": 7.5
+          },
+          {
+            "name": "LLM运行时管理",
+            "description": "在应用启动时初始化指定的大型语言模型提供程序，如唤醒Ollama服务。",
+            "code_paths": [
+              "crates/feed_api_rs/src/startup/init_llm.rs"
+            ],
+            "key_functions": [
+              "检查LLM安装状态",
+              "尝试唤醒未运行的服务",
+              "执行空初始化保持流程一致"
+            ],
+            "importance": 8.5
+          }
+        ],
+        "code_paths": [
+          "crates/feed_api_rs/src/startup/*"
+        ],
+        "importance": 8.5,
+        "complexity": 7.5
+      }
+    ],
+    "domain_relations": [
+      {
+        "from_domain": "用户界面域",
+        "to_domain": "状态管理域",
+        "relation_type": "状态依赖",
+        "strength": 10.0,
+        "description": "用户界面域的所有组件都依赖于状态管理域提供的store来获取数据和触发状态变更。"
+      },
+      {
+        "from_domain": "用户界面域",
+        "to_domain": "内容获取与处理域",
+        "relation_type": "功能调用",
+        "strength": 8.0,
+        "description": "UI组件通过hybrid-apis间接调用内容获取与处理域的功能，如刷新文章内容。"
+      },
+      {
+        "from_domain": "用户界面域",
+        "to_domain": "AI能力集成域",
+        "relation_type": "服务调用",
+        "strength": 7.0,
+        "description": "AI助手面板直接与AI能力集成域交互，发送消息并接收回复。"
+      },
+      {
+        "from_domain": "状态管理域",
+        "to_domain": "内容获取与处理域",
+        "relation_type": "数据流",
+        "strength": 9.0,
+        "description": "状态管理域中的stores调用内容获取与处理域的API来获取最新内容并更新状态。"
+      },
+      {
+        "from_domain": "状态管理域",
+        "to_domain": "数据持久化域",
+        "relation_type": "数据依赖",
+        "strength": 8.5,
+        "description": "状态管理需要从数据持久化域读取初始数据，并将变更持久化回数据库。"
+      },
+      {
+        "from_domain": "内容获取与处理域",
+        "to_domain": "AI能力集成域",
+        "relation_type": "服务依赖",
+        "strength": 10.0,
+        "description": "文章内容处理管道必须依赖AI能力集成域提供的LLM服务来完成净化、优化和融合操作。"
+      },
+      {
+        "from_domain": "内容获取与处理域",
+        "to_domain": "数据持久化域",
+        "relation_type": "数据写入",
+        "strength": 9.0,
+        "description": "处理完成后的内容需要持久化到数据库中，供后续读取和展示。"
+      },
+      {
+        "from_domain": "AI能力集成域",
+        "to_domain": "系统启动与配置域",
+        "relation_type": "配置依赖",
+        "strength": 8.0,
+        "description": "LLM服务的初始化和配置需要依赖系统启动时加载的应用配置。"
+      },
+      {
+        "from_domain": "数据持久化域",
+        "to_domain": "系统启动与配置域",
+        "relation_type": "路径依赖",
+        "strength": 7.0,
+        "description": "数据库操作需要使用系统启动与配置域提供的数据存储路径。"
+      }
+    ],
+    "business_flows": [
+      {
+        "name": "项目分析流程",
+        "description": "用户启动应用后，系统自动加载配置、初始化状态并展示主界面的过程。",
+        "steps": [
+          {
+            "step": 1,
+            "domain_module": "系统启动与配置域",
+            "sub_module": "启动流程管理",
+            "operation": "执行分阶段初始化：先同步初始化配置和日志，再并行加载用户配置与LLM服务",
+            "code_entry_point": "crates/feed_api_rs/src/startup/mod.rs"
+          },
+          {
+            "step": 2,
+            "domain_module": "系统启动与配置域",
+            "sub_module": "应用配置管理",
+            "operation": "尝试从磁盘读取app_config.toml，若不存在则创建默认配置并持久化",
+            "code_entry_point": "crates/feed_api_rs/src/startup/init_app_config.rs"
+          },
+          {
+            "step": 3,
+            "domain_module": "系统启动与配置域",
+            "sub_module": "用户配置管理",
+            "operation": "尝试读取user_config.toml，若为新用户则生成包含预设订阅包的默认配置",
+            "code_entry_point": "crates/feed_api_rs/src/startup/init_user_profile.rs"
+          },
+          {
+            "step": 4,
+            "domain_module": "系统启动与配置域",
+            "sub_module": "LLM运行时管理",
+            "operation": "检查Ollama服务状态，若已安装但未运行则尝试唤醒服务",
+            "code_entry_point": "crates/feed_api_rs/src/startup/init_llm.rs"
+          },
+          {
+            "step": 5,
+            "domain_module": "状态管理域",
+            "sub_module": "集中式状态存储",
+            "operation": "创建主状态store，整合feeds、articles、tasks等子模块",
+            "code_entry_point": "app/src/routes/main/stores/index.svelte.ts"
+          },
+          {
+            "step": 6,
+            "domain_module": "用户界面域",
+            "sub_module": "主页面布局",
+            "operation": "渲染主界面三栏布局，绑定各组件到对应的状态store",
+            "code_entry_point": "app/src/routes/main/+page.svelte"
+          }
+        ],
+        "entry_point": "app/src-tauri/src/main.rs",
+        "importance": 9.0,
+        "involved_domains_count": 4
+      },
+      {
+        "name": "代码洞察生成流程",
+        "description": "当用户点击某篇文章时，系统通过AI模型生成内容摘要和洞察的完整流程。",
+        "steps": [
+          {
+            "step": 1,
+            "domain_module": "用户界面域",
+            "sub_module": "文章列表展示",
+            "operation": "捕获用户点击事件，获取被点击文章的ID",
+            "code_entry_point": "app/src/routes/main/widgets/ArticlesList.svelte"
+          },
+          {
+            "step": 2,
+            "domain_module": "状态管理域",
+            "sub_module": "文章状态管理",
+            "operation": "根据文章ID查询详细内容，并更新当前选中文章状态",
+            "code_entry_point": "app/src/routes/main/stores/articles/list/index.svelte.ts"
+          },
+          {
+            "step": 3,
+            "domain_module": "内容获取与处理域",
+            "sub_module": "文章内容处理管道",
+            "operation": "启动LLM处理流水线，依次执行Purge（净化）、Optimize（优化）、Melt（融合）操作",
+            "code_entry_point": "crates/intelligent/src/article_processor/*"
+          },
+          {
+            "step": 4,
+            "domain_module": "AI能力集成域",
+            "sub_module": "LLM代理服务",
+            "operation": "根据配置选择具体的LLM提供商（如Ollama、OpenAI），发送处理请求",
+            "code_entry_point": "crates/llm/src/llm_agent.rs"
+          },
+          {
+            "step": 5,
+            "domain_module": "AI能力集成域",
+            "sub_module": "Ollama集成",
+            "operation": "向本地Ollama服务发送POST请求，执行文本生成任务",
+            "code_entry_point": "crates/llm/src/providers/llm_ollama.rs"
+          },
+          {
+            "step": 6,
+            "domain_module": "内容获取与处理域",
+            "sub_module": "文章内容处理管道",
+            "operation": "接收LLM返回的处理结果，更新文章的优化后和熔炼后内容字段",
+            "code_entry_point": "crates/intelligent/src/article_processor/llm_processor.rs"
+          },
+          {
+            "step": 7,
+            "domain_module": "数据持久化域",
+            "sub_module": "文章记录服务",
+            "operation": "将处理后的文章内容更新到数据库中",
+            "code_entry_point": "crates/recorder/src/article_recorder_service.rs"
+          },
+          {
+            "step": 8,
+            "domain_module": "用户界面域",
+            "sub_module": "内容阅读器",
+            "operation": "重新渲染文章阅读器，展示新的优化和熔炼内容",
+            "code_entry_point": "app/src/routes/main/widgets/ArticleReader.svelte"
+          }
+        ],
+        "entry_point": "用户点击文章条目",
+        "importance": 9.5,
+        "involved_domains_count": 4
+      }
+    ],
+    "architecture_summary": "系统采用分层架构设计，前端基于SvelteKit构建响应式UI，通过Tauri桥接Rust后端。核心业务逻辑分布在内容获取与处理、AI能力集成等领域，由状态管理域统一协调。数据持久化基于SeaORM操作SQLite数据库。整体架构清晰分离关注点，支持本地AI模型集成和多源内容抓取。",
+    "confidence_score": 9.0
+  },
+  "timestamp": 1759024866,
+  "prompt_hash": "e58e3850ee9a8cb05d89ea5b4e6fe22a",
+  "token_usage": {
+    "input_tokens": 28201,
+    "output_tokens": 6217,
+    "total_tokens": 34418
+  },
+  "model_name": null
+}

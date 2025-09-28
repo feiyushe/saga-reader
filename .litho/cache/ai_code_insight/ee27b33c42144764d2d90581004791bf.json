@@ -1,0 +1,90 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "types.rs",
+      "file_path": "crates/scrap/src/search/types.rs",
+      "source_summary": "",
+      "code_purpose": "model",
+      "importance_score": 0.6,
+      "description": "定义搜索功能所需的数据类型和核心行为契约，特别是文章搜索的异步处理接口。",
+      "functions": [],
+      "interfaces": [
+        "IProvider"
+      ]
+    },
+    "detailed_description": "该组件定义了一个名为 IProvider 的 trait，用于规范搜索服务的行为。它要求实现者提供一个基于关键词搜索文章的异步方法 search_by_words，该方法接受字符串切片向量和可选的 Tauri AppHandle，返回一个异步 Future，解析为包含 Article 对象向量的结果。此 trait 是搜索功能的核心抽象，允许不同搜索引擎（如本地、网络等）以统一方式集成。",
+    "responsibilities": [
+      "定义搜索服务的行为契约",
+      "声明异步搜索方法的统一接口",
+      "支持可选应用上下文传递以便内部操作",
+      "作为多种搜索实现的公共抽象基类",
+      "促进依赖注入和模块化设计"
+    ],
+    "interfaces": [
+      {
+        "name": "IProvider",
+        "interface_type": "trait",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "搜索服务提供者的抽象接口，规定了必须实现的异步搜索方法。"
+      },
+      {
+        "name": "search_by_words",
+        "interface_type": "method",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "words",
+            "param_type": "Vec<&str>",
+            "is_optional": false,
+            "description": "用于搜索的关键词列表"
+          },
+          {
+            "name": "app_handle",
+            "param_type": "Option<AppHandle<R>>",
+            "is_optional": true,
+            "description": "Tauri 应用句柄，用于访问应用状态或资源"
+          }
+        ],
+        "return_type": "impl std::future::Future<Output = anyhow::Result<Vec<Article>>>",
+        "description": "根据提供的关键词执行搜索并返回文章结果的异步操作"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "tauri",
+        "path": "tauri::{AppHandle, Runtime}",
+        "is_external": true,
+        "line_number": 1,
+        "dependency_type": "use",
+        "version": null
+      },
+      {
+        "name": "types::Article",
+        "path": "types::Article",
+        "is_external": false,
+        "line_number": 2,
+        "dependency_type": "use",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 10,
+      "number_of_functions": 1,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 2.0,
+      "cohesion_score": 0.95
+    }
+  },
+  "timestamp": 1759024634,
+  "prompt_hash": "ee27b33c42144764d2d90581004791bf",
+  "token_usage": {
+    "input_tokens": 480,
+    "output_tokens": 762,
+    "total_tokens": 1242
+  },
+  "model_name": null
+}

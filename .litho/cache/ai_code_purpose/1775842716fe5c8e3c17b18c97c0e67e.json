@@ -1,0 +1,15 @@
+{
+  "data": {
+    "code_purpose": "util",
+    "confidence": 0.95,
+    "reasoning": "该文件位于`crates/recorder/src/path.rs`，主要职责是处理与文件路径相关的操作，如构建、确保目录存在等。文件中定义了多个公共函数用于获取应用数据目录下的数据库文件或子目录路径，并包含辅助函数来创建必要的目录结构。这些功能属于典型的工具类代码，不涉及UI、接口控制、业务逻辑实现或数据模型定义，因此归类为'util'（工具类的代码）。"
+  },
+  "timestamp": 1758800811,
+  "prompt_hash": "1775842716fe5c8e3c17b18c97c0e67e",
+  "token_usage": {
+    "input_tokens": 583,
+    "output_tokens": 220,
+    "total_tokens": 803
+  },
+  "model_name": null
+}

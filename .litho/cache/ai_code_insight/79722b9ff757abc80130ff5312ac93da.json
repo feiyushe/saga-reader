@@ -1,0 +1,39 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "FeedsPanel.svelte",
+      "file_path": "app/src/routes/main/widgets/FeedsPanel.svelte",
+      "source_summary": "",
+      "code_purpose": "widget",
+      "importance_score": 0.8,
+      "description": null,
+      "functions": [],
+      "interfaces": []
+    },
+    "detailed_description": "该组件源代码为空，未实现任何功能。理论上应作为信息流展示面板的UI容器，但当前无实际逻辑或结构。",
+    "responsibilities": [
+      "占位组件：暂时作为FeedsPanel的UI占位符",
+      "待实现职责：信息流数据展示",
+      "待实现职责：用户交互响应（如刷新、筛选）"
+    ],
+    "interfaces": [],
+    "dependencies": [],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 0,
+      "number_of_functions": 0,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.0,
+      "cohesion_score": 0.0
+    }
+  },
+  "timestamp": 1759024538,
+  "prompt_hash": "79722b9ff757abc80130ff5312ac93da",
+  "token_usage": {
+    "input_tokens": 414,
+    "output_tokens": 253,
+    "total_tokens": 667
+  },
+  "model_name": null
+}

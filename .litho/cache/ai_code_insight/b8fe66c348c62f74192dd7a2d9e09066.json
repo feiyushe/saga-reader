@@ -1,0 +1,61 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "api.ts",
+      "file_path": "app/src/lib/hybrid-apis/feed/api.ts",
+      "source_summary": "",
+      "code_purpose": "api",
+      "importance_score": 0.8,
+      "description": "定义了用于管理订阅源、文章内容、应用配置及AI辅助交互的一系列异步接口。",
+      "functions": [],
+      "interfaces": [
+        "FeaturesAPI"
+      ]
+    },
+    "detailed_description": "该组件定义了一个名为 FeaturesAPI 的 TypeScript 接口，封装了客户端与后端或原生层（如通过 Tauri）通信所需的所有方法。主要功能包括：对 FeedsPackage（订阅包）和 Feed（订阅源）的增删改查操作；获取和更新文章内容；基于关键词搜索文章；读取和设置应用配置；与 Ollama 模型服务进行交互（状态查询、下载、启动）；支持外部打开文章链接和网页内容抓取；以及提供基于文章内容的智能对话能力。所有方法均以 Promise 形式返回，表明其异步特性，适用于跨进程或网络调用场景。",
+    "responsibilities": [
+      "提供统一的异步接口契约以管理信息流订阅体系",
+      "支持本地应用配置的持久化读写操作",
+      "集成 AI 功能（Ollama）以实现智能内容处理与交互",
+      "定义文章内容检索、更新与外部交互的标准方法",
+      "为前端或业务逻辑层屏蔽底层通信细节"
+    ],
+    "interfaces": [
+      {
+        "name": "FeaturesAPI",
+        "interface_type": "interface",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "核心 API 接口契约，声明了所有可用的异步功能方法。"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "../tauri-regular",
+        "path": "app/src/lib/hybrid-apis/feed/../tauri-regular",
+        "is_external": false,
+        "line_number": 1,
+        "dependency_type": "import",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 73,
+      "number_of_functions": 17,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 6.0,
+      "cohesion_score": 0.92
+    }
+  },
+  "timestamp": 1759024446,
+  "prompt_hash": "b8fe66c348c62f74192dd7a2d9e09066",
+  "token_usage": {
+    "input_tokens": 861,
+    "output_tokens": 685,
+    "total_tokens": 1546
+  },
+  "model_name": null
+}

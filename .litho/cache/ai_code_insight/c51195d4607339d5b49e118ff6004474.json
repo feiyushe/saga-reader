@@ -1,0 +1,118 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "Footer.svelte",
+      "file_path": "app/src/routes/main/widgets/Footer.svelte",
+      "code_purpose": "widget",
+      "importance_score": 1.0,
+      "description": "底部状态栏组件，显示任务加载状态并提供任务详情弹窗",
+      "functions": [
+        "popoverClose"
+      ],
+      "interfaces": [
+        "FooterProps"
+      ]
+    },
+    "detailed_description": "该组件是一个Svelte前端UI组件，作为应用主界面的底部状态栏。它通过Popover展示当前待处理任务的详细信息，支持国际化文本显示，并集成右键菜单禁用功能。组件监听tasksStore中的pendingStatus和pendingStatusText，动态渲染加载进度环和任务描述列表。当有任务处于加载状态时，显示ProgressRing动画；当无任务时显示空闲提示。用户可点击触发区域展开弹窗查看所有待处理任务，每个任务项包含状态标签和描述文本，支持通过关闭按钮或外部点击收起弹窗。",
+    "responsibilities": [
+      "渲染底部状态栏UI布局",
+      "展示当前任务加载状态和进度指示",
+      "管理Popover弹窗的打开/关闭状态",
+      "显示待处理任务列表及其状态详情",
+      "处理右键上下文菜单禁用逻辑"
+    ],
+    "interfaces": [
+      {
+        "name": "FooterProps",
+        "interface_type": "type",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "定义传递给Footer组件的属性类型，包含tasksStore引用"
+      },
+      {
+        "name": "trigger",
+        "interface_type": "snippet",
+        "visibility": "private",
+        "parameters": [],
+        "return_type": null,
+        "description": "Popover触发区域的UI模板"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "svelte-i18n",
+        "path": null,
+        "is_external": true,
+        "line_number": 2,
+        "dependency_type": "i18n",
+        "version": null
+      },
+      {
+        "name": "$lib/utils/dom",
+        "path": "app/src/lib/utils/dom.ts",
+        "is_external": false,
+        "line_number": 3,
+        "dependency_type": "utility",
+        "version": null
+      },
+      {
+        "name": "@skeletonlabs/skeleton-svelte",
+        "path": null,
+        "is_external": true,
+        "line_number": 4,
+        "dependency_type": "ui_component",
+        "version": null
+      },
+      {
+        "name": "lucide-svelte",
+        "path": null,
+        "is_external": true,
+        "line_number": 5,
+        "dependency_type": "icon",
+        "version": null
+      },
+      {
+        "name": "@skeletonlabs/skeleton-svelte",
+        "path": null,
+        "is_external": true,
+        "line_number": 6,
+        "dependency_type": "ui_component",
+        "version": null
+      },
+      {
+        "name": "../stores/loading.svelte",
+        "path": "app/src/routes/main/stores/loading.svelte",
+        "is_external": false,
+        "line_number": 7,
+        "dependency_type": "store",
+        "version": null
+      },
+      {
+        "name": "./types",
+        "path": "app/src/routes/main/widgets/types.ts",
+        "is_external": false,
+        "line_number": 8,
+        "dependency_type": "type_definition",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 3.0,
+      "lines_of_code": 74,
+      "number_of_functions": 1,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.857,
+      "cohesion_score": 0.72
+    }
+  },
+  "timestamp": 1758801079,
+  "prompt_hash": "c51195d4607339d5b49e118ff6004474",
+  "token_usage": {
+    "input_tokens": 1025,
+    "output_tokens": 863,
+    "total_tokens": 1888
+  },
+  "model_name": null
+}

@@ -1,0 +1,15 @@
+{
+  "data": {
+    "code_purpose": "specificfeature",
+    "confidence": 0.9,
+    "reasoning": "该文件位于 `crates/scrap/src/lib.rs`，是一个 Rust 项目的库入口文件。文件通过 `mod` 和 `pub mod` 导出多个模块（如 rss、search、simulator 等），表明其职责是组织和封装与网页抓取（scrap）相关的特定功能模块。文件本身不包含具体实现，而是作为功能模块的聚合点，因此归类为实现特定逻辑功能的组件。"
+  },
+  "timestamp": 1758800906,
+  "prompt_hash": "3d9fd2b019fc832a84e546524d91dfff",
+  "token_usage": {
+    "input_tokens": 230,
+    "output_tokens": 178,
+    "total_tokens": 408
+  },
+  "model_name": null
+}

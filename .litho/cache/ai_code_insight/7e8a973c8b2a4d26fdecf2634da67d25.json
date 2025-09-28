@@ -1,0 +1,72 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "mod.rs",
+      "file_path": "app/src-tauri/src/daemon/mod.rs",
+      "code_purpose": "other",
+      "importance_score": 0.6,
+      "description": null,
+      "functions": [],
+      "interfaces": []
+    },
+    "detailed_description": "该组件是一个Rust模块的组织文件，用于将daemon功能域下的多个子模块（args、feeds_update、launcher、locks）进行聚合和封装。它本身不包含具体实现逻辑，而是通过pub(crate)关键字将内部模块暴露给同crate的其他组件使用，形成一个内聚的守护进程功能模块集合。",
+    "responsibilities": [
+      "组织和管理daemon领域的子模块",
+      "控制子模块的可见性范围（仅限当前crate）",
+      "提供daemon功能的模块化结构基础",
+      "维护守护进程相关功能的命名空间一致性"
+    ],
+    "interfaces": [],
+    "dependencies": [
+      {
+        "name": "args",
+        "path": "app/src-tauri/src/daemon/args.rs",
+        "is_external": false,
+        "line_number": 1,
+        "dependency_type": "module",
+        "version": null
+      },
+      {
+        "name": "feeds_update",
+        "path": "app/src-tauri/src/daemon/feeds_update.rs",
+        "is_external": false,
+        "line_number": 2,
+        "dependency_type": "module",
+        "version": null
+      },
+      {
+        "name": "launcher",
+        "path": "app/src-tauri/src/daemon/launcher.rs",
+        "is_external": false,
+        "line_number": 3,
+        "dependency_type": "module",
+        "version": null
+      },
+      {
+        "name": "locks",
+        "path": "app/src-tauri/src/daemon/locks.rs",
+        "is_external": false,
+        "line_number": 4,
+        "dependency_type": "module",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 4,
+      "number_of_functions": 0,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.8,
+      "cohesion_score": 0.9
+    }
+  },
+  "timestamp": 1758805971,
+  "prompt_hash": "7e8a973c8b2a4d26fdecf2634da67d25",
+  "token_usage": {
+    "input_tokens": 423,
+    "output_tokens": 488,
+    "total_tokens": 911
+  },
+  "model_name": null
+}

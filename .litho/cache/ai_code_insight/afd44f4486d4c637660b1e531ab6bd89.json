@@ -1,0 +1,99 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "index.ts",
+      "file_path": "app/src/lib/hybrid-apis/tauri-regular/index.ts",
+      "source_summary": "",
+      "code_purpose": "entry",
+      "importance_score": 0.8,
+      "description": "Tauri插件调用的统一接口封装，用于与原生功能交互。",
+      "functions": [
+        "call"
+      ],
+      "interfaces": [
+        "InvokeArgs",
+        "Option"
+      ]
+    },
+    "detailed_description": "该组件是Tauri框架下与原生插件通信的核心桥梁，通过`invoke`机制调用名为'feed-api'的Rust插件方法。它定义了类型安全的泛型函数`call<T>`，接收方法名和参数，并返回Promise类型的响应结果。所有对外暴露的方法均通过'plugin:feed-api|{methodName}'格式进行路由，实现了前端JavaScript/TypeScript与后端Rust逻辑的安全异步通信。",
+    "responsibilities": [
+      "提供统一的Tauri插件调用接口",
+      "封装底层invoke通信细节",
+      "实现类型安全的跨语言方法调用",
+      "管理与原生模块的异步通信协议"
+    ],
+    "interfaces": [
+      {
+        "name": "InvokeArgs",
+        "interface_type": "type",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "允许传递对象、数字数组或二进制数据作为调用参数的联合类型"
+      },
+      {
+        "name": "Option",
+        "interface_type": "type",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "T",
+            "param_type": "generic",
+            "is_optional": false,
+            "description": "泛型占位符"
+          }
+        ],
+        "return_type": null,
+        "description": "表示可选值的标准类型定义，兼容null和undefined"
+      },
+      {
+        "name": "call",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "methodName",
+            "param_type": "string",
+            "is_optional": false,
+            "description": "要调用的Rust插件方法名称"
+          },
+          {
+            "name": "args",
+            "param_type": "InvokeArgs",
+            "is_optional": false,
+            "description": "传递给方法的序列化参数"
+          }
+        ],
+        "return_type": "Promise<T>",
+        "description": "执行异步插件调用并返回泛型结果"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "@tauri-apps/api/core",
+        "path": null,
+        "is_external": true,
+        "line_number": 1,
+        "dependency_type": "import",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 13,
+      "number_of_functions": 1,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.08,
+      "cohesion_score": 0.95
+    }
+  },
+  "timestamp": 1759024456,
+  "prompt_hash": "afd44f4486d4c637660b1e531ab6bd89",
+  "token_usage": {
+    "input_tokens": 504,
+    "output_tokens": 715,
+    "total_tokens": 1219
+  },
+  "model_name": null
+}

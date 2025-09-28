@@ -1,0 +1,15 @@
+{
+  "data": {
+    "code_purpose": "model",
+    "confidence": 0.95,
+    "reasoning": "该文件定义了一个枚举类型 LoadingStatus，包含 Loading、Completed 和 Error 三种状态，用于表示加载状态。文件路径位于 `/types/` 目录下，且文件名为 `loading.ts`，表明其用途是定义类型。内容上仅导出一个枚举，无任何业务逻辑或函数实现，符合数据模型或类型定义的特征。因此，该文件的组件类型为 'model'。"
+  },
+  "timestamp": 1758800966,
+  "prompt_hash": "7605cd98b380f133edcc17fc3b294e7a",
+  "token_usage": {
+    "input_tokens": 228,
+    "output_tokens": 182,
+    "total_tokens": 410
+  },
+  "model_name": null
+}

@@ -1,0 +1,50 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "loading.ts",
+      "file_path": "app/src/lib/types/loading.ts",
+      "code_purpose": "model",
+      "importance_score": 0.6,
+      "description": "定义加载状态的枚举类型，用于表示异步操作的不同阶段",
+      "functions": [],
+      "interfaces": [
+        "LoadingStatus"
+      ]
+    },
+    "detailed_description": "该组件定义了一个名为LoadingStatus的枚举类型，包含三个状态值：Loading（加载中）、Completed（已完成）和Error（出错）。该枚举用于统一管理系统中所有异步操作的加载状态，为前端UI提供标准化的状态标识，便于根据不同的加载状态展示相应的用户界面。",
+    "responsibilities": [
+      "定义系统级的加载状态枚举",
+      "提供类型安全的状态管理机制",
+      "作为其他组件状态判断的依据",
+      "确保加载状态的一致性和可维护性"
+    ],
+    "interfaces": [
+      {
+        "name": "LoadingStatus",
+        "interface_type": "enum",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "表示异步操作的三种可能状态：加载中、已完成、出错"
+      }
+    ],
+    "dependencies": [],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 7,
+      "number_of_functions": 0,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.0,
+      "cohesion_score": 1.0
+    }
+  },
+  "timestamp": 1758805987,
+  "prompt_hash": "21f7ea14dab5aaddb082bf74224314e0",
+  "token_usage": {
+    "input_tokens": 423,
+    "output_tokens": 438,
+    "total_tokens": 861
+  },
+  "model_name": null
+}

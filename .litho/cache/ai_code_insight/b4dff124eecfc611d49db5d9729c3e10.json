@@ -1,0 +1,207 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "lite-edit.ts",
+      "file_path": "app/src/lib/windows/lite-edit.ts",
+      "code_purpose": "controller",
+      "importance_score": 0.8,
+      "description": "负责管理订阅组和订阅项的窗口打开逻辑，封装了与 Tauri 窗口系统交互的细节。",
+      "functions": [
+        "openFeedPackageCreateWindow",
+        "openFeedPackageEditWindow",
+        "openFeedCreateWindow",
+        "openFeedEditWindow",
+        "open"
+      ],
+      "interfaces": [
+        "FeedsPackage",
+        "FeedTargetDescription",
+        "WindowOptions",
+        "UnlistenFn"
+      ]
+    },
+    "detailed_description": "该组件主要用于在桌面应用中动态打开各类表单窗口（如创建/编辑订阅组、订阅项），通过统一的 `open` 函数调用底层 `openWithCallback` 工具函数实现窗口弹出，并传递 URL 参数与回调处理。所有公开函数均返回 Promise，便于异步等待用户操作结果。其核心是解耦 UI 层与窗口管理逻辑，提供类型安全的接口供其他模块调用。",
+    "responsibilities": [
+      "封装窗口打开逻辑，统一配置窗口样式与行为",
+      "为订阅组和订阅项的增删改操作提供异步弹窗接口",
+      "处理窗口关闭后的回调数据解析与 Promise 解析",
+      "通过 URL 查询参数传递操作模式与上下文数据",
+      "确保窗口不可调整大小且始终置顶以提升用户体验"
+    ],
+    "interfaces": [
+      {
+        "name": "openFeedPackageCreateWindow",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": "Promise<FeedsPackage>",
+        "description": "打开‘新增订阅组’窗口并返回创建的结果"
+      },
+      {
+        "name": "openFeedPackageEditWindow",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "id",
+            "param_type": "string",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "name",
+            "param_type": "string",
+            "is_optional": false,
+            "description": null
+          }
+        ],
+        "return_type": "Promise<{ submited: boolean; newName: string }>",
+        "description": "打开‘编辑订阅组’窗口并返回是否提交及新名称"
+      },
+      {
+        "name": "openFeedCreateWindow",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "feedsPackageId",
+            "param_type": "string",
+            "is_optional": false,
+            "description": null
+          }
+        ],
+        "return_type": "Promise<FeedTargetDescription>",
+        "description": "打开‘新增订阅’窗口并返回创建的订阅描述"
+      },
+      {
+        "name": "openFeedEditWindow",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "id",
+            "param_type": "string",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "name",
+            "param_type": "string",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "fetcher_id",
+            "param_type": "string",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "data",
+            "param_type": "string[]",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "feedsPackageId",
+            "param_type": "string",
+            "is_optional": false,
+            "description": null
+          }
+        ],
+        "return_type": "Promise<{ submited: boolean; newName: string }>",
+        "description": "打开‘编辑订阅’窗口并返回是否提交及新名称"
+      },
+      {
+        "name": "open",
+        "interface_type": "function",
+        "visibility": "private",
+        "parameters": [
+          {
+            "name": "label",
+            "param_type": "string",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "title",
+            "param_type": "string",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "url",
+            "param_type": "string",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "onFinish",
+            "param_type": "(submited: boolean, data: string) => void",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "windowOpt",
+            "param_type": "WindowOptions",
+            "is_optional": true,
+            "description": null
+          }
+        ],
+        "return_type": "void",
+        "description": "内部通用函数，用于实际打开窗口并绑定关闭回调"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "@tauri-apps/api/event",
+        "path": "@tauri-apps/api/event",
+        "is_external": true,
+        "line_number": 1,
+        "dependency_type": "import",
+        "version": null
+      },
+      {
+        "name": "./utils",
+        "path": "app/src/lib/windows/utils",
+        "is_external": false,
+        "line_number": 2,
+        "dependency_type": "import",
+        "version": null
+      },
+      {
+        "name": "$lib/hybrid-apis/feed/types",
+        "path": "app/src/lib/hybrid-apis/feed/types",
+        "is_external": false,
+        "line_number": 3,
+        "dependency_type": "import",
+        "version": null
+      },
+      {
+        "name": "@tauri-apps/api/window",
+        "path": "@tauri-apps/api/window",
+        "is_external": true,
+        "line_number": 4,
+        "dependency_type": "import",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 2.0,
+      "lines_of_code": 103,
+      "number_of_functions": 5,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.4,
+      "cohesion_score": 0.85
+    }
+  },
+  "timestamp": 1758805737,
+  "prompt_hash": "b4dff124eecfc611d49db5d9729c3e10",
+  "token_usage": {
+    "input_tokens": 1076,
+    "output_tokens": 1306,
+    "total_tokens": 2382
+  },
+  "model_name": null
+}

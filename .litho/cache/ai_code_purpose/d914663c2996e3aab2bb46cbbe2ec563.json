@@ -1,0 +1,15 @@
+{
+  "data": {
+    "code_purpose": "config",
+    "confidence": 0.95,
+    "reasoning": "该文件是一个JSON格式的国际化语言配置文件，位于locales目录下，文件名为en.json，表示英文语言包。文件内容包含大量UI界面的文本标签和提示信息，用于多语言支持。这种结构和内容特征表明它是一个典型的配置文件，用于存储应用程序的国际化文本配置。"
+  },
+  "timestamp": 1758800971,
+  "prompt_hash": "d914663c2996e3aab2bb46cbbe2ec563",
+  "token_usage": {
+    "input_tokens": 459,
+    "output_tokens": 170,
+    "total_tokens": 629
+  },
+  "model_name": null
+}

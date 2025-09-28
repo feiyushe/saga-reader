@@ -1,0 +1,123 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "types.ts",
+      "file_path": "app/src/lib/hybrid-apis/feed/types.ts",
+      "source_summary": "",
+      "code_purpose": "model",
+      "importance_score": 0.8,
+      "description": "定义了应用核心数据结构，包括LLM配置、信息流抓取、文章模型和对话消息等类型。",
+      "functions": [],
+      "interfaces": [
+        "AppConfig",
+        "LLMProviderType",
+        "FeedsPackage",
+        "FeedTargetDescription",
+        "ArticleModel",
+        "FeedFetcherID",
+        "ConversationMessage",
+        "ConversationInput"
+      ]
+    },
+    "detailed_description": "该组件是系统中的核心类型定义文件，主要用于声明应用程序中多个模块共享的数据结构。主要包括：1) LLMProviderType 和 LLMSection 定义了支持的大型语言模型提供者及其对应的配置参数；2) AppConfig 封装了整个应用的顶层配置结构；3) Feed 相关类型（FeedFetcherID, FeedTargetDescription, FeedsPackage）用于描述信息源抓取的目标与组织方式；4) ArticleModel 表示一篇文章的完整元数据和内容状态；5) ConversationMessage 和 ConversationInput 支持多模态对话交互的消息格式。所有类型均通过 export type 导出，供其他模块按需引用。",
+    "responsibilities": [
+      "定义并导出应用程序的通用数据模型",
+      "统一LLM服务提供商的配置结构",
+      "规范信息流抓取任务的数据格式",
+      "提供文章内容处理的标准化表示",
+      "支持多模态对话系统的消息类型定义"
+    ],
+    "interfaces": [
+      {
+        "name": "AppConfig",
+        "interface_type": "object",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "应用的顶层配置对象，包含LLM设置、爬虫选项和守护进程策略"
+      },
+      {
+        "name": "LLMProviderType",
+        "interface_type": "union",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "支持的语言模型提供者枚举类型"
+      },
+      {
+        "name": "LLMSection",
+        "interface_type": "object",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "LLM相关配置的完整结构，包含各provider的具体字段和激活类型"
+      },
+      {
+        "name": "FeedFetcherID",
+        "interface_type": "union",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "信息源抓取器标识符，决定使用哪种抓取机制"
+      },
+      {
+        "name": "FeedTargetDescription",
+        "interface_type": "object",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "单个信息源目标的描述，包括ID、名称、抓取器和原始数据"
+      },
+      {
+        "name": "FeedsPackage",
+        "interface_type": "object",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "信息源包的容器结构，包含多个feed及其组织逻辑"
+      },
+      {
+        "name": "ArticleModel",
+        "interface_type": "object",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "文章实体的完整模型，涵盖展示、存储和处理所需的所有字段"
+      },
+      {
+        "name": "ConversationMessage",
+        "interface_type": "object",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "对话系统中的消息单元，支持多种角色和媒体类型"
+      },
+      {
+        "name": "ConversationInput",
+        "interface_type": "object",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": null,
+        "description": "用户输入消息的简化结构，仅包含媒体类型和负载"
+      }
+    ],
+    "dependencies": [],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 89,
+      "number_of_functions": 0,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.0,
+      "cohesion_score": 0.95
+    }
+  },
+  "timestamp": 1759024451,
+  "prompt_hash": "790984d1bbd9e6790c6f52e9614496fd",
+  "token_usage": {
+    "input_tokens": 828,
+    "output_tokens": 1161,
+    "total_tokens": 1989
+  },
+  "model_name": null
+}

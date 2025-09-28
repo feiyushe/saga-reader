@@ -1,0 +1,151 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "init_logger.rs",
+      "file_path": "crates/feed_api_rs/src/startup/init_logger.rs",
+      "code_purpose": "util",
+      "importance_score": 0.8,
+      "description": "日志初始化工具模块，根据应用配置动态设置日志输出方式和格式。",
+      "functions": [
+        "call",
+        "init_by",
+        "specify_logger_format"
+      ],
+      "interfaces": [
+        "call",
+        "init_by",
+        "specify_logger_format"
+      ]
+    },
+    "detailed_description": "该组件负责根据 AppConfig 中的 log 配置项初始化全局日志系统。支持三种输出模式：Stdout、Disk 和 UnSpecified。在 Debug 模式下自动启用全量日志输出。当选择磁盘输出时，使用按天轮转的日志文件策略，并将日志写入指定目录下的时间命名文件中。所有日志输出均采用统一的格式化模板，包含日期、时间、线程ID、日志级别和消息内容。",
+    "responsibilities": [
+      "解析应用配置中的日志设置",
+      "根据配置初始化日志输出目标（控制台或磁盘）",
+      "设置全局日志格式和级别过滤器",
+      "支持调试模式下的自动日志启用机制",
+      "管理日志文件的轮转与刷新策略"
+    ],
+    "interfaces": [
+      {
+        "name": "call",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "app_config",
+            "param_type": "&AppConfig",
+            "is_optional": false,
+            "description": "应用配置对象引用"
+          }
+        ],
+        "return_type": "anyhow::Result<()>",
+        "description": "主入口函数，通过应用配置调用日志初始化"
+      },
+      {
+        "name": "init_by",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "log_section",
+            "param_type": "&AppConfigLogSection",
+            "is_optional": false,
+            "description": "日志配置节引用"
+          }
+        ],
+        "return_type": "anyhow::Result<()>",
+        "description": "根据日志配置节执行具体的初始化逻辑"
+      },
+      {
+        "name": "specify_logger_format",
+        "interface_type": "function",
+        "visibility": "private",
+        "parameters": [
+          {
+            "name": "logger",
+            "param_type": "&Arc<Logger>",
+            "is_optional": false,
+            "description": "日志记录器智能指针引用"
+          }
+        ],
+        "return_type": null,
+        "description": "为指定日志记录器设置统一的格式化模式"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "std::sync::Arc",
+        "path": null,
+        "is_external": false,
+        "line_number": 1,
+        "dependency_type": "std",
+        "version": null
+      },
+      {
+        "name": "std::time::Duration",
+        "path": null,
+        "is_external": false,
+        "line_number": 2,
+        "dependency_type": "std",
+        "version": null
+      },
+      {
+        "name": "spdlog",
+        "path": null,
+        "is_external": true,
+        "line_number": 4,
+        "dependency_type": "third_party",
+        "version": null
+      },
+      {
+        "name": "recorder::path::get_appdata_file_in_dir",
+        "path": "recorder/path.rs",
+        "is_external": false,
+        "line_number": 9,
+        "dependency_type": "internal",
+        "version": null
+      },
+      {
+        "name": "types::AppConfig",
+        "path": "types/config.rs",
+        "is_external": false,
+        "line_number": 10,
+        "dependency_type": "internal",
+        "version": null
+      },
+      {
+        "name": "types::AppConfigLogSection",
+        "path": "types/config.rs",
+        "is_external": false,
+        "line_number": 10,
+        "dependency_type": "internal",
+        "version": null
+      },
+      {
+        "name": "types::OutputType",
+        "path": "types/enums.rs",
+        "is_external": false,
+        "line_number": 10,
+        "dependency_type": "internal",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 5.0,
+      "lines_of_code": 74,
+      "number_of_functions": 3,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.6,
+      "cohesion_score": 0.85
+    }
+  },
+  "timestamp": 1758801184,
+  "prompt_hash": "c37f1b5ec9dae2ca73697002dfc56a37",
+  "token_usage": {
+    "input_tokens": 1113,
+    "output_tokens": 1000,
+    "total_tokens": 2113
+  },
+  "model_name": null
+}

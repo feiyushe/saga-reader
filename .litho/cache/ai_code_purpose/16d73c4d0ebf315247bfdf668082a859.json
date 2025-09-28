@@ -1,0 +1,15 @@
+{
+  "data": {
+    "code_purpose": "specificfeature",
+    "confidence": 0.95,
+    "reasoning": "该文件位于 `providers` 目录下，文件名为 `llm_glm.rs`，表明其与特定的 LLM（大语言模型）提供商 GLM 相关。代码中定义了 `GLMCompletionService` 结构体并实现了 `CompletionService` trait，用于封装 GLM 模型的补全服务逻辑。它复用了 OpenAI 类似的实现（`OpenAILikeCompletionService`），但针对 GLM 配置进行了适配。这属于实现特定功能逻辑的组件，而非通用工具、模型定义或配置文件。因此，归类为 'specificfeature' 最为合适。"
+  },
+  "timestamp": 1758800690,
+  "prompt_hash": "16d73c4d0ebf315247bfdf668082a859",
+  "token_usage": {
+    "input_tokens": 460,
+    "output_tokens": 227,
+    "total_tokens": 687
+  },
+  "model_name": null
+}

@@ -1,0 +1,15 @@
+{
+  "data": {
+    "code_purpose": "specificfeature",
+    "confidence": 0.9,
+    "reasoning": "该文件位于 `src/article_reader.rs`，文件名和路径表明其职责是读取文章内容。代码中定义了异步函数 `read` 和 `read_inner`，用于获取并处理网页 HTML 内容，结合了网络请求（reqwest）、HTML 解析（scraper）、日志记录（spdlog）以及与 LLM 组件的交互，属于实现特定业务逻辑的功能模块，即从指定 URL 读取文章并进行初步处理，因此归类为 'specificfeature'。"
+  },
+  "timestamp": 1758800778,
+  "prompt_hash": "c3e0a4bb91564316a491223c00cb8584",
+  "token_usage": {
+    "input_tokens": 462,
+    "output_tokens": 198,
+    "total_tokens": 660
+  },
+  "model_name": null
+}

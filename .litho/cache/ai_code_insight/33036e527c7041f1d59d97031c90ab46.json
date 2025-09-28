@@ -1,0 +1,93 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "init_llm.rs",
+      "file_path": "crates/feed_api_rs/src/startup/init_llm.rs",
+      "source_summary": "",
+      "code_purpose": "specificfeature",
+      "importance_score": 0.8,
+      "description": "初始化LLM提供者，根据配置启动相应的本地大模型服务。",
+      "functions": [
+        "call"
+      ],
+      "interfaces": [
+        "call"
+      ]
+    },
+    "detailed_description": "该组件负责在应用启动时初始化指定的大型语言模型（LLM）提供程序。当前主要支持Ollama作为后端运行时，通过查询其平台状态并采取相应措施：若未安装则记录信息；若已安装但未运行，则尝试唤醒服务；若正在运行则不做操作。对于非Ollama的其他提供者类型，执行空初始化任务以保持流程一致性。",
+    "responsibilities": [
+      "检测并处理Ollama服务的运行状态",
+      "根据LLM配置决定是否需要唤醒本地模型服务",
+      "统一不同LLM提供者的初始化流程",
+      "集成到系统启动任务框架中，保证可扩展性和可观测性"
+    ],
+    "interfaces": [
+      {
+        "name": "call",
+        "interface_type": "function",
+        "visibility": "pub",
+        "parameters": [
+          {
+            "name": "llm_section",
+            "param_type": "&LLMSection",
+            "is_optional": false,
+            "description": "包含LLM配置信息的引用"
+          }
+        ],
+        "return_type": "anyhow::Result<()>",
+        "description": "异步初始化LLM提供者，依据配置激活对应的服务准备逻辑"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "spdlog",
+        "path": null,
+        "is_external": true,
+        "line_number": 1,
+        "dependency_type": "logging",
+        "version": null
+      },
+      {
+        "name": "ollama",
+        "path": null,
+        "is_external": true,
+        "line_number": 2,
+        "dependency_type": "service_client",
+        "version": null
+      },
+      {
+        "name": "types",
+        "path": null,
+        "is_external": false,
+        "line_number": 3,
+        "dependency_type": "model",
+        "version": null
+      },
+      {
+        "name": "super::task::InitTask",
+        "path": "crates/feed_api_rs/src/startup/task.rs",
+        "is_external": false,
+        "line_number": 5,
+        "dependency_type": "framework",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 4.0,
+      "lines_of_code": 38,
+      "number_of_functions": 1,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.15,
+      "cohesion_score": 0.9
+    }
+  },
+  "timestamp": 1759024295,
+  "prompt_hash": "33036e527c7041f1d59d97031c90ab46",
+  "token_usage": {
+    "input_tokens": 840,
+    "output_tokens": 673,
+    "total_tokens": 1513
+  },
+  "model_name": null
+}

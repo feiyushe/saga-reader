@@ -1,0 +1,15 @@
+{
+  "data": {
+    "code_purpose": "controller",
+    "confidence": 0.95,
+    "reasoning": "该文件位于 `src/commands.rs`，属于 Tauri 插件的一部分。文件中定义了多个使用 `#[tauri::command]` 宏标记的异步函数（如 `add_feeds_package`、`remove_feeds_package`），这些函数用于暴露 Rust 后端功能给前端调用，符合 Tauri 中 Controller 或命令处理层的典型特征。同时，它依赖 `State` 管理应用状态，并与业务逻辑模块（如 `features_api`）交互，进一步表明其作为后端接口控制器的角色。"
+  },
+  "timestamp": 1758800827,
+  "prompt_hash": "2b146e8c900a427832d0f40b2fe82d4a",
+  "token_usage": {
+    "input_tokens": 463,
+    "output_tokens": 208,
+    "total_tokens": 671
+  },
+  "model_name": null
+}

@@ -1,0 +1,152 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "init_logger.rs",
+      "file_path": "crates/feed_api_rs/src/startup/init_logger.rs",
+      "source_summary": "",
+      "code_purpose": "util",
+      "importance_score": 0.8,
+      "description": "初始化日志系统，根据配置决定日志输出方式（stdout或磁盘文件），并设置统一的日志格式。",
+      "functions": [
+        "call",
+        "init_by",
+        "specify_logger_format"
+      ],
+      "interfaces": [
+        "call",
+        "init_by",
+        "specify_logger_format"
+      ]
+    },
+    "detailed_description": "该组件负责应用程序启动时的日志系统初始化。它读取应用配置中的日志部分（AppConfigLogSection），根据是否启用日志、输出类型（标准输出或磁盘）以及调试模式状态来动态配置全局日志行为。在磁盘模式下，使用按天轮转的策略将日志写入指定路径，并设置3秒的刷新周期以平衡性能与持久性。同时，为所有日志记录器统一设置包含时间、线程ID、日志级别和消息内容的可读格式。",
+    "responsibilities": [
+      "解析日志配置并决定日志启用策略",
+      "根据输出类型初始化对应的目标sink（stdout或文件）",
+      "设置统一的日志格式以增强可读性和一致性",
+      "支持调试模式下的自动日志开启机制",
+      "管理日志刷新频率和文件轮转策略"
+    ],
+    "interfaces": [
+      {
+        "name": "call",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "app_config",
+            "param_type": "&AppConfig",
+            "is_optional": false,
+            "description": "应用完整配置，从中提取日志配置部分"
+          }
+        ],
+        "return_type": "anyhow::Result<()>",
+        "description": "入口函数，接收整体应用配置并调用实际初始化逻辑"
+      },
+      {
+        "name": "init_by",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "log_section",
+            "param_type": "&AppConfigLogSection",
+            "is_optional": false,
+            "description": "日志模块的配置节"
+          }
+        ],
+        "return_type": "anyhow::Result<()>",
+        "description": "核心初始化函数，根据日志配置执行具体的日志系统设置"
+      },
+      {
+        "name": "specify_logger_format",
+        "interface_type": "function",
+        "visibility": "private",
+        "parameters": [
+          {
+            "name": "logger",
+            "param_type": "&Arc<Logger>",
+            "is_optional": false,
+            "description": "待格式化的日志记录器实例"
+          }
+        ],
+        "return_type": null,
+        "description": "内部辅助函数，为指定日志器设置统一的输出格式"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "std::sync::Arc",
+        "path": "std::sync::Arc",
+        "is_external": false,
+        "line_number": 1,
+        "dependency_type": "std",
+        "version": null
+      },
+      {
+        "name": "std::time::Duration",
+        "path": "std::time::Duration",
+        "is_external": false,
+        "line_number": 2,
+        "dependency_type": "std",
+        "version": null
+      },
+      {
+        "name": "spdlog",
+        "path": "spdlog",
+        "is_external": true,
+        "line_number": 4,
+        "dependency_type": "third_party",
+        "version": null
+      },
+      {
+        "name": "recorder::path::get_appdata_file_in_dir",
+        "path": "recorder::path::get_appdata_file_in_dir",
+        "is_external": false,
+        "line_number": 9,
+        "dependency_type": "internal",
+        "version": null
+      },
+      {
+        "name": "types::AppConfig",
+        "path": "types::AppConfig",
+        "is_external": false,
+        "line_number": 10,
+        "dependency_type": "internal",
+        "version": null
+      },
+      {
+        "name": "types::AppConfigLogSection",
+        "path": "types::AppConfigLogSection",
+        "is_external": false,
+        "line_number": 10,
+        "dependency_type": "internal",
+        "version": null
+      },
+      {
+        "name": "types::OutputType",
+        "path": "types::OutputType",
+        "is_external": false,
+        "line_number": 10,
+        "dependency_type": "internal",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 5.0,
+      "lines_of_code": 74,
+      "number_of_functions": 3,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.65,
+      "cohesion_score": 0.88
+    }
+  },
+  "timestamp": 1759024306,
+  "prompt_hash": "ecd06cf71483c78301f89c9f58242253",
+  "token_usage": {
+    "input_tokens": 1121,
+    "output_tokens": 1122,
+    "total_tokens": 2243
+  },
+  "model_name": null
+}

@@ -1,0 +1,329 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "types.ts",
+      "file_path": "app/src/routes/main/widgets/types.ts",
+      "source_summary": "",
+      "code_purpose": "widget",
+      "importance_score": 1.0,
+      "description": "定义前端UI组件所需的各种类型接口，包括属性传递和状态结构。",
+      "functions": [],
+      "interfaces": [
+        "FeedsListProps",
+        "SearchBarProps",
+        "ArticleReaderProps",
+        "ArticlesGroup",
+        "ArticlesListProps",
+        "FooterProps",
+        "AISpriteProps",
+        "ArticleReadMode"
+      ]
+    },
+    "detailed_description": "该组件是一个类型定义文件，专门用于声明前端UI组件之间的共享类型接口。它导入多个Svelte store的类型，并定义了如FeedsListProps、ArticlesListProps等组件属性接口，以及ArticlesGroup这样的数据分组结构。同时定义了一个联合类型ArticleReadMode来表示文章阅读模式。所有类型均通过export type导出，供其他组件引用，确保类型安全和一致性。",
+    "responsibilities": [
+      "定义UI组件间通信的属性接口",
+      "统一管理前端组件依赖的状态store类型",
+      "提供数据结构类型定义（如ArticlesGroup）",
+      "定义可选值的联合类型（如阅读模式）",
+      "促进类型安全的组件间交互"
+    ],
+    "interfaces": [
+      {
+        "name": "FeedsListProps",
+        "interface_type": "interface",
+        "visibility": "exported",
+        "parameters": [
+          {
+            "name": "store",
+            "param_type": "FeedsStoreType",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "selectedFeedId",
+            "param_type": "string | undefined",
+            "is_optional": true,
+            "description": null
+          },
+          {
+            "name": "onFeedPressed",
+            "param_type": "(feedId: string) => void",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "onSelectToday",
+            "param_type": "() => void",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "onSelectWeekend",
+            "param_type": "() => void",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "isTodaySelected",
+            "param_type": "boolean",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "isWeekendSelected",
+            "param_type": "boolean",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "onSelectFavorite",
+            "param_type": "() => void",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "isFavoriteSelected",
+            "param_type": "boolean",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "onSelectUnread",
+            "param_type": "() => void",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "isUnreadSelected",
+            "param_type": "boolean",
+            "is_optional": false,
+            "description": null
+          }
+        ],
+        "return_type": null,
+        "description": null
+      },
+      {
+        "name": "SearchBarProps",
+        "interface_type": "interface",
+        "visibility": "exported",
+        "parameters": [
+          {
+            "name": "store",
+            "param_type": "SearchStoreType",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "articles_store",
+            "param_type": "ListStoreType",
+            "is_optional": false,
+            "description": null
+          }
+        ],
+        "return_type": null,
+        "description": null
+      },
+      {
+        "name": "ArticleReaderProps",
+        "interface_type": "interface",
+        "visibility": "exported",
+        "parameters": [
+          {
+            "name": "articleId",
+            "param_type": "number",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "store",
+            "param_type": "ReaderStoreType",
+            "is_optional": false,
+            "description": null
+          }
+        ],
+        "return_type": null,
+        "description": null
+      },
+      {
+        "name": "ArticlesGroup",
+        "interface_type": "interface",
+        "visibility": "exported",
+        "parameters": [
+          {
+            "name": "name",
+            "param_type": "string",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "articles",
+            "param_type": "Article[]",
+            "is_optional": false,
+            "description": null
+          }
+        ],
+        "return_type": null,
+        "description": null
+      },
+      {
+        "name": "ArticlesListProps",
+        "interface_type": "interface",
+        "visibility": "exported",
+        "parameters": [
+          {
+            "name": "store",
+            "param_type": "ListStoreType",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "markAsRead",
+            "param_type": "(articleId: number) => Promise<void>",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "isFilterActived",
+            "param_type": "boolean",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "isFeedSpecified",
+            "param_type": "boolean",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "selectedArticle",
+            "param_type": "Article | null",
+            "is_optional": false,
+            "description": null
+          },
+          {
+            "name": "onArticlePressed",
+            "param_type": "(article: Article) => void",
+            "is_optional": false,
+            "description": null
+          }
+        ],
+        "return_type": null,
+        "description": null
+      },
+      {
+        "name": "FooterProps",
+        "interface_type": "interface",
+        "visibility": "exported",
+        "parameters": [
+          {
+            "name": "tasksStore",
+            "param_type": "TasksStoreType",
+            "is_optional": false,
+            "description": null
+          }
+        ],
+        "return_type": null,
+        "description": null
+      },
+      {
+        "name": "AISpriteProps",
+        "interface_type": "interface",
+        "visibility": "exported",
+        "parameters": [
+          {
+            "name": "store",
+            "param_type": "AISpriteStore",
+            "is_optional": false,
+            "description": null
+          }
+        ],
+        "return_type": null,
+        "description": null
+      },
+      {
+        "name": "ArticleReadMode",
+        "interface_type": "type",
+        "visibility": "exported",
+        "parameters": [],
+        "return_type": "'optimized' | 'melted' | 'original'",
+        "description": null
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "Article",
+        "path": "$lib/types/article",
+        "is_external": false,
+        "line_number": 1,
+        "dependency_type": "type import",
+        "version": null
+      },
+      {
+        "name": "SearchStoreType",
+        "path": "../stores/articles/search/index.svelte",
+        "is_external": false,
+        "line_number": 2,
+        "dependency_type": "type import",
+        "version": null
+      },
+      {
+        "name": "ListStoreType",
+        "path": "../stores/articles/list/index.svelte",
+        "is_external": false,
+        "line_number": 3,
+        "dependency_type": "type import",
+        "version": null
+      },
+      {
+        "name": "TasksStoreType",
+        "path": "../stores/tasks.svelte",
+        "is_external": false,
+        "line_number": 4,
+        "dependency_type": "type import",
+        "version": null
+      },
+      {
+        "name": "FeedsStoreType",
+        "path": "../stores/feeds.svelte",
+        "is_external": false,
+        "line_number": 5,
+        "dependency_type": "type import",
+        "version": null
+      },
+      {
+        "name": "ReaderStoreType",
+        "path": "../stores/reader.svelte",
+        "is_external": false,
+        "line_number": 6,
+        "dependency_type": "type import",
+        "version": null
+      },
+      {
+        "name": "AISpriteStore",
+        "path": "../stores/sprite.svelte",
+        "is_external": false,
+        "line_number": 7,
+        "dependency_type": "type import",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 66,
+      "number_of_functions": 0,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 7.0,
+      "cohesion_score": 0.85
+    }
+  },
+  "timestamp": 1759024229,
+  "prompt_hash": "65a4ded8f7b861f8d55aecf58fe0005e",
+  "token_usage": {
+    "input_tokens": 834,
+    "output_tokens": 1579,
+    "total_tokens": 2413
+  },
+  "model_name": null
+}

@@ -1,0 +1,104 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "init_user_profile.rs",
+      "file_path": "crates/feed_api_rs/src/startup/init_user_profile.rs",
+      "code_purpose": "specificfeature",
+      "importance_score": 0.8,
+      "description": "负责用户配置文件的初始化、读取和同步，支持 TOML 格式的持久化存储。",
+      "functions": [
+        "call",
+        "sync_to",
+        "default_user_profile"
+      ],
+      "interfaces": [
+        "call",
+        "sync_to"
+      ]
+    },
+    "detailed_description": "该组件用于在应用启动时初始化用户配置。它尝试从指定路径加载 user_config.toml 文件，若文件不存在或读取失败，则生成默认用户配置并将其持久化到磁盘。核心功能包括异步读取配置、序列化/反序列化 TOML 数据以及写入最新配置。`call` 函数返回一个初始化任务，集成至系统启动流程；`sync_to` 提供将内存中的 UserConfig 对象写回磁盘的能力；`default_user_profile` 定义了新用户的默认订阅设置。",
+    "responsibilities": [
+      "管理用户配置的生命周期（加载、创建默认、持久化）",
+      "处理用户配置的序列化与反序列化（TOML 格式）",
+      "提供默认用户画像以支持首次启动体验",
+      "与文件系统交互实现配置的持久化存储",
+      "集成到应用启动流程中作为初始化任务"
+    ],
+    "interfaces": [
+      {
+        "name": "call",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": "anyhow::Result<InitTask<UserConfig>>",
+        "description": "启动用户配置初始化任务，返回可执行的异步任务"
+      },
+      {
+        "name": "sync_to",
+        "interface_type": "function",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "user_config",
+            "param_type": "&UserConfig",
+            "is_optional": false,
+            "description": "待持久化的用户配置引用"
+          }
+        ],
+        "return_type": "anyhow::Result<()>",
+        "description": "将给定的用户配置同步保存至磁盘文件"
+      },
+      {
+        "name": "default_user_profile",
+        "interface_type": "function",
+        "visibility": "private",
+        "parameters": [],
+        "return_type": "UserConfig",
+        "description": "生成并返回默认的用户配置实例"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "tokio",
+        "path": null,
+        "is_external": true,
+        "line_number": 1,
+        "dependency_type": "async_runtime",
+        "version": null
+      },
+      {
+        "name": "recorder::path::get_appdata_file",
+        "path": "recorder::path",
+        "is_external": false,
+        "line_number": 6,
+        "dependency_type": "utility",
+        "version": null
+      },
+      {
+        "name": "types",
+        "path": "types",
+        "is_external": false,
+        "line_number": 7,
+        "dependency_type": "model",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 2.0,
+      "lines_of_code": 56,
+      "number_of_functions": 3,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.5,
+      "cohesion_score": 0.9
+    }
+  },
+  "timestamp": 1758801163,
+  "prompt_hash": "7e0e8fef0131b7a0c87c87dfd1fe24a1",
+  "token_usage": {
+    "input_tokens": 866,
+    "output_tokens": 859,
+    "total_tokens": 1725
+  },
+  "model_name": null
+}

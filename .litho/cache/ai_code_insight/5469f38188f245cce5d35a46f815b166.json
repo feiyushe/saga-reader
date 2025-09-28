@@ -1,0 +1,67 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "utils.ts",
+      "file_path": "app/src/lib/windows/utils.ts",
+      "code_purpose": "util",
+      "importance_score": 0.8,
+      "description": "提供Tauri桌面应用中窗口管理的工具函数，支持单例窗口展示和带回调的窗口打开功能。",
+      "functions": [
+        "openWithCallback",
+        "showWindowSingleton"
+      ],
+      "interfaces": []
+    },
+    "detailed_description": "该组件封装了Tauri框架下窗口操作的核心逻辑。`showWindowSingleton` 函数用于确保指定标签的窗口在整个应用中仅存在一个实例，若已存在则聚焦该窗口，否则创建新窗口；`openWithCallback` 函数在此基础上扩展，允许在目标窗口关闭时通过事件机制触发回调函数，实现跨窗口通信。两个函数均基于Tauri的Window和Webview API构建，增强了窗口管理的复用性和一致性。",
+    "responsibilities": [
+      "管理Tauri应用中的单例窗口生命周期",
+      "实现跨窗口异步回调通信机制",
+      "封装底层Tauri窗口API以提高调用安全性与一致性",
+      "处理URL参数拼接以传递回调事件标识"
+    ],
+    "interfaces": [],
+    "dependencies": [
+      {
+        "name": "@tauri-apps/api/window",
+        "path": null,
+        "is_external": true,
+        "line_number": 1,
+        "dependency_type": "import",
+        "version": null
+      },
+      {
+        "name": "@tauri-apps/api/webview",
+        "path": null,
+        "is_external": true,
+        "line_number": 2,
+        "dependency_type": "import",
+        "version": null
+      },
+      {
+        "name": "@tauri-apps/api/event",
+        "path": null,
+        "is_external": true,
+        "line_number": 3,
+        "dependency_type": "import",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 2.0,
+      "lines_of_code": 43,
+      "number_of_functions": 2,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.6,
+      "cohesion_score": 0.85
+    }
+  },
+  "timestamp": 1758805724,
+  "prompt_hash": "5469f38188f245cce5d35a46f815b166",
+  "token_usage": {
+    "input_tokens": 710,
+    "output_tokens": 570,
+    "total_tokens": 1280
+  },
+  "model_name": null
+}

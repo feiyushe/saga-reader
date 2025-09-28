@@ -1,0 +1,123 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "article.ts",
+      "file_path": "app/src/lib/types/article.ts",
+      "source_summary": "",
+      "code_purpose": "model",
+      "importance_score": 0.6,
+      "description": "定义文章数据结构，用于表示系统中的文章实体及其属性。",
+      "functions": [],
+      "interfaces": [
+        "Article"
+      ]
+    },
+    "detailed_description": "该组件定义了一个名为 Article 的接口，用于描述系统中文章的数据结构。包含文章的基本信息如 ID、标题、阅读状态、发布时间、内容变体（purged、optimized、melted）、分组标识、收藏状态等。主要用于类型约束和前后端数据交互的结构一致性保障。",
+    "responsibilities": [
+      "定义文章实体的数据结构",
+      "提供类型安全支持以确保数据一致性",
+      "作为多个模块间数据传输的契约"
+    ],
+    "interfaces": [
+      {
+        "name": "Article",
+        "interface_type": "interface",
+        "visibility": "public",
+        "parameters": [
+          {
+            "name": "id",
+            "param_type": "number",
+            "is_optional": false,
+            "description": "文章唯一标识符"
+          },
+          {
+            "name": "title",
+            "param_type": "string",
+            "is_optional": false,
+            "description": "文章标题"
+          },
+          {
+            "name": "head_read",
+            "param_type": "string",
+            "is_optional": false,
+            "description": "摘要或首段预览文本"
+          },
+          {
+            "name": "published_at",
+            "param_type": "string",
+            "is_optional": false,
+            "description": "文章发布时间（ISO 字符串格式）"
+          },
+          {
+            "name": "has_read",
+            "param_type": "boolean",
+            "is_optional": false,
+            "description": "用户是否已读该文章"
+          },
+          {
+            "name": "source_link",
+            "param_type": "string",
+            "is_optional": false,
+            "description": "原始来源链接"
+          },
+          {
+            "name": "purged_content",
+            "param_type": "string",
+            "is_optional": false,
+            "description": "清理后的纯文本内容"
+          },
+          {
+            "name": "optimized_content",
+            "param_type": "string",
+            "is_optional": false,
+            "description": "优化渲染的内容（如富文本）"
+          },
+          {
+            "name": "melted_content",
+            "param_type": "string",
+            "is_optional": false,
+            "description": "聚合或融合处理后的内容版本"
+          },
+          {
+            "name": "created_at",
+            "param_type": "string",
+            "is_optional": false,
+            "description": "记录创建时间"
+          },
+          {
+            "name": "group_id",
+            "param_type": "string",
+            "is_optional": false,
+            "description": "所属分组 ID"
+          },
+          {
+            "name": "is_favorite",
+            "param_type": "boolean",
+            "is_optional": false,
+            "description": "是否被标记为收藏"
+          }
+        ],
+        "return_type": null,
+        "description": "表示一篇文章的完整数据结构"
+      }
+    ],
+    "dependencies": [],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 1.0,
+      "lines_of_code": 16,
+      "number_of_functions": 0,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.0,
+      "cohesion_score": 1.0
+    }
+  },
+  "timestamp": 1759024686,
+  "prompt_hash": "aa5a4f69973c3b3787ca003a4abf79e9",
+  "token_usage": {
+    "input_tokens": 488,
+    "output_tokens": 797,
+    "total_tokens": 1285
+  },
+  "model_name": null
+}

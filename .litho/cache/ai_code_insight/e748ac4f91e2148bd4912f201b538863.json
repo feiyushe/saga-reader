@@ -1,0 +1,112 @@
+{
+  "data": {
+    "code_dossier": {
+      "name": "ContextMenuProvider.svelte",
+      "file_path": "app/src/lib/widgets/ContextMenuProvider.svelte",
+      "code_purpose": "widget",
+      "importance_score": 0.8,
+      "description": "Svelte组件，提供可复用的右键上下文菜单功能，支持动态菜单项和位置自适应",
+      "functions": [
+        "showContextMenu",
+        "onHideMenu",
+        "getContextMenuDimension",
+        "wrapMenuPressHandler"
+      ],
+      "interfaces": [
+        "menus",
+        "children"
+      ]
+    },
+    "detailed_description": "该组件是一个Svelte前端UI组件，用于在网页中实现右键上下文菜单功能。它接收菜单配置数组和子元素作为插槽内容，当用户在子元素上右键点击时，显示对应的上下文菜单。组件会自动计算菜单显示位置，避免超出浏览器视窗边界。菜单项可以是普通按钮或分隔线（'hr'），每个按钮都有图标、文本和点击处理函数。通过wrapMenuPressHandler包装器确保菜单操作后自动隐藏。使用Svelte的$state进行响应式状态管理，并通过use指令获取菜单尺寸以实现智能定位。",
+    "responsibilities": [
+      "管理上下文菜单的显示与隐藏状态",
+      "处理右键点击事件并定位菜单位置",
+      "防止菜单显示超出浏览器视窗边界",
+      "提供菜单项点击处理的包装逻辑",
+      "通过插槽机制封装受保护的内容区域"
+    ],
+    "interfaces": [
+      {
+        "name": "menus",
+        "interface_type": "property",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": "MenuType[]",
+        "description": "菜单配置数组，包含菜单项的名称、显示文本、CSS类名和点击回调函数"
+      },
+      {
+        "name": "children",
+        "interface_type": "slot",
+        "visibility": "public",
+        "parameters": [],
+        "return_type": "Snippet",
+        "description": "默认插槽，用于包裹需要启用上下文菜单功能的子元素"
+      },
+      {
+        "name": "showContextMenu",
+        "interface_type": "function",
+        "visibility": "private",
+        "parameters": [
+          {
+            "name": "e",
+            "param_type": "MouseEvent",
+            "is_optional": false,
+            "description": "鼠标事件对象"
+          }
+        ],
+        "return_type": "boolean",
+        "description": "处理右键点击事件，显示上下文菜单并计算最佳显示位置"
+      },
+      {
+        "name": "onHideMenu",
+        "interface_type": "function",
+        "visibility": "private",
+        "parameters": [],
+        "return_type": "void",
+        "description": "处理页面点击事件，隐藏当前显示的上下文菜单"
+      },
+      {
+        "name": "getContextMenuDimension",
+        "interface_type": "function",
+        "visibility": "private",
+        "parameters": [
+          {
+            "name": "node",
+            "param_type": "HTMLElement",
+            "is_optional": false,
+            "description": "上下文菜单DOM节点"
+          }
+        ],
+        "return_type": "void",
+        "description": "获取上下文菜单的实际尺寸，用于位置计算"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "svelte",
+        "path": "svelte",
+        "is_external": true,
+        "line_number": 3,
+        "dependency_type": "import",
+        "version": null
+      }
+    ],
+    "complexity_metrics": {
+      "cyclomatic_complexity": 7.0,
+      "lines_of_code": 160,
+      "number_of_functions": 4,
+      "number_of_classes": 0,
+      "depth_of_inheritance": 0,
+      "coupling_factor": 0.25,
+      "cohesion_score": 0.85
+    }
+  },
+  "timestamp": 1758805757,
+  "prompt_hash": "e748ac4f91e2148bd4912f201b538863",
+  "token_usage": {
+    "input_tokens": 1335,
+    "output_tokens": 997,
+    "total_tokens": 2332
+  },
+  "model_name": null
+}
