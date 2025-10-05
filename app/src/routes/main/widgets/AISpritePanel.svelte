@@ -1,13 +1,14 @@
 <script lang="ts">
-	import { _ } from 'svelte-i18n';
-	import type { AISpriteProps } from '../widgets/types';
-	import { Avatar, ProgressRing } from '@skeletonlabs/skeleton-svelte';
-	import { Bot, Baby as UserIcon, SendHorizontal, XIcon } from 'lucide-svelte';
-	import Markdown from '$lib/widgets/Markdown.svelte';
-	import { spriteToaster as toaster } from '../stores/toast';
+    import { _ } from 'svelte-i18n';
+    import type { AISpriteProps } from '../widgets/types';
+    import { Avatar, ProgressRing } from '@skeletonlabs/skeleton-svelte';
+    import { Bot, Baby as UserIcon, SendHorizontal, XIcon, MessageCircle } from 'lucide-svelte';
+    import Markdown from '$lib/widgets/Markdown.svelte';
+    import { spriteToaster as toaster } from '../stores/toast';
+    import type { DefaultQuestion } from '../stores/sprite.svelte';
 
-	import { onMount } from 'svelte';
-	let { store }: AISpriteProps = $props();
+    import { onMount } from 'svelte';
+    let { store }: AISpriteProps = $props();
 
 	let elemChat: HTMLElement | undefined = $state();
 	let currentMessage = $state('');
@@ -52,9 +53,31 @@
 		requestAnimationFrame(() => {
 			scrollChatBottom('smooth');
 		});
-	}
+    }
 
-	function onPromptKeydown(event: KeyboardEvent) {
+    async function handleDefaultQuestion(question: DefaultQuestion) {
+        if (store.isLoading) {
+            toaster.info({
+                description: $_('aisprite.tip_wait_llm_response')
+            });
+            return;
+        }
+
+        requestAnimationFrame(() => {
+            scrollChatBottom('smooth');
+        });
+        const success = await store.sendDefaultQuestion(question);
+        if (!success) {
+            toaster.info({
+                description: $_('aisprite.tip_error_llm_error')
+            });
+        }
+        requestAnimationFrame(() => {
+            scrollChatBottom('smooth');
+        });
+    }
+
+    function onPromptKeydown(event: KeyboardEvent) {
 		if (event.keyCode === 13) {
 			event.preventDefault();
 			addMessage();
@@ -80,8 +103,33 @@
 		</header>
 
 		<!-- Conversation -->
-		<section bind:this={elemChat} class="h-full p-4 overflow-y-auto space-y-4">
-			{#each store.history as bubble (bubble.created_at)}
+        <section bind:this={elemChat} class="h-full p-4 overflow-y-auto space-y-4">
+            <!-- Default Questions (shown when no conversation exists) -->
+            {#if !store.hasConversation && !store.isLoading}
+                <div class="space-y-4">
+                    <div class="text-center space-y-2">
+                        <div class="flex justify-center">
+                            <MessageCircle size="48" class="text-primary-500 opacity-60" />
+                        </div>
+                        <h3 class="h5 font-semibold">{$_('aisprite.default_questions.title')}</h3>
+                        <p class="text-sm opacity-70">{$_('aisprite.default_questions.subtitle')}</p>
+                    </div>
+                    
+                    <div class="grid gap-2">
+                        {#each store.getDefaultQuestions() as question (question.id)}
+                            <button
+                                class="btn preset-tonal text-left p-3 rounded-lg hover:preset-filled-primary-500 transition-all duration-200"
+                                onclick={() => handleDefaultQuestion(question)}
+                            >
+                                <span class="text-sm">{$_(`aisprite.default_questions.questions.${question.id}`)}</span>
+                            </button>
+                        {/each}
+                    </div>
+                </div>
+            {/if}
+
+            <!-- Chat History -->
+            {#each store.history as bubble (bubble.created_at)}
 				{#if bubble.role !== 'user'}
 					<div class="grid grid-cols-[auto_1fr] gap-2">
 						<Avatar name={bubble.role} size="size-12" classes="preset-filled-primary-500">

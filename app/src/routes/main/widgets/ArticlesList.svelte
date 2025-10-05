@@ -75,16 +75,28 @@
 						{/if}
 
 						<article
-							class={`hover:scale-105 transition-transform flex-1 pt-4 pb-4 pr-4 ${article.has_read || selectedArticle?.id == article.id ? 'pl-4' : ''}`}
-						>
-							<h6 class="font-bold">{article.title}</h6>
+                            class={`hover:scale-105 transition-transform flex-1 pt-4 pb-4 pr-4 ${article.has_read || selectedArticle?.id == article.id ? 'pl-4' : ''}`}
+                        >
+                            <h6 class="font-bold">{article.title}</h6>
 
-							<p
-								class={`line-clamp-2 ${selectedArticle?.id === article.id ? 'text-surface-400-600' : 'text-surface-600-400'}`}
-							>
-								{article.head_read}
-							</p>
-						</article>
+                            <p
+                                class={`line-clamp-2 ${selectedArticle?.id === article.id ? 'text-surface-400-600' : 'text-surface-600-400'}`}
+                            >
+                                {article.head_read}
+                            </p>
+                            
+                            <!-- 文章元信息 -->
+                            <div class="flex items-center justify-between mt-2 text-xs text-surface-500">
+                                <span>{new Date(article.published_at).toLocaleDateString()}</span>
+                                
+                                <!-- Feed来源标签 -->
+                                {#if article.feed_name}
+                                    <span class="feed-tag-small">
+                                        {article.feed_name}
+                                    </span>
+                                {/if}
+                            </div>
+                        </article>
 					</a>
 				</div>
 			{/each}
@@ -113,18 +125,28 @@
 {/snippet}
 
 <style>
-	:global(.articles_nav_loading_indicator) {
-		animation: my-custom-animation 2s ease-in-out infinite;
-	}
-	@keyframes my-custom-animation {
-		0% {
-			translate: -100%;
-		}
-		50% {
-			scale: 1;
-		}
-		100% {
-			translate: 200%;
-		}
-	}
+    :global(.articles_nav_loading_indicator) {
+        animation: my-custom-animation 2s ease-in-out infinite;
+    }
+    @keyframes my-custom-animation {
+        0% {
+            translate: -100%;
+        }
+        50% {
+            scale: 1;
+        }
+        100% {
+            translate: 200%;
+        }
+    }
+    
+    .feed-tag-small {
+        padding: 0.125rem 0.375rem;
+        background-color: rgb(59 130 246);
+        color: white;
+        border-radius: 0.25rem;
+        font-size: 0.625rem;
+        font-weight: 500;
+        opacity: 0.8;
+    }
 </style>

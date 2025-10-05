@@ -94,13 +94,29 @@
     "blank_tip_2": "2、刷新订阅内容清单",
     "blank_tip_3": "3、点击订阅内容标题"
   },
+  "feed": {
+    "source": "来源",
+    "from": "来自"
+  },
   "aisprite": {
     "label": "麒睿AI伴读",
     "chat_me": "我",
     "tip_wait_llm_response": "请等候Copilot完成思考",
     "tip_no_input": "请输入内容",
     "tip_error_llm_error": "大模型服务调用异常",
-    "tip_placeholder_please_input": "向Copilot了解..."
+    "tip_placeholder_please_input": "向Copilot了解...",
+    "default_questions": {
+      "title": "推荐问题",
+      "subtitle": "点击下方问题开始对话",
+      "questions": {
+        "summarize": "请总结这篇文章的核心观点",
+        "key_points": "这篇文章的关键信息有哪些？",
+        "explain_concept": "请解释文章中的重要概念",
+        "practical_application": "这些内容在实际中如何应用？",
+        "related_topics": "有哪些相关的话题值得深入了解？",
+        "critical_thinking": "对这篇文章的观点有什么不同看法？"
+      }
+    }
   },
   "settings": {
     "label": "应用设置",

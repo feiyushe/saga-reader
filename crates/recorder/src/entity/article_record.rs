@@ -20,6 +20,7 @@ pub struct Model {
     pub has_read: bool,
     pub is_favorite: bool,
     pub group_id: String,
+    pub feed_name: Option<String>,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
