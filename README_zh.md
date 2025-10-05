@@ -13,11 +13,11 @@
 <p align="center">🛠️ 基于<strong>Rust</strong>、<strong>Tauri</strong>和<strong>Svelte</strong>构建的现代跨平台应用程序</p>
 <p align="center">
   <a style="text-decoration:none" href="https://aiqino.netlify.app?s=github_website_tag">
-    <img src="https://img.shields.io/badge/麒睿智库-Website-1E90FF" alt="Website" />
+    <img src="https://img.shields.io/badge/麒睿智库-Website-1E90FF" alt="Web" />
   </a>
+  <a href="./docs/1、项目概述.md"><img src="https://img.shields.io/badge/Litho-Docs-blue" /></a>
   <img src="https://img.shields.io/github/v/release/sopaco/saga-reader?label=version&color=6A5ACD" />
-  <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/sopaco/saga-reader/rust.yml">
-  <img src="https://img.shields.io/github/downloads/sopaco/saga-reader/total" />
+  <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/sopaco/saga-reader/rust.yml" />
 </p>
 <hr />
 
@@ -41,8 +41,9 @@
 <div style="text-align: center;">
   <table style="width: 100%; margin: 0 auto;">
     <tr>
-      <td style="width: 50%;"><img src="docs/assets/snapshot-main-light-zh.png" alt="snapshot-main-light" style="width: 100%; height: auto; display: block;"></td>
-      <td style="width: 50%;"><img src="docs/assets/snapshot-main-dark-zh.png" alt="snapshot-main-dark" style="width: 100%; height: auto; display: block;"></td>
+      <td style="width: 33%;"><img src="docs/assets/snapshot-main-light-zh.webp" alt="snapshot-main-light" style="width: 100%; height: auto; display: block;"></td>
+      <td style="width: 33%;"><img src="docs/assets/snapshot-main-dark-zh.webp" alt="snapshot-main-dark" style="width: 100%; height: auto; display: block;"></td>
+      <td style="width: 33%;"><img src="docs/assets/snapshot-companion-light.webp" alt="snapshot-companion-light" style="width: 100%; height: auto; display: block;"></td>
     </tr>
   </table>
 </div>
