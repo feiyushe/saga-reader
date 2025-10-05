@@ -7,17 +7,18 @@ import type { StoreType as ReaderStoreType } from '../stores/reader.svelte';
 import type { StoreType as AISpriteStore, DefaultQuestion } from '../stores/sprite.svelte';
 
 interface FeedsListProps {
-	store: FeedsStoreType;
-	selectedFeedId: string | undefined;
-	onFeedPressed: (feedId: string) => void;
-	onSelectToday: () => void;
-	onSelectWeekend: () => void;
-	isTodaySelected: boolean;
-	isWeekendSelected: boolean;
-	onSelectFavorite: () => void;
-	isFavoriteSelected: boolean;
-	onSelectUnread: () => void;
-	isUnreadSelected: boolean;
+    store: FeedsStoreType;
+    selectedFeedId: string | undefined;
+    onFeedPressed: (feedId: string) => void;
+    onSelectToday: () => void;
+    onSelectWeekend: () => void;
+    isTodaySelected: boolean;
+    isWeekendSelected: boolean;
+    onSelectFavorite: () => void;
+    isFavoriteSelected: boolean;
+    onSelectUnread: () => void;
+    isUnreadSelected: boolean;
+    onExpandFeedGroup?: (feedId: string) => void;
 }
 
 interface SearchBarProps {
@@ -26,8 +27,9 @@ interface SearchBarProps {
 }
 
 interface ArticleReaderProps {
-	articleId: number;
-	store: ReaderStoreType;
+    articleId: number;
+    store: ReaderStoreType;
+    onFeedTagClick?: (feedName: string) => void;
 }
 
 interface ArticlesGroup {

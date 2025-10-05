@@ -22,7 +22,7 @@
 
 	let group: ArticleReadMode = $state('optimized');
 
-	let { articleId, store }: ArticleReaderProps = $props();
+	let { articleId, store, onFeedTagClick }: ArticleReaderProps = $props();
 
 	let article: Article | null = $state(null);
 	let articleUpdatedSeq: number = $state(0);
@@ -53,13 +53,18 @@
 	}
 
 	function switchStar(article: Article) {
-		if (!article) return;
-		const is_favorite_new = !article.is_favorite;
-		featuresApi
-			.set_favorite(article.id, is_favorite_new)
-			.then(() => (article.is_favorite = is_favorite_new))
-			.catch((e) => console.error('reader.article switchStar failured', e));
-	}
+        if (!article) return;
+        const is_favorite_new = !article.is_favorite;
+        featuresApi
+            .set_favorite(article.id, is_favorite_new)
+            .then(() => (article.is_favorite = is_favorite_new))
+            .catch((e) => console.error('reader.article switchStar failured', e));
+    }
+
+    function handleFeedTagClick(feedName: string | undefined) {
+        if (!feedName || !onFeedTagClick) return;
+        onFeedTagClick(feedName);
+    }
 
 	$effect(() => {
         featuresApi
@@ -82,6 +87,13 @@
         border-radius: 0.375rem;
         font-size: 0.75rem;
         font-weight: 500;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+    
+    .feed-tag:hover {
+        background-color: rgb(37 99 235);
     }
     
     .feed-icon {
@@ -126,12 +138,16 @@
                 
                 <!-- Feed来源标签 -->
                 {#if article.feed_name}
-                    <span class="feed-tag">
+                    <button 
+                        class="feed-tag"
+                        onclick={() => handleFeedTagClick(article.feed_name)}
+                        onkeypress={() => handleFeedTagClick(article.feed_name)}
+                    >
                         <svg class="feed-icon" width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248S0 22.546 0 20.752s1.456-3.248 3.252-3.248 3.251 1.454 3.251 3.248zm-6.503-12.572v4.811c6.05.062 10.96 4.966 11.022 11.009h4.817c-.062-8.71-7.118-15.758-15.839-15.82zm0-3.368c10.58.046 19.152 8.594 19.183 19.188h4.817c-.03-13.231-10.755-23.954-24-24v4.812z"/>
                         </svg>
                         {article.feed_name}
-                    </span>
+                    </button>
                 {/if}
             </div>
         {/if}

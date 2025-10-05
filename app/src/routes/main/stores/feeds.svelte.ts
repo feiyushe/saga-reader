@@ -7,16 +7,17 @@ import {
 } from './loading.svelte';
 
 type StoreType = {
-	loadingStore: LoadingStore;
-	feedPackages: FeedsPackage[];
-	refresh: () => Promise<void>;
-	addFeedsPackage: (feedsPackage: FeedsPackage) => Promise<void>;
-	removeFeedsPackage: (packageId: string) => Promise<void>;
-	renameFeedsPackage: (packageId: string, newName: string) => Promise<void>;
-	addFeed: (packageId: string, ftd: FeedTargetDescription) => Promise<void>;
-	removeFeed: (packageId: string, feedId: string) => Promise<void>;
-	renameFeed: (packageId: string, feedId: string, newName: string) => Promise<void>;
-	findPackagesOwnerByFeedId: (feedId: string) => FeedsPackage | undefined;
+    loadingStore: LoadingStore;
+    feedPackages: FeedsPackage[];
+    refresh: () => Promise<void>;
+    addFeedsPackage: (feedsPackage: FeedsPackage) => Promise<void>;
+    removeFeedsPackage: (packageId: string) => Promise<void>;
+    renameFeedsPackage: (packageId: string, newName: string) => Promise<void>;
+    addFeed: (packageId: string, ftd: FeedTargetDescription) => Promise<void>;
+    removeFeed: (packageId: string, feedId: string) => Promise<void>;
+    renameFeed: (packageId: string, feedId: string, newName: string) => Promise<void>;
+    findPackagesOwnerByFeedId: (feedId: string) => FeedsPackage | undefined;
+    findFeedIdByName: (feedName: string) => string | undefined;
 };
 
 function create(): StoreType {
@@ -36,10 +37,20 @@ function create(): StoreType {
 	}
 
 	function findPackagesOwnerByFeedId(feedId: string): FeedsPackage | undefined {
-		return feedPackages.find((feedPackage) => {
-			return feedPackage.feeds.findIndex((feed) => feed.id === feedId) >= 0;
-		});
-	}
+        return feedPackages.find((feedPackage) => {
+            return feedPackage.feeds.findIndex((feed) => feed.id === feedId) >= 0;
+        });
+    }
+
+    function findFeedIdByName(feedName: string): string | undefined {
+        for (const feedPackage of feedPackages) {
+            const feed = feedPackage.feeds.find((feed) => feed.name === feedName);
+            if (feed) {
+                return feed.id;
+            }
+        }
+        return undefined;
+    }
 
 	function addFeedsPackage(feedsPackage: FeedsPackage): Promise<void> {
 		return featuresApi.add_feeds_package(feedsPackage);
@@ -71,13 +82,14 @@ function create(): StoreType {
 			return feedPackages;
 		},
 		refresh,
-		addFeedsPackage,
-		removeFeedsPackage,
-		renameFeedsPackage,
-		addFeed,
-		removeFeed,
-		renameFeed,
-		findPackagesOwnerByFeedId
+        addFeedsPackage,
+        removeFeedsPackage,
+        renameFeedsPackage,
+        addFeed,
+        removeFeed,
+        renameFeed,
+        findPackagesOwnerByFeedId,
+        findFeedIdByName
 	};
 }
 

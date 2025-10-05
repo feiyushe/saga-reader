@@ -27,18 +27,19 @@
 	import { format } from '$lib/utils/text';
 
 	let {
-		store,
-		onFeedPressed,
-		selectedFeedId,
-		onSelectToday,
-		onSelectWeekend,
-		isTodaySelected,
-		isWeekendSelected,
-		onSelectFavorite,
-		isFavoriteSelected,
-		onSelectUnread,
-		isUnreadSelected
-	}: FeedsListProps = $props();
+        store,
+        onFeedPressed,
+        selectedFeedId,
+        onSelectToday,
+        onSelectWeekend,
+        isTodaySelected,
+        isWeekendSelected,
+        onSelectFavorite,
+        isFavoriteSelected,
+        onSelectUnread,
+        isUnreadSelected,
+        onExpandFeedGroup
+    }: FeedsListProps = $props();
 	const expandState: {
 		[key: string]: boolean;
 	} = $state({});
@@ -126,8 +127,24 @@
 	}
 
 	function expandGroup(key: string) {
-		expandState[key] = true;
-	}
+        expandState[key] = true;
+    }
+
+    // 暴露给外部的展开函数
+    function expandFeedGroupByFeedId(feedId: string) {
+        // 根据feedId找到对应的package
+        const feedPackage = store.findPackagesOwnerByFeedId(feedId);
+        if (feedPackage) {
+            expandGroup(feedPackage.id);
+        }
+    }
+
+    // 将函数暴露给父组件
+    $effect(() => {
+        if (onExpandFeedGroup) {
+            onExpandFeedGroup(expandFeedGroupByFeedId);
+        }
+    });
 
 	function onAddFeedPressed() {
 		createRefreshFeedsAction(() => openFeedPackageCreateWindow())();
