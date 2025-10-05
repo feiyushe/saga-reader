@@ -94,6 +94,10 @@
     "blank_tip_2": "2、刷新订阅内容清单",
     "blank_tip_3": "3、点击订阅内容标题"
   },
+  "feed": {
+    "source": "来源",
+    "from": "来自"
+  },
   "aisprite": {
     "label": "麒睿AI伴读",
     "chat_me": "我",

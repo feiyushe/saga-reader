@@ -111,7 +111,7 @@ impl FeaturesAPIImpl {
         ))
     }
 
-    async fn create_futures_for_update_feeds(article_recorder_service: Arc<ArticleRecorderService>, mut article: Article, feed_id: String, purge: Arc<ArticleLLMProcessor>, optimizer: Arc<ArticleLLMProcessor>, melt: Arc<ArticleLLMProcessor>, package_id: String, llm_section: LLMSection) -> anyhow::Result<()> {
+    async fn create_futures_for_update_feeds(article_recorder_service: Arc<ArticleRecorderService>, mut article: Article, feed_id: String, feed_name: String, purge: Arc<ArticleLLMProcessor>, optimizer: Arc<ArticleLLMProcessor>, melt: Arc<ArticleLLMProcessor>, package_id: String, llm_section: LLMSection) -> anyhow::Result<()> {
         match Self::process_article_pipelines(&mut article, &purge, &optimizer, &melt, &llm_section.instruct).await {
             Ok((out_purged_article, out_optimized_article, out_melted_article)) => {
                 article_recorder_service
@@ -128,6 +128,7 @@ impl FeaturesAPIImpl {
                         has_read: false,
                         is_favorite: false,
                         group_id: feed_id.to_owned(),
+                        feed_name: Some(feed_name)
                     }])
                     .await?;
                 info!(
@@ -322,6 +323,7 @@ impl FeaturesAPI for FeaturesAPIImpl {
                     Arc::clone(&article_recorder_service),
                     article.clone(),
                     feed_id.to_owned(),
+                    ftd.name.to_owned(),
                     Arc::clone(&purge),
                     Arc::clone(&optimizer),
                     Arc::clone(&melt),

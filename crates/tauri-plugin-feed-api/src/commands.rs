@@ -139,11 +139,30 @@ pub(crate) async fn read_feed_contents(
     count: u64,
 ) -> Result<Vec<Model>, ()> {
     let features_api = &state.features_api;
-    convert_result(
-        features_api
-            .read_feed_contents(feed_id, offset, count)
-            .await,
-    )
+    match features_api.read_feed_contents(feed_id, offset, count).await {
+        Ok(mut articles) => {
+            // 获取所有feeds信息用于匹配feed名称
+            let feeds_packages = features_api.get_feeds_packages().await;
+            let mut feed_map = std::collections::HashMap::new();
+            
+            for package in feeds_packages {
+                for feed in package.feeds {
+                    feed_map.insert(feed.id, feed.name);
+                }
+            }
+            
+            // 为每个文章添加feed名称
+            for article in &mut articles {
+                article.feed_name = feed_map.get(&article.group_id).cloned();
+            }
+            
+            Ok(articles)
+        }
+        Err(e) => {
+            error!("read_feed_contents error: {}", e);
+            Err(())
+        }
+    }
 }
 
 #[tauri::command(rename_all = "snake_case")]
@@ -152,7 +171,28 @@ pub(crate) async fn query_by_id(
     id: i32,
 ) -> Result<Option<Model>, ()> {
     let features_api = &state.features_api;
-    convert_result(features_api.query_by_id(id).await)
+    match features_api.query_by_id(id).await {
+        Ok(Some(mut article)) => {
+            // 获取所有feeds信息用于匹配feed名称
+            let feeds_packages = features_api.get_feeds_packages().await;
+            let mut feed_map = std::collections::HashMap::new();
+            
+            for package in feeds_packages {
+                for feed in package.feeds {
+                    feed_map.insert(feed.id, feed.name);
+                }
+            }
+            
+            // 为文章添加feed名称
+            article.feed_name = feed_map.get(&article.group_id).cloned();
+            Ok(Some(article))
+        }
+        Ok(None) => Ok(None),
+        Err(e) => {
+            error!("query_by_id error: {}", e);
+            Err(())
+        }
+    }
 }
 
 #[tauri::command(rename_all = "snake_case")]
@@ -291,9 +331,28 @@ pub(crate) async fn search_contents_by_keyword(
     count: u64,
 ) -> Result<Vec<Model>, ()> {
     let features_api = &state.features_api;
-    convert_result(
-        features_api
-            .search_contents_by_keyword(keyword, offset, count)
-            .await,
-    )
+    match features_api.search_contents_by_keyword(keyword, offset, count).await {
+        Ok(mut articles) => {
+            // 获取所有feeds信息用于匹配feed名称
+            let feeds_packages = features_api.get_feeds_packages().await;
+            let mut feed_map = std::collections::HashMap::new();
+            
+            for package in feeds_packages {
+                for feed in package.feeds {
+                    feed_map.insert(feed.id, feed.name);
+                }
+            }
+            
+            // 为每个文章添加feed名称
+            for article in &mut articles {
+                article.feed_name = feed_map.get(&article.group_id).cloned();
+            }
+            
+            Ok(articles)
+        }
+        Err(e) => {
+            error!("search_contents_by_keyword error: {}", e);
+            Err(())
+        }
+    }
 }

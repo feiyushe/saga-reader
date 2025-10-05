@@ -94,6 +94,10 @@
     "blank_tip_2": "2.Refresh the subscription content list.",
     "blank_tip_3": "3.Click on the title of the subscription content."
   },
+  "feed": {
+    "source": "Source",
+    "from": "From"
+  },
   "aisprite": {
     "label": "AI Companion Reading",
     "chat_me": "Me",

@@ -62,45 +62,80 @@
 	}
 
 	$effect(() => {
-		featuresApi
-			.query_by_id(articleId)
-			.then((queried_article) => {
-				article = queried_article;
-			})
-			.catch((e) => console.error('reader.article query failured', e));
-	});
+        featuresApi
+            .query_by_id(articleId)
+            .then((queried_article) => {
+                article = queried_article;
+            })
+            .catch((e) => console.error('reader.article query failured', e));
+    });
 </script>
+
+<style>
+    .feed-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        padding: 0.25rem 0.5rem;
+        background-color: rgb(59 130 246);
+        color: white;
+        border-radius: 0.375rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+    
+    .feed-icon {
+        opacity: 0.8;
+    }
+</style>
 
 <div class="flex h-full w-full flex-col p-4">
 	<div
-		use:disableContextMenu
-		class="card flex min-h-24 flex-row items-center p-4 preset-filled-surface-50-950"
-	>
-		{#if article !== null}
-			<h5 class="h5 flex-1">{article.title}</h5>
-			<div class="flex flex-row">
-				<button
-					class="btn hover:bg-surface-200-800 rounded-full w-12 h-12"
-					onclick={() => switchStar(article!)}
-					onkeypress={() => switchStar(article!)}
-				>
-					{#if article.is_favorite}
-						<IconStarOff size={20} />
-					{:else}
-						<IconStar size={20} />
-					{/if}
-				</button>
-				<button type="button" class="btn w-12 h-12 rounded-full preset-filled" onclick={copyLink}
-					><Link size={16} /></button
-				>
-				<button
-					type="button"
-					class="btn w-12 h-12 ml-2 rounded-full preset-filled"
-					onclick={openOriginalPage}><ExternalLink size={16} /></button
-				>
-			</div>
-		{/if}
-	</div>
+        use:disableContextMenu
+        class="card flex min-h-24 flex-col p-4 preset-filled-surface-50-950"
+    >
+        {#if article !== null}
+            <div class="flex flex-row items-center">
+                <h5 class="h5 flex-1">{article.title}</h5>
+                <div class="flex flex-row">
+                    <button
+                        class="btn hover:bg-surface-200-800 rounded-full w-12 h-12"
+                        onclick={() => switchStar(article!)}
+                        onkeypress={() => switchStar(article!)}
+                    >
+                        {#if article.is_favorite}
+                            <IconStarOff size={20} />
+                        {:else}
+                            <IconStar size={20} />
+                        {/if}
+                    </button>
+                    <button type="button" class="btn w-12 h-12 rounded-full preset-filled" onclick={copyLink}
+                        ><Link size={16} /></button
+                    >
+                    <button
+                        type="button"
+                        class="btn w-12 h-12 ml-2 rounded-full preset-filled"
+                        onclick={openOriginalPage}><ExternalLink size={16} /></button
+                    >
+                </div>
+            </div>
+            
+            <!-- 文章元信息 -->
+            <div class="flex items-center gap-3 mt-3 text-sm text-surface-600-300">
+                <span>{new Date(article.published_at).toLocaleDateString()}</span>
+                
+                <!-- Feed来源标签 -->
+                {#if article.feed_name}
+                    <span class="feed-tag">
+                        <svg class="feed-icon" width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248S0 22.546 0 20.752s1.456-3.248 3.252-3.248 3.251 1.454 3.251 3.248zm-6.503-12.572v4.811c6.05.062 10.96 4.966 11.022 11.009h4.817c-.062-8.71-7.118-15.758-15.839-15.82zm0-3.368c10.58.046 19.152 8.594 19.183 19.188h4.817c-.03-13.231-10.755-23.954-24-24v4.812z"/>
+                        </svg>
+                        {article.feed_name}
+                    </span>
+                {/if}
+            </div>
+        {/if}
+    </div>
 
 	<div class="mt-4 flex-1 overflow-hidden rounded pt-2 preset-filled-surface-50-950">
 		<Tabs
