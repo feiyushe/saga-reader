@@ -4,7 +4,7 @@ import type { StoreType as ListStoreType } from '../stores/articles/list/index.s
 import type { StoreType as TasksStoreType } from '../stores/tasks.svelte';
 import type { StoreType as FeedsStoreType } from '../stores/feeds.svelte';
 import type { StoreType as ReaderStoreType } from '../stores/reader.svelte';
-import type { StoreType as AISpriteStore } from '../stores/sprite.svelte';
+import type { StoreType as AISpriteStore, DefaultQuestion } from '../stores/sprite.svelte';
 
 interface FeedsListProps {
 	store: FeedsStoreType;

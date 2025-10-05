@@ -100,7 +100,19 @@
     "tip_wait_llm_response": "Please wait for Copilot to finish thinking.",
     "tip_no_input": "Please enter the content",
     "tip_error_llm_error": "An exception occurred",
-    "tip_placeholder_please_input": "Learn about something from Copilot"
+    "tip_placeholder_please_input": "Learn about something from Copilot",
+    "default_questions": {
+      "title": "Suggested Questions",
+      "subtitle": "Click a question below to start the conversation",
+      "questions": {
+        "summarize": "Please summarize the key points of this article",
+        "key_points": "What are the key information in this article?",
+        "explain_concept": "Please explain the important concepts in the article",
+        "practical_application": "How can this content be applied in practice?",
+        "related_topics": "What related topics are worth exploring further?",
+        "critical_thinking": "What different perspectives do you have on this article's viewpoints?"
+      }
+    }
   },
   "settings": {
     "label": "Settings",
