@@ -76,8 +76,8 @@ async fn schedule_loop<R: Runtime>(
             use tauri_plugin_notification::NotificationExt;
             app_handle.notification()
                 .builder()
-                .title("Saga Reader")
-                .body(&format!("发现{}篇新文章，请查看", total_new_articles))
+                .title("麒睿智库")
+                .body(&format!("更新了{}篇内容，请查看", total_new_articles))
                 .show()
                 .unwrap_or_else(|e| error!("发送通知失败: {}", e));
         }

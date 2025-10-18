@@ -4,7 +4,6 @@ use chrono::{Datelike, NaiveDate, Utc, Weekday};
 use spdlog::{error, info};
 use tauri::{AppHandle, Runtime};
 use tokio::sync::RwLock;
-use tauri_plugin_notification::NotificationExt;
 
 use intelligent::article_processor::assistant::Assistant;
 use intelligent::article_processor::llm_processor::{
@@ -339,17 +338,8 @@ impl FeaturesAPI for FeaturesAPIImpl {
                 );
                 articles_process_futures.push(future);
             }
+            
             do_parallel_with_limit(articles_process_futures, llm_section.max_parallel.unwrap_or(5)).await;
-
-            // 发送通知
-            if let Some(handle) = app_handle {
-                handle.notification()
-                    .builder()
-                    .title("Saga Reader")
-                    .body(&format!("发现{}篇新文章，请查看", new_articles_count))
-                    .show()
-                    .unwrap_or_else(|e| error!("发送通知失败: {}", e));
-            }
 
             return Ok(new_articles_count);
         }
