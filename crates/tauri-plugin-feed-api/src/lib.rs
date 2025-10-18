@@ -3,7 +3,7 @@ use std::sync::Arc;
 use tauri::{
     generate_handler,
     plugin::{Builder, TauriPlugin},
-    Manager, RunEvent,
+    Manager,
 };
 
 use feed_api_rs::application_context::ContextHost;

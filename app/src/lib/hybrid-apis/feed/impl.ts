@@ -106,8 +106,11 @@ class FeaturesAPIImpl implements FeaturesAPI {
     return call("scrap_text_by_url", { url });
   }
 
-  update_article_by_source(article_id: number, url: string): Promise<boolean> {
-    return call("update_article_by_source", { article_id, url });
+  update_article_by_source(
+    article_id: number,
+    source_text: string,
+  ): Promise<boolean> {
+    return call("update_article_by_source", { article_id, source_text });
   }
 
   chat_with_article_assistant(

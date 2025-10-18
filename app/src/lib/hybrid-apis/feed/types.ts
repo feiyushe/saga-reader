@@ -31,6 +31,7 @@ type AppConfig = {
   scrap: "baidu" | "bing";
   daemon: {
     frequency_feeds_update: boolean;
+    enable_notification: boolean;
   };
 };
 

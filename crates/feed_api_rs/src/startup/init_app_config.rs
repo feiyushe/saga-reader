@@ -5,7 +5,7 @@ use tokio::{
 
 use recorder::path::get_appdata_file;
 use types::{
-    AppConfig, GLMLLMProvider, LLMInstructOption, LLMSection, OllamaLLMProvider, OpenAILLMProvider,
+    AppConfig, DaemonSection, GLMLLMProvider, LLMInstructOption, LLMSection, OllamaLLMProvider, OpenAILLMProvider,
     PlatformLLMProvider, ScrapSection,
 };
 
@@ -70,7 +70,10 @@ fn default_app_config() -> AppConfig {
             provider: Default::default(),
         },
         log: Default::default(),
-        daemon: Default::default(),
+        daemon: DaemonSection {
+            frequency_feeds_update: Default::default(),
+            enable_notification: true, // 默认开启通知
+        },
         diagnostic: Default::default(),
     }
 }

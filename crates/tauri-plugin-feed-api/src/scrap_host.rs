@@ -12,11 +12,10 @@ const WINDOW_SCRAP_HOST: &str = "WINDOW_SCRAP_HOST";
 pub(crate) async fn scrap_text_by_url<R: Runtime>(
     app_handle: AppHandle<R>,
     url: &str,
-) -> Result<String, ()> {
+) -> anyhow::Result<String> {
     match app_handle.get_webview_window(WINDOW_SCRAP_HOST) {
         Some(_) => {
-            error!("The scrap host was busy to use, scrap pages at the same time was not support currently!");
-            Err(())
+            Err(anyhow::Error::msg("The scrap host was busy to use, scrap pages at the same time was not support currently!"))
         }
         None => {
             let window = WebviewWindowBuilder::new(

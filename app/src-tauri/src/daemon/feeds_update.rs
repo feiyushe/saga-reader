@@ -3,7 +3,7 @@ use std::sync::Arc;
 use feed_api_rs::features::api::FeaturesAPI;
 use fslock::LockFile;
 use spdlog::{error, info, warn};
-use tauri::{async_runtime, AppHandle, EventLoopMessage, Runtime};
+use tauri::{async_runtime, AppHandle, Runtime};
 use tauri_plugin_feed_api::state::HybridRuntimeState;
 use tokio::time::{self, Duration, Instant};
 
@@ -50,13 +50,19 @@ async fn schedule_loop<R: Runtime>(
         interval.tick().await;
         info!("scheduled feeds update begin");
         let feeds_packages = features.get_feeds_packages().await;
+        
+        // 统计新增文章数量
+        let mut total_new_articles = 0;
+        
         for feed_package in feeds_packages {
             for feed in feed_package.feeds {
                 match features
                     .update_feed_contents(&feed_package.id, &feed.id, Some(app_handle.clone()))
                     .await
                 {
-                    Ok(_) => (),
+                    Ok(count) => {
+                        total_new_articles += count;
+                    },
                     Err(e) => error!(
                         "update_feed_contents failure, package_id = {}, feed_id = {}, error = {}",
                         &feed_package.id, &feed.id, e
@@ -64,6 +70,18 @@ async fn schedule_loop<R: Runtime>(
                 }
             }
         }
+        
+        // 检查是否需要发送通知
+        if app_config.daemon.enable_notification && total_new_articles > 0 {
+            use tauri_plugin_notification::NotificationExt;
+            app_handle.notification()
+                .builder()
+                .title("Saga Reader")
+                .body(&format!("发现{}篇新文章，请查看", total_new_articles))
+                .show()
+                .unwrap_or_else(|e| error!("发送通知失败: {}", e));
+        }
+        
         info!("scheduled feeds update end");
     }
 }

@@ -171,6 +171,10 @@
       "option_scheduled_fetch": {
         "label": "更快的后台更新",
         "description": "启用该选项有助于更快的更新您的订阅内容。"
+      },
+      "option_notification": {
+        "label": "内容更新通知",
+        "description": "启用该选项会在发现新内容时发送系统通知。"
       }
     },
     "section_users_support": {

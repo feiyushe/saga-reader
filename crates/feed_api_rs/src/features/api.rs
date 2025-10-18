@@ -73,7 +73,7 @@ pub trait FeaturesAPI {
         package_id: &str,
         feed_id: &str,
         app_handle: Option<AppHandle<R>>,
-    ) -> impl std::future::Future<Output = anyhow::Result<()>>;
+    ) -> impl std::future::Future<Output = anyhow::Result<usize>>;
 
     fn read_feed_contents(
         &self,

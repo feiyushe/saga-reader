@@ -148,6 +148,8 @@ pub struct LLMSection {
 #[derive(Serialize, Deserialize, Clone, Default)]
 pub struct DaemonSection {
     pub frequency_feeds_update: bool,
+    #[serde(default)]
+    pub enable_notification: bool,
 }
 
 #[derive(Serialize, Deserialize, Clone)]
