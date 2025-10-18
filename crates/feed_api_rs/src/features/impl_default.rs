@@ -136,22 +136,6 @@ impl FeaturesAPIImpl {
                     "article recorded to the feed_id = {}, title = {}",
                     &feed_id, article.title
                 );
-                
-                // 发送通知
-                if let Some(handle) = app_handle {
-                    // 获取新增文章数量
-                    let new_article_count = 1; // 这里简化处理，实际应该统计新增的文章数量
-                    
-                    // 发送系统通知
-                    if new_article_count > 0 {
-                        handle.notification()
-                            .builder()
-                            .title("Saga Reader")
-                            .body(&format!("发现{}篇新文章，请查看", new_article_count))
-                            .show()
-                            .unwrap_or_else(|e| error!("发送通知失败: {}", e));
-                    }
-                }
             }
             Err(e) => error!(
                         "process_article_pipelines execution failure, the requirements of package_id = {}, feed_id = {}, source_link = {}, error = {}",
@@ -318,7 +302,7 @@ impl FeaturesAPI for FeaturesAPIImpl {
                 }
                 _ => vec![],
             };
-            
+
             let mut new_articles_count = 0;
             let article_recorder_service = &self.article_recorder_service;
             let purge = Arc::new(Purge::new_processor(llm_section.clone())?);
@@ -340,7 +324,7 @@ impl FeaturesAPI for FeaturesAPIImpl {
 
                 // 增加新增文章计数
                 new_articles_count += 1;
-                
+
                 let future = Self::create_futures_for_update_feeds(
                     app_handle.clone(),
                     Arc::clone(&article_recorder_service),
@@ -356,6 +340,17 @@ impl FeaturesAPI for FeaturesAPIImpl {
                 articles_process_futures.push(future);
             }
             do_parallel_with_limit(articles_process_futures, llm_section.max_parallel.unwrap_or(5)).await;
+
+            // 发送通知
+            if let Some(handle) = app_handle {
+                handle.notification()
+                    .builder()
+                    .title("Saga Reader")
+                    .body(&format!("发现{}篇新文章，请查看", new_articles_count))
+                    .show()
+                    .unwrap_or_else(|e| error!("发送通知失败: {}", e));
+            }
+
             return Ok(new_articles_count);
         }
         let error_msg = format!(
