@@ -338,7 +338,7 @@ impl FeaturesAPI for FeaturesAPIImpl {
                 );
                 articles_process_futures.push(future);
             }
-            
+
             do_parallel_with_limit(articles_process_futures, llm_section.max_parallel.unwrap_or(5)).await;
 
             return Ok(new_articles_count);
@@ -451,6 +451,10 @@ impl FeaturesAPI for FeaturesAPIImpl {
     }
 
     async fn open_article_external(&self, url: &str) -> anyhow::Result<()> {
+        if !url.starts_with("https://") {
+            return Err(anyhow::Error::msg("open_article_external error, the url bypassed from web exists risk"));
+        }
+
         open::that(url)?;
         Ok(())
     }
