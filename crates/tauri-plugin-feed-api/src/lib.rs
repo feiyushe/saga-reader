@@ -1,9 +1,10 @@
 use std::sync::Arc;
 
+#[cfg(target_os = "macos")]
+use tauri::RunEvent;
 use tauri::{
-    generate_handler,
+    Manager, generate_handler,
     plugin::{Builder, TauriPlugin},
-    Manager,
 };
 
 use feed_api_rs::application_context::ContextHost;
