@@ -1,6 +1,6 @@
 {
 	"name": "qino-feed-client",
-	"version": "0.9.80",
+	"version": "0.9.90",
 	"description": "",
 	"type": "module",
 	"scripts": {
