@@ -38,6 +38,7 @@
 		"autostart:allow-is-enabled",
 		"os:default",
 		"dialog:default",
-		"dialog:allow-ask"
+		"dialog:allow-ask",
+		"notification:default"
 	]
 }
