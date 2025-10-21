@@ -34,13 +34,14 @@ pub fn run() {
         .plugin(tauri_plugin_notification::init())
         .invoke_handler(tauri::generate_handler![])
         .on_window_event(|window, event| match event {
-            tauri::WindowEvent::CloseRequested { .. } => {
+            tauri::WindowEvent::CloseRequested { api, .. } => {
                 if window.label() != WINDOW_MAIN_LABEL {
                     return;
                 }
                 #[cfg(target_os = "macos")]
                 {
                     tauri::AppHandle::hide(window.app_handle()).unwrap();
+                    api.prevent_close();
                 }
             }
             _ => {}
