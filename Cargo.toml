@@ -30,6 +30,7 @@ sys-locale = "0.3.2"
 
 ### tauri runtime
 tauri = { version = "2.7.0" }
+tauri-plugin-notification = "2.3.1"
 
 ### diagnostic
 #### samply外部执行的很好

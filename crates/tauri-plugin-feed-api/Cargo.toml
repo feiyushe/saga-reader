@@ -15,6 +15,7 @@ feed_api_rs = { path = "../feed_api_rs" }
 types = { path = "../types" }
 recorder = { path = "../recorder" }
 ollama = { path = "../ollama" }
+tauri-plugin-notification = "2.3.1"
 
 [build-dependencies]
 tauri-plugin = { version = "2.3.1", features = ["build"] }

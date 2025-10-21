@@ -31,6 +31,7 @@ pub fn run() {
             MacosLauncher::LaunchAgent,
             Some(vec![DAEMON_FEEDS_SCHEDULE_UPDATE]),
         ))
+        .plugin(tauri_plugin_notification::init())
         .invoke_handler(tauri::generate_handler![])
         .on_window_event(|window, event| match event {
             tauri::WindowEvent::CloseRequested { api, .. } => {

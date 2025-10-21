@@ -171,6 +171,10 @@
       "option_scheduled_fetch": {
         "label": "Faster Background Update",
         "description": "Enabling this option helps to update your subscription content more quickly."
+      },
+      "option_notification": {
+        "label": "Content Update Notification",
+        "description": "Enabling this option will send system notifications when new content is discovered."
       }
     },
     "section_users_support": {

@@ -27,4 +27,5 @@ toml = { workspace = true }
 spdlog-rs = { workspace = true }                    # 开启异步需要添加 features = ["multi-thread"]
 chrono = { workspace = true }
 tauri = { workspace = true }
+tauri-plugin-notification = "2.3.1"
 

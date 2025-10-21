@@ -205,6 +205,7 @@
 	// 应用行为配置
 	let enableAutoStartUp = $state(false);
 	let enableFrequencyUpdate = $state(false);
+	let enableNotification = $state(false);
 
 	// 应用行为设置变更处理函数 - 跟随系统自动启动
 	async function onAutoStartUpSwitched() {
@@ -226,6 +227,13 @@
 		await updateAppConfig(appConfig);
 	}
 
+	// 应用行为设置变更处理函数 - 通知开关
+	async function onNotificationSwitched() {
+		if (!appConfig) return;
+		appConfig.daemon.enable_notification = !appConfig.daemon.enable_notification;
+		await updateAppConfig(appConfig);
+	}
+
 	// 线上使用说明
 	function openGLMGuide() {
 		featuresApi.open_article_external('https://bigmodel.cn');
@@ -235,6 +243,7 @@
 	function afterAppConfigUpdated() {
 		if (!appConfig) return;
 		enableFrequencyUpdate = appConfig.daemon.frequency_feeds_update;
+		enableNotification = appConfig.daemon.enable_notification;
 		activedProviderType = appConfig.llm.active_provider_type;
 		llmFormOllamaURI = appConfig.llm.provider_ollama.endpoint.api_base_url;
 		llmFormOllamaModelName = appConfig.llm.provider_ollama.endpoint.model;
@@ -538,6 +547,13 @@
 					$_('settings.section_app_behavior.option_scheduled_fetch.description'),
 					enableFrequencyUpdate,
 					onFrequencyUpdateSwitched
+				)}
+
+				{@render CheckOption(
+					$_('settings.section_app_behavior.option_notification.label'),
+					$_('settings.section_app_behavior.option_notification.description'),
+					enableNotification,
+					onNotificationSwitched
 				)}
 
 				{@render SectionEnd()}

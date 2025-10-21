@@ -142,11 +142,14 @@ pub struct LLMSection {
     pub active_provider_type: LLMProviderType,
     #[serde(default)]
     pub instruct: LLMInstructOption,
-    pub max_parallel: Option<usize>
+    pub max_parallel: Option<usize>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Default)]
 pub struct DaemonSection {
+    #[serde(default)]
+    pub enable_notification: bool,
+
     pub frequency_feeds_update: bool,
 }
 

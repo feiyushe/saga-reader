@@ -111,7 +111,7 @@ impl FeaturesAPIImpl {
         ))
     }
 
-    async fn create_futures_for_update_feeds(article_recorder_service: Arc<ArticleRecorderService>, mut article: Article, feed_id: String, feed_name: String, purge: Arc<ArticleLLMProcessor>, optimizer: Arc<ArticleLLMProcessor>, melt: Arc<ArticleLLMProcessor>, package_id: String, llm_section: LLMSection) -> anyhow::Result<()> {
+    async fn create_futures_for_update_feeds<R: Runtime>(app_handle: Option<AppHandle<R>>, article_recorder_service: Arc<ArticleRecorderService>, mut article: Article, feed_id: String, feed_name: String, purge: Arc<ArticleLLMProcessor>, optimizer: Arc<ArticleLLMProcessor>, melt: Arc<ArticleLLMProcessor>, package_id: String, llm_section: LLMSection) -> anyhow::Result<()> {
         match Self::process_article_pipelines(&mut article, &purge, &optimizer, &melt, &llm_section.instruct).await {
             Ok((out_purged_article, out_optimized_article, out_melted_article)) => {
                 article_recorder_service
@@ -278,7 +278,7 @@ impl FeaturesAPI for FeaturesAPIImpl {
         package_id: &str,
         feed_id: &str,
         app_handle: Option<AppHandle<R>>,
-    ) -> anyhow::Result<()> {
+    ) -> anyhow::Result<usize> {
         let user_config;
         let llm_section;
         {
@@ -291,16 +291,18 @@ impl FeaturesAPI for FeaturesAPIImpl {
             let articles = match ftd.fetcher_id.as_str() {
                 "scrap" => {
                     self.scrap_provider
-                        .fetch(app_handle, &llm_section, ftd.clone())
+                        .fetch(app_handle.clone(), &llm_section, ftd.clone())
                         .await?
                 }
                 "rss" => {
                     RSSFetcher::default()
-                        .fetch(app_handle, &llm_section, ftd.clone())
+                        .fetch(app_handle.clone(), &llm_section, ftd.clone())
                         .await?
                 }
                 _ => vec![],
             };
+
+            let mut new_articles_count = 0;
             let article_recorder_service = &self.article_recorder_service;
             let purge = Arc::new(Purge::new_processor(llm_section.clone())?);
             let optimizer = Arc::new(Optimizer::new_processor(llm_section.clone())?);
@@ -319,7 +321,11 @@ impl FeaturesAPI for FeaturesAPIImpl {
                     continue;
                 }
 
+                // 增加新增文章计数
+                new_articles_count += 1;
+
                 let future = Self::create_futures_for_update_feeds(
+                    app_handle.clone(),
                     Arc::clone(&article_recorder_service),
                     article.clone(),
                     feed_id.to_owned(),
@@ -332,8 +338,10 @@ impl FeaturesAPI for FeaturesAPIImpl {
                 );
                 articles_process_futures.push(future);
             }
+
             do_parallel_with_limit(articles_process_futures, llm_section.max_parallel.unwrap_or(5)).await;
-            return Ok(());
+
+            return Ok(new_articles_count);
         }
         let error_msg = format!(
             "update_feed_contents failure, the feed was not found, the requirements of package_id = {}, feed_id = {}",
@@ -443,6 +451,10 @@ impl FeaturesAPI for FeaturesAPIImpl {
     }
 
     async fn open_article_external(&self, url: &str) -> anyhow::Result<()> {
+        if !url.starts_with("https://") {
+            return Err(anyhow::Error::msg("open_article_external error, the url bypassed from web exists risk"));
+        }
+
         open::that(url)?;
         Ok(())
     }
