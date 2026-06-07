@@ -1,5 +1,6 @@
 use reqwest::Client;
 use serde::{Deserialize, Serialize};
+use spdlog::error;
 use types::OpenAILLMProvider;
 
 use crate::connector;
@@ -64,9 +65,18 @@ impl CompletionService for OpenAILikeCompletionService {
             model: self.config.model_name.clone(),
             messages: vec![sys_prompt, message],
         };
+        // Auto-append /chat/completions if the base URL doesn't already end with it
+        let url = if self.config.api_base_url.ends_with("/chat/completions") {
+            self.config.api_base_url.clone()
+        } else {
+            let base = self.config.api_base_url.trim_end_matches('/');
+            format!("{}/chat/completions", base)
+        };
+        spdlog::debug!("LLM request URL: {}", url);
+
         let response = self
             .client
-            .post(self.config.api_base_url.clone())
+            .post(url)
             .header(
                 "Authorization",
                 format!("Bearer {}", self.config.api_key.clone()),
@@ -74,7 +84,23 @@ impl CompletionService for OpenAILikeCompletionService {
             .json(&parameter)
             .send()
             .await?;
-        let resp: Response = response.json().await?;
+
+        let status = response.status();
+        if !status.is_success() {
+            let body = response.text().await.unwrap_or_default();
+            let err_msg = format!("LLM API returned status {}: {}", status, body);
+            error!("{}", err_msg);
+            return Err(anyhow::Error::msg(err_msg));
+        }
+
+        let body_text = response.text().await?;
+        let resp: Response = match serde_json::from_str(&body_text) {
+            Ok(r) => r,
+            Err(e) => {
+                error!("LLM API response JSON parse error: {}, body snippet: {:?}", e, &body_text[..body_text.len().min(500)]);
+                return Err(anyhow::Error::msg(format!("LLM API response JSON parse error: {}", e)));
+            }
+        };
         let content = match &resp.choices[0].message {
             Some(m) => m.content.clone(),
             None => String::new(),

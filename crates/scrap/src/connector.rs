@@ -9,7 +9,7 @@ pub struct ClientOption {
 
 const DEFAULT_USER_AGENT: &str = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0";
 const DEFAULT_ACCEPT: &str = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7";
-const DEFAULT_ACCEPT_ENCODING: &str = "gzip, deflate";
+const DEFAULT_ACCEPT_ENCODING: &str = "gzip, deflate, br";
 
 const DEFAULT_ACCEPT_LANGUAGE: &str = "en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7";
 const DEFAULT_CACHE_CONTROL: &str = "no-cache";
@@ -22,6 +22,7 @@ pub(crate) fn new_builder(option: ClientOption) -> anyhow::Result<ClientBuilder>
             .timeout(Duration::from_secs(20))
             .gzip(true)
             .deflate(true)
+            .brotli(true)
             .default_headers({
                 let mut headers = header::HeaderMap::new();
                 headers.insert(header::USER_AGENT, option.user_agent.unwrap_or(DEFAULT_USER_AGENT.to_string()).parse()?);

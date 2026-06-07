@@ -1,5 +1,6 @@
 use reqwest::Client;
 use serde::{Deserialize, Serialize};
+use spdlog::error;
 
 use types::llm_endpoint::LLMEndPoint;
 use types::OllamaLLMProvider;
@@ -59,7 +60,23 @@ impl CompletionService for OllamaCompletionService {
         };
         let url = self.endpoint.get_api_generate_completion();
         let response = self.client.post(url).json(&parameter).send().await?;
-        let reply: CompletionReply = response.json().await?;
+
+        let status = response.status();
+        if !status.is_success() {
+            let body = response.text().await.unwrap_or_default();
+            let err_msg = format!("Ollama API returned status {}: {}", status, body);
+            error!("{}", err_msg);
+            return Err(anyhow::Error::msg(err_msg));
+        }
+
+        let body_text = response.text().await?;
+        let reply: CompletionReply = match serde_json::from_str(&body_text) {
+            Ok(r) => r,
+            Err(e) => {
+                error!("Ollama API response JSON parse error: {}, body snippet: {:?}", e, &body_text[..body_text.len().min(500)]);
+                return Err(anyhow::Error::msg(format!("Ollama API response JSON parse error: {}", e)));
+            }
+        };
         Ok(reply.response)
     }
 }
