@@ -1,6 +1,6 @@
 [package]
 name = "qino-feed-client"
-version = "0.9.90"
+version = "0.9.91"
 description = "Saga Reader"
 authors = ["Sopaco"]
 edition = "2024"
@@ -12,21 +12,21 @@ name = "qino_feed_client_lib"
 crate-type = ["lib", "cdylib", "staticlib"]
 
 [build-dependencies]
-tauri-build = { version = "2.3.0", features = [] }
+tauri-build = { version = "2.6.2", features = [] }
 
 [dependencies]
 # 本crate的特定的依赖
-sentry = "0.41.0"
+sentry = "0.48.2"
 fslock = "0.2.1"
-tauri-plugin-shell = "2.3.0"
-tauri-plugin-clipboard-manager = "2.3.0"
-tauri-plugin-os = "2.3.0"
-tauri-plugin-dialog = "2.3.1"
-tauri-plugin-notification = "2.3.1"
+tauri-plugin-shell = "2.3.5"
+tauri-plugin-clipboard-manager = "2.3.2"
+tauri-plugin-os = "2.3.2"
+tauri-plugin-dialog = "2.7.1"
+tauri-plugin-notification = "2.3.3"
 
 [target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
-tauri-plugin-autostart = "2.5.0"
-tauri-plugin-single-instance = "2.3.1"
+tauri-plugin-autostart = "2.5.1"
+tauri-plugin-single-instance = "2.4.2"
 
 # 对workspace中其他crate的依赖
 feed_api_rs = { path = "../../crates/feed_api_rs" }
