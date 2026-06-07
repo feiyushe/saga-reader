@@ -10,7 +10,7 @@ pub struct RSSFetcher {}
 impl IFetcher for RSSFetcher {
     async fn fetch<R: Runtime>(
         &self,
-        _app_handle: Option<AppHandle<R>>,
+        app_handle: Option<AppHandle<R>>,
         llm_section: &LLMSection,
         ftd: FeedTargetDescription,
     ) -> anyhow::Result<Vec<Article>> {
@@ -31,6 +31,7 @@ impl IFetcher for RSSFetcher {
                         &source_link,
                         None,
                         llm_section.clone(),
+                        app_handle.clone(),
                     ).await {
                         Ok(c) => {
                             articles.push(Article {

@@ -71,7 +71,7 @@ impl Provider {
         Ok(pending_result)
     }
 
-    async fn convert(&self, html_text: String) -> anyhow::Result<Vec<Article>> {
+    async fn convert<R: Runtime>(&self, html_text: String, app_handle: Option<AppHandle<R>>) -> anyhow::Result<Vec<Article>> {
         let mut result: Vec<Article> = Vec::new();
         let pending_result = self.prepare_target_sources(&html_text)?;
 
@@ -83,6 +83,7 @@ impl Provider {
                 &source_link,
                 Some(String::from("bing.com")),
                 self.llm_section.clone(),
+                app_handle.clone(),
             )
             .await
             {
@@ -124,11 +125,11 @@ impl IProvider for Provider {
             r#"https://www.bing.com/search?ensearch=1&q={}&filters=ex1:%22ez2%22&rdr=1"#,
             search_word
         );
-        let html_text = match app_handle {
-            Some(ap) => scrap_text_by_url(ap, url.as_str()).await?,
+        let html_text = match &app_handle {
+            Some(ap) => scrap_text_by_url(ap.clone(), url.as_str()).await?,
             None => self.client.get(url).send().await?.text().await?,
         };
         info!("已获得搜索数据，清单解析中");
-        self.convert(html_text).await
+        self.convert(html_text, app_handle).await
     }
 }

@@ -15,7 +15,7 @@ types = { path = "../types" }
 
 # 与workspace共享配置的依赖
 tokio = { workspace = true, features = ["full"] }
-reqwest = { workspace = true, features = ["gzip", "deflate", "json"] }
+reqwest = { workspace = true, features = ["gzip", "deflate", "brotli", "json"] }
 anyhow = { workspace = true }
 serde = { workspace = true, features = ["derive"] }
 spdlog-rs = { workspace = true }
